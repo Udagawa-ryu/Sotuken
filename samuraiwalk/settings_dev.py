@@ -38,4 +38,4 @@ LOGGING = {
     }
 }
 #-------------------
-EMAIL_BACKEND = 'djago.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
