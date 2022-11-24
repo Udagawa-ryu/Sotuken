@@ -43,6 +43,9 @@ INSTALLED_APPS = [
 
     'accounts.apps.AccountsConfig',
     'maps.apps.MapsConfig',
+    'blog.apps.BlogConfig',
+    'main.apps.MainConfig',
+    'store.apps.StoreConfig',
 
     'django.contrib.sites',
     'allauth',
@@ -145,12 +148,18 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # メールアドレス認証に変更する設定
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = 'emial'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+USER_MODEL_EMAIL_FIELD = "email"
 
 # サインアップにメールアドレス確認を挟むよう設定
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "accounts:Login"
 
 # ログイン/ログアウト後の遷移先を設定
 LOGIN_REDIRECT_URL = 'maps:index'
@@ -164,8 +173,7 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 # デフォルトのメール送信元を設定
 DEFAULT_FROM_EMAIL = 'admin@example.com'
-# ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'
-
-# ACCOUNT_FORMS = {
-#     'signup': 'accounts.forms.CustomSignupForm',
-# }
+ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'
+ACCOUNT_FORMS = {
+    'signup': 'accounts.forms.CustomSignupForm',
+}
