@@ -177,3 +177,8 @@ ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'
 ACCOUNT_FORMS = {
     'signup': 'accounts.forms.CustomSignupForm',
 }
+
+# 静的ファイルの設置場所を設定
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
+)
