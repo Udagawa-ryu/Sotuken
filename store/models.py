@@ -10,8 +10,8 @@ class MO2_store(models.Model):
     MO2_address = models.CharField(verbose_name="住所",max_length=50)
     MO2_mailAdress = models.EmailField(verbose_name="メールアドレス",unique=True)
     MO2_password = models.CharField(verbose_name="パスワード",null=True,max_length=50)
-    MO1_createDate = models.DateTimeField(verbose_name="作成日時", auto_now_add=True)
-    MO1_updateDate = models.DateTimeField(verbose_name="更新日時", auto_now_add=True)
+    MO2_createDate = models.DateTimeField(verbose_name="作成日時", auto_now_add=True)
+    MO2_updateDate = models.DateTimeField(verbose_name="更新日時", auto_now_add=True)
     is_active = models.BooleanField(verbose_name="is_active", default=False)
     is_auth = models.BooleanField(verbose_name="管理者認証",default=False)
     class Meta:
