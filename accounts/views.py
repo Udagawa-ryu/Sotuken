@@ -21,3 +21,16 @@ def newAccount(request):
 
 def UserInfoRegister(request):
     return render(request, 'userinforegister.html')
+
+def login(request):
+    params = {'message':'', 'form': None}
+    if request.method == 'POST':
+        form = CustomLoginForm(request.POST)
+        if form.is_valid():
+            user = form.login(request)
+        else:
+            params['message'] = '再入力して下さい'
+            params['form'] = form
+    else:
+        params['form'] = CustomLoginForm()
+    return render(request, 'account/login.html',params)

@@ -68,6 +68,7 @@ class CustomUser(AbstractUser):
     MO1_point = models.IntegerField(verbose_name="ポイント",default=0)
     MO1_createDate = models.DateTimeField(verbose_name="作成日時", auto_now_add=True)
     MO1_updateDate = models.DateTimeField(verbose_name="更新日時", auto_now_add=True)
+    password = models.CharField(verbose_name="password", max_length=12,blank=True)
     is_staff = models.BooleanField(_("staff status"), default=False)
     is_active = models.BooleanField(_("active"), default=True)
     REQUIRED_FIELDS = ["username","MO1_userID","MO1_homeCountry","MO1_language","MO1_openRange"]

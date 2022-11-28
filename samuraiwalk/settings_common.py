@@ -162,7 +162,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "accounts:Login"
 
 # ログイン/ログアウト後の遷移先を設定
-LOGIN_REDIRECT_URL = 'maps:index'
+LOGIN_REDIRECT_URL = 'main:Mypage'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
 # ログアウトリンクのクリック一発でログアウトする設定

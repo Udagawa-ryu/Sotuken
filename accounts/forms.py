@@ -44,3 +44,23 @@ class CustomSignupForm(UserCreationForm):
         # self.fields['MO1_language'].widget.attrs['placeholder'] = 'MO1_language'
         # self.fields['MO1_openRange'].widget.attrs['class'] = 'form-control'
         # self.fields['MO1_openRange'].widget.attrs['placeholder'] = 'MO1_openRange'
+
+class CustomLoginForm(forms.ModelForm):
+    # MO1_userName = forms.CharField(label='userName')
+    # MO1_homeCountry = forms.CharField( label='homeCountry')
+    # MO1_language = forms.CharField( label='language')
+    # MO1_openRange =  forms.ChoiceField(choices = (
+    #         (0, 'Open'),
+    #         (1, 'Hidden'),
+    #     ), label='openRange')
+    class Meta:
+        model = CustomUser
+        fields = ["email","password"]
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["email"].required = True
+        labels = {
+            "email": "mailAdress",
+            "password":"password"
+        }
