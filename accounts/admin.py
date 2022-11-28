@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
-from .models import CustomUser
+from .models import *
   
   
 # class MyUserChangeForm(UserChangeForm):
@@ -35,3 +35,5 @@ from .models import CustomUser
 #     ordering = ('email',)
   
 admin.site.register(CustomUser)
+admin.site.register(MO6_Visit_record)
+admin.site.register(MO9_Fav_Custom_user)
