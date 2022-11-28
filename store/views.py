@@ -3,7 +3,7 @@ from django.views import generic
 from .models import *
 from .froms import *
 from accounts.models import *
-import cryptocode
+# import cryptocode
 from samuraiwalk.settings_dev import *
 from django.contrib.auth.hashers import make_password,check_password
 # Create your views here.
