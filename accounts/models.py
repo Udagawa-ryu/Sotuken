@@ -92,8 +92,8 @@ class MO6_Visit_record(models.Model):
         return self.MO1_userNumber
 
 class MO9_Fav_Custom_user(models.Model):
-    MO1_userNumber = models.ForeignKey(CustomUser, models.CASCADE, verbose_name="ユーザナンバー")
-    MO9_followedUserNumber = models.ForeignKey(CustomUser, models.CASCADE, verbose_name="フォローユーザナンバー")
+    MO1_userNumber = models.ForeignKey(CustomUser, models.CASCADE, verbose_name="ユーザナンバー",related_name='myuser')
+    MO9_followedUserNumber = models.ForeignKey(CustomUser, models.CASCADE, verbose_name="フォローユーザナンバー",related_name='followeduser')
     class Meta:
         verbose_name_plural = "MO9_Fav_Custom_user"
 
