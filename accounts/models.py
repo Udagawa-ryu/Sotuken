@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext_lazy as _
+from maps.models import *
 
 # # Create your models here.
 # class UserManager(BaseUserManager):
