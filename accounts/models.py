@@ -74,3 +74,29 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ["username","MO1_userID","MO1_homeCountry","MO1_language","MO1_openRange"]
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
+    class Meta:
+        verbose_name_plural = "CustomUser"
+
+    def __str__(self):
+        return self.MO1_userID
+
+class MO6_Visit_record(models.Model):
+    MO6_visitRecordNumber = models.AutoField(verbose_name="訪問記録ナンバー", primary_key=True, editable=False)
+    MO1_userNumber = models.ForeignKey(CustomUser, models.CASCADE, verbose_name="ユーザナンバー")
+    MO6_dateofvisit = models.DateTimeField(verbose_name="訪問記録", auto_now_add=True)
+    MO3_DspotNumber = models.ForeignKey("maps.MO3_Default_spot", models.CASCADE, verbose_name="デフォルトスポットナンバー")
+    MO4_OspotNumber = models.ForeignKey("maps.MO4_Original_spot", models.CASCADE, verbose_name="オリジナルスポットナンバー")
+    class Meta:
+        verbose_name_plural = "MO6_Visit_record"
+
+    def __str__(self):
+        return self.MO1_userNumber
+
+class MO9_Fav_Custom_user(models.Model):
+    MO1_userNumber = models.ForeignKey(CustomUser, models.CASCADE, verbose_name="ユーザナンバー",related_name='myuser')
+    MO9_followedUserNumber = models.ForeignKey(CustomUser, models.CASCADE, verbose_name="フォローユーザナンバー",related_name='followeduser')
+    class Meta:
+        verbose_name_plural = "MO9_Fav_Custom_user"
+
+    def __str__(self):
+        return self.MO1_userNumber

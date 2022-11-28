@@ -14,3 +14,7 @@ class StoreCreateForm(forms.ModelForm):
         self.fields["MO2_address"].empty_label = '住所'
         self.fields['MO2_mailAdress'].widget.attrs['class'] = 'form-control'
         self.fields["MO2_mailAdress"].empty_label = 'メールアドレス'
+
+class StorePassCreateForm(forms.Form):
+    password1 = forms.CharField(label='パスワード1', widget=forms.PasswordInput(), min_length=8)
+    password2 = forms.CharField(label='パスワード2', widget=forms.PasswordInput(), min_length=8)
