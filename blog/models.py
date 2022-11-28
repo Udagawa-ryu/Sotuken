@@ -1,6 +1,6 @@
 from django.db import models
 from django import forms
-from accounts.models import CustomUser,MO6_Visit_record
+from accounts.models import *
 
 # Create your models here.
 
