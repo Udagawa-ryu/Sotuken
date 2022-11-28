@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import redirect,render
 from django.views import generic
 from .models import *
 from .froms import *
+from accounts.models import *
+import cryptocode
+from samuraiwalk.settings_dev import *
+from django.contrib.auth.hashers import make_password,check_password
 # Create your views here.
 
 class IndexView(generic.TemplateView):
@@ -14,12 +18,69 @@ def storeRequest(request):
         form = StoreCreateForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'StoreLogin.html', params)
+            return render(request, 'StoreRequest.html', params)
         else:
             params['message'] = '再入力して下さい'
             params['form'] = form
+            return render(request, 'StoreRequest.html', params)
     else:
-        params['form'] =  StoreCreateForm(request.POST)
+        params['form'] =  StoreCreateForm()
         params['message'] = ''
-    return render(request, 'StoreRequest.html', params)
+        return render(request, 'StoreRequest.html', params)
 
+def storeCertification(request):
+    if request.user.is_superuser == True:
+        nocompstore = MO2_store.objects.filter(is_auth=False)
+        compstore = MO2_store.objects.filter(is_auth=True)
+        params = {
+            "noauth" : nocompstore,
+            "auth" : compstore,
+        }
+        return render(request, 'StoreCertification.html', params)
+    else:
+        return redirect('admin:login')
+
+def addStore(request):
+    storeNums = request.POST.getlist('add')
+    if storeNums != []:
+        for num in storeNums:
+            i = MO2_store.objects.get(MO2_storeNumber=num)
+            # str_encoded = cryptocode.encrypt(str(i.MO2_storeNumber),"samurai")
+            # url = "http://localhost:8000/store/storePassRegister/"+str_encoded+"/"
+            url = "http://localhost:8000/store/storePassRegister/"+str(i.MO2_mailAdress)
+            subject = "認証が完了しました。以下のURLよりパスワードを設定してください。"
+            message = url
+            from_email = DEFAULT_FROM_EMAIL  # 送信者
+            recipient_list = [i.MO2_mailAdress]  # 宛先リスト
+            send_mail(subject, message, from_email, recipient_list)
+            i.is_auth = True
+            i.save()
+    return redirect('store:storeCertification')
+
+def StorePassRegister(request,store):
+    params = {'message': '', 'form': None,}
+    # decoded = cryptocode.decrypt(store,"samurai")
+    # mystore = MO2_store.objects.get(MO2_storeNumber=decoded)
+    mystore = MO2_store.objects.get(MO2_mailAdress=store)
+    if request.method == 'POST':
+        form = StorePassCreateForm(request.POST)
+        if form['password1'] != form['password2']:
+            params['message'] = "入力された二つのパスワードが違います。再入力してください。"
+            params['form'] =  StorePassCreateForm()
+            return render(request, 'StorePassRegister.html', params)
+        else :
+            if form.is_valid():
+                en_pass = make_password(form['password1'])
+                mystore.MO2_password = en_pass
+                mystore.is_active = True
+                mystore.save()
+                params['message'] = "入力が完了しました。"
+                return render(request, 'index.html', params)
+            else:
+                params['message'] = '再入力して下さい'
+                params['form'] = StorePassCreateForm()
+                return render(request, 'StorePassRegister.html', params)
+    else:
+        params['form'] =  StorePassCreateForm()
+        params['message'] = ''
+        return render(request, 'StorePassRegister.html', params)
