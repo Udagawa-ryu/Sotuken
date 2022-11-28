@@ -6,7 +6,6 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext_lazy as _
-from maps.models import *
 
 # # Create your models here.
 # class UserManager(BaseUserManager):
@@ -84,8 +83,8 @@ class MO6_Visit_record(models.Model):
     MO6_visitRecordNumber = models.AutoField(verbose_name="訪問記録ナンバー", primary_key=True, editable=False)
     MO1_userNumber = models.ForeignKey(CustomUser, models.CASCADE, verbose_name="ユーザナンバー")
     MO6_dateofvisit = models.DateTimeField(verbose_name="訪問記録", auto_now_add=True)
-    MO3_DspotNumber = models.ForeignKey(MO3_Default_spot, models.CASCADE, verbose_name="デフォルトスポットナンバー")
-    MO4_OspotNumber = models.ForeignKey(MO4_Original_spot, models.CASCADE, verbose_name="オリジナルスポットナンバー")
+    MO3_DspotNumber = models.ForeignKey("maps.MO3_Default_spot", models.CASCADE, verbose_name="デフォルトスポットナンバー")
+    MO4_OspotNumber = models.ForeignKey("maps.MO4_Original_spot", models.CASCADE, verbose_name="オリジナルスポットナンバー")
     class Meta:
         verbose_name_plural = "MO6_Visit_record"
 
