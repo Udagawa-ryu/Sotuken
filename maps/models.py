@@ -14,7 +14,7 @@ class MO5_Tag(models.Model):
     return self.MO5_tagNumber
 
 # デフォルトスポットモデル
-class MO3_Default_spot(models.Modele):
+class MO3_Default_spot(models.Model):
   MO3_DspotNumber = models.AutoField(verbose_name="デフォルトスポットナンバー", primary_key=True)
   MO2_storeNumber = models.ForeignKey(MO2_store, models.CASCADE, verbose_name="ストアナンバー", editable=False)
   MO5_tagNumber = models.ForeignKey(MO5_Tag,models.CASCADE, verbose_name="タグナンバー")
