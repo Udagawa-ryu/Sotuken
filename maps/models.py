@@ -1,6 +1,7 @@
 from django.db import models
 from store.models import MO2_store
-from accounts.models import *
+from accounts.models import CustomUser
+
 # Create your models here.
 # タグモデル
 class MO5_Tag(models.Model):
