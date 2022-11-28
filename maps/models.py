@@ -1,6 +1,6 @@
 from django.db import models
 from store.models import MO2_store
-from accounts.models import CustomUser,MO6_Visit_record,MO8_Fav_Search_condition
+from accounts.models import CustomUser
 
 # Create your models here.
 # タグモデル
