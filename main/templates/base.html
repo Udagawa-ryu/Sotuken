@@ -88,26 +88,45 @@
                         <!-- 訪日観光客のアカウントの時 -->
                         <h1 id="fh5co-logo"><a href="{% url 'main:Mypage' %}"><i class="icon-airplane"></i>SAMURAI WALK</a></h1>
                         <!-- 店舗アカウントの時 -->
-                        <h1 id="fh5co-logo"><a href="{% url 'store:StoreMypage' %}"><i class="icon-airplane"></i>SAMURAI WALK</a></h1>
+                        <!-- <h1 id="fh5co-logo"><a href="{% url 'store:StoreMypage' }"><i class="icon-airplane"></i>SAMURAI WALK</a></h1> -->
                         <!-- START #fh5co-menu-wrap -->
                         <!-- ログインしていない時、店舗アカウントの時は表示しないようにする -->
+                        <!-- <nav id="fh5co-menu-wrap" role="navigation">
+                            <ul class="sf-menu" id="fh5co-primary-menu">
+                                <li>
+                                    <a href="#">Account</a>
+                                    <ul class="fh5co-sub-menu">
+                                        <li><a href="{% url 'accounts:UserInfoEdit' }">Edit My Information</a></li>
+                                        <li><a href="{% url 'accounts:Logout' }">LogOut</a></li>
+                                        <li><a href="{% url 'accounts:DeleteAccount' }">Delete Account</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{% url 'blog:FavoriteBlogList' }">Favorite</a></li>
+                                <li><a href="{% url 'main:Point' }">Point</a></li>
+                                <li><a href="{% url 'blog/BlogList' }">Blog</a></li>
+                                <li><a href="{% url 'maps:Map' }">Map</a></li>
+                                <li><a href="{% url 'blog:OpenRangeRegister' }">PublicScope</a></li>
+                                <li><a href="{% url 'blog:BlogList' }">Blog</a></li>
+                                <li><a href="{% url 'accounts:UserSearch' }">Search</a></li>
+                            </ul>
+                        </nav> -->
                         <nav id="fh5co-menu-wrap" role="navigation">
                             <ul class="sf-menu" id="fh5co-primary-menu">
                                 <li>
                                     <a href="#">Account</a>
                                     <ul class="fh5co-sub-menu">
-                                        <li><a href="{% url 'accounts:UserInfoEdit' %}">Edit My Information</a></li>
-                                        <li><a href="{% url 'accounts:Logout' %}">LogOut</a></li>
-                                        <li><a href="{% url 'accounts:DeleteAccount' %}">Delete Account</a></li>
+                                        <li><a href="#">Edit My Information</a></li>
+                                        <li><a href="#">LogOut</a></li>
+                                        <li><a href="#">Delete Account</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{% url 'blog:FavoriteBlogList' %}">Favorite</a></li>
-                                <li><a href="{% url 'main:Point' %}">Point</a></li>
-                                <li><a href="{% url 'blog/BlogList' %}">Blog</a></li>
-                                <li><a href="{% url 'maps:Map' %}">Map</a></li>
-                                <li><a href="{% url 'blog:OpenRangeRegister' %}">PublicScope</a></li>
-                                <li><a href="{% url 'blog:BlogList' %}">Blog</a></li>
-                                <li><a href="{% url 'accounts:UserSearch' %}">Search</a></li>
+                                <li><a href="#">Favorite</a></li>
+                                <li><a href="#">Point</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Map</a></li>
+                                <li><a href="#">PublicScope</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Search</a></li>
                             </ul>
                         </nav>
                     </div>

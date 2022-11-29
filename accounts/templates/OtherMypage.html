@@ -1,1 +1,58 @@
-<h1></h1>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Mypage{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <!-- ↓ユーザ名を入れる -->
+                <h3>〇〇s Page</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- 左寄せ -->
+        <div id="fh5co-menu-wrap">
+            <div class="row">
+                <div class="animate-box">
+                    <ul class="actions">
+                        <!-- お気に入りボタン -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div id="main">
+            <div class="inner">
+                <section class="tiles">
+                    <article class="style1">
+                        <span class="image">
+                            <img src="{% static 'images/pic01.jpg' %}" alt="" />
+                            <p>Map</p>
+                        </span>
+                        <div class="content">
+                            <p></p>
+                        </div>
+                        <!-- <a href="generic.html"> -->
+                        <!-- </a> -->
+                    </article>
+                    <article class="style2">
+                        <span class="image">
+                            <img src="{% static 'images/pic02.jpg' %}" alt="" />
+                            <p>Blog</p>
+                        </span>
+                        <!-- <a href="generic.html"> -->
+                        <!-- </a> -->
+                    </article>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
