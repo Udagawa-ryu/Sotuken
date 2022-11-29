@@ -311,8 +311,3 @@ body.is-touch .tiles article .content {
         padding: 0 1.25em;
     }
 }
-
-/* 右寄せ */
-.right {
-    text-align: right;
-}
