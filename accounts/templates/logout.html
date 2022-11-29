@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Log Out{% endblock %}
+
+{% block active_login %}active{% endblock %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div class="my-div-style">
+            <h1>Log Out</h1>
+            <h2>Do you want to log out?</h2>
+                <button class="btn btn-primary" type="submit" href="{% url 'main:Mypage' %}">cancel</button>
+                <button class="btn btn-primary" type="submit" href="{% url 'accounts:login' %}">Log Out</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
