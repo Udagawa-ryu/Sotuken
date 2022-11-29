@@ -7,21 +7,18 @@ class MypageView(generic.TemplateView):
 class PointView(generic.TemplateView):
     template_name = "Point.html"
 
+class PointConfirmationView(generic.TemplateView):
+    template_name = "PointConfirmation.html"
 
 
+class PointDisplayView(generic.TemplateView):
+    template_name = "PointDisplay.html"
 
-# class FavoriteView(generic.TemplateView):
-#     template_name = "Favorite.html"
+class PointInputView(generic.TemplateView):
+    template_name = "PointInput.html"
 
+class StoreQRreadView(generic.TemplateView):
+    template_name = "StoreQRread.html"
 
-# class BlogView(generic.TemplateView):
-#     template_name = "Blog.html"
-
-# class MapView(generic.TemplateView):
-#     template_name = "Map.html"
-
-# class PublicScopeView(generic.TemplateView):
-#     template_name = "Point.html"
-
-# class SearchView(generic.TemplateView):
-#     template_name = "Point.html"
+class VisitQRreadView(generic.TemplateView):
+    template_name = "VisitQRreadhtml"
