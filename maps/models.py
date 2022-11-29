@@ -15,7 +15,7 @@ class MO5_Tag(models.Model):
 class MO3_Default_spot(models.Model):
   MO3_DspotNumber = models.AutoField(verbose_name="デフォルトスポットナンバー", primary_key=True, editable=False)
   MO2_storeNumber = models.ForeignKey("store.MO2_store", models.CASCADE, verbose_name="ストアナンバー")
-  MO5_tagNumber = models.ForeignKey(MO5_Tag,models.CASCADE, verbose_name="タグナンバー")
+  MO5_tagNumber = models.ManyToManyField(MO5_Tag)
   class Meta:
     verbose_name_plural = "MO3_Default_spot"
 
@@ -29,7 +29,7 @@ class MO4_Original_spot(models.Model):
   MO4_OspotInfo = models.TextField(verbose_name="オリジナルスポット情報",null=True)
   MO4_OspotAdress = models.CharField(verbose_name="オリジナルスポット住所", max_length=50, null=True)
   MO4_createDate = models.DateTimeField(verbose_name="作成日時", auto_now_add=True)
-  MO5_tagNumber = models.ForeignKey(MO5_Tag,models.CASCADE,verbose_name="タグナンバー" )
+  MO5_tagNumber = models.ManyToManyField(MO5_Tag)
   MO1_userNumber = models.ForeignKey("accounts.CustomUser", models.CASCADE,verbose_name="ユーザナンバー")
   class Meta:
     verbose_name_plural = "MO4_Original_spot"

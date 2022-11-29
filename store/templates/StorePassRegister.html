@@ -4,7 +4,7 @@
 </head>
 <body>
     <div>
-        <form method="post" action="{% url 'store:storeRequest' %}">
+        <form method="post" action="{% url 'store:storePassRegister' store.MO2_mailAdress %}">
             {% csrf_token %}
                 <p>パスワード : {{form.password1}}</p>
                 <p>パスワード確認 : {{form.password2}}</p>
