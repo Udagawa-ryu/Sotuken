@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from allauth.account.adapter import get_adapter
 from allauth.account.forms import (
-    SignupForm,
+    SignupForm,LoginForm
 )
 
 #クラス名はsettings.pyで書いた名前
@@ -47,22 +47,23 @@ class CustomSignupForm(UserCreationForm):
         # self.fields['MO1_openRange'].widget.attrs['class'] = 'form-control'
         # self.fields['MO1_openRange'].widget.attrs['placeholder'] = 'MO1_openRange'
 
-class CustomLoginForm(forms.ModelForm):
-    # MO1_userName = forms.CharField(label='userName')
-    # MO1_homeCountry = forms.CharField( label='homeCountry')
-    # MO1_language = forms.CharField( label='language')
-    # MO1_openRange =  forms.ChoiceField(choices = (
-    #         (0, 'Open'),
-    #         (1, 'Hidden'),
-    #     ), label='openRange')
-    class Meta:
-        model = CustomUser
-        fields = ["email","password"]
+# class CustomLoginForm(forms.ModelForm):
+#     class Meta:
+#         model = CustomUser
+#         fields = ["email","password"]
         
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.fields["email"].required = True
+#         labels = {
+#             "email": "mailAdress",
+#             "password":"password"
+#         }
+
+class CustomLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["email"].required = True
-        labels = {
-            "email": "mailAdress",
-            "password":"password"
-        }
+        for field in self.fields.values():
+            self.fields['login'].label = 'email'
+            self.fields['password'].label = 'password'
+            field.widget.attrs['class'] = 'form-control'

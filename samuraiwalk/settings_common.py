@@ -148,11 +148,10 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # メールアドレス認証に変更する設定
-ACCOUNT_AUTHENTICATION_METHOD = 'emial'
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 USER_MODEL_EMAIL_FIELD = "email"
 
 # サインアップにメールアドレス確認を挟むよう設定
@@ -176,6 +175,7 @@ DEFAULT_FROM_EMAIL = 'admin@example.com'
 ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'
 ACCOUNT_FORMS = {
     'signup': 'accounts.forms.CustomSignupForm',
+    'login': 'accounts.forms.CustomLoginForm',
 }
 
 # 静的ファイルの設置場所を設定
