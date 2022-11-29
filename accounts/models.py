@@ -59,16 +59,15 @@ from django.utils.translation import gettext_lazy as _
 
 class CustomUser(AbstractUser):
     MO1_userNumber = models.AutoField(verbose_name="ユーザナンバー",primary_key=True, editable=False)
-    MO1_userID = models.CharField(verbose_name="ユーザID",max_length=16)
-    username = models.CharField(verbose_name="ユーザ名",max_length=50,blank=True)
-    email = models.EmailField(verbose_name="メールアドレス",unique=True)
-    MO1_homeCountry = models.CharField(verbose_name="所在国",max_length=50,blank=True)
-    MO1_language = models.CharField(verbose_name="使用言語",max_length=50,blank=True)
-    MO1_openRange = models.IntegerField(verbose_name="公開範囲",default=0)
+    MO1_userID = models.CharField(verbose_name="UserID",max_length=16)
+    username = models.CharField(verbose_name="UserName",max_length=50,blank=True)
+    email = models.EmailField(verbose_name="MailAddres",unique=True)
+    MO1_homeCountry = models.CharField(verbose_name="HomeCountry",max_length=50,blank=True)
+    MO1_language = models.CharField(verbose_name="Language",max_length=50,blank=True)
+    MO1_openRange = models.IntegerField(verbose_name="OpenRange",default=0)
     MO1_point = models.IntegerField(verbose_name="ポイント",default=0)
     MO1_createDate = models.DateTimeField(verbose_name="作成日時", auto_now_add=True)
     MO1_updateDate = models.DateTimeField(verbose_name="更新日時", auto_now_add=True)
-    password = models.CharField(verbose_name="password", max_length=12,blank=True)
     is_staff = models.BooleanField(_("staff status"), default=False)
     is_active = models.BooleanField(_("active"), default=True)
     REQUIRED_FIELDS = ["username","MO1_userID","MO1_homeCountry","MO1_language","MO1_openRange"]
@@ -78,7 +77,7 @@ class CustomUser(AbstractUser):
         verbose_name_plural = "CustomUser"
 
     def __str__(self):
-        return self.MO1_userID
+        return f'{self.MO1_userNumber}-{self.username}'
 
 class MO6_Visit_record(models.Model):
     MO6_visitRecordNumber = models.AutoField(verbose_name="訪問記録ナンバー", primary_key=True, editable=False)
