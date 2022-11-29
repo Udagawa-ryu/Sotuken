@@ -1,11 +1,24 @@
-{% extends 'base.html' %}
+{% extends 'base_store.html' %}
 
 {% load static %}
 
 {% block title %}店舗登録申請{% endblock %}
 
+{% block css %}
+  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+{% endblock %}
+
 {% block contents %}
-    <div>
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+        <h3>店舗登録申請</h3>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row row-bottom-padded-md"></div>
       <form method="post" action="{% url 'store:storeRequest' %}">
         {% csrf_token %}
             <p>店舗名 : {{form.MO2_storeName}}</p>
@@ -15,10 +28,12 @@
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
         <!--登録ボタン-->
-        <div class="row justify-content-center" style="margin-top: 50px;">
-          <button type="submit" class="btn btn-outline-primary">　登録　</button>
+        <div style="text-align: center;">
+          <button type="submit" class="button primary">　登録　</button>
         </div>
       </form>
       <p>{{ message }}</p>
     </div>
+  </div>
+</div>
 {% endblock %}
