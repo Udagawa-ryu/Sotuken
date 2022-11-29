@@ -22,6 +22,9 @@ def newAccount(request):
 def UserInfoRegister(request):
     return render(request, 'userinforegister.html')
 
+def logout(request):
+    return render(request,'logout.html')
+
 def login(request):
     params = {'message':'', 'form': None}
     if request.method == 'POST':
