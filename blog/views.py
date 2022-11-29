@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 # Create your views here.
 
-class BlogListView(generic.View):
+class BlogListView(generic.TemplateView):
     template_name = "BlogList.html"
 
 class BlogRegisterView(generic.View):
