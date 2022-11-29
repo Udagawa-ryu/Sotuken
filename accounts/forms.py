@@ -18,10 +18,6 @@ class CustomSignupForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ["email","username","MO1_userID","MO1_homeCountry","MO1_language","MO1_openRange"]
-        
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields["email"].required = True
         labels = {
             "email": "mailAdress",
             "username":"UserName",
@@ -30,6 +26,12 @@ class CustomSignupForm(UserCreationForm):
             "MO1_language":"Language",
             "MO1_openRange":"OpenRange",
         }
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["email"].required = True
+        self.fields['password1'].label = 'password'
+        self.fields['password2'].label = 'password(confirmation)'
         # self.fields["email"].widget.attrs['class'] = 'form-control'
         # self.fields["email"].widget.attrs['placeholder'] = 'MailAdress'
         # self.fields['password1'].widget.attrs['class'] = 'form-control'
