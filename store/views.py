@@ -58,19 +58,17 @@ def addStore(request):
     return redirect('store:storeCertification')
 
 def StorePassRegister(request,store):
-    params = {'message': '', 'form': None,}
-    # decoded = cryptocode.decrypt(store,"samurai")
-    # mystore = MO2_store.objects.get(MO2_storeNumber=decoded)
     mystore = MO2_store.objects.get(MO2_mailAdress=store)
+    params = {'message': '', 'form': None,'store':mystore}
     if request.method == 'POST':
         form = StorePassCreateForm(request.POST)
-        if form['password1'] != form['password2']:
+        if request.POST['password1'] != request.POST['password2']:
             params['message'] = "入力された二つのパスワードが違います。再入力してください。"
             params['form'] =  StorePassCreateForm()
             return render(request, 'StorePassRegister.html', params)
         else :
             if form.is_valid():
-                en_pass = make_password(form['password1'])
+                en_pass = make_password(request.POST['password1'])
                 mystore.MO2_password = en_pass
                 mystore.is_active = True
                 mystore.save()
@@ -82,5 +80,5 @@ def StorePassRegister(request,store):
                 return render(request, 'StorePassRegister.html', params)
     else:
         params['form'] =  StorePassCreateForm()
-        params['message'] = ''
+        params['message'] = 'getされました'
         return render(request, 'StorePassRegister.html', params)

@@ -9,7 +9,7 @@ class MO2_store(models.Model):
     MO2_phoneNumber = models.CharField(verbose_name="電話番号",null=True,max_length=20,blank=True)
     MO2_address = models.CharField(verbose_name="住所",max_length=50)
     MO2_mailAdress = models.EmailField(verbose_name="メールアドレス",unique=True)
-    MO2_password = models.CharField(verbose_name="パスワード",null=True,max_length=50,blank=True)
+    MO2_password = models.CharField(verbose_name="パスワード",null=True,max_length=255,blank=True)
     MO2_createDate = models.DateTimeField(verbose_name="作成日時", auto_now_add=True)
     MO2_updateDate = models.DateTimeField(verbose_name="更新日時", auto_now_add=True)
     is_active = models.BooleanField(verbose_name="is_active", default=False)
