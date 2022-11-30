@@ -9,7 +9,7 @@ class MO5_Tag(models.Model):
     verbose_name_plural = "MO5_Tag"
 
   def __str__(self):
-    return self.MO5_tagNumber
+    return f'{self.MO5_tagNumber}'
 
 # デフォルトスポットモデル
 class MO3_Default_spot(models.Model):
@@ -20,7 +20,7 @@ class MO3_Default_spot(models.Model):
     verbose_name_plural = "MO3_Default_spot"
 
   def __str__(self):
-    return self.MO3_DspotNumber
+    return f'{self.MO3_DspotNumber}'
 
 # オリジナルスポットモデル
 class MO4_Original_spot(models.Model):
