@@ -25,7 +25,7 @@ class BlogRegisterForm(forms.ModelForm):
       'MO6_visitRecordNumber':forms.ModelChoiceField(label="VisitRecord",queryset=MO6_Visit_record.objects.all())
     }
   def __init__(self, *args, **kwargs):
+    self.user = kwargs.pop('user', None) #viewからのデータの受け取り
     super().__init__(*args, **kwargs)
-    user = kwargs.pop('uNumber', None) #viewからのデータの受け取り
-    my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
+    my_record = MO6_Visit_record.objects.filter(MO1_userNumber=self.user.MO1_userNumber)
     self.fields['MO6_visitRecordNumber'].queryset = my_record

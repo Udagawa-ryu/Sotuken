@@ -1,10 +1,17 @@
 from django.shortcuts import render
 from django.views import generic
+from .forms import *
 # Create your views here.
 
 # ブログ一覧画面
-class BlogListView(generic.TemplateView):
+class BlogListView(generic.FormView):
     template_name = "BlogList.html"
+    form = BlogRegisterForm
+    def get_form_kwargs(self,request):
+        user = self.request.user # formへ渡す変数
+        kwargs = super(BlogRegisterForm, self).get_form_kwargs()
+        kwargs.update({'user': user})
+        return kwargs
 
 # ブログ新規作成画面
 class BlogRegisterView(generic.View):
