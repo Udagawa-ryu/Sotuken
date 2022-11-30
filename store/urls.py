@@ -8,4 +8,5 @@ urlpatterns = [
     path('storeCertification/',views.storeCertification,name="storeCertification"),
     path('addStore/',views.addStore,name="addStore"),
     path('storePassRegister/<str:store>/',views.StorePassRegister,name="storePassRegister"),
+    path('storeLogin/',views.storeLogin,name="storeLogin"),
 ]

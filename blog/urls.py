@@ -12,5 +12,4 @@ urlpatterns = [
     path('blogDelete', views.BlogDeleteView.as_view(), name="blogDelete"),
     path('openRangeRegister', views.OpenRangeRegisterView.as_view(), name="openRangeRegister"),
     path('otherBlogList', views.OtherBlogListView.as_view(), name="otherBlogList"),
-    path('favoriteBlogList', views.FavoriteBlogListView.as_view(), name="favoriteBlogList"),
 ]

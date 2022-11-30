@@ -22,3 +22,10 @@ class StoreQRreadView(generic.TemplateView):
 
 class VisitQRreadView(generic.TemplateView):
     template_name = "VisitQRreadhtml"
+
+
+class FavoriteBlogListView(generic.View):
+    template_name = "FavoriteBlogList.html"
+
+class FavoriteUserListView(generic.View):
+    template_name = "FavoriteBlogList.html"
