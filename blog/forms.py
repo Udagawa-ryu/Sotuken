@@ -3,6 +3,7 @@ from accounts.models import *
 from django import forms
 
 class BlogRegisterForm(forms.ModelForm):
+  record = forms.ModelChoiceField(label="VisitRecord",queryset=MO6_Visit_record.objects.none())
   class Meta:
     model = MO7_Blog
     # フォームに入力したいフィールドを選択
@@ -11,7 +12,7 @@ class BlogRegisterForm(forms.ModelForm):
     labels = {
       'MO7_blogName':"BlogName",
       'MO7_blogText':"BlogText",
-      'MO6_visitRecordNumber':'VisitRecord',
+      'MO6_visitRecordNumber':'record',
       'MO7_openRange':'OpenRange'
     }
     # フォームの動きをモデルのフィールドとは違うものにしたいときに記述
@@ -22,6 +23,7 @@ class BlogRegisterForm(forms.ModelForm):
             (1,"Hidden"),
           )
         ),
+<<<<<<< HEAD
       # 'MO6_visitRecordNumber':forms.ModelChoiceField(label="VisitRecord",queryset=MO6_Visit_record.objects.all())
     }
   def __init__(self, *args, **kwargs):
@@ -29,3 +31,8 @@ class BlogRegisterForm(forms.ModelForm):
     super().__init__(*args, **kwargs)
     # my_record = MO6_Visit_record.objects.filter(MO1_userNumber=self.user.MO1_userNumber)
     # self.fields['MO6_visitRecordNumber'].queryset = my_record
+=======
+    }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+>>>>>>> c6cd9b70f5172c4b1917c8bf08519dea2f88d88f
