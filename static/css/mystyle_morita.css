@@ -20,3 +20,21 @@
 .button_secondaryAction {
     margin-left: 42%;
 }
+
+#signup_form {
+    margin-left: 290px;
+}
+
+.toroku {
+    margin-left: 200px;
+    margin-top: 40px;
+}
+
+.welcom {
+    margin-left: 225px;
+}
+
+.close {
+    margin-right: 70px;
+    margin-top: 60px;
+}

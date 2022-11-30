@@ -26,6 +26,9 @@ def UserInfoRegister(request):
 def logout(request):
     return render(request,'logout.html')
 
+def signupcomp(request):
+    return render(request,'SingUpCompletion.html')
+
 def login(request):
     params = {'message':'', 'form': None}
     if request.method == 'POST':
