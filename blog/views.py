@@ -6,16 +6,16 @@ from .forms import *
 # ブログ一覧画面
 class BlogListView(generic.FormView):
     template_name = "BlogList.html"
+
+# ブログ新規作成画面
+class BlogRegisterView(generic.View):
+    template_name = "BlogRegister.html"
     form = BlogRegisterForm
     def get_form_kwargs(self,request):
         user = self.request.user # formへ渡す変数
         kwargs = super(BlogRegisterForm, self).get_form_kwargs()
         kwargs.update({'user': user})
         return kwargs
-
-# ブログ新規作成画面
-class BlogRegisterView(generic.View):
-    template_name = "BlogRegister.html"
 
 # ブログ内容確認画面
 class BlogConfirmationView(generic.View):
