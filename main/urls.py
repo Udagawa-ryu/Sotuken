@@ -10,4 +10,5 @@ urlpatterns = [
     path('PointInput/',views.PointInputView.as_view(), name="PointInput"),
     path('StoreQRread/',views.StoreQRreadView.as_view(), name="StoreQRread"),
     path('VisitQRread/',views.VisitQRreadView.as_view(), name="VisitQRread"),
+    path('favoriteBlogList', views.FavoriteBlogListView.as_view(), name="favoriteBlogList"),
 ]

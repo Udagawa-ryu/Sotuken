@@ -57,6 +57,7 @@ def addStore(request):
             i.save()
     return redirect('store:storeCertification')
 
+
 def StorePassRegister(request,store):
     mystore = MO2_store.objects.get(MO2_mailAdress=store)
     params = {'message': '', 'form': None,'store':mystore}
@@ -82,3 +83,28 @@ def StorePassRegister(request,store):
         params['form'] =  StorePassCreateForm()
         params['message'] = 'getされました'
         return render(request, 'StorePassRegister.html', params)
+
+def storeLogin(request):
+    params = {'message': '', 'form': None}
+    if request.method == 'POST':
+        ma = request.POST['MO2_mailAdress']
+        ps = request.POST['MO2_password']
+        if MO2_store.objects.filter(MO2_mailAdress = ma).exists():
+            user = MO2_store.objects.get(MO2_mailAdress = ma)
+            if check_password(ps,user.MO2_password):
+                params['form'] = StoreLoginForm()
+                params['message'] = "ログイン可能セッション処理記述中"
+                return render(request,'StoreLogin.html',params)
+            else:
+                params['form'] = StoreLoginForm()
+                params['message'] = "パスワードが違います"
+                return render(request,'StoreLogin.html',params)
+        else:
+            params['form'] = StoreLoginForm()
+            params['message'] = "そのメールアドレスは登録されていません。"
+            return render(request,'StoreLogin.html',params)
+    else:
+        params['form'] = StoreLoginForm()
+        params['message'] = ''
+        return render(request,'StoreLogin.html',params)
+    return render(request,'StoreLogin.html',params)

@@ -27,3 +27,6 @@ class StoreLoginForm(forms.ModelForm):
             "MO2_mailAdress": "MailAdress",
             "MO2_password":"Password",
         }
+        widgets = {
+            "MO2_password": forms.PasswordInput()
+        }

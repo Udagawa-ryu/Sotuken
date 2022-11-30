@@ -4,6 +4,7 @@ from .forms import *
 from allauth.account.utils import *
 from samuraiwalk.settings_common import *
 
+
 # Create your views here.
 def newAccount(request):
     params = {'message': '', 'form': None}

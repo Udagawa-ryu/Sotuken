@@ -28,6 +28,3 @@ class OpenRangeRegisterView(generic.View):
 
 class OtherBlogListView(generic.View):
     template_name = "OtherBlogList.html"
-
-class FavoriteBlogListView(generic.View):
-    template_name = "FavoriteBlogList.html"
