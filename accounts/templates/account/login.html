@@ -1,33 +1,38 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
-{% block title %}Log In | Private Diary{% endblock %}
+{% block title %}Log In{% endblock %}
 
 {% block active_login %}active{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
 {% endblock %}
 
 {% block contents %}
-<div class="container">
-    <div class="row">
-        <div class="my-div-style">
-            <h1>Log In</h1>
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <h3>Login</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
             <form method="post" action="{% url 'account_login' %}">
                 {% csrf_token %}
 
                 {{ form.as_p }}
 
                 {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
 
-                <button class="btn btn-primary" type="submit">Login</button>
-                <p><a class="button secondaryAction" href="{% url 'account_reset_password' %}">パスワードを忘れましたか？</a></p>
+                <button class="login" type="submit">Login</button>
+                <p><a class="button_secondaryAction" href="{% url 'account_reset_password' %}">パスワードを忘れましたか？</a></p>
             </form>
-        </div>
     </div>
+
 </div>
 {% endblock %}

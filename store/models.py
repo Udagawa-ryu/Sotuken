@@ -12,6 +12,9 @@ class MO2_store(models.Model):
     MO2_password = models.CharField(verbose_name="パスワード",null=True,max_length=255,blank=True)
     MO2_createDate = models.DateTimeField(verbose_name="作成日時", auto_now_add=True)
     MO2_updateDate = models.DateTimeField(verbose_name="更新日時", auto_now_add=True)
+    MO2_images1 = models.ImageField(verbose_name="店舗画像1",upload_to="store",null=True,blank=True)
+    MO2_images2 = models.ImageField(verbose_name="店舗画像2",upload_to="store",null=True,blank=True)
+    MO2_images3 = models.ImageField(verbose_name="店舗画像3",upload_to="store",null=True,blank=True)
     is_active = models.BooleanField(verbose_name="is_active", default=False)
     is_auth = models.BooleanField(verbose_name="管理者認証",default=False)
     class Meta:
