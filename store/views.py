@@ -9,7 +9,7 @@ from django.contrib.auth.hashers import make_password,check_password
 # Create your views here.
 
 class IndexView(generic.TemplateView):
-    template_name= "StoreMyoage.html"
+    template_name= "StoreMypage.html"
 
 
 def storeRequest(request):
@@ -108,3 +108,6 @@ def storeLogin(request):
         params['message'] = ''
         return render(request,'StoreLogin.html',params)
     return render(request,'StoreLogin.html',params)
+
+def storeinfocompletion(request):
+    template_name = "StoreInfoCompletion.html"
