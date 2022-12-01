@@ -69,3 +69,22 @@
 .row_justify-content-center {
     margin-left: 520px;
 }
+
+.account {
+    margin-left: 225px;
+    font-size: 20px;
+}
+
+.account_cancel {
+    margin-left: 400px;
+    margin-top: 50px;
+}
+
+.account_delete {
+    margin-left: 60px;
+}
+
+.btn_btn-outline-primary {
+    margin-bottom: 100px;
+    margin-left : -10px;
+}

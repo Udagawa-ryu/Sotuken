@@ -44,3 +44,6 @@ def login(request):
     else:
         params['form'] = CustomLoginForm()
     return render(request, 'account/login.html',params)
+
+def deleteAccount(request):
+    return render(request,'DeleteAccount.html')
