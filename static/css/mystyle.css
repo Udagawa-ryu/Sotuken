@@ -377,3 +377,33 @@ input[type="radio"] {
 #tab2:checked~.panel_area #panel2 {
     display: block;
 }
+
+/* テーブル */
+table.confirmation {
+    border-collapse: separate;
+    border-spacing: 0px 5px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+td,
+th {
+    padding: 10px;
+}
+
+th.th-center{
+    background: #F78536;
+    color: #fff;
+    width: 30%;
+    height: 50px;
+    text-align: center;
+}
+
+td.td-space {
+    background: #ffefe4;
+    /* 改行 */
+    word-break: break-word;
+    padding-left: 10px;
+    padding-right: 10px;
+    color:#333333;
+}

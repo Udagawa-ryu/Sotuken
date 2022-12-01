@@ -1,1 +1,60 @@
-<h1></h1>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}BlogConfirmation{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <h3>BlogConfirmation</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- <div class="row"> -->
+        <div class="animate-box">
+            <table class="confirmation">
+                <tr>
+                    <th class="th-center">Title</th>
+                    <td class="td-space">my blog</td>
+                </tr>
+                <tr>
+                    <th class="th-center">Contents</th>
+                    <td class="td-space">
+                        Professional musician Robin Spielberg says music saved her daughter’s life.
+                        
+                        In 1998, Spielberg was pregnant with twin girls when she suffered complications. An emergency cesarean was performed
+                        during the 22nd week of pregnancy. Sadly, one of the twins passed away, but Valerie survived.
+                        
+                        Valerie was born weighing only 12 ounces and was the size of a can of soda. She was so small that she didn’t meet the
+                        hospital’s premature baby weight limit necessary to receive life-saving treatment. A kind nurse put her thumb on the
+                        scale and recorded her weight at 17 ounces, just enough to make her eligible to receive medical support.
+                        
+                        It was touch and go. To make matters worse, the hospital was very loud and busy. Spielberg thought it felt more like an
+                        emergency room than a healing environment. She wanted to drown out the hustle and bustle of the hospital.
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th-center">VisitRecode</th>
+                    <td class="td-space">
+                        recode1
+                        <br>
+                        recode2
+                    </td>
+                </tr>
+            </table>
+            <div class="text-center" style="margin-top: 20px;">
+                <a href="#" class="button primary">Cancel</a>
+                <a href="#" class="button primary">OK</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
