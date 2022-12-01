@@ -1,1 +1,50 @@
-<h1>店舗用登録内容削除確認画面</h1>
+{% extends 'base.html' %}
+
+{% block title %}店舗登録内容削除確認画面{% endblock %}
+
+{% block active_login %}active{% endblock %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <h3>店舗登録内容削除確認</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="my-div-style">
+                <h2 class="store_info_text">この登録内容を削除してもよろしいですか？</h2>
+                            <table class="confirmation">
+                                <tr>
+                                    <th class="th-center">店舗名</th>
+                                    <td class="td-space">○○商店</td>
+                                </tr>
+                                <tr>
+                                    <th class="th-center">住所</th>
+                                    <td class="td-space">
+                                        ○○県○○市○○町○○
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="th-center">メールアドレス</th>
+                                    <td class="td-space">
+                                        ○○○○○○@ac.jp
+                                    </td>
+                                </tr>
+                            </table>
+                <button class="store_info_cancel" type="submit" href="{% url 'store:StoreMypage' %}">キャンセル</button>
+                <button class="store_delete" type="submit">削除</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

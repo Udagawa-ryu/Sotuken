@@ -3170,9 +3170,6 @@ input, select, textarea {
 
 	#footer {
 		padding: 5em 0 6em 0 ;
-		position: absolute;
-		bottom: 0;
-		width: 100%;
 		background-color: #f6f6f6;
 	}
 

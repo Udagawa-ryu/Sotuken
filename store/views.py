@@ -117,3 +117,9 @@ def IndexView2(request,mail):
     print("",mail)
     mail = request.user.email
     return render(request,'StoreMypage.html',{})
+
+class storeLogoutView(generic.TemplateView):
+    template_name = "StoreLogout.html"
+
+class storeinfodeleteconfView(generic.TemplateView):
+    template_name = "StoreInfoDeleteConfirmation.html"
