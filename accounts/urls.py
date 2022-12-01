@@ -8,5 +8,5 @@ urlpatterns = [
     path('signupcompletion/',views.signupcomp,name="signupcomp"),
     path('UserInfoCompletion/',views.UserInfoCompletion,name="UserInfoComp"),
     path('UserInfoRegister/',views.UserInfoRegister,name="UserInfoRegister"),
-    path('DeleteAccount/',views.deleteAccount,name="DeleteAccount")
+    path('DeleteAccount/',views.deleteAccount,name="DeleteAccount"),
 ]
