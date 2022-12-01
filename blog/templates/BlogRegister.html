@@ -24,8 +24,29 @@
         <p>{{ message }}</p>
         <form method="post" action="{% url 'blog:blogRegister' %}">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button class="ui button orange" type="submit" name="next" value="confirm">CREATE</button>
+            <table class="confirmation">
+                <tr>
+                    <th class="th-center">BlogName</th>
+                    <td class="td-space">{{form.MO7_blogName}}</td>
+                </tr>
+                <tr>
+                    <th class="th-center">BlogText</th>
+                    <td class="td-space"><pre>{{form.MO7_blogText}}</pre></td>
+                </tr>
+                <tr>
+                    <th class="th-center">VisitRecode</th>
+                    <td class="td-space">
+                        {{form.MO6_visitRecordNumber}}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th-center">OpenRangee</th>
+                    <td class="td-space">
+                        {{form.MO7_openRange}}
+                    </td>
+                </tr>
+            </table>
+            <button class="button primary" type="submit" name="next" value="confirm">CREATE</button>
         </form>
     </div>
 </div>

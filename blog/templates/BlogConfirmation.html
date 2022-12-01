@@ -46,8 +46,8 @@
               <form method="post" action="{% url 'blog:blogRegister' %}">
                 {% csrf_token %}
                 {{ form.as_hideen }}
-                <button class="ui button grey" type="submit" name="next" value="back">BACK</button>
-                <button class="ui button orange" type="submit" name="next" value="create">CREATE</button>
+                <button class="button primary" type="submit" name="next" value="back">Cancel</button>
+                <button class="button primary" type="submit"  name="next" value="create">OK</button>
               </form>
             </div>
         </div>
