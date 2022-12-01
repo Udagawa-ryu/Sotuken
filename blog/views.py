@@ -17,6 +17,7 @@ def BlogRegisterView(request):
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     form = BlogRegisterForm()
     my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
+    print("query",my_record)
     form.fields['MO6_visitRecordNumber'].queryset = my_record
     params['form'] = form
     return render(request,"BlogRegister.html",params)

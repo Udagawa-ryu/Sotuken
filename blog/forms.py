@@ -4,6 +4,11 @@ from django import forms
 
 class BlogRegisterForm(forms.ModelForm):
   MO6_visitRecordNumber = forms.ModelChoiceField(label="VisitRecord",queryset=MO6_Visit_record.objects.none())
+  CHOICE = {
+    (0,'OPEN'),
+    (1,'HIDDEN'),
+  }
+  MO7_openRange = forms.ChoiceField(label='OpenRange', choices= CHOICE)
   class Meta:
     model = MO7_Blog
     # フォームに入力したいフィールドを選択
@@ -13,22 +18,12 @@ class BlogRegisterForm(forms.ModelForm):
       'MO7_blogName':"BlogName",
       'MO7_blogText':"BlogText",
       'MO6_visitRecordNumber':'record',
-      'MO7_openRange':'OpenRange'
+      'MO7_openRange':'OpenRange',
     }
     # フォームの動きをモデルのフィールドとは違うものにしたいときに記述
-    widgets = {
-      'MO7_openRange':forms.ChoiceField(
-          choices=(
-            (0,"Open"),
-            (1,"Hidden"),
-          )
-        ),
-      # 'MO6_visitRecordNumber':forms.ModelChoiceField(label="VisitRecord",queryset=MO6_Visit_record.objects.all())
-    }
+    # widgets = {
+    #   'MO7_openRange':forms.ChoiceField(label='OpenRange', widget=forms.RadioSelect, choices= CHOICE, initial=0)
+    # }
   def __init__(self, *args, **kwargs):
-    self.user = kwargs.pop('user', None) #viewからのデータの受け取り
+    # self.user = kwargs.pop('user', None) #viewからのデータの受け取り
     super().__init__(*args, **kwargs)
-    # my_record = MO6_Visit_record.objects.filter(MO1_userNumber=self.user.MO1_userNumber)
-    # self.fields['MO6_visitRecordNumber'].queryset = my_record
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
