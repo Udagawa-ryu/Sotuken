@@ -11,6 +11,9 @@ from django.contrib.auth.hashers import make_password,check_password
 class IndexView(generic.TemplateView):
     template_name= "StoreMypage.html"
 
+class storeinfocompletionView(generic.TemplateView):
+    template_name = "StoreInfoCompletion.html"
+
 
 def storeRequest(request):
     params = {'message': '仮登録が完了しました。メールが届くまでお待ちください。', 'form': None,}
@@ -108,6 +111,3 @@ def storeLogin(request):
         params['message'] = ''
         return render(request,'StoreLogin.html',params)
     return render(request,'StoreLogin.html',params)
-
-def storeinfocompletion(request):
-    template_name = "StoreInfoCompletion.html"
