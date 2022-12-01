@@ -9,16 +9,17 @@ class BlogListView(generic.FormView):
     template_name = "BlogList.html"
 
 # ブログ新規作成画面
-class BlogRegisterView(generic.View):
-    template_name = "BlogRegister.html"
-    form_class = BlogRegisterForm
-    def get(self, request, *args, **kwargs):
-        params = {"message":'',}
-        user = CustomUser.object.get(MO1_userNumber=request.user.MO1_userNumber)
-        form = self.form_class()
-        my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
-        form.fields['category'].queryset = my_record
-        return render(request,"BlogList.html",)
+# class BlogRegisterView(generic.View):
+#     template_name = "BlogRegister.html"
+#     form_class = BlogRegisterForm
+def BlogRegisterView(request):
+    params = {"message":'',"form":None}
+    user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
+    form = BlogRegisterForm()
+    my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
+    form.fields['MO6_visitRecordNumber'].queryset = my_record
+    params['form'] = form
+    return render(request,"BlogRegister.html",params)
 
 
 # ブログ内容確認画面

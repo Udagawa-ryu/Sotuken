@@ -3,7 +3,7 @@ from accounts.models import *
 from django import forms
 
 class BlogRegisterForm(forms.ModelForm):
-  record = forms.ModelChoiceField(label="VisitRecord",queryset=MO6_Visit_record.objects.none())
+  MO6_visitRecordNumber = forms.ModelChoiceField(label="VisitRecord",queryset=MO6_Visit_record.objects.none())
   class Meta:
     model = MO7_Blog
     # フォームに入力したいフィールドを選択
