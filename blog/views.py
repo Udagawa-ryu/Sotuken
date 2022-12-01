@@ -1,30 +1,52 @@
 from django.shortcuts import render
 from django.views import generic
+from .forms import *
+from accounts.models import CustomUser
 # Create your views here.
 
-class BlogListView(generic.TemplateView):
+# ブログ一覧画面
+class BlogListView(generic.FormView):
     template_name = "BlogList.html"
 
-class BlogRegisterView(generic.View):
-    template_name = "BlogRegister.html"
+# ブログ新規作成画面
+# class BlogRegisterView(generic.View):
+#     template_name = "BlogRegister.html"
+#     form_class = BlogRegisterForm
+def BlogRegisterView(request):
+    params = {"message":'',"form":None}
+    user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
+    form = BlogRegisterForm()
+    my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
+    print("query",my_record)
+    form.fields['MO6_visitRecordNumber'].queryset = my_record
+    params['form'] = form
+    return render(request,"BlogRegister.html",params)
 
-class BlogConfirmationView(generic.View):
+
+# ブログ内容確認画面
+class BlogConfirmationView(generic.TemplateView):
     template_name = "BlogConfirmation.html"
 
-class BlogCompletionView(generic.View):
+# ブログ登録完了画面
+class BlogCompletionView(generic.TemplateView):
     template_name = "BlogCompletion.html"
 
-class BlogDetailView(generic.View):
+# ブログ詳細画面
+class BlogDetailView(generic.TemplateView):
     template_name = "BlogDetail.html"
 
-class BlogEditView(generic.View):
+# ブログ編集画面
+class BlogEditView(generic.TemplateView):
     template_name = "BlogEdit.html"
 
-class BlogDeleteView(generic.View):
+# ブログ削除画面
+class BlogDeleteView(generic.TemplateView):
     template_name = "BlogDelete.html"
 
-class OpenRangeRegisterView(generic.View):
+# マイブログ公開範囲設定入力画面
+class OpenRangeRegisterView(generic.TemplateView):
     template_name = "OpenRangeRegister.html"
 
-class OtherBlogListView(generic.View):
+# 他ユーザのブログ画面
+class OtherBlogListView(generic.TemplateView):
     template_name = "OtherBlogList.html"

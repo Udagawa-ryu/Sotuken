@@ -9,6 +9,13 @@ from samuraiwalk.settings_dev import *
 from django.contrib.auth.hashers import make_password,check_password
 # Create your views here.
 
+class IndexView(generic.TemplateView):
+    template_name= "StoreMypage.html"
+
+class storeinfocompletionView(generic.TemplateView):
+    template_name = "StoreInfoCompletion.html"
+
+
 def storeRequest(request):
     params = {'message': '仮登録が完了しました。メールが届くまでお待ちください。', 'form': None,}
     if request.method == 'POST':
@@ -110,5 +117,3 @@ def IndexView2(request,mail):
     print("",mail)
     mail = request.user.email
     return render(request,'StoreMypage.html',{})
-class IndexView(generic.TemplateView):
-    template_name= "StoreMyoage.html"

@@ -25,8 +25,8 @@ class StoreLoginForm(forms.ModelForm):
         model = MO2_store
         fields = ("MO2_mailAdress","MO2_password")
         labels = {
-            "MO2_mailAdress": "MailAdress",
-            "MO2_password":"Password",
+            "MO2_mailAdress": "メールアドレス",
+            "MO2_password":"パスワード",
         }
         widgets = {
             "MO2_password": forms.PasswordInput()

@@ -1,12 +1,71 @@
-h2 {
-    text-align: center;
+.my-div-style {
+    margin-left: 20%;
 }
 
-.container {
-    text-align: center;
+.text {
+    margin-bottom: 50px;
 }
 
 .cancel {
     margin-top: 10px;
     margin-right: 100px;
+    margin-left: 140px;
+}
+
+.login {
+    margin-left: 45.7%;
+    margin-bottom: 30px;
+}
+
+.button_secondaryAction {
+    margin-left: 42%;
+}
+
+#signup_form {
+    margin-left: 290px;
+}
+
+.toroku {
+    margin-left: 200px;
+    margin-top: 40px;
+}
+
+.welcom {
+    margin-left: 225px;
+}
+
+.close {
+    margin-right: 70px;
+    margin-top: 60px;
+}
+
+.complete {
+    margin-left: 205px;
+}
+
+.info_close {
+    margin-left: 270px;
+    margin-top: 40px;
+}
+
+.completed {
+    margin-left: 190px;
+}
+
+.blog_OK {
+    margin-left: 285px;
+    margin-top: 40px;
+}
+
+.store_complete {
+    margin-left: 150px;
+}
+
+.back {
+    margin-left: 276px;
+    margin-top: 40px;
+}
+
+.row_justify-content-center {
+    margin-left: 520px;
 }
