@@ -86,8 +86,5 @@
 
 .btn_btn-outline-primary {
     margin-bottom: 100px;
-}
-
-#fh5co-blog-section {
-    padding: 0px;
+    margin-left : -10px;
 }
