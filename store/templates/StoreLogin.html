@@ -1,9 +1,26 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-</head>
-<body>
-    <div>
+{% extends 'base.html' %}
+
+{% block title %}ログイン{% endblock %}
+
+{% block active_login %}active{% endblock %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+          <h3>ログイン</h3>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="form">
         <form method="post" action="{% url 'store:storeLogin' %}">
             {% csrf_token %}
             {{ form.as_p }}
@@ -11,10 +28,11 @@
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
             {% endif %}
             <!--登録ボタン-->
-            <div class="row justify-content-center" style="margin-top: 50px;">
+            <div class="row_justify-content-center" style="margin-top: 50px;">
               <button type="submit" class="btn btn-outline-primary">ログイン</button>
             </div>
           </form>
           <p>{{ message }}</p>
-    </div>
-</body>
+      </div>
+</div>
+{% endblock %}
