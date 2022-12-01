@@ -3,6 +3,7 @@ from django.views import generic
 from .models import *
 from .froms import *
 from accounts.models import *
+from .decorators import *
 # import cryptocode
 from samuraiwalk.settings_dev import *
 from django.contrib.auth.hashers import make_password,check_password
@@ -95,9 +96,8 @@ def storeLogin(request):
         if MO2_store.objects.filter(MO2_mailAdress = ma).exists():
             user = MO2_store.objects.get(MO2_mailAdress = ma)
             if check_password(ps,user.MO2_password):
-                params['form'] = StoreLoginForm()
-                params['message'] = "ログイン可能セッション処理記述中"
-                return render(request,'StoreLogin.html',params)
+                request.session['storeLogin'] = user.MO2_mailAdress
+                return render(request,'StoreLogin.html',)
             else:
                 params['form'] = StoreLoginForm()
                 params['message'] = "パスワードが違います"
@@ -111,3 +111,9 @@ def storeLogin(request):
         params['message'] = ''
         return render(request,'StoreLogin.html',params)
     return render(request,'StoreLogin.html',params)
+
+@login_required_store
+def IndexView2(request,mail):
+    print("",mail)
+    mail = request.user.email
+    return render(request,'StoreMypage.html',{})
