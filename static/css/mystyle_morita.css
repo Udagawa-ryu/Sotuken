@@ -103,8 +103,8 @@
 }
 
 .store_info_text {
-    text-align: center;
     font-size: 25px;
+    margin-right: 50px;
 }
 
 .store_info_cancel {
@@ -114,4 +114,35 @@
 
 .store_delete {
     margin-left: 60px;
+}
+
+/* テーブル */
+table.confirmation {
+    border-collapse: separate;
+    border-spacing: 0px 5px;
+    margin-right: 190px;
+    width: 80%;
+    
+}
+
+td,
+th {
+    padding: 10px;
+}
+
+th.th-center {
+    background: #F78536;
+    color: #fff;
+    width: 30%;
+    height: 50px;
+    text-align: center;
+}
+
+td.td-space {
+    background: #ffefe4;
+    /* 改行 */
+    word-break: break-word;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #333333;
 }
