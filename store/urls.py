@@ -10,5 +10,4 @@ urlpatterns = [
     path('storePassRegister/<str:store>/',views.StorePassRegister,name="storePassRegister"),
     path('storeLogin/',views.storeLogin,name="storeLogin"),
     path('storeinfocompletion/',views.storeinfocompletionView.as_view(),name="storeinfocomp")
-    path('karioki/',views.IndexView2,name="StoreMypage2"),
 ]
