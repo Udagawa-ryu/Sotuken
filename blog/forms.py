@@ -24,6 +24,3 @@ class BlogRegisterForm(forms.ModelForm):
     # widgets = {
     #   'MO7_openRange':forms.ChoiceField(label='OpenRange', widget=forms.RadioSelect, choices= CHOICE, initial=0)
     # }
-  def __init__(self, *args, **kwargs):
-    # self.user = kwargs.pop('user', None) #viewからのデータの受け取り
-    super().__init__(*args, **kwargs)

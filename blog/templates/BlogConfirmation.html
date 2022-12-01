@@ -1,1 +1,39 @@
-<h1></h1>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}BlogList{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <h3>CoufirmationBlog</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- ブログタイトル入力 -->
+        <!-- ブログ内容入力 -->
+        <!-- 該当する訪問記録を選択 -->
+        <p>{{ message }}</p>
+        <table  class="ui celled table table table-hover" >
+            <tr><td>BlogName</td><td>{{form.MO7_blogName.value}}</td></tr>
+            <tr><td>BlogText</td><td><pre>{{form.MO7_blogText.value}}</pre></td></tr>
+            <tr><td>record</td><td>{{form.MO6_visitRecordNumber.value}}</td></tr>
+            <tr><td>OpenRange</td><td>{{form.MO7_openRange.value}}</td></tr>
+        </table>
+        <form method="post" action="{% url 'blog:blogRegister' %}">
+            {% csrf_token %}
+            {{ form.as_hideen }}
+            <button class="ui button grey" type="submit" name="next" value="back">BACK</button>
+            <button class="ui button orange" type="submit" name="next" value="create">CREATE</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

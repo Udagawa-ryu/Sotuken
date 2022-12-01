@@ -14,7 +14,6 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
                 <h3>Create New Blog</h3>
-                {{ form.as_p }}
             </div>
         </div>
     </div>
@@ -22,6 +21,12 @@
         <!-- ブログタイトル入力 -->
         <!-- ブログ内容入力 -->
         <!-- 該当する訪問記録を選択 -->
+        <p>{{ message }}</p>
+        <form method="post" action="{% url 'blog:blogRegister' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="ui button orange" type="submit" name="next" value="confirm">CREATE</button>
+        </form>
     </div>
 </div>
 {% endblock %}
