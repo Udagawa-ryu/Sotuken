@@ -166,3 +166,19 @@ table.point_confirmation {
 .point_use {
     margin-left: 70px;
 }
+
+.point_disp_text {
+    font-size: 30px;
+    margin-left: -170px;
+    margin-bottom: 60px;
+}
+
+.point_display {
+    margin-left: 90px;
+    width: 50%;
+}
+
+.point_close {
+    margin-top: 40px;
+    margin-left: 265px;
+}
