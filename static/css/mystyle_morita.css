@@ -122,7 +122,6 @@ table.confirmation {
     border-spacing: 0px 5px;
     margin-right: 190px;
     width: 80%;
-    
 }
 
 td,
@@ -145,4 +144,25 @@ td.td-space {
     padding-left: 10px;
     padding-right: 10px;
     color: #333333;
+}
+
+.point_text {
+    text-align: center;
+    margin-left: 200px;
+}
+
+table.point_confirmation {
+    border-collapse: separate;
+    border-spacing: 0px 5px;
+    margin-left: 160px;
+    width: 70%;
+}
+
+.point_cancel {
+    margin-left: 180px;
+    margin-top: 40px;
+}
+
+.point_use {
+    margin-left: 70px;
 }
