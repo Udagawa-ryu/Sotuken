@@ -203,3 +203,29 @@ table.point_confirmation {
     margin-top: 40px;
     margin-left: 290px;
 }
+
+table.ospot_record {
+    width: 500px;
+    height: 300px;
+    margin-left: 60px;
+}
+
+.th-center {
+    vertical-align: middle;
+}
+
+.td-name {
+    vertical-align: middle;
+}
+
+.td-date {
+    vertical-align: middle;
+}
+
+.td-time {
+    vertical-align: middle;
+}
+
+.btn-record {
+    margin-left: 430px;
+}

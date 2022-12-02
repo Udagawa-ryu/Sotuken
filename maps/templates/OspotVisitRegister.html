@@ -1,1 +1,45 @@
-<h1></h1>
+{% extends 'base.html' %}
+
+{% block title %}OspotVisitRegister{% endblock %}
+
+{% block active_login %}active{% endblock %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <h3 class="point">Ospot Visit Register</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="my-div-style">
+                <table class="ospot_record">
+                    <tr>
+                        <th class="th-center">Sopt Name</th>
+                        <td class="td-name">○○商店</td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">Date</th>
+                        <!-- <h2 class="point_input_text">Spot Name</h2> -->
+                        <td class="td-date"><input type="date" class="ospot_date"></td>
+                    </tr>
+                    <tr>
+                        <th class = "th-center">Time</th>
+                        <td class="td-time"><input type="time" class="ospot_time"></td>
+                    </tr>
+                </table>
+                <button class="btn-record" type="submit" href="{% url 'main:PointConfirmation' %}">Record</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
