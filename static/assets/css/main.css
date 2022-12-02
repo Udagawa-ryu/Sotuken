@@ -2528,7 +2528,9 @@ input, select, textarea {
 		button.primary,
 		.button.primary {
 			box-shadow: none;
-			background-color: #585858;
+			/* 変更 */
+			/* background-color: #585858; */
+			background-color: #F78536;
 			color: #ffffff !important;
 		}
 
@@ -2539,7 +2541,7 @@ input, select, textarea {
 			.button.primary:hover {
 				/* 変更 */
 				/* background-color: #f2849e; */
-				background-color: #F78536;
+				background-color: #19bbe8;
 			}
 
 			input[type="submit"].primary:active,
@@ -2549,7 +2551,7 @@ input, select, textarea {
 			.button.primary:active {
 				/* 変更 */
 				/* background-color: #f2849e; */
-				background-color: #F78536;
+				background-color: #19bbe8;
 			}
 
 		input[type="submit"].disabled, input[type="submit"]:disabled,

@@ -9,7 +9,7 @@ class OspotInfoView(generic.TemplateView):
     template_name= "OspotInfo.html"
 
 class OspotVisitRegisterView(generic.TemplateView):
-    template_name: str = "OspotVisitRegister.html"
+    template_name = "OspotVisitRegister.html"
 
 class DspotInfoView(generic.TemplateView):
     template_name: str = "DspotInfo.html"

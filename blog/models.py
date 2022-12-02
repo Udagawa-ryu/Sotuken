@@ -1,5 +1,5 @@
 from django.db import models
-# from accounts.models import *
+from accounts.models import *
 # Create your models here.
 
 # ブログモデル
@@ -29,4 +29,4 @@ class MO10_Fav_Blog(models.Model):
     verbose_name_plural = "MO10_Fav_Blog"
 
   def __str__(self):
-    return f'{self.MO1_userNumber}-{self.MO7_blogNumber}'
+    return f'{self.MO1_userNumber}-{self.MO7_blogNumber.MO7_blogName}'

@@ -1,1 +1,38 @@
-<h1>使用ポイント確認画面</h1>
+{% extends 'base.html' %}
+
+{% block title %}Point Confirmation{% endblock %}
+
+{% block active_login %}active{% endblock %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <h3>Point Confirm</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="my-div-style">
+                <h2 class="point_text">Is this OK?</h2>
+                <table class="point_confirmation">
+                    <tr>
+                        <th class="th-center">Use Point</th>
+                        <td class="td-space">1000pt</td>
+                    </tr>
+                </table>
+                <button class="point_cancel" type="submit" href="{% url 'main:PointInput' %}">Cancel</button>
+                <button class="point_use" type="submit">Use</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
