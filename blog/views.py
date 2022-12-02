@@ -34,8 +34,7 @@ class BlogRegisterView(generic.CreateView):
         if self.request.POST.get('next', '') == 'back':
             return render(self.request,"BlogRegister.html",params)
         if self.request.POST.get('next', '') == 'create':
-            form.save()
-            return redirect("BlogList.html")
+            return super().form_valid(form)
         else:
             # 正常動作ではここは通らない。エラーページへの遷移でも良い
             return redirect(reverse_lazy('base:top'))
