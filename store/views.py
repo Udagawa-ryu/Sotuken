@@ -12,10 +12,11 @@ from django.contrib.auth.hashers import make_password,check_password
 class IndexView(generic.TemplateView):
     template_name= "StoreMypage.html"
 
+# 店舗用情報編集画面
 class storeinfocompletionView(generic.TemplateView):
     template_name = "StoreInfoCompletion.html"
 
-
+# 店舗用スポット登録申請画面
 def storeRequest(request):
     params = {'message': '仮登録が完了しました。メールが届くまでお待ちください。', 'form': None,}
     if request.method == 'POST':
@@ -32,6 +33,7 @@ def storeRequest(request):
         params['message'] = ''
         return render(request, 'StoreRequest.html', params)
 
+# 店舗認証
 def storeCertification(request):
     if request.user.is_superuser == True:
         nocompstore = MO2_store.objects.filter(is_auth=False)
@@ -44,6 +46,7 @@ def storeCertification(request):
     else:
         return redirect('admin:login')
 
+# 店舗追加
 def addStore(request):
     storeNums = request.POST.getlist('add')
     if storeNums != []:
@@ -61,7 +64,7 @@ def addStore(request):
             i.save()
     return redirect('store:storeCertification')
 
-
+# 店舗用パスワード設定画面
 def StorePassRegister(request,store):
     mystore = MO2_store.objects.get(MO2_mailAdress=store)
     params = {'message': '', 'form': None,'store':mystore}

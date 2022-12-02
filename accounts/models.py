@@ -100,4 +100,4 @@ class MO9_Fav_Custom_user(models.Model):
         verbose_name_plural = "MO9_Fav_Custom_user"
 
     def __str__(self):
-        return self.MO1_userNumber
+        return f'{self.MO1_userNumber}'
