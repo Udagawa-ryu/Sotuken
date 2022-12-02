@@ -125,4 +125,4 @@ class storeLogoutView(generic.TemplateView):
     template_name = "StoreLogout.html"
 
 class storeinfodeleteconfView(generic.TemplateView):
-    template_name = "StoreInfoDeleteConfirmation.html"
+    template_name = 'StoreInfoDeleteConfirmation.html'
