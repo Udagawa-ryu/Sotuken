@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from blog.models import *
+from blog.models import MO10_Fav_Blog
 # Create your views here.
 
 # マイページ画面
@@ -34,7 +34,7 @@ class VisitQRreadView(generic.TemplateView):
 # お気に入りブログ一覧画面
 class FavoriteBlogListView(generic.TemplateView):
     template_name = "FavoriteBlogList.html"
-    model = MO10_Fav_blog
+    model = MO10_Fav_Blog
 
 
 # お気に入りユーザ一覧画面

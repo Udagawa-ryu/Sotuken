@@ -20,7 +20,7 @@ class MO3_Default_spot(models.Model):
     verbose_name_plural = "MO3_Default_spot"
 
   def __str__(self):
-    return f'{self.MO3_DspotNumber}'
+    return f'{self.MO2_storeNumber.MO2_storeName}'
 
 # オリジナルスポットモデル
 class MO4_Original_spot(models.Model):
@@ -35,7 +35,7 @@ class MO4_Original_spot(models.Model):
     verbose_name_plural = "MO4_Original_spot"
 
   def __str__(self):
-    return f'{self.MO4_OspotNumber}'
+    return f'{self.MO4_OspotName}'
 
 # お気に入り検索条件モデル
 class MO8_Fav_Search_condition(models.Model):
