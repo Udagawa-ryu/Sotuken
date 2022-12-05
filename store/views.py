@@ -4,9 +4,7 @@ from .models import *
 from .froms import *
 from accounts.models import *
 from .decorators import *
-import samuraiwalk.settings_dev as settings
-# import cryptocode
-from samuraiwalk.settings_dev import *
+from samuraiwalk.settings_dev import SESSION_COOKIE_AGE
 from django.contrib.auth.hashers import make_password,check_password
 from PIL import Image
 import qrcode
@@ -80,7 +78,7 @@ def StorePassRegister(request,store):
                 mystore.save()
                 params['message'] = "入力が完了しました。"
                 request.session['storeLogin'] = mystore.MO2_mailAdress
-                request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+                request.session.set_expiry(SESSION_COOKIE_AGE)
                 qr = storeQRCreate(mystore.MO2_mailAdress)
                 params = {'qr':qr}
                 return render(request,'StoreQR.html',params)
@@ -107,7 +105,7 @@ def storeLogin(request):
             else:
                 if check_password(ps,user.MO2_password):
                     request.session['storeLogin'] = user.MO2_mailAdress
-                    request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+                    request.session.set_expiry(SESSION_COOKIE_AGE)
                     return render(request,'storeMypage.html',{'mystore':user})
                 else:
                     params['form'] = StoreLoginForm()
