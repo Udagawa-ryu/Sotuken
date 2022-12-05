@@ -23,8 +23,8 @@
         <div class="row">
             <div class="my-div-style">
                 <h2 class="store_text">ログアウトしてもよろしいですか？</h2>
-                <button class="store_cancel" type="submit" href="{% url 'store:StoreMypage' %}">キャンセル</button>
-                <button class="store_logout" type="submit">ログアウト</button>
+                <button class="store_cancel" type="submit" onclick="location.href='{% url 'store:StoreMypage' %}'">キャンセル</button>
+                <button class="store_logout" type="submit" onclick="location.href='{% url 'store:storeLogoutCheck' %}'">ログアウト</button>
             </div>
         </div>
     </div>

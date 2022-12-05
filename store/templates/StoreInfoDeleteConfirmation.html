@@ -26,23 +26,23 @@
                             <table class="confirmation">
                                 <tr>
                                     <th class="th-center">店舗名</th>
-                                    <td class="td-space">○○商店</td>
+                                    <td class="td-space">{{ mystore.MO2_storeName }}</td>
                                 </tr>
                                 <tr>
                                     <th class="th-center">住所</th>
                                     <td class="td-space">
-                                        ○○県○○市○○町○○
+                                        {{ mystore.MO2_address }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="th-center">メールアドレス</th>
                                     <td class="td-space">
-                                        ○○○○○○@ac.jp
+                                        {{ mystore.MO2_mailAdress }}
                                     </td>
                                 </tr>
                             </table>
-                <button class="store_info_cancel" type="submit" href="{% url 'store:StoreMypage' %}">キャンセル</button>
-                <button class="store_delete" type="submit">削除</button>
+                <button class="store_info_cancel" type="submit" onclick="location.href='{% url 'store:StoreMypage' %}'">キャンセル</button>
+                <button class="store_delete" type="submit" onclick="location.href='{% url 'store:StoreInfoDelete' %}'">削除 </button>
             </div>
         </div>
     </div>

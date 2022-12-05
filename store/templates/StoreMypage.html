@@ -17,24 +17,24 @@
                 <tr>
                     <th class="th-center">店舗名</th>
                     <td class="td-space">
-                        天然温泉 凌雲の湯 御宿 野乃 浅草
+                        {{ mystore.MO2_storeName }}
                     </td>
                 </tr>
                 <tr>
                     <th class="th-center">住所</th>
                     <td class="td-space">
-                        〒111-0032 東京都台東区浅草２丁目７−２０
+                        〒{{ mystore.MO2_address }}
                     </td>
                 </tr>
                 <tr>
                     <th class="th-center">メール</th>
                     <td class="td-space">
-                        asakusa@mail.com
+                        {{ mystore.MO2_mailAdress }}
                     </td>
                 </tr>
             </table>
             <div class="text-center" style="margin-top: 20px; margin-bottom: 20px;">
-                <a href="#" class="button primary">登録情報編集</a>
+                <a href="{% url 'store:storeInfoEdit' %}" class="button primary">登録情報編集</a>
                 <a href="#" class="button primary">登録情報削除</a>
             </div>
         </div>

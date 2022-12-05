@@ -4,17 +4,15 @@ from .models import *
 from .froms import *
 from accounts.models import *
 from .decorators import *
+import samuraiwalk.settings_dev as settings
 # import cryptocode
 from samuraiwalk.settings_dev import *
 from django.contrib.auth.hashers import make_password,check_password
+from PIL import Image
+import qrcode
+import base64
+from io import BytesIO
 # Create your views here.
-
-class IndexView(generic.TemplateView):
-    template_name= "StoreMypage.html"
-
-# 店舗用情報編集画面
-class storeinfocompletionView(generic.TemplateView):
-    template_name = "StoreInfoCompletion.html"
 
 # 店舗用スポット登録申請画面
 def storeRequest(request):
@@ -81,7 +79,11 @@ def StorePassRegister(request,store):
                 mystore.is_active = True
                 mystore.save()
                 params['message'] = "入力が完了しました。"
-                return render(request, 'index.html', params)
+                request.session['storeLogin'] = mystore.MO2_mailAdress
+                request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+                qr = storeQRCreate(mystore.MO2_mailAdress)
+                params = {'qr':qr}
+                return render(request,'StoreQR.html',params)
             else:
                 params['message'] = '再入力して下さい'
                 params['form'] = StorePassCreateForm()
@@ -98,13 +100,19 @@ def storeLogin(request):
         ps = request.POST['MO2_password']
         if MO2_store.objects.filter(MO2_mailAdress = ma).exists():
             user = MO2_store.objects.get(MO2_mailAdress = ma)
-            if check_password(ps,user.MO2_password):
-                request.session['storeLogin'] = user.MO2_mailAdress
-                return render(request,'StoreLogin.html',)
-            else:
+            if user.is_active == False:
                 params['form'] = StoreLoginForm()
-                params['message'] = "パスワードが違います"
+                params['message'] = "店舗登録が解除されています。"
                 return render(request,'StoreLogin.html',params)
+            else:
+                if check_password(ps,user.MO2_password):
+                    request.session['storeLogin'] = user.MO2_mailAdress
+                    request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+                    return render(request,'storeMypage.html',{'mystore':user})
+                else:
+                    params['form'] = StoreLoginForm()
+                    params['message'] = "パスワードが違います"
+                    return render(request,'StoreLogin.html',params)
         else:
             params['form'] = StoreLoginForm()
             params['message'] = "そのメールアドレスは登録されていません。"
@@ -116,13 +124,119 @@ def storeLogin(request):
     return render(request,'StoreLogin.html',params)
 
 @login_required_store
-def IndexView2(request,mail):
-    print("",mail)
-    mail = request.user.email
-    return render(request,'StoreMypage.html',{})
+def IndexView(request,mail):
+    mystore = MO2_store.objects.get(MO2_mailAdress = mail)
+    params = {
+        'mystore':mystore,
+        'message':''
+    }
+    return render(request,'StoreMypage.html',params)
 
+@login_required_store
+def storeInfoEditView(request,mail):
+    mystore = MO2_store.objects.get(MO2_mailAdress = mail)
+    if request.method == 'POST':
+        initial_data = {
+            "MO2_storeName":request.POST.get('MO2_storeName'),
+            "MO2_storeInfo":request.POST.get('MO2_storeInfo'),
+            "MO2_phoneNumber":request.POST.get('MO2_phoneNumber'),
+            "MO2_address":request.POST.get('MO2_address'),
+            "MO2_images1":request.POST.get('MO2_images1'),
+            "MO2_images2":request.POST.get('MO2_images2'),
+            "MO2_images3":request.POST.get('MO2_images3'),
+        }
+        form = StoreUpdateForm(request.POST or initial_data)
+        params = {
+            'form':form,
+            'message' : '',
+        }
+        return render(request,"StoreInfoEdit.html",params)
+    else :
+        initial_data = {
+            "MO2_storeName":mystore.MO2_storeName,
+            "MO2_storeInfo":mystore.MO2_storeInfo,
+            "MO2_phoneNumber":mystore.MO2_phoneNumber,
+            "MO2_address":mystore.MO2_address,
+            "MO2_images1":mystore.MO2_images1,
+            "MO2_images2":mystore.MO2_images2,
+            "MO2_images3":mystore.MO2_images3,
+        }
+        form = StoreUpdateForm(request.POST or initial_data)
+        params = {
+            'form':form,
+            'message' : '',
+        }
+        return render(request,"StoreInfoEdit.html",params)
+# 店舗用情報編集画面
+@login_required_store
+def storeInfoConfirmationView(request,mail):
+    if request.method == 'POST':
+        initial_data = {
+            "MO2_storeName":request.POST.get('MO2_storeName'),
+            "MO2_storeInfo":request.POST.get('MO2_storeInfo'),
+            "MO2_phoneNumber":request.POST.get('MO2_phoneNumber'),
+            "MO2_address":request.POST.get('MO2_address'),
+            "MO2_images1":request.POST.get('MO2_images1'),
+            "MO2_images2":request.POST.get('MO2_images2'),
+            "MO2_images3":request.POST.get('MO2_images3'),
+        }
+        if request.POST.get('next', '') == 'confirm':
+            form = StoreUpdateForm(initial_data)
+            params = {"message":'',"form":form}
+            return render(request,"StoreInfoConfirmation.html",params)
+        if request.POST.get('next', '') == 'back':
+            form = StoreUpdateForm(initial_data)
+            params = {"message":'',"form":form}
+            return render(request,"StoreInfoEdit.html",params)
+        if request.POST.get('next', '') == 'next':
+            form = StoreUpdateForm(initial_data)
+            if form.is_valid():
+                mystore = MO2_store.objects.get(MO2_mailAdress = mail)
+                mystore.MO2_storeName = request.POST.get('MO2_storeName')
+                mystore.MO2_storeInfo = request.POST.get('MO2_storeInfo')
+                mystore.MO2_phoneNumber = request.POST.get('MO2_phoneNumber')
+                mystore.MO2_address = request.POST.get('MO2_address')
+                mystore.MO2_images1 = request.POST.get('MO2_images1')
+                mystore.MO2_images2 = request.POST.get('MO2_images2')
+                mystore.MO2_images3 = request.POST.get('MO2_images3')
+                mystore.save()
+                return redirect("store:storeinfocomp")
+
+class storeinfocompletionView(generic.TemplateView):
+    template_name = "StoreInfoCompletion.html"
+
+@login_required_store
+def storeQRView(request,mail):
+    qr = storeQRCreate(mail)
+    return render(request,"StoreQR.html",{"qr":qr})
+
+def storeQRCreate(mail):
+    qr_str = "store:"+mail
+    img = qrcode.make(qr_str)
+    buffer = BytesIO()
+    img.save(buffer, format="PNG")
+    qr = base64.b64encode(buffer.getvalue()).decode().replace("'", "")
+    return qr
+
+@login_required_store
+def storeLogout(request,mail):
+    request.session.pop('storeLogin')
+    return redirect('store:storeLogin')
 class storeLogoutView(generic.TemplateView):
     template_name = "StoreLogout.html"
 
-class storeinfodeleteconfView(generic.TemplateView):
-    template_name = 'StoreInfoDeleteConfirmation.html'
+# class storeinfodeleteconfView(generic.TemplateView):
+#     template_name = 'StoreInfoDeleteConfirmation.html'
+
+@login_required_store
+def storeinfodeleteconfView(requset,mail):
+    mystore = MO2_store.objects.get(MO2_mailAdress = mail)
+    return render(requset,"StoreInfoDeleteConfirmation.html",{"mystore":mystore})
+
+@login_required_store
+def storeinfodelete(request,mail):
+    mystore = MO2_store.objects.get(MO2_mailAdress = mail)
+    mystore.is_active = False
+    mystore.save()
+    request.session.pop('storeLogin')
+    return redirect('store:storeRequest')

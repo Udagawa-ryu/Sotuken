@@ -1,1 +1,84 @@
-<h1>店舗用情報編集確認画面</h1>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}店舗登録申請{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+        <h3>店舗登録申請</h3>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row row-bottom-padded-md"></div>
+    <table class="confirmation">
+        <tr>
+            <th class="th-center">店舗名</th>
+            <td class="td-space">{{form.MO2_storeName.value}}</td>
+        </tr>
+        <tr>
+            <th class="th-center">店舗情報</th>
+            <td class="td-space"><pre>{{form.MO2_storeInfo.value}}</pre></td>
+        </tr>
+        <tr>
+            <th class="th-center">電話番号</th>
+            <td class="td-space">
+                {{form.MO2_phoneNumber.value}}
+            </td>
+        </tr>
+        <tr>
+            <th class="th-center">住所</th>
+            <td class="td-space">
+                {{form.MO2_address.value}}
+            </td>
+        </tr>
+        <tr>
+            <th class="th-center">店舗画像1</th>
+            <td class="td-space">
+                {{form.MO2_images1.value}}
+            </td>
+        </tr>
+        <tr>
+            <th class="th-center">店舗画像2</th>
+            <td class="td-space">
+                {{form.MO2_images2.value}}
+            </td>
+        </tr>
+        <tr>
+            <th class="th-center">店舗画像3</th>
+            <td class="td-space">
+                {{form.MO2_images3.value}}
+            </td>
+        </tr>
+    </table>
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <!--登録ボタン-->
+    <form method="post" action="{% url 'store:storeInfoConfirmation' %}">
+        {% csrf_token %}
+        <input type="hidden" name="MO2_storeName" value={{form.MO2_storeName.value}}>
+        <textarea style="display:none" name="MO2_storeInfo" value={{form.MO2_storeInfo.value}}>{{form.MO2_storeInfo.value}}</textarea>
+        <input type="hidden" name="MO2_phoneNumber" value={{form.MO2_phoneNumber.value}}>
+        <input type="hidden" name="MO2_address" value={{form.MO2_address.value}}>
+        <input type="hidden" name="MO2_image1" value={{form.MO2_image1.value}}>
+        <input type="hidden" name="MO2_image2" value={{form.MO2_image2.value}}>
+        <input type="hidden" name="MO2_imgae3" value={{form.MO2_imgae3.value}}>
+        <div style="text-align: center;">
+            <button type="submit" class="button primary" name="next" value="back">　戻る　</button>
+            <button type="submit" class="button primary" name="next" value="next">　更新　</button>
+        </div>
+    </form>
+    <p>{{ message }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

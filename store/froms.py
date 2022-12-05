@@ -31,3 +31,17 @@ class StoreLoginForm(forms.ModelForm):
         widgets = {
             "MO2_password": forms.PasswordInput()
         }
+
+class StoreUpdateForm(forms.ModelForm):
+    class Meta:
+        model = MO2_store
+        fields = ("MO2_storeName","MO2_storeInfo","MO2_phoneNumber","MO2_address","MO2_images1","MO2_images2","MO2_images3")
+        labels = {
+            "MO2_storeName":"店舗名",
+            "MtO2_storeInfo":"店舗情報",
+            "MO2_phoneNumber":"電話番号",
+            "MO2_address":"住所",
+            "MO2_images1":"店舗画像1",
+            "MO2_images2":"店舗画像2",
+            "MO2_images3":"店舗画像3",
+        }
