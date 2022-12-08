@@ -3,11 +3,19 @@ from django.views import generic
 from .forms import BlogRegisterForm
 from accounts.models import CustomUser,MO6_Visit_record
 from django.urls import reverse_lazy
+from blog.models import MO7_Blog
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 # ブログ一覧画面
-class BlogListView(generic.TemplateView):
+class BlogListView(LoginRequiredMixin, generic.ListView):
+    model = MO7_Blog
     template_name = "BlogList.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['blogs'] = MO7_Blog.objects.filter(MO1_userID=self.request.user).order_by('-MO7_createDate')
+        return context
 
 # ブログ新規作成画面
 class BlogRegisterView(generic.CreateView):
