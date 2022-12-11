@@ -1,1 +1,64 @@
-<h1></h1>
+{% extends 'base.html' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block active_login %}active{% endblock %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <h3>UserInfoConfirmation</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <table class="confirmation">
+            <tr>
+                <th class="th-center">{{form.username.label}}</th>
+                <td class="td-space">{{form.username.value}}</td>
+            </tr>
+            <tr>
+                <th class="th-center">{{form.MO1_userID.label}}</th>
+                <td class="td-space">{{form.MO1_userID.value}}</td>
+            </tr>
+            <tr>
+                <th class="th-center">{{ form.MO1_homeCountry.label }}</th>
+                <td class="td-space">{{form.MO1_homeCountry.value}}</td>
+            </tr>
+            <tr>
+                <th class="th-center">{{ form.MO1_language.label }}</th>
+                <td class="td-space">{{form.MO1_language.value}}</td>
+            </tr>
+            <tr>
+                <th class="th-center">{{ form.MO1_openRange.label }}</th>
+                <td class="td-space">{{form.MO1_openRange.value}}</td>
+            </tr>
+        </table>
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <form method="post" action="{% url 'accounts:UserInfoConfirmation' %}">
+            {% csrf_token %}
+            <input type="hidden" name="username" value={{form.username.value}}>
+            <input type="hidden" name="MO1_userID" value={{form.MO1_userID.value}}>
+            <input type="hidden" name="MO1_homeCountry" value={{form.MO1_homeCountry.value}}>
+            <input type="hidden" name="MO1_language" value={{form.MO1_language.value}}>
+            <input type="hidden" name="MO1_openRange" value={{form.MO1_openRange.value}}>
+            <div style="text-align: center;">
+                <button type="submit" class="button primary" name="next" value="back">　Back　</button>
+                <button type="submit" class="button primary" name="next" value="next">　Update　</button>
+            </div>
+            <p><a class="button_secondaryAction" href="{% url 'account_reset_password' %}">パスワードを忘れましたか？</a></p>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

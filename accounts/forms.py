@@ -8,13 +8,18 @@ from allauth.account.forms import (
 
 #クラス名はsettings.pyで書いた名前
 class CustomSignupForm(UserCreationForm):
-    # MO1_userName = forms.CharField(label='userName')
-    # MO1_homeCountry = forms.CharField( label='homeCountry')
-    # MO1_language = forms.CharField( label='language')
-    # MO1_openRange =  forms.ChoiceField(choices = (
-    #         (0, 'Open'),
-    #         (1, 'Hidden'),
-    #     ), label='openRange')
+    COUNTRIES = {
+        #どこかから国の一覧データを持ってきたい
+        ("USA","USA"),
+        ("日本","JAPAN"),
+    }
+    MO1_homeCountry = forms.ChoiceField(label="HomeCountry",choices=COUNTRIES)
+    LANGAGES = {
+        ("English","en"),
+        ("日本語","ja"),
+    }
+    MO1_language = forms.ChoiceField(label="Language",choices=LANGAGES)
+    MO1_openRange = forms.ChoiceField(label="OpenRange",choices={(0,"Open"),(1,"Hidden")})
     class Meta:
         model = CustomUser
         fields = ["email","username","MO1_userID","MO1_homeCountry","MO1_language","MO1_openRange"]
@@ -32,33 +37,6 @@ class CustomSignupForm(UserCreationForm):
         self.fields["email"].required = True
         self.fields['password1'].label = 'password'
         self.fields['password2'].label = 'password(confirmation)'
-        # self.fields["email"].widget.attrs['class'] = 'form-control'
-        # self.fields["email"].widget.attrs['placeholder'] = 'MailAdress'
-        # self.fields['password1'].widget.attrs['class'] = 'form-control'
-        # self.fields['password1'].widget.attrs['placeholder'] = 'password1'
-        # self.fields['password2'].widget.attrs['class'] = 'form-control'
-        # self.fields['password2'].widget.attrs['placeholder'] = 'password2'
-        # self.fields['MO1_userName'].widget.attrs['class'] = 'form-control'
-        # self.fields['MO1_userName'].widget.attrs['placeholder'] = 'MO1_userName'
-        # self.fields['MO1_homeCountry'].widget.attrs['class'] = 'form-control'
-        # self.fields['MO1_homeCountry'].widget.attrs['placeholder'] = 'MO1_homeCountry'
-        # self.fields['MO1_language'].widget.attrs['class'] = 'form-control'
-        # self.fields['MO1_language'].widget.attrs['placeholder'] = 'MO1_language'
-        # self.fields['MO1_openRange'].widget.attrs['class'] = 'form-control'
-        # self.fields['MO1_openRange'].widget.attrs['placeholder'] = 'MO1_openRange'
-
-# class CustomLoginForm(forms.ModelForm):
-#     class Meta:
-#         model = CustomUser
-#         fields = ["email","password"]
-        
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields["email"].required = True
-#         labels = {
-#             "email": "mailAdress",
-#             "password":"password"
-#         }
 
 class CustomLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):
@@ -67,3 +45,27 @@ class CustomLoginForm(LoginForm):
             self.fields['login'].label = 'email'
             self.fields['password'].label = 'password'
             field.widget.attrs['class'] = 'form-control'
+
+class UserEditForm(forms.ModelForm):
+    COUNTRIES = {
+        #どこかから国の一覧データを持ってきたい
+        ("USA","USA"),
+        ("日本","JAPAN"),
+    }
+    MO1_homeCountry = forms.ChoiceField(label="HomeCountry",choices=COUNTRIES)
+    LANGAGES = {
+        ("English","en"),
+        ("日本語","ja"),
+    }
+    MO1_language = forms.ChoiceField(label="Language",choices=LANGAGES)
+    MO1_openRange = forms.ChoiceField(label="OpenRange",choices={(0,"Open"),(1,"Hidden")})
+    class Meta:
+        model = CustomUser
+        fields = ["username","MO1_userID","MO1_homeCountry","MO1_language","MO1_openRange"]
+        labels = {
+            "username":"UserName",
+            "MO1_userID":"UserID",
+            "MO1_homeCountry":"HomeCountry",
+            "MO1_language":"Language",
+            "MO1_openRange":"OpenRange",
+        }

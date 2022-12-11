@@ -22,9 +22,10 @@
         <!-- ブログ内容入力 -->
         <!-- 該当する訪問記録を選択 -->
         <p>{{ message }}</p>
-        <form method="post" action="{% url 'blog:blogRegister' %}">
+        <form method="post" action="{% url 'blog:blogConfirmation' %}">
             {% csrf_token %}
             <table class="confirmation">
+                <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
                 <tr>
                     <th class="th-center">BlogName</th>
                     <td class="td-space">{{form.MO7_blogName}}</td>

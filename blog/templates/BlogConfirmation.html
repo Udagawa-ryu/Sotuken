@@ -43,11 +43,17 @@
               </tr>
             </table>
             <div class="text-center" style="margin-top: 20px;">
-              <form method="post" action="{% url 'blog:blogRegister' %}">
+              <form method="post" action="{% url 'blog:blogConfirmation' %}">
                 {% csrf_token %}
-                {{ form.as_hideen }}
-                <button class="button primary" type="submit" name="next" value="back">Cancel</button>
-                <button class="button primary" type="submit"  name="next" value="create">OK</button>
+                <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
+                <input type="hidden" name="MO7_blogName" value={{form.MO7_blogName.value}}>
+                <textarea style="display:none" name="MO7_blogText" value={{form.MO7_blogText.value}}>{{form.MO7_blogText.value}}</textarea>
+                <input type="hidden" name="MO6_visitRecordNumber" value={{form.MO6_visitRecordNumber.value}}>
+                <input type="hidden" name="MO7_openRange" value={{form.MO7_openRange.value}}>
+                <div style="text-align: center;">
+                  <button class="button primary" type="submit" name="next" value="back">Cancel</button>
+                  <button class="button primary" type="submit"  name="next" value="create">OK</button>
+                </div>
               </form>
             </div>
         </div>

@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from .forms import *
 from allauth.account.utils import *
 from samuraiwalk.settings_common import *
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -19,6 +20,68 @@ def newAccount(request):
     else:
         params['form'] = CustomSignupForm()
     return render(request, 'account/signup.html', params)
+
+@login_required
+def UserInfoEdit(request):
+    mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+    if request.method == 'POST':
+        initial_data = {
+            "username":request.POST.get("username"),
+            "MO1_userID":request.POST.get("MO1_userID"),
+            "MO1_homeCountry":request.POST.get("MO1_homeCountry"),
+            "MO1_language":request.POST.get("MO1_language"),
+            "MO1_openRange":request.POST.get("MO1_openRange"),
+        }
+        form = UserEditForm(request.POST or initial_data)
+        params = {
+            'form':form,
+            'message' : '',
+        }
+        return render(request,"UserInfoEdit.html",params)
+    else :
+        initial_data = {
+            "username":mydata.username,
+            "MO1_userID":mydata.MO1_userID,
+            "MO1_homeCountry":mydata.MO1_homeCountry,
+            "MO1_language":mydata.MO1_language,
+            "MO1_openRange":mydata.MO1_openRange,
+        }
+        form = UserEditForm(request.POST or initial_data)
+        params = {
+            'form':form,
+            'message' : '',
+        }
+        return render(request,"UserInfoEdit.html",params)
+
+@login_required
+def UserInfoConfirmation(request):
+    if request.method == 'POST':
+        initial_data = {
+            "username":request.POST.get("username"),
+            "MO1_userID":request.POST.get("MO1_userID"),
+            "MO1_homeCountry":request.POST.get("MO1_homeCountry"),
+            "MO1_language":request.POST.get("MO1_language"),
+            "MO1_openRange":request.POST.get("MO1_openRange"),
+        }
+        if request.POST.get('next', '') == 'confirm':
+            form = UserEditForm(initial_data)
+            params = {"message":'',"form":form}
+            return render(request,"UserInfoConfirmation.html",params)
+        if request.POST.get('next', '') == 'back':
+            form = UserEditForm(initial_data)
+            params = {"message":'',"form":form}
+            return render(request,"UserInfoEdit.html",params)
+        if request.POST.get('next', '') == 'next':
+            form =  UserEditForm(initial_data)
+            if form.is_valid():
+                mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+                mydata.username = request.POST.get("username")
+                mydata.MO1_userID = request.POST.get("MO1_userID")
+                mydata.MO1_homeCountry = request.POST.get("MO1_homeCountry")
+                mydata.MO1_language = request.POST.get("MO1_language")
+                mydata.MO1_openRange = request.POST.get("MO1_openRange")
+                mydata.save()
+                return redirect("accounts:UserInfoComp")
 
 def UserInfoRegister(request):
     return render(request, 'userinforegister.html')
@@ -45,5 +108,13 @@ def login(request):
         params['form'] = CustomLoginForm()
     return render(request, 'account/login.html',params)
 
+@login_required
 def deleteAccount(request):
     return render(request,'DeleteAccount.html')
+
+@login_required
+def AccountDelete(request):
+    mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+    mydata.is_active = False
+    mydata.save()
+    return redirect('account_logout')
