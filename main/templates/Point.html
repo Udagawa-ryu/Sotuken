@@ -1,1 +1,46 @@
-<h1>ポイント画面</h1>
+{% extends 'base.html' %}
+
+{% block title %}Point{% endblock %}
+
+{% block active_login %}active{% endblock %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <h3>Point</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+            <div class="my-div-style">
+                <h4 class="remain_text"><b>Remaining Point</b></h4>
+                <table class="point_disp">
+                    <tr>
+                        <td class="point">1000p</td>
+                    </tr>
+                </table>
+                <button class="use" type="submit">Use</button>
+                <button class="po_save" type="submit">Save</button>
+                <table class="point_log">
+                    <tr>
+                        <td class="store_point">○○商店<br>save  600p<br>remaining  400p</td>
+                    </tr>
+                    <tr>
+                        <td class="store_point">○○店<br>save  300p<br>remaining  100p</td>
+                    </tr>
+                    <tr>
+                        <td class="store_point">○○商店<br>save  700p<br>remaining  30p</td>
+                    </tr>
+                </table>
+            </div>
+    </div>
+</div>
+{% endblock %}

@@ -262,3 +262,34 @@ table.ospot_record {
 .user7 {
     text-align: center;
 }
+
+.remain_text {
+    margin-left: 225px;
+}
+
+.point_disp {
+    width: 40%;
+    margin-left: 170px;
+}
+
+.point {
+    text-align: center;
+}
+
+.use {
+    margin-left: 170px;
+}
+
+.po_save {
+    margin-left: 170px;
+}
+
+.point_log {
+    margin-top: 80px;
+    width: 70%;
+    margin-left: 35px;
+}
+
+.store_point {
+    text-align: center;
+}
