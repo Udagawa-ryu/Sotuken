@@ -293,3 +293,46 @@ table.ospot_record {
 .store_point {
     text-align: center;
 }
+
+.spot_disp {
+    width: 50%;
+    margin-right: 450px;
+}
+
+.Spot_Name {
+    text-align: center;
+}
+
+.record {
+    margin-left: 600px;
+    display: inline-block;
+    margin-top: -290px;
+}
+
+.spot_date {
+    width: 70%;
+}
+
+.visited_count {
+    width: 450px;
+    margin-left: 600px;
+    margin-top: -200px;
+}
+
+.spot_date {
+    width: 450px;
+    margin-left: 600px;
+    margin-top: -30px;
+}
+
+.featured {
+    margin-top: 100px;
+}
+
+.blog_date {
+    margin-top: -30px;
+}
+
+.f_blog {
+    text-align: center;
+}

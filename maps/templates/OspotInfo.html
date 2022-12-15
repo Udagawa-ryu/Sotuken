@@ -1,1 +1,59 @@
-<h1></h1>
+<h1></h1>{% extends 'base.html' %}
+
+{% block title %}Original Info{% endblock %}
+
+{% block active_login %}active{% endblock %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <h3>Original Info</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+            <table class="spot_disp">
+                <tr>
+                    <td class="Spot_Name">Spot Name</td>
+                </tr>
+                <tr>
+                    <td>Spot Info<br>--------------------------<br>--------------------------</td>
+                </tr>
+                <tr>
+                    <td>Spot Info<br>--------------------------<br>--------------------------</td>
+                </tr>
+            </table>
+            <button class="record" type="submit">record of <br>your visits</button>
+            <table class="visited_count">
+                <tr>
+                    <td>You have visited 2 times.</td>
+                </tr>
+            </table>
+            <select class="spot_date">
+                <option>2022/12/04 12:00~12:40</option>
+                <option>2022/12/07 14:00~15:40</option>
+                <option>2022/12/08 15:00~15:40</option>
+                <option>2022/12/10 18:00~20:40</option>
+            </select>
+            <table class="featured">
+                <tr>
+                    <td class="f_blog">Featured Blogs</td>
+                </tr>
+            </table>
+            <select class="blog_date" size="4">
+                <option>Blog1</option>
+                <option>Blog2</option>
+                <option>Blog3</option>
+                <option>Blog4</option>
+            </select>
+    </div>
+</div>
+{% endblock %}
