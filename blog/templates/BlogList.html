@@ -41,14 +41,15 @@
                     <div class="blog-text">
                         <div class="prod-title">
                             <!-- ブログタイトル -->
-                            <h3><a href="#">30% Discount to Travel</a></h3>
+                            <h3><a href="#">{{ blog.MO7_blogName }}</a></h3>
                             <!-- 日付 -->
-                            <span class="posted_by">Sep. 15th</span>
+                            <span class="posted_by">{{ blog.MO7_createDate }}</span>
                             <!-- <span class="comment"><a href="">21<i class="icon-bubble2"></i></a></span> -->
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                                there live the blind texts.</p>
+                            <p>{{ blog.MO7_blogText }}</p>
                             <!-- ブログ詳細画面へのリンク -->
                             <p><a href="#">Learn More...</a></p>
+                            {% empty %}
+                            <p>No blog</p>
                         </div>
                     </div>
                 </div>
