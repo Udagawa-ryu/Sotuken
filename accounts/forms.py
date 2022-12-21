@@ -69,3 +69,6 @@ class UserEditForm(forms.ModelForm):
             "MO1_language":"Language",
             "MO1_openRange":"OpenRange",
         }
+
+class UserSearchForm(forms.Form):
+    s_user = forms.CharField(label="UserSearch")

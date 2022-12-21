@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import generic
 from blog.models import MO10_Fav_Blog
+from accounts.models import CustomUser,MO6_Visit_record
+from maps.models import MO3_Default_spot,MO4_Original_spot
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 # マイページ画面
@@ -40,3 +43,11 @@ class FavoriteBlogListView(generic.TemplateView):
 # お気に入りユーザ一覧画面
 class FavoriteUserListView(generic.TemplateView):
     template_name = "FavoriteUserList.html"
+
+@login_required
+def visitrecordcreate(request,pk):
+    user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
+    d_spot = MO3_Default_spot.objects.get(MO2_storeNumber = pk)
+    record = MO6_Visit_record(MO1_userNumber=user,MO3_Default_spot=d_spot)
+    record.save()
+    return redirect("main:Mypage")

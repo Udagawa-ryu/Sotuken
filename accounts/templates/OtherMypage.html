@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
                 <!-- ↓ユーザ名を入れる -->
-                <h3>〇〇s Page</h3>
+                <h3>{{ page_user.username }}s Page</h3>
             </div>
         </div>
     </div>
@@ -20,7 +20,10 @@
             <div class="row">
                 <div class="animate-box">
                     <ul class="actions">
-                        <!-- お気に入りボタン -->
+                        {% if fav == 0 %}
+                            <
+                        {% else %}
+                        {% endif %}
                     </ul>
                 </div>
             </div>
