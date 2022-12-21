@@ -45,14 +45,16 @@
                             <!-- 日付 -->
                             <span class="posted_by">{{ blog.MO7_createDate }}</span>
                             <!-- <span class="comment"><a href="">21<i class="icon-bubble2"></i></a></span> -->
-                            <p>{{ blog.MO7_blogText }}</p>
+                            <p><pre>{{ blog.MO7_blogText }}</pre></p>
                             <!-- ブログ詳細画面へのリンク -->
                             <p><a href="#">Learn More...</a></p>
-                            {% empty %}
-                            <p>No blog</p>
                         </div>
                     </div>
                 </div>
+            </div>
+            {% empty %}
+            <div>
+                <p>No blog</p>
             </div>
             {% endfor %}
             <div class="clearfix visible-md-block"></div>
