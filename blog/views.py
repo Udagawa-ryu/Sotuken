@@ -126,13 +126,47 @@ class BlogCompletionView(generic.TemplateView):
 class BlogDetailView(generic.TemplateView):
     template_name = "BlogDetail.html"
 
+# class BlogDetailView(LoginRequiredMixin, generic.DeleteView):
+#     model = MO7_Blog
+#     template_name = "BlogDetail.html"
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['blogs'] = MO7_Blog.objects.filter(MO1_userID=self.request.user)
+#         return context
+
 # ブログ編集画面
 class BlogEditView(generic.TemplateView):
     template_name = "BlogEdit.html"
 
+# class BlogEditView(LoginRequiredMixin, generic.UpdateView):
+#     model = MO7_Blog
+#     template_name = 'BlogEdit.html'
+#     form_class = BlogRegisterForm
+
+#     def get_success_url(self):
+#         return reverse_lazy('blog:blogDetail', kwargs={'pk': self.kwargs['pk']})
+
+#     def form_valid(self, form):
+#         messages.success(self.request, 'ブログを更新しました。')
+#         return super().form_valid(form)
+
+#     def form_invalid(self, form):
+#         messages.error(self.request, 'ブログの更新に失敗しました。')
+#         return super().form_invalid(form)
+
 # ブログ削除画面
 class BlogDeleteView(generic.TemplateView):
     template_name = "BlogDelete.html"
+
+# class BlogDeleteView(LoginRequiredMixin, generic.DeleteView):
+#     model = MO7_Blog
+#     template_name = "BlogDelete.html"
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['blogs'] = MO7_Blog.objects.filter(MO1_userID=self.request.user)
+#         return context
 
 # マイブログ公開範囲設定入力画面
 class OpenRangeRegisterView(generic.TemplateView):
