@@ -306,7 +306,6 @@ table.ospot_record {
 .record {
     margin-left: 600px;
     display: inline-block;
-    margin-top: -290px;
 }
 
 .spot_date {
@@ -316,7 +315,7 @@ table.ospot_record {
 .visited_count {
     width: 450px;
     margin-left: 600px;
-    margin-top: -200px;
+    margin-top: -340px;
 }
 
 .spot_date {
@@ -326,7 +325,7 @@ table.ospot_record {
 }
 
 .featured {
-    margin-top: 100px;
+    margin-top: 280px;
 }
 
 .blog_date {
