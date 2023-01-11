@@ -13,12 +13,38 @@
 }
 
 .login {
-    margin-left: 45.7%;
-    margin-bottom: 30px;
+            margin-left: 45.7%;
+            margin-bottom: 30px;
+}
+
+@media screen and (max-width: 959px) {
+    .login {
+        margin-left: 300px;
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .login {
+        margin-left: 33%;
+        margin-bottom: 30px;
+    }
 }
 
 .button_secondaryAction {
     margin-left: 42%;
+}
+
+@media screen and (max-width: 959px) {
+    .button_secondaryAction {
+        margin-left: 36%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .button_secondaryAction {
+        margin-left: 21%;
+    }
 }
 
 #signup_form {
