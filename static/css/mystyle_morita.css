@@ -85,9 +85,27 @@
     margin-left: 290px;
 }
 
+@media screen and (max-width: 959px) {
+    #signup_form {
+        margin-left: 13%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #signup_form {
+        margin-left: 0%;
+    }
+}
+
 .toroku {
     margin-left: 200px;
     margin-top: 40px;
+}
+
+@media screen and (max-width: 480px) {
+    .toroku {
+        margin-left: 35%;
+    }
 }
 
 .welcom {
