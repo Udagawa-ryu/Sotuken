@@ -24,27 +24,12 @@
             <div class="my-div-style">
                 <button class="favorite" type="submit">Favorite Blog</button>
                 <table class="user_list">
+                    {% for obj in favUser_list %}
                     <tr>
-                        <td class="user1">User1</td>
+                        <td class="user1"><a href="">{{ obj.MO9_followedUserNumber}}</a></td>
+                        {% comment %} <td class="user1"><a href="{% url 'accounts:OtherMypage' %}}">{{ obj.MO9_followedUserNumber}}</a></td> {% endcomment %}
                     </tr>
-                    <tr>
-                        <td class="user2">User2</td>
-                    </tr>
-                    <tr>
-                        <td class="user3">User3</td>
-                    </tr>
-                    <tr>
-                        <td class="user4">User4</td>
-                    </tr>
-                    <tr>
-                        <td class="user5">User5</td>
-                    </tr>
-                    <tr>
-                        <td class="user6">User6</td>
-                    </tr>
-                    <tr>
-                        <td class="user7">User7</td>
-                    </tr>
+                    {% endfor %}
                 </table>
             </div>
         </div>

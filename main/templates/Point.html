@@ -22,13 +22,15 @@
     <div class="container">
             <div class="my-div-style">
                 <h4 class="remain_text"><b>Remaining Point</b></h4>
+
                 <table class="point_disp">
                     <tr>
-                        <td class="point">1000p</td>
+                        <td class="point">{{ object.MO1_point }}</td>
                     </tr>
                 </table>
-                <button class="use" type="submit">Use</button>
-                <button class="po_save" type="submit">Save</button>
+
+                <button class="use" type="button" onclick="location.href='/PointInput'">Use</button>
+                <button class="po_save" type="submit" >Save</button>
                 <table class="point_log">
                     <tr>
                         <td class="store_point">○○商店<br>save  600p<br>remaining  400p</td>

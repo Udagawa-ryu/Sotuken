@@ -3,13 +3,13 @@ from . import views
 
 app_name = 'main'
 urlpatterns = [
-    path('', views.MypageView.as_view(), name="Mypage"),
-    path('Point/',views.PointView.as_view(), name="Point"),
-    path('PointConfirmation/',views.PointConfirmationView.as_view(), name="PointConfirmation"),
-    path('PointDisplay/',views.PointDisplayView.as_view(), name="PointDisplay"),
-    path('PointInput/',views.PointInputView.as_view(), name="PointInput"),
-    path('StoreQRread/',views.StoreQRreadView.as_view(), name="StoreQRread"),
-    path('VisitQRread/',views.VisitQRreadView.as_view(), name="VisitQRread"),
-    path('favoriteBlogList/', views.FavoriteBlogListView.as_view(), name="favoriteBlogList"),
-    path('favoriteUserList/', views.FavoriteUserListView.as_view(), name="favoriteUserList"),
+    path('', views.MypageView, name="Mypage"),
+    path('Point/',views.PointView, name="Point"),
+    path('PointConfirmation/',views.PointConfirmationView, name="PointConfirmation"),
+    path('PointDisplay/',views.PointDisplayView, name="PointDisplay"),
+    path('PointInput/',views.PointInputView, name="PointInput"),
+    path('StoreQRread/',views.StoreQRreadView, name="StoreQRread"),
+    path('VisitQRread/',views.VisitQRreadView, name="VisitQRread"),
+    path('favoriteBlogList/', views.FavoriteBlogListView, name="favoriteBlogList"),
+    path('favoriteUserList/', views.FavoriteUserListView, name="favoriteUserList"),
 ]

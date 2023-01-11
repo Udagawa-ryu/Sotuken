@@ -22,15 +22,19 @@
     <div class="container">
         <div class="row">
             <div class="my-div-style">
-                <table class="point_input">
-                    <tr>
-                        <th class="th-center">Remaining Point</th>
-                        <td class="td-space">1000pt</td>
-                    </tr>
-                </table>
-                <h2 class="point_input_text">Use Points</h2>
-                <input type="text" class = "use_point" value="pt">
-                <button class="point_OK" type="submit" href="{% url 'main:PointConfirmation' %}">OK</button>
+                <form method="post" action="{% url 'main:PointConfirmation' %}">
+                    {% csrf_token %}
+                    <table class="point_input">
+                        <tr>
+                            <th class="th-center">Remaining Point</th>
+                            <td class="td-space">{{mydata.MO1_point}}</td>
+                        </tr>
+                    </table>
+                    <h2 class="point_input_text">Use Points</h2>
+                    <!-- <input type="text" class = "use_point" value="pt"> -->
+                    {{form.point}}
+                    <button class="point_OK" type="submit" name="next" value="comfirm">OK</button>
+                </form>
             </div>
         </div>
     </div>

@@ -26,11 +26,15 @@
                 <table class="point_confirmation">
                     <tr>
                         <th class="th-center">Use Point</th>
-                        <td class="td-space">1000pt</td>
+                        <td class="td-space">{{form.point.value}}pt</td>
                     </tr>
                 </table>
-                <button class="point_cancel" type="submit" href="{% url 'main:PointInput' %}">Cancel</button>
-                <button class="point_use" type="submit">Use</button>
+                <form method="post" action="{% url 'main:PointConfirmation' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="point" value="{{form.point.value}}">
+                    <button class="point_cancel" type="submit" name="next" value="back">Cancel</button>
+                    <button class="point_use" type="submit" name="next" value="next" href="{% url 'main:PointInput' %}>Use</button>
+                </form>
             </div>
         </div>
     </div>
