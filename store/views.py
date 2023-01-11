@@ -3,6 +3,7 @@ from django.views import generic
 from .models import *
 from .froms import *
 from accounts.models import *
+from maps.models import MO3_Default_spot
 from .decorators import *
 from django.conf import settings
 from django.contrib.auth.hashers import make_password,check_password
@@ -53,7 +54,7 @@ def addStore(request):
             url = "http://localhost:8000/store/storePassRegister/"+str(i.MO2_mailAdress)
             subject = "認証が完了しました。以下のURLよりパスワードを設定してください。"
             message = url
-            from_email = DEFAULT_FROM_EMAIL  # 送信者
+            from_email = "admin@mail.com"  # 送信者
             recipient_list = [i.MO2_mailAdress]  # 宛先リスト
             send_mail(subject, message, from_email, recipient_list)
             i.is_auth = True
@@ -79,7 +80,7 @@ def StorePassRegister(request,store):
                 params['message'] = "入力が完了しました。"
                 request.session['storeLogin'] = mystore.MO2_mailAdress
                 request.session.set_expiry(settings.SESSION_COOKIE_AGE)
-                qr = storeQRCreate(mystore.MO2_mailAdress)
+                qr = storeQRCreate(mystore.MO2_storeNumber)
                 params = {'qr':qr}
                 return render(request,'StoreQR.html',params)
             else:
@@ -208,8 +209,8 @@ def storeQRView(request,mail):
     qr = storeQRCreate(mail)
     return render(request,"StoreQR.html",{"qr":qr})
 
-def storeQRCreate(mail):
-    qr_str = "store:"+mail
+def storeQRCreate(num):
+    qr_str = "http://localhost:8000/visitrecord/"+str(num)
     img = qrcode.make(qr_str)
     buffer = BytesIO()
     img.save(buffer, format="PNG")
@@ -238,3 +239,5 @@ def storeinfodelete(request,mail):
     mystore.save()
     request.session.pop('storeLogin')
     return redirect('store:storeRequest')
+
+

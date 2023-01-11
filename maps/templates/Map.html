@@ -96,11 +96,15 @@
 
         // マーカーリスト作成関数 make_markerList
         function make_markerList(){
+            const d_list = JSON.parse('{{ d_list|safe }}');
+            const o_list = JSON.parse('{{ o_list|safe }}');
             console.log("make_markerList start");
             // データベースからスポットの情報を取得
             // [Stirng 住所, String 名前]
-            var default_spot_data_array=[['東京都千代田区西神田2-4-11',"東京情報クリエイター工学院専門学校"],['東京都豊島区東池袋1-20-17',"大原ビジネス公務員専門学校池袋校"],['東京都立川市緑町4-8',"大原簿記公務員医療福祉保育専門学校立川校"]];
-            var original_spot_data_array=[['神奈川県横浜市神奈川区反町1-8-14',"大原簿記情報ビジネス専門学校横浜校"],['千葉県千葉市中央区弁天1-16-2',"大原簿記公務員専門学校千葉校"]];
+            //var default_spot_data_array=[['東京都千代田区西神田2-4-11',"東京情報クリエイター工学院専門学校"],['東京都豊島区東池袋1-20-17',"大原ビジネス公務員専門学校池袋校"],['東京都立川市緑町4-8',"大原簿記公務員医療福祉保育専門学校立川校"]];
+            //var original_spot_data_array=[['神奈川県横浜市神奈川区反町1-8-14',"大原簿記情報ビジネス専門学校横浜校"],['千葉県千葉市中央区弁天1-16-2',"大原簿記公務員専門学校千葉校"]];
+            var default_spot_data_array = d_list
+            var original_spot_data_array = o_list
             // 各データ数を変数に格納
             const default_spot_counter = default_spot_data_array.length;
             const original_spot_counter = original_spot_data_array.length;

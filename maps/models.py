@@ -26,7 +26,7 @@ class MO3_Default_spot(models.Model):
 class MO4_Original_spot(models.Model):
   MO4_OspotNumber = models.AutoField(verbose_name="オリジナルスポットナンバー", primary_key=True, editable=False)
   MO4_OspotName = models.CharField(verbose_name="オリジナルスポット名",max_length=50, blank=True)
-  MO4_OspotInfo = models.TextField(verbose_name="オリジナルスポット情報",null=True)
+  MO4_OspotInfo = models.TextField(verbose_name="オリジナルスポット情報",null=True,blank=True)
   MO4_OspotAdress = models.CharField(verbose_name="オリジナルスポット住所", max_length=50, null=True)
   MO4_createDate = models.DateTimeField(verbose_name="作成日時", auto_now_add=True)
   MO5_tagNumber = models.ManyToManyField(MO5_Tag)

@@ -118,3 +118,29 @@ def AccountDelete(request):
     mydata.is_active = False
     mydata.save()
     return redirect('account_logout')
+
+@login_required
+def UserSearch(request):
+    params = {'message': '', 'form': None}
+    form = UserSearchForm()
+    params['form'] = form
+    return render(request,"UserSearch.html",params)
+
+@login_required
+def UserSearchResult(request):
+    if request.method == 'POST':
+        users = CustomUser.objects.filter(MO1_userID__contains = request.POST.get("s_user"),is_active=True,is_staff=False)
+        params = {'message': '', 'form': None,'users':users}
+        return render(request,"UserSearchResult.html",params)
+
+@login_required
+def OtherMypage(request):
+    page_user = CustomUser.objects.get(MO1_userNumber = request.POST.get("user"))
+    mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+    if MO9_Fav_Custom_user.objects.filter(MO1_userNumber = mydata.MO1_userNumber,MO9_followedUserNumber = page_user.MO1_userNumber).exists():
+        fav = 1
+    else :
+        fav = 0
+    params = {"page_user":page_user,"mydata":mydata,"fav":fav}
+    return render(request,"OtherMypage.html",params)
+

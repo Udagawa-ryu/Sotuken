@@ -12,4 +12,7 @@ urlpatterns = [
     path('UserInfoRegister/',views.UserInfoRegister,name="UserInfoRegister"),
     path('DeleteAccount/',views.deleteAccount,name="DeleteAccount"),
     path('AccountDelete/',views.AccountDelete,name="AccountDelete"),
+    path('AccountSearch/',views.UserSearch,name="UserSearch"),
+    path('AccountSearchResult/',views.UserSearchResult,name="UserSearchResult"),
+    path('OtherUserPage/',views.OtherMypage,name="OtherMypage"),
 ]
