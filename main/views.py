@@ -4,6 +4,7 @@ from blog.models import MO7_Blog,MO10_Fav_Blog,MO9_Fav_Custom_user
 from accounts.models import CustomUser
 from django.urls import reverse_lazy
 from .forms import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
