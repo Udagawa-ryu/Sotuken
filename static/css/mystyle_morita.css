@@ -85,18 +85,68 @@
     margin-left: 290px;
 }
 
+@media screen and (max-width: 959px) {
+    #signup_form {
+        margin-left: 13%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #signup_form {
+        margin-left: 0%;
+    }
+}
+
 .toroku {
     margin-left: 200px;
     margin-top: 40px;
+}
+
+@media screen and (max-width: 480px) {
+    .toroku {
+        margin-left: 35%;
+    }
+}
+
+/* SignUpCompletion.htmlのCSS */
+@media screen and (max-width: 480px) {
+    .signupcompletion {
+        font-size: 10px;
+    }
 }
 
 .welcom {
     margin-left: 225px;
 }
 
+@media screen and (max-width: 959px) {
+    .welcom {
+        margin-left: 33%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .welcom {
+        margin-left: 0%;
+    }
+}
+
 .close {
     margin-right: 70px;
     margin-top: 60px;
+}
+
+@media screen and (max-width: 959px) {
+    .close {
+        margin-right: 0%;
+        margin-bottom: 132%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .close {
+        margin-right: 30%;
+    }
 }
 
 .complete {
@@ -130,14 +180,41 @@
     margin-left: 520px;
 }
 
+/* DeleteAccount.htmlのCSS */
 .account {
     margin-left: 225px;
     font-size: 20px;
 }
 
+@media screen and (max-width: 959px) {
+    .account {
+        margin-left: 0%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .account {
+        margin-left: 0%;
+        font-size: 10px;
+    }
+}
+
 .account_cancel {
     margin-left: 400px;
     margin-top: 50px;
+}
+
+@media screen and (max-width: 959px) {
+    .account_cancel {
+        margin-left: 25%;
+        margin-bottom: 45%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .account_cancel {
+        margin-left: 3%;
+    }
 }
 
 .account_delete {
