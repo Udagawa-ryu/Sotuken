@@ -5,6 +5,7 @@ from accounts.models import CustomUser,MO6_Visit_record
 from django.urls import reverse_lazy
 from blog.models import MO7_Blog
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 # Create your views here.
 
 # ブログ一覧画面
@@ -123,50 +124,51 @@ class BlogCompletionView(generic.TemplateView):
     template_name = "BlogCompletion.html"
 
 # ブログ詳細画面
-class BlogDetailView(generic.TemplateView):
-    template_name = "BlogDetail.html"
-
-# class BlogDetailView(LoginRequiredMixin, generic.DeleteView):
-#     model = MO7_Blog
+# class BlogDetailView(generic.TemplateView):
 #     template_name = "BlogDetail.html"
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['blogs'] = MO7_Blog.objects.filter(MO1_userID=self.request.user)
-#         return context
+class BlogDetailView(LoginRequiredMixin, generic.DeleteView):
+    model = MO7_Blog
+    template_name = "BlogDetail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['blog'] = MO7_Blog.objects.filter(MO7_blogNumber=self.kwargs['pk'])
+        print(context['blog'])
+        return context
 
 # ブログ編集画面
-class BlogEditView(generic.TemplateView):
-    template_name = "BlogEdit.html"
+# class BlogEditView(generic.TemplateView):
+#     template_name = "BlogEdit.html"
 
-# class BlogEditView(LoginRequiredMixin, generic.UpdateView):
-#     model = MO7_Blog
-#     template_name = 'BlogEdit.html'
-#     form_class = BlogRegisterForm
+class BlogEditView(LoginRequiredMixin, generic.UpdateView):
+    model = MO7_Blog
+    template_name = 'BlogEdit.html'
+    form_class = BlogRegisterForm
 
-#     def get_success_url(self):
-#         return reverse_lazy('blog:blogDetail', kwargs={'pk': self.kwargs['pk']})
+    def get_success_url(self):
+        return reverse_lazy('blog:blogDetail', kwargs={'pk': self.kwargs['pk']})
 
-#     def form_valid(self, form):
-#         messages.success(self.request, 'ブログを更新しました。')
-#         return super().form_valid(form)
+    def form_valid(self, form):
+        messages.success(self.request, 'ブログを更新しました。')
+        return super().form_valid(form)
 
-#     def form_invalid(self, form):
-#         messages.error(self.request, 'ブログの更新に失敗しました。')
-#         return super().form_invalid(form)
+    def form_invalid(self, form):
+        messages.error(self.request, 'ブログの更新に失敗しました。')
+        return super().form_invalid(form)
 
 # ブログ削除画面
-class BlogDeleteView(generic.TemplateView):
-    template_name = "BlogDelete.html"
-
-# class BlogDeleteView(LoginRequiredMixin, generic.DeleteView):
-#     model = MO7_Blog
+# class BlogDeleteView(generic.TemplateView):
 #     template_name = "BlogDelete.html"
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['blogs'] = MO7_Blog.objects.filter(MO1_userID=self.request.user)
-#         return context
+class BlogDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = MO7_Blog
+    template_name = "BlogDelete.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['blog'] = MO7_Blog.objects.filter(MO7_blogNumber=self.kwargs['pk'])
+        return context
 
 # マイブログ公開範囲設定入力画面
 class OpenRangeRegisterView(generic.TemplateView):
