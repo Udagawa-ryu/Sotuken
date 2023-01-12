@@ -46,9 +46,11 @@
             </table>
             <div class="text-center" style="margin-top: 20px;">
                 <div style="text-align: center;">
-                    <button class="button primary" type="submit" name="next" value="favo">Favorite</button>
-                    <button class="button primary" type="submit" name="next" value="edit">Edit</button>
-                    <button class="button primary" type="submit" name="next" value="delete">Delete</button>
+                    <button class="button primary" type="submit" name="favo" value="favo">Favorite</button>
+                    <button class="button primary" type="submit"
+                        onclick="location.href='../../blogEdit/{{blog.0.MO7_blogNumber}}'">Edit</button>
+                    <button class="button primary" type="submit"
+                        onclick="location.href='../../blogDelete/{{blog.0.MO7_blogNumber}}'">Delete</button>
                 </div>
             </div>
         </div>

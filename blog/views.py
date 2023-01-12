@@ -175,5 +175,15 @@ class OpenRangeRegisterView(generic.TemplateView):
     template_name = "OpenRangeRegister.html"
 
 # 他ユーザのブログ画面
-class OtherBlogListView(LoginRequiredMixin, generic.DeleteView):
+# class OtherBlogListView(generic.TemplateView):
+#     template_name = "OtherBlogList.html"
+
+class OtherBlogListView(LoginRequiredMixin, generic.DetailView):
+    model = MO7_Blog
     template_name = "OtherBlogList.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['blog'] = MO7_Blog.objects.filter(MO7_blogNumber=self.kwargs['pk'])
+        print(context['blog'])
+        return context
