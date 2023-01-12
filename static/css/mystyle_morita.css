@@ -108,13 +108,44 @@
     }
 }
 
+@media screen and (max-width: 480px) {
+    .signupcompletion {
+        font-size: 10px;
+    }
+}
+
 .welcom {
     margin-left: 225px;
+}
+
+@media screen and (max-width: 959px) {
+    .welcom {
+        margin-left: 33%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .welcom {
+        margin-left: 0%;
+    }
 }
 
 .close {
     margin-right: 70px;
     margin-top: 60px;
+}
+
+@media screen and (max-width: 959px) {
+    .close {
+        margin-right: 0%;
+        margin-bottom: 132%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .close {
+        margin-right: 30%;
+    }
 }
 
 .complete {
