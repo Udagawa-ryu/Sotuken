@@ -127,7 +127,7 @@ class BlogCompletionView(generic.TemplateView):
 # class BlogDetailView(generic.TemplateView):
 #     template_name = "BlogDetail.html"
 
-class BlogDetailView(LoginRequiredMixin, generic.DeleteView):
+class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     model = MO7_Blog
     template_name = "BlogDetail.html"
 
@@ -175,5 +175,5 @@ class OpenRangeRegisterView(generic.TemplateView):
     template_name = "OpenRangeRegister.html"
 
 # 他ユーザのブログ画面
-class OtherBlogListView(generic.TemplateView):
+class OtherBlogListView(LoginRequiredMixin, generic.DeleteView):
     template_name = "OtherBlogList.html"
