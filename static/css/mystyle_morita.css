@@ -97,6 +97,7 @@
     }
 }
 
+/* signup.htmlのCSS */
 #signup_form {
     margin-left: 290px;
 }
@@ -132,7 +133,7 @@
 }
 
 .welcom {
-    margin-left: 225px;
+    margin-left: 290px;
 }
 
 @media screen and (max-width: 959px) {
@@ -148,7 +149,7 @@
 }
 
 .close {
-    margin-right: 70px;
+    margin-right: 560px;
     margin-top: 60px;
 }
 
