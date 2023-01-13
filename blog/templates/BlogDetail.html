@@ -1,1 +1,59 @@
-<h1></h1>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}BlogDetail{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <h3>Blog Detail</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- <div class="row"> -->
+        <div class="animate-box">
+            <table class="confirmation">
+                <tr>
+                    <th class="th-center">BlogName</th>
+                    <td class="td-space">{{blog.0.MO7_blogName}}</td>
+                </tr>
+                <tr>
+                    <th class="th-center">BlogText</th>
+                    <td class="td-space">
+                        <pre>{{blog.0.MO7_blogText}}</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th-center">VisitRecode</th>
+                    <td class="td-space">
+                        {{blog.0.MO6_visitRecordNumber}}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="th-center">OpenRangee</th>
+                    <td class="td-space">
+                        {{blog.0.MO7_openRange}}
+                    </td>
+                </tr>
+            </table>
+            <div class="text-center" style="margin-top: 20px;">
+                <div style="text-align: center;">
+                    <button class="button primary" type="submit" name="favo" value="favo">Favorite</button>
+                    <button class="button primary" type="submit"
+                        onclick="location.href='{% url 'blog:blogEdit' blog.0.MO7_blogNumber %}'">Edit</button>
+                    <button class="button primary" type="submit"
+                        onclick="location.href='{% url 'blog:blogDelete' blog.0.MO7_blogNumber %}'">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
