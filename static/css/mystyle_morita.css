@@ -2,31 +2,81 @@
     margin-left: 20%;
 }
 
+@media screen and (max-width: 959px) {
+    div {
+        line-height: 2.7;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    div {
+        line-height: 1.6;
+    }
+}
+
+/* logout.htmlのCSS */
 .text {
     margin-bottom: 50px;
+    margin-left: 200px;
+}
+
+@media screen and (max-width: 959px) {
+    .text {
+        font-size: 25px;
+        margin-left: 17%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .text {
+        font-size: 23px;
+        margin-left: -5%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logout {
+        margin-left: 5%;
+    }
 }
 
 .cancel {
     margin-top: 10px;
     margin-right: 100px;
-    margin-left: 140px;
+    margin-left: 250px;
 }
 
+@media screen and (max-width: 959px) {
+    .cancel {
+        margin-left: 22%;
+        margin-bottom: 60%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .cancel {
+        margin-bottom: 70%;
+        margin-left: 13%;
+        margin-right: 0%;
+    }
+}
+
+/* login.htmlのCSS */
 .login {
-            margin-left: 45.7%;
+            margin-left: 47.6%;
             margin-bottom: 30px;
 }
 
 @media screen and (max-width: 959px) {
     .login {
-        margin-left: 300px;
+        margin-left: 46%;
         margin-bottom: 30px;
     }
 }
 
 @media screen and (max-width: 480px) {
     .login {
-        margin-left: 33%;
+        margin-left: 42%;
         margin-bottom: 30px;
     }
 }
@@ -47,8 +97,21 @@
     }
 }
 
+/* signup.htmlのCSS */
 #signup_form {
     margin-left: 290px;
+}
+
+@media screen and (max-width: 959px) {
+    #signup_form {
+        margin-left: 13%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #signup_form {
+        margin-left: 0%;
+    }
 }
 
 .toroku {
@@ -56,13 +119,46 @@
     margin-top: 40px;
 }
 
+@media screen and (max-width: 480px) {
+    .toroku {
+        margin-left: 35%;
+    }
+}
+
+/* SignUpCompletion.htmlのCSS */
 .welcom {
-    margin-left: 225px;
+    margin-left: 290px;
+}
+
+@media screen and (max-width: 959px) {
+    .welcom {
+        margin-left: 28%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .welcom {
+        margin-left: 18%;
+    }
 }
 
 .close {
-    margin-right: 70px;
+    margin-right: 560px;
     margin-top: 60px;
+}
+
+@media screen and (max-width: 959px) {
+    .close {
+        margin-right: 57%;
+        margin-bottom: 60%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .close {
+        margin-right: 53%;
+        margin-bottom: 80%;
+    }
 }
 
 .complete {
@@ -74,8 +170,33 @@
     margin-top: 40px;
 }
 
+/* BlogCompletion.htmlのCSS */
 .completed {
-    margin-left: 190px;
+    margin-left: 270px;
+}
+
+@media screen and (max-width: 959px) {
+    .completed {
+        margin-left: 25%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .completed {
+        margin-left: 11%;
+    }
+}
+
+@media screen and (max-width: 959px) {
+    .blog_comp {
+        margin-bottom: 40%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .blog_comp {
+        margin-bottom: 50%;
+    }
 }
 
 .blog_OK {
@@ -96,36 +217,115 @@
     margin-left: 520px;
 }
 
+/* DeleteAccount.htmlのCSS */
 .account {
-    margin-left: 225px;
+    margin-left: 390px;
     font-size: 20px;
 }
 
+@media screen and (max-width: 959px) {
+    .account {
+        margin-left: 15%;
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .account {
+        margin-left: 7%;
+        font-size: 15px;
+    }
+}
+
 .account_cancel {
-    margin-left: 400px;
+    margin-left: 500px;
     margin-top: 50px;
+}
+
+@media screen and (max-width: 959px) {
+    .account_cancel {
+        margin-left: 38%;
+        margin-bottom: 45%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .account_cancel {
+        margin-left: 25%;
+        margin-bottom: 60%;
+    }
 }
 
 .account_delete {
     margin-left: 60px;
 }
 
-.btn_btn-outline-primary {
-    margin-bottom: 100px;
-    margin-left : -10px;
+/* StoreLogin.htmlのCSS */
+.col-md-12 {
+    margin-top: 50px;
 }
 
+@media screen and (max-width: 959px) {
+    .col-md-12 {
+        margin-top: 10%;
+        margin-bottom: 20%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .col-md-12 {
+        margin-top: 15%;
+        margin-bottom: 30%;
+    }
+}
+
+/* StoreLogout.htmlのCSS */
 .store_text {
-    text-align: center;
+    margin-left: 120px;
     margin-bottom: 80px;
 }
 
+@media screen and (max-width: 959px) {
+    .store_text {
+        margin-left: 0%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_text {
+        font-size: 17px;
+        margin-right: 5%;
+        margin-left: -8%;
+    }
+}
+
 .store_cancel {
-    margin-left: 135px;
+    margin-left: 230px;
+}
+
+@media screen and (max-width: 959px) {
+    .store_cancel {
+        margin-left: 16%;
+        margin-bottom: 50%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_cancel {
+        margin-left: 3%;
+        margin-bottom: 70%;
+    }
 }
 
 .store_logout {
     margin-left: 60px;
+}
+
+@media screen and (max-width: 480px) {
+    .store_logout {
+        margin-left: 5%;
+        margin-bottom: 20%;
+    }
 }
 
 .store_info_text {
