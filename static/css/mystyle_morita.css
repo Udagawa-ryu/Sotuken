@@ -126,25 +126,19 @@
 }
 
 /* SignUpCompletion.htmlのCSS */
-@media screen and (max-width: 480px) {
-    .signupcompletion {
-        font-size: 10px;
-    }
-}
-
 .welcom {
     margin-left: 290px;
 }
 
 @media screen and (max-width: 959px) {
     .welcom {
-        margin-left: 33%;
+        margin-left: 28%;
     }
 }
 
 @media screen and (max-width: 480px) {
     .welcom {
-        margin-left: 0%;
+        margin-left: 18%;
     }
 }
 
@@ -155,14 +149,15 @@
 
 @media screen and (max-width: 959px) {
     .close {
-        margin-right: 0%;
-        margin-bottom: 132%;
+        margin-right: 57%;
+        margin-bottom: 60%;
     }
 }
 
 @media screen and (max-width: 480px) {
     .close {
-        margin-right: 30%;
+        margin-right: 53%;
+        margin-bottom: 80%;
     }
 }
 
