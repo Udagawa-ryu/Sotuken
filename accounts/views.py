@@ -5,7 +5,6 @@ from allauth.account.utils import *
 from samuraiwalk.settings_common import *
 from django.contrib.auth.decorators import login_required
 
-
 # Create your views here.
 def newAccount(request):
     params = {'message': '', 'form': None}
@@ -143,4 +142,23 @@ def OtherMypage(request):
         fav = 0
     params = {"page_user":page_user,"mydata":mydata,"fav":fav}
     return render(request,"OtherMypage.html",params)
+
+@login_required
+def OpenRangeRegister(request):
+    mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+    if request.method == 'POST':
+        range = request.POST.get("demo-priority")
+        print(range)
+        if range == "0":
+            range = 0
+        elif range == "1":
+            range = 1
+        else:
+            range = 2
+        print(range)
+        mydata.MO1_openRange = range
+        mydata.save()
+    else:
+        params = {"mydata":mydata}
+    return render(request,'OpenRangeRegister.html', params)
 
