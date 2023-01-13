@@ -72,3 +72,8 @@ class UserEditForm(forms.ModelForm):
 
 class UserSearchForm(forms.Form):
     s_user = forms.CharField(label="UserSearch")
+
+class FavUserForm(forms.ModelForm):
+    class Meta:
+        model = MO9_Fav_Custom_user
+        fields = ["MO1_userNumber","MO9_followedUserNumber"]

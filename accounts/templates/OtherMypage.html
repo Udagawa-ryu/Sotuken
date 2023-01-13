@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
                 <!-- ↓ユーザ名を入れる -->
-                <h3>{{ page_user.username }}s Page</h3>
+                <h3>{{ page_user.username }}'s Page</h3>
             </div>
         </div>
     </div>
@@ -20,10 +20,17 @@
             <div class="row">
                 <div class="animate-box">
                     <ul class="actions">
-                        {% if fav == 0 %}
-                            <
-                        {% else %}
-                        {% endif %}
+                        <form method="post" action="{% url 'accounts:FavUser' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="mydata" value={{mydata}}>
+                            <input type="hidden" name="user" value={{page_user.MO1_userNumber}}>
+                            <input type="hidden" name="fav" value={{fav}}>
+                            {% if fav == "0" %}
+                                <button type="submit" id="main">★</button>
+                            {% else %}
+                                <button type="submit" id="main" class="foo">★</button>
+                            {% endif %}
+                        </form>
                     </ul>
                 </div>
             </div>
@@ -59,3 +66,24 @@
 </div>
 
 {% endblock %}
+
+<style>
+
+  .foo{
+
+      background-color: #00CCFF;
+
+  }
+
+</style>
+<script>
+    document.getElementById('main').onclick = function () {
+        this.classList.toggle('foo');
+    };
+    {% if fav == 1 %}
+        window.onload = function() {
+        document.getElementById('main').click();
+    }
+{% endif %}
+
+</script>
