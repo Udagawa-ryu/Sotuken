@@ -31,6 +31,11 @@ class StoreLoginForm(forms.ModelForm):
         widgets = {
             "MO2_password": forms.PasswordInput()
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
 
 class StoreUpdateForm(forms.ModelForm):
     class Meta:
