@@ -47,8 +47,7 @@
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
             {% endif %}
-
-            <button type="submit" class="button primary" name="next" value="confirm">　Update　</button>
+                <button type="submit" class="button primary" name="next" value="confirm">　Update　</button>
             <p><a class="button_secondaryAction" href="{% url 'account_reset_password' %}">パスワードを忘れましたか？</a></p>
         </form>
     </div>

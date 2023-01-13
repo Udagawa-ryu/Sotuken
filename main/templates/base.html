@@ -116,18 +116,23 @@
                                 <li>
                                     <a href="#">Account</a>
                                     <ul class="fh5co-sub-menu">
-                                        <li><a href="#">Edit My Information</a></li>
-                                        <li><a href="#">LogOut</a></li>
-                                        <li><a href="#">Delete Account</a></li>
+                                        <li><a href="{% url 'accounts:UserInfoEdit' %}">Edit My Information</a></li>
+                                        <li><a href="{% url 'accounts:logout' %}">LogOut</a></li>
+                                        <li><a href="{% url 'accounts:DeleteAccount' %}">Delete Account</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Favorite</a></li>
-                                <li><a href="/Point">Point</a></li>
-                                <li><a href="/blog">Blog</a></li>
-                                <li><a href="/maps">Map</a></li>
-                                <li><a href="#">PublicScope</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Search</a></li>
+                                <li>
+                                    <a href="#">Favorite</a>
+                                    <ul class="fh5co-sub-menu">
+                                        <li><a href="{% url 'main:favoriteUserList' %}">FavoriteUser</a></li>
+                                        <li><a href="{% url 'main:favoriteBlogList' %}">FavoriteBlog</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{% url 'blog:blogList' %}">Blog</a></li>
+                                <li><a href="{% url 'main:Point' %}">Point</a></li>
+                                <li><a href="{% url 'maps:Map' %}">Map</a></li>
+                                <li><a href="{% url 'blog:openRangeRegister' %}">PublicScope</a></li>
+                                <li><a href="{% url 'accounts:UserSearch' %}">Search</a></li>
                             </ul>
                         </nav>
                     </div>
