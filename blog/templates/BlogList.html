@@ -12,17 +12,18 @@
 <div id="fh5co-blog-section" class="fh5co-section-gray">
     <div class="container">
         <!-- <div class="row"> -->
-            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3 style="text-transform:none">Your Blog</h3>
-            </div>
+        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+            <h3 style="text-transform:none">Your Blog</h3>
+        </div>
         <!-- </div> -->
     </div>
     <div class="container">
         <div class="animate-box">
             <!-- 左寄せ -->
             <div style="text-align: right;">
-                <button href="{% url 'blog:blogRegister' %}" class="btnin">Create</button>
-                <button href="{% url 'blog:openRangeRegister' %}" class="btnin" style="width:150px;">OpenRange</button>
+                <button onclick="location.href='{% url 'blog:blogRegister' %}'" class="btnin">Create</button>
+                <button onclick="location.href='{% url 'accounts:OpenRangeRegister' %}'" class="btnin"
+                    style="width:150px;">OpenRange</button>
             </div>
         </div>
     </div>
