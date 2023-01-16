@@ -170,8 +170,33 @@
     margin-top: 40px;
 }
 
+/* BlogCompletion.htmlのCSS */
 .completed {
-    margin-left: 190px;
+    margin-left: 270px;
+}
+
+@media screen and (max-width: 959px) {
+    .completed {
+        margin-left: 25%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .completed {
+        margin-left: 11%;
+    }
+}
+
+@media screen and (max-width: 959px) {
+    .blog_comp {
+        margin-bottom: 40%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .blog_comp {
+        margin-bottom: 50%;
+    }
 }
 
 .blog_OK {

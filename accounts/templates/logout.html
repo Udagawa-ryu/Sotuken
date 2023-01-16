@@ -23,8 +23,9 @@
             <div class="my-div-style">
                 <div class="botton_log">
                     <h2 class="text">Do you want to log out?</h2>
-                    <button class="cancel" type="submit" href="{% url 'main:Mypage' %}">cancel</button>
-                    <button class="logout" type="submit" href="{% url 'account_logout' %}'">Log Out</button>
+                    <button class="cancel" type="submit" onclick="location.href='{% url 'main:Mypage' %}'">cancel</button>
+                    <button type="submit" class="button primary" value="back">cancel</button>
+                    <button class="logout" type="submit" onclick="location.href='{% url 'account_logout' %}'">Log Out</button>
                 </div>
             </div>
         </div>

@@ -61,7 +61,7 @@ class UserEditForm(forms.ModelForm):
         ("日本語","ja"),
     }
     MO1_language = forms.ChoiceField(label="Language",choices=LANGAGES)
-    MO1_openRange = forms.ChoiceField(label="OpenRange",choices={(0,"Open"),(1,"Hidden")})
+    MO1_openRange = forms.ChoiceField(label="OpenRange",choices={(0,"Open"),(1,"Partial"),(2,"Hidden")})
     class Meta:
         model = CustomUser
         fields = ["username","MO1_userID","MO1_homeCountry","MO1_language","MO1_openRange"]
@@ -75,3 +75,8 @@ class UserEditForm(forms.ModelForm):
 
 class UserSearchForm(forms.Form):
     s_user = forms.CharField(label="UserSearch")
+
+class FavUserForm(forms.ModelForm):
+    class Meta:
+        model = MO9_Fav_Custom_user
+        fields = ["MO1_userNumber","MO9_followedUserNumber"]

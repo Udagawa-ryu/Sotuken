@@ -1,16 +1,28 @@
-<h1>地図画面</h1>
+{% extends 'base.html' %}
+{% comment %} <h1>地図画面</h1> {% endcomment %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>map</title>
+{% comment %} <!DOCTYPE html> {% endcomment %}
+{% comment %} <html> {% endcomment %}
+{% comment %} <head> {% endcomment %}
+{% block title %}Map{% endblock %}
+    {% comment %} <meta charset="UTF-8"> {% endcomment %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% comment %} <title>map</title> {% endcomment %}
+{% block script %}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
     <script src="{% static 'js/leaflet.js' %}"></script>
     <script src="{% static 'js/leaflet.sprite.js' %}"></script>
     <script src="https://cdn.geolonia.com/community-geocoder.js"></script>
     <script src="{% static 'js/leaflet-search.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/leaflet-search.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylymap.css' %}" />    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" rel="stylesheet">
+    {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script> {% endcomment %}
+    <script src="https://api.wikiocity.com/lib/mlgl/v1.14.0/maplibre-gl.js"></script>
+    <script src="https://api.wikiocity.com/lib/mlgl-leaflet/leaflet-maplibre-gl.js"></script>
 
     <script>
         console.log("map start");
@@ -19,13 +31,17 @@
         // データ型:　[{pos: [float 緯度][float 経度], name; String 名前},・・・]
         var default_spot_markerList = [];
         var original_spot_markerList = [];
+        // 日本の全体が入るboundを保存
+        var japan_bound = [[47,120], [20,155]];
 
         // マップ作成、表示関数
         function init() {
             console.log("init start");
             // htmlの要素mapcontainerを指定し、mapを作成
             // 空のmapを作成し、要素を後から追加
-            var map = L.map('mapcontainer');
+            var center = [36.0,140];
+            var startZoom =  '10';
+            var map = L.map('mapcontainer',{maxBounds: japan_bound, maxZoom: 20, minZoom: 5,}).setView(center, startZoom);
 
             // maptile選択・mapに追加
             // 地理院標準地図
@@ -35,15 +51,66 @@
             // openstreetmap
             {% comment %} L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                continuousWorld: false
+                continuousWorld: false,
+                maxZoom: 20,
+                minZoom: 5,
             }).addTo(map); {% endcomment %}
             // MapTilesAPI.OSMEnglish
-            L.tileLayer('https://maptiles.p.rapidapi.com/en/map/v1/{z}/{x}/{y}.png?rapidapi-key={apikey}', {
+            {% comment %} L.tileLayer('https://maptiles.p.rapidapi.com/es/map/v1/{z}/{x}/{y}.png?rapidapi-key={apikey}', {
                 attribution: '&copy; <a href="http://www.maptilesapi.com/">MapTiles API</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 apikey: '07b42bd84dmsha2c84c2de9e35b3p1dc440jsn35ea7f61ea22',
-                maxZoom: 19
+                maxZoom: 20,
+                minZoom: 5,
+            }).addTo(map); {% endcomment %}
+
+            {% comment %} L.tileLayer('https://api.wikiocity.com/r/vector/en/{z}/{x}/{y}.pbf?key=d9277a1cc43ba53c284c72ed7', {
+                attribution: '&copy; <a href="https://api.wikiocity.com">Wikiocity</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                style: 'https://api.wikiocity.com/style/wikiocity-mgl-style.json?key=d9277a1cc43ba53c284c72ed7&lang=en',
+                maxZoom: 20,
+                minZoom: 5,
+            }).addTo(map); {% endcomment %}
+
+            // 言語設定
+            // intl - Language is in native language of viewed map area.
+            //ar - Arabic العربية
+            //bn - Bengali বাংলা
+            //de - German Deutsch
+            //en - English English
+            //es - Spanish Español
+            //fr - French Français
+            //el - Greek ελληνικά
+            //hi - Hindi हिन्दी, हिंदी
+            //hu - Hungarian Magyar
+            //id - Indonesian Bahasa Indonesia
+            //it - Italian Italiano
+            //ja - Japanese 日本語 (にほんご)
+            //ko - Korean 한국어
+            //nl - Dutch, Flemish Nederlands, Vlaams
+            //pl - Polish Język Polski, Polszczyzna
+            //pt - Portuguese Português
+            //ru - Russian русский
+            //sv - Swedish Svenska
+            //tr - Turkish Türkçe
+            //vi - Vietnamese Tiếng Việt
+            //zh - Chinese 中文 (Zhōngwén), 汉语, 漢語
+            mapLanguage = 'en';
+            var apiKey = 'd9277a1cc43ba53c284c72ed7';
+            var targetDivId = 'map';
+   		    var mapType = 'vector';
+            var gl = L.maplibreGL({
+                attribution: '&copy; <a href="https://api.wikiocity.com">Wikiocity</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                style: 'https://api.wikiocity.com/style/wikiocity-mgl-style.json?key='+apiKey+'&lang='+mapLanguage,
+                minZoom:5
             }).addTo(map);
 
+            {% comment %} L.tileLayer('https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyAq9zOaV1tEij_ymeVg4jegRhqQhjoS4QY',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            }); {% endcomment %}
+
+            {% comment %} L.tileLayer('https://www.google.com/maps/dir/35.7324484,139.721777//@35.7324281,139.6517369,12z/data=!4m4!4m3!1m1!4e1!1m0',{
+                maxZoom: 20,
+            }); {% endcomment %}
 
             // 検索コンソール設定
             // 検索用レイヤーを作成し、マップに追加
@@ -60,8 +127,13 @@
             });
             map.addControl( controlSearch );
 
-            //マーカー全体が入るボックスを作る
-            var bound = L.latLngBounds([35.475243,139.40441], [35.731372,140.11212]);    
+            L.Control.geocoder({ // 地点検索を行う
+                geocoder: L.Control.Geocoder.nominatim()
+            }).addTo(map);
+
+            // 地図初期設定
+            // [左上緯度,左上経度], [右下緯度,右下経度]
+            var bound = L.latLngBounds([37.0,139.4], [35.5,140.1]);
 
             // マーカーを地図に追加
             for (var num in default_spot_markerList) {
@@ -156,10 +228,51 @@
             });
         }
     </script>
-</head>
+{% endblock %}
+{% comment %} </head> {% endcomment %}
  
-<body onload="make_markerList()">
+{% comment %} <body onload="make_markerList()">
     <div id="mapcontainer" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
-</body>
- 
-</html>
+</body> {% endcomment %}
+{% block onload %}onload="make_markerList()"{% endblock %}
+{% block contents %}
+    <div id="mapfloar">
+        <div id="mapcontainer" class="mapcon"></div>
+    </div>
+    <div class="container">
+        <!-- ブログタイトル入力 -->
+        <!-- ブログ内容入力 -->
+        <!-- 該当する訪問記録を選択 -->
+        <p>{{ message }}</p>
+        <form method="post" action="{% url 'maps:SpotSearch' %}">
+            {% csrf_token %}
+            <div style="display:block;">
+                <div class="box-parent">
+                {% for i in tag_list %}
+                    <div class="box-child">
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="tags" value={{i.MO5_tagNumber}} style="transform: scale(2);margin: 0 12px;">
+                                </td>
+                                <td>
+                                    {{ i.MO5_tagName }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <table class="confirmation">
+                <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
+                <tr>
+                    <th class="th-center">{{s_form.words.label}}</th>
+                    <td class="td-space"><input type="text" name="keyword" class="hoge"></td>
+                    <td class="td-button"><button class="btn btn-primary btn-outline btn-lg" type="submit" name="next" value="confirm">SEARCH</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}
+{% comment %} </html> {% endcomment %}

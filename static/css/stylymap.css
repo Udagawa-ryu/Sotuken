@@ -1,0 +1,97 @@
+@media screen and (max-width: 1280px) {
+    .mapcon{
+        margin: auto;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        height: 600px;
+        width: 80%;
+    }
+    .hoge{
+        margin: 1% 1px;
+        width: 95%;
+    }
+    .box-parent {
+        margin: auto;
+        width:90%;
+        height: 80px;
+        border: 1px solid;
+        display:flex;
+        flex-wrap:wrap;/* これを指定する */
+        /* justify-content:space-between; */
+        overflow-y:scroll;
+    }
+    .box-child {
+        margin: 3px 1%;
+        width:calc(94%/3);/* 横幅を3等分 */
+        height:30px;
+        display:flex;/* 高さを揃えるための指定 */
+        flex-direction:column;/* 高さを揃えるための指定 */
+        border:1px solid #ccc;/* 装飾用 */
+        box-sizing:border-box;/* 装飾用 */
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .mapfloar{
+        min-height: 600px;
+    }
+    .mapcon{
+        margin: auto;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        height: 400px;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 736px) {
+    .mapcon{
+        margin: auto;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        height: 400px;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .mapfloar{
+        min-height: 900px;
+    }
+    .mapcon{
+        margin: auto;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        height: 400px;
+        width: 80%;
+    }
+}
+
+table.confirmation {
+    border-collapse: separate;
+    border-spacing: 0px 5px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+td,
+th {
+    padding: 10px;
+}
+
+th.th-center{
+    background: #F78536;
+    color: #fff;
+    width: 20%;
+    height: 50px;
+    text-align: center;
+}
+
+td.td-space {
+    background: #ffefe4;
+    /* 改行 */
+    word-break: break-word;
+    padding-left: 10px;
+    padding-right: 10px;
+    color:#333333;
+}
