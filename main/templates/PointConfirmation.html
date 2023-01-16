@@ -33,7 +33,7 @@
                     {% csrf_token %}
                     <input type="hidden" name="point" value="{{form.point.value}}">
                     <button class="point_cancel" type="submit" name="next" value="back">Cancel</button>
-                    <button class="point_use" type="submit" name="next" value="next" href="{% url 'main:PointInput' %}>Use</button>
+                    <button class="point_use" type="submit" name="next" value="next" href="{% url 'main:PointInput' %}">Use</button>
                 </form>
             </div>
         </div>
