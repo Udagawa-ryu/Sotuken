@@ -490,10 +490,23 @@ table.point_confirmation {
     margin-left: 265px;
 }
 
+/* PointInput.htmlのCSS */
 .point_input_text {
     margin-left: 190px;
     margin-top: 80px;
     margin-bottom: 60px;
+}
+
+@media screen and (max-width: 959px) {
+    .point_input_text {
+        margin-left: 13%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .point_input_text {
+        margin-left: 0%;
+    }
 }
 
 .point_input {
@@ -501,14 +514,28 @@ table.point_confirmation {
     width: 50%;
 }
 
-.use_point {
-    margin-bottom: 40px;
-    width: 40%;
+@media screen and (max-width: 959px) {
+    .point_input {
+        margin-left: 40%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .point_input {
+        margin-left: 12%;
+    }
 }
 
 .point_OK {
     margin-top: 40px;
     margin-left: 290px;
+}
+
+@media screen and (max-width: 480px) {
+    .point_OK {
+        margin-left: 22%;
+        margin-top: 10%;
+    }
 }
 
 table.ospot_record {
