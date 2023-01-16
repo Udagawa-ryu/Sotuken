@@ -9,7 +9,7 @@ class MO5_Tag(models.Model):
     verbose_name_plural = "MO5_Tag"
 
   def __str__(self):
-    return f'{self.MO5_tagNumber}'
+    return f'{self.MO5_tagNumber}-{self.MO5_tagName}'
 
 # デフォルトスポットモデル
 class MO3_Default_spot(models.Model):
@@ -29,7 +29,7 @@ class MO4_Original_spot(models.Model):
   MO4_OspotInfo = models.TextField(verbose_name="オリジナルスポット情報",null=True,blank=True)
   MO4_OspotAdress = models.CharField(verbose_name="オリジナルスポット住所", max_length=50, null=True)
   MO4_createDate = models.DateTimeField(verbose_name="作成日時", auto_now_add=True)
-  MO5_tagNumber = models.ManyToManyField(MO5_Tag)
+  MO5_tagNumber = models.ManyToManyField(MO5_Tag,blank=True)
   MO1_userNumber = models.ForeignKey("accounts.CustomUser", models.CASCADE,verbose_name="ユーザナンバー")
   class Meta:
     verbose_name_plural = "MO4_Original_spot"
