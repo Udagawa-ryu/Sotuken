@@ -204,13 +204,42 @@
     margin-top: 40px;
 }
 
+/* StoreInfoCompletion.htmlのCSS */
 .store_complete {
-    margin-left: 150px;
+    margin-left: 215px;
+}
+
+@media screen and (max-width: 959px) {
+    .store_complete {
+        margin-left: 15%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_complete {
+        margin-left: -5%;
+    }
 }
 
 .back {
-    margin-left: 276px;
+    margin-left: 295px;
     margin-top: 40px;
+}
+
+@media screen and (max-width: 959px) {
+    .back {
+        margin-left: 29%;
+        margin-top: 15%;
+        margin-bottom: 50%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .back {
+        margin-left: 20%;
+        margin-top: 20%;
+        margin-bottom: 60%;
+    }
 }
 
 .row_justify-content-center {
