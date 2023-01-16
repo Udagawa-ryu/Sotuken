@@ -136,7 +136,6 @@ class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['blog'] = MO7_Blog.objects.filter(MO7_blogNumber=self.kwargs['pk'])
-        print(context['blog'])
         return context
 
 # ブログ編集画面
