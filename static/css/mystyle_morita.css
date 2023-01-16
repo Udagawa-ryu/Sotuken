@@ -161,13 +161,42 @@
     }
 }
 
+/* StoreInfoCompletion.htmlのCSS */
 .complete {
-    margin-left: 205px;
+    margin-left: 282px;
+}
+
+@media screen and (max-width: 959px) {
+    .complete {
+        margin-left: 27%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .complete {
+        margin-left: 15%;
+    }
 }
 
 .info_close {
-    margin-left: 270px;
+    margin-left: 285px;
     margin-top: 40px;
+}
+
+@media screen and (max-width: 959px) {
+    .info_close {
+        margin-left: 27%;
+        margin-top: 15%;
+        margin-bottom: 50%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .info_close {
+        margin-left: 16%;
+        margin-top: 15%;
+        margin-bottom: 60%;
+    }
 }
 
 /* BlogCompletion.htmlのCSS */
