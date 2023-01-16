@@ -9,4 +9,5 @@ urlpatterns = [
     path('OspotVisitRegister/', views.OspotVisitRegisterView.as_view(), name="OspotVisitRegister"),
     path('DspotInfo/', views.DspotInfoView.as_view(), name="DspotInfo"),
     path('OspotInfo/', views.OtherMapView.as_view(), name="OtherMap"),
+    path('SpotSaerch/',views.SpotSearch,name="SpotSearch"),
 ]

@@ -16,4 +16,5 @@ urlpatterns = [
     path('AccountSearchResult/',views.UserSearchResult,name="UserSearchResult"),
     path('OtherUserPage/',views.OtherMypage,name="OtherMypage"),
     path('OpenRangeRegister/', views.OpenRangeRegister, name="OpenRangeRegister"),
+    path('favuser/',views.FavUser,name="FavUser"),
 ]

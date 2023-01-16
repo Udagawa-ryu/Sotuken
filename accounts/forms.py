@@ -37,6 +37,9 @@ class CustomSignupForm(UserCreationForm):
         self.fields["email"].required = True
         self.fields['password1'].label = 'password'
         self.fields['password2'].label = 'password(confirmation)'
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+        
 
 class CustomLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):
@@ -72,3 +75,8 @@ class UserEditForm(forms.ModelForm):
 
 class UserSearchForm(forms.Form):
     s_user = forms.CharField(label="UserSearch")
+
+class FavUserForm(forms.ModelForm):
+    class Meta:
+        model = MO9_Fav_Custom_user
+        fields = ["MO1_userNumber","MO9_followedUserNumber"]

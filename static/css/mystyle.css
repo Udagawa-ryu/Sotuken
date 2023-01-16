@@ -407,3 +407,24 @@ td.td-space {
     padding-right: 10px;
     color:#333333;
 }
+
+/* テキスト 中央 */
+.text-center-nh {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+.point-display {
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.point-disp-table {
+    width: 80%;
+}
+.btnin {
+    display: inline-block;
+    width: 100px;
+    padding-left: 0%;
+    padding-right: 0%;
+}
