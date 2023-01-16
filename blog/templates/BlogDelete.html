@@ -22,29 +22,32 @@
             <div class="text-center">
                 <h4>Are you sure you want to delete this blog?</h4>
             </div>
-            <table class="confirmation">
-                <tr>
-                    <th class="th-center">Title</th>
-                    <td class="td-space">{{ blog.0.MO7_blogName }}</td>
-                </tr>
-                <tr>
-                    <th class="th-center">Contents</th>
-                    <td class="td-space">
-                        {{ blog.0.MO7_blogText }}
-                    </td>
-                </tr>
-                <tr>
-                    <th class="th-center">VisitRecode</th>
-                    <td class="td-space">
-                        recode1
-                        <br>
-                        recode2
-                    </td>
-                </tr>
-            </table>
-            <div class="text-center" style="margin-top: 20px;">
-                <button href="{% url 'blog:blogList' %}" class="button primary" type="submit">Delete</button>
-            </div>
+            <form method="post" action="{% url 'blog:blogList' %}">
+                {% csrf_token %}
+                <table class="confirmation">
+                    <tr>
+                        <th class="th-center">Title</th>
+                        <td class="td-space">{{ blog.0.MO7_blogName }}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">Contents</th>
+                        <td class="td-space">
+                            {{ blog.0.MO7_blogText }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">VisitRecode</th>
+                        <td class="td-space">
+                            recode1
+                            <br>
+                            recode2
+                        </td>
+                    </tr>
+                </table>
+                <div class="text-center" style="margin-top: 20px;">
+                    <button class="button primary" type="submit" name="next" value="confirm">Delete</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
