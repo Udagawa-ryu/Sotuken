@@ -33,17 +33,30 @@
                         <div class="panel_area">
                             <div id="panel1" class="tab_panel">
                                 <div class="col-4 col-12-small">
+                                    {% if mydata.MO1_openRange == 0 %}
+                                    <input type="radio" id="demo-priority-normal" name="demo-priority" value="0"
+                                        checked>
+                                    {% else %}
                                     <input type="radio" id="demo-priority-normal" name="demo-priority" value="0">
+                                    {% endif %}
                                     <label for="demo-priority-normal">publish to the public</label>
                                 </div>
                                 <div class="col-4 col-12-small">
+                                    {% if mydata.MO1_openRange == 1 %}
+                                    <input type="radio" id="demo-priority-row" name="demo-priority" value="1" checked>
+                                    {% else %}
                                     <input type="radio" id="demo-priority-row" name="demo-priority" value="1">
+                                    {% endif %}
                                     <label for="demo-priority-row">publish only default spots</label>
                                 </div>
                             </div>
                             <div id="panel2" class="tab_panel">
                                 <div class="col-4 col-12-small">
+                                    {% if mydata.MO1_openRange == 2 %}
+                                    <input type="radio" id="demo-priority-high" name="demo-priority" value="2" checked>
+                                    {% else %}
                                     <input type="radio" id="demo-priority-high" name="demo-priority" value="2">
+                                    {% endif %}
                                     <label for="demo-priority-high">private</label>
                                 </div>
                             </div>
