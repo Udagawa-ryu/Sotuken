@@ -328,18 +328,41 @@
     }
 }
 
+/* StoreDeleteConfirmation.htmlのCSS */
 .store_info_text {
     font-size: 25px;
-    margin-right: 50px;
+    margin-left: 100px;
 }
 
-.store_info_cancel {
-    margin-top: 50px;
+@media screen and (max-width: 959px) {
+    .store_info_text {
+        margin-left: -2%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_info_text {
+        font-size: 15px;
+        margin-left: -13%;
+    }
+}
+
+.store_info_button {
     margin-left: 150px;
+    display: inline-block;
 }
 
-.store_delete {
-    margin-left: 60px;
+@media screen and (max-width: 959px) {
+    .store_info_button {
+        margin-left: 13%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_info_button {
+        margin-left: -10%;
+        padding: 7%;
+    }
 }
 
 /* テーブル */
