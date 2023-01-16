@@ -161,13 +161,42 @@
     }
 }
 
+/* StoreInfoCompletion.htmlのCSS */
 .complete {
-    margin-left: 205px;
+    margin-left: 282px;
+}
+
+@media screen and (max-width: 959px) {
+    .complete {
+        margin-left: 27%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .complete {
+        margin-left: 15%;
+    }
 }
 
 .info_close {
-    margin-left: 270px;
+    margin-left: 285px;
     margin-top: 40px;
+}
+
+@media screen and (max-width: 959px) {
+    .info_close {
+        margin-left: 27%;
+        margin-top: 15%;
+        margin-bottom: 50%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .info_close {
+        margin-left: 16%;
+        margin-top: 15%;
+        margin-bottom: 60%;
+    }
 }
 
 /* BlogCompletion.htmlのCSS */
@@ -204,13 +233,42 @@
     margin-top: 40px;
 }
 
+/* StoreInfoCompletion.htmlのCSS */
 .store_complete {
-    margin-left: 150px;
+    margin-left: 215px;
+}
+
+@media screen and (max-width: 959px) {
+    .store_complete {
+        margin-left: 15%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_complete {
+        margin-left: -5%;
+    }
 }
 
 .back {
-    margin-left: 276px;
+    margin-left: 295px;
     margin-top: 40px;
+}
+
+@media screen and (max-width: 959px) {
+    .back {
+        margin-left: 29%;
+        margin-top: 15%;
+        margin-bottom: 50%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .back {
+        margin-left: 20%;
+        margin-top: 20%;
+        margin-bottom: 60%;
+    }
 }
 
 .row_justify-content-center {
@@ -328,18 +386,41 @@
     }
 }
 
+/* StoreDeleteConfirmation.htmlのCSS */
 .store_info_text {
     font-size: 25px;
-    margin-right: 50px;
+    margin-left: 100px;
 }
 
-.store_info_cancel {
-    margin-top: 50px;
+@media screen and (max-width: 959px) {
+    .store_info_text {
+        margin-left: -2%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_info_text {
+        font-size: 15px;
+        margin-left: -13%;
+    }
+}
+
+.store_info_button {
     margin-left: 150px;
+    display: inline-block;
 }
 
-.store_delete {
-    margin-left: 60px;
+@media screen and (max-width: 959px) {
+    .store_info_button {
+        margin-left: 13%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_info_button {
+        margin-left: -10%;
+        padding: 7%;
+    }
 }
 
 /* テーブル */
