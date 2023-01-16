@@ -51,8 +51,9 @@ class BlogListView(LoginRequiredMixin, generic.ListView):
 
 def BlogRegister(request):
     CHOICE = {
-        (0,'OPEN'),
-        (1,'HIDDEN'),
+        (0,'publish to the public'),
+        (1,'publish only default spots'),
+        (2,'private'),
     }
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
@@ -87,8 +88,9 @@ def BlogConfirmation(request):
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
     CHOICE = {
-        (0,'OPEN'),
-        (1,'HIDDEN'),
+        (0,'publish to the public'),
+        (1,'publish only default spots'),
+        (2,'private'),
     }
     if request.method == 'POST':
         initial_data = {

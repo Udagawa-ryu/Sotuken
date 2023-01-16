@@ -5,7 +5,6 @@ from allauth.account.utils import *
 from samuraiwalk.settings_common import *
 from django.contrib.auth.decorators import login_required
 
-
 # Create your views here.
 def newAccount(request):
     params = {'message': '', 'form': None}
@@ -135,12 +134,51 @@ def UserSearchResult(request):
 
 @login_required
 def OtherMypage(request):
-    page_user = CustomUser.objects.get(MO1_userNumber = request.POST.get("user"))
-    mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
-    if MO9_Fav_Custom_user.objects.filter(MO1_userNumber = mydata.MO1_userNumber,MO9_followedUserNumber = page_user.MO1_userNumber).exists():
-        fav = 1
-    else :
-        fav = 0
-    params = {"page_user":page_user,"mydata":mydata,"fav":fav}
-    return render(request,"OtherMypage.html",params)
+    if request.method == 'POST':
+        page_user = CustomUser.objects.get(MO1_userNumber = request.POST.get("user"))
+        mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+        if MO9_Fav_Custom_user.objects.filter(MO1_userNumber = mydata.MO1_userNumber,MO9_followedUserNumber = page_user.MO1_userNumber).exists():
+            fav = 1
+        else :
+            fav = 0
+        params = {"page_user":page_user,"mydata":mydata,"fav":fav}
+        return render(request,"OtherMypage.html",params)
 
+@login_required
+def OpenRangeRegister(request):
+    mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+    if request.method == 'POST':
+        range = request.POST.get("demo-priority")
+        if range == "0":
+            r = 0
+        elif range == "1":
+            r = 1
+        else:
+            r = 2
+        mydata.MO1_openRange = r
+        mydata.save()
+    params = {"mydata":mydata}
+    return render(request,'OpenRangeRegister.html', params)
+
+@login_required
+def FavUser(request):
+    if request.method == 'POST':
+        print(request.POST.get("fav"))
+        if request.POST.get("fav") == "0":
+            # page_user = CustomUser.objects.get(MO1_userNumber = request.POST.get("user"))
+            page_user = CustomUser.objects.get(MO1_userNumber = request.POST.get("user"))
+            mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+            initial_data = {
+                "MO1_userNumber":mydata,
+                "MO9_followedUserNumber":page_user,
+            }
+            form = FavUserForm(request.POST or initial_data)
+            print(form)
+            if form.is_valid():
+                form.save()
+        else :
+            mydata = request.POST.get("mydata")
+            page_user = request.POST.get("page_user")
+            fav_data = MO9_Fav_Custom_user.objects.filter(MO1_userNumber = mydata.MO1_userNumber,MO9_followedUserNumber = page_user.MO1_userNumber)
+            fav_data.delete()
+    return OtherMypage(request)

@@ -10,7 +10,9 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def Map(request):
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
-    form = OspotCreateForm()
+    o_spotform = OspotCreateForm()
+    searchform = SpotSearchForm()
+    tag_list = MO5_Tag.objects.all()
     d_spot = MO3_Default_spot.objects.all()
     o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = request.user.MO1_userNumber)
     d_list = []
@@ -22,7 +24,9 @@ def Map(request):
     params = {
         'd_list': json.dumps(d_list),
         'o_list': json.dumps(o_list),
-        'form':form,
+        'o_form':o_spotform,
+        's_form':searchform,
+        'tag_list':tag_list,
         'user':user,
     }
     return render(request,"Map.html",params)
@@ -54,3 +58,14 @@ def OspotCreate(request):
         form = OspotCreateForm(request.POST or initial_data)
         if form.is_valid():
             form.save()
+    return Map(request)
+
+@login_required
+def SpotSearch(request):
+    if request.method == 'POST':
+        tags_id = request.POST.getlist('tags')
+        keword = request.POST.get('keyword')
+    for i in tags_id:
+        print("tag=",i)
+    print("keyword=",keword)
+    return Map(request)
