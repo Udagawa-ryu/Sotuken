@@ -15,41 +15,44 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3>UserInfoEdit</h3>
+                <h3 style="text-transform:none">UserInfoEdit</h3>
             </div>
         </div>
     </div>
     <div class="container">
-        <form method="post" action="{% url 'accounts:UserInfoConfirmation' %}">
-            {% csrf_token %}
-            <table class="confirmation">
-                <tr>
-                    <th class="th-center">{{form.username.label}}</th>
-                    <td class="td-space">{{form.username}}</td>
-                </tr>
-                <tr>
-                    <th class="th-center">{{form.MO1_userID.label}}</th>
-                    <td class="td-space">{{form.MO1_userID}}</td>
-                </tr>
-                <tr>
-                    <th class="th-center">{{ form.MO1_homeCountry.label }}</th>
-                    <td class="td-space">{{form.MO1_homeCountry}}</td>
-                </tr>
-                <tr>
-                    <th class="th-center">{{ form.MO1_language.label }}</th>
-                    <td class="td-space">{{form.MO1_language}}</td>
-                </tr>
-                <tr>
-                    <th class="th-center">{{ form.MO1_openRange.label }}</th>
-                    <td class="td-space">{{form.MO1_openRange}}</td>
-                </tr>
-            </table>
-            {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-            {% endif %}
-                <button type="submit" class="button primary" name="next" value="confirm">　Update　</button>
-            <p><a class="button_secondaryAction" href="{% url 'account_reset_password' %}">パスワードを忘れましたか？</a></p>
-        </form>
+        <div class="animate-box">
+            <form method="post" action="{% url 'accounts:UserInfoConfirmation' %}">
+                {% csrf_token %}
+                <table class="confirmation" style="margin-right:auto; margin-left: auto;">
+                    <tr>
+                        <th class="th-center">{{form.username.label}}</th>
+                        <td class="td-space">{{form.username}}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">{{form.MO1_userID.label}}</th>
+                        <td class="td-space">{{form.MO1_userID}}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">{{ form.MO1_homeCountry.label }}</th>
+                        <td class="td-space">{{form.MO1_homeCountry}}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">{{ form.MO1_language.label }}</th>
+                        <td class="td-space">{{form.MO1_language}}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">{{ form.MO1_openRange.label }}</th>
+                        <td class="td-space">{{form.MO1_openRange}}</td>
+                    </tr>
+                </table>
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <div class="text-center-nh" style="margin-top:10px;">
+                    <button type="submit" class="btnin" name="next" value="confirm" style="width:130px">　Update　</button>
+                </div>
+            </form>
+        </div>
     </div>
 
 </div>
