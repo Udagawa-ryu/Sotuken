@@ -578,10 +578,24 @@ table.point_confirmation {
     }
 }
 
+/* OspotVisitRegister.htmlのCSS */
 table.ospot_record {
     width: 500px;
     height: 300px;
     margin-left: 60px;
+}
+
+@media screen and (max-width: 959px) {
+    table.ospot_record {
+        margin-left: -15%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    table.ospot_record {
+        width: 120%;
+        margin-left: -25%;
+    }
 }
 
 .th-center {
@@ -602,6 +616,20 @@ table.ospot_record {
 
 .btn-record {
     margin-left: 430px;
+}
+
+@media screen and (max-width: 959px) {
+    .btn-record {
+        margin-left: 60%;
+        margin-top: 10%;
+        margin-bottom: 20%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .btn-record {
+        margin-left: 45%;
+    }
 }
 
 .favorite {
