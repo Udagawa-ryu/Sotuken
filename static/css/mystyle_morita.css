@@ -578,10 +578,24 @@ table.point_confirmation {
     }
 }
 
+/* OspotVisitRegister.htmlのCSS */
 table.ospot_record {
     width: 500px;
     height: 300px;
     margin-left: 60px;
+}
+
+@media screen and (max-width: 959px) {
+    table.ospot_record {
+        margin-left: -15%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    table.ospot_record {
+        width: 120%;
+        margin-left: -25%;
+    }
 }
 
 .th-center {
@@ -602,6 +616,20 @@ table.ospot_record {
 
 .btn-record {
     margin-left: 430px;
+}
+
+@media screen and (max-width: 959px) {
+    .btn-record {
+        margin-left: 60%;
+        margin-top: 10%;
+        margin-bottom: 20%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .btn-record {
+        margin-left: 45%;
+    }
 }
 
 .favorite {
@@ -667,9 +695,16 @@ table.ospot_record {
     text-align: center;
 }
 
+/* OspotInfo.htmlのCSS */
 .spot_disp {
     width: 50%;
     margin-right: 450px;
+}
+
+@media screen and (max-width: 480px) {
+    .spot_disp {
+        margin-left: 0%;
+    }
 }
 
 .Spot_Name {
@@ -679,6 +714,22 @@ table.ospot_record {
 .record {
     margin-left: 600px;
     display: inline-block;
+}
+
+@media screen and (max-width: 959px) {
+    .record {
+        margin-left: 70%;
+        margin-top: -20%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .record {
+        width: 47%;
+        margin-left: 55%;
+        float: right;
+        margin-top: -80%;
+    }
 }
 
 .spot_date {
@@ -691,10 +742,40 @@ table.ospot_record {
     margin-top: -340px;
 }
 
+@media screen and (max-width: 959px) {
+    .visited_count {
+        margin-left: 60%;
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .visited_count {
+        width: 100%;
+        margin-left: 0%;
+        margin-top: 20%;
+    }
+}
+
 .spot_date {
     width: 450px;
     margin-left: 600px;
     margin-top: -30px;
+}
+
+@media screen and (max-width: 959px) {
+    .spot_date {
+        margin-left: 60%;
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .spot_date {
+        width: 100%;
+        margin-left: 0%;
+        margin-bottom: -60%;
+    }
 }
 
 .featured {
