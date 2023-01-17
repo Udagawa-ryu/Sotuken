@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MinLengthValidator
 
 # # Create your models here.
 # class UserManager(BaseUserManager):
@@ -59,8 +60,8 @@ from django.utils.translation import gettext_lazy as _
 
 class CustomUser(AbstractUser):
     MO1_userNumber = models.AutoField(verbose_name="ユーザナンバー",primary_key=True, editable=False)
-    MO1_userID = models.CharField(verbose_name="UserID",max_length=16)
-    username = models.CharField(verbose_name="UserName",max_length=50,blank=True)
+    MO1_userID = models.CharField(verbose_name="UserID",max_length=16,validators=[MinLengthValidator(7)])
+    username = models.CharField(verbose_name="UserName",max_length=50)
     email = models.EmailField(verbose_name="MailAddres",unique=True)
     MO1_homeCountry = models.CharField(verbose_name="HomeCountry",max_length=50,blank=True)
     MO1_language = models.CharField(verbose_name="Language",max_length=50,blank=True)
