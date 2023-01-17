@@ -50,6 +50,7 @@
                     </td>
                 </tr>
             </table>
+            {% if blog.0.MO1_userID == login_user %}
             <div class="text-center" style="margin-top: 20px;">
                 <div style="text-align: center;">
                     <button class="button primary" type="submit" name="favo" value="favo">Favorite</button>
@@ -59,6 +60,8 @@
                         onclick="location.href='{% url 'blog:blogDelete' blog.0.MO7_blogNumber %}'">Delete</button>
                 </div>
             </div>
+            {% else %}
+            {% endif %}
         </div>
     </div>
 </div>

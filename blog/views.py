@@ -136,6 +136,7 @@ class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['blog'] = MO7_Blog.objects.filter(MO7_blogNumber=self.kwargs['pk'])
+        context['login_user'] = self.request.user
         return context
 
 # ブログ編集画面
@@ -180,12 +181,12 @@ class OpenRangeRegisterView(generic.TemplateView):
 # class OtherBlogListView(generic.TemplateView):
 #     template_name = "OtherBlogList.html"
 
-class OtherBlogListView(LoginRequiredMixin, generic.DetailView):
+class OtherBlogListView(LoginRequiredMixin, generic.ListView):
     model = MO7_Blog
     template_name = "OtherBlogList.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['blog'] = MO7_Blog.objects.filter(MO7_blogNumber=self.kwargs['pk'])
-        print(context['blog'])
+        user = CustomUser.objects.get(MO1_userNumber=self.kwargs['pk'])
+        context['blogs'] = MO7_Blog.objects.filter(MO1_userID=user).order_by('-MO7_createDate')
         return context
