@@ -800,11 +800,50 @@ table.ospot_record {
     margin-bottom: 90px;
 }
 
+@media screen and (max-width: 959px) {
+    .email_mess {
+        margin-left: 0%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .email_mess {
+        margin-left: -22%;
+        font-size: 18px;
+    }
+}
+
 .btn_send {
     margin-left: 270px;
     margin-top: 50px;
 }
 
+@media screen and (max-width: 959px) {
+    .btn_send {
+        margin-left: 35%;
+        margin-bottom: 30%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .btn_send {
+        margin-left: 18%;
+    }
+}
+
 .pass_form {
     margin-left: 130px;
+}
+
+@media screen and (max-width: 959px) {
+    .pass_form {
+        margin-left: 0%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .pass_form {
+        width: 100%;
+        margin-left: -20%;
+    }
 }
