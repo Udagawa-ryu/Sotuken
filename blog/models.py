@@ -5,7 +5,7 @@ from accounts.models import *
 # ブログモデル
 class MO7_Blog(models.Model):
   MO7_blogNumber = models.AutoField(verbose_name="ブログナンバー",primary_key=True,editable=False)
-  MO7_blogName = models.CharField(verbose_name="ブログ名", max_length=50, blank=True)
+  MO7_blogName = models.CharField(verbose_name="ブログ名", max_length=50)
   MO7_blogText = models.TextField(verbose_name="ブログ内容", null=True)
   MO1_userID = models.ForeignKey("accounts.CustomUser", models.CASCADE, verbose_name="ユーザID")
   MO6_visitRecordNumber= models.ForeignKey("accounts.MO6_Visit_record", models.CASCADE, verbose_name="訪問記録ナンバー")
