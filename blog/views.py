@@ -146,12 +146,6 @@ class BlogEditView(LoginRequiredMixin, generic.UpdateView):
     model = MO7_Blog
     template_name = 'BlogEdit.html'
     form_class = BlogRegisterForm
-    def visit_recode(request):
-        user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
-        my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
-        form = BlogRegisterForm()
-        form.fields['MO6_visitRecordNumber'].queryset = my_record
-        return 
 
     def get_success_url(self):
         return reverse_lazy('blog:blogDetail', kwargs={'pk': self.kwargs['pk']})
