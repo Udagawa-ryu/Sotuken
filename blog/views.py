@@ -165,6 +165,7 @@ class BlogEditView(LoginRequiredMixin, generic.UpdateView):
 class BlogDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = MO7_Blog
     template_name = "BlogDelete.html"
+    success_url = reverse_lazy('blog:blogList')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
