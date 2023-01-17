@@ -787,3 +787,24 @@ table.ospot_record {
 .f_blog {
     text-align: center;
 }
+
+/* password_reset.htmlのCSS */
+.Pass_re {
+    margin-top: 30px;
+    font-size: 60px;
+}
+
+.email_mess {
+    margin-left: 110px;
+    font-size: 25px;
+    margin-bottom: 90px;
+}
+
+.btn_send {
+    margin-left: 270px;
+    margin-top: 50px;
+}
+
+.pass_form {
+    margin-left: 130px;
+}
