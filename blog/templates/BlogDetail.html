@@ -53,10 +53,10 @@
             {% if blog.0.MO1_userID == login_user %}
             <div class="text-center" style="margin-top: 20px;">
                 <div style="text-align: center;">
-                    <button class="button primary" type="submit" name="favo" value="favo">Favorite</button>
-                    <button class="button primary" type="submit"
+                    <button class="btnin" type="submit" style="width:130px;" name="favo" value="favo">Favorite</button>
+                    <button class="btnin" type="submit"
                         onclick="location.href='{% url 'blog:blogEdit' blog.0.MO7_blogNumber %}'">Edit</button>
-                    <button class="button primary" type="submit"
+                    <button class="btnin" type="submit"
                         onclick="location.href='{% url 'blog:blogDelete' blog.0.MO7_blogNumber %}'">Delete</button>
                 </div>
             </div>
