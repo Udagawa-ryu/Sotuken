@@ -632,37 +632,35 @@ table.ospot_record {
     }
 }
 
+/* FavoriteUserList.htmlのCSS */
 .favorite {
     margin-left: 450px;
     margin-bottom: 40px;
 }
 
-.user1 {
-    text-align: center;
+@media screen and (max-width: 959px) {
+    .favorite {
+        margin-left: 160%;
+    }
 }
 
-.user2 {
-    text-align: center;
+@media screen and (max-width: 480px) {
+    .favorite {
+        width: 95%;
+        margin-left: 30%;
+    }
 }
 
-.user3 {
-    text-align: center;
+@media screen and (max-width: 959px) {
+    .user_list {
+        margin-bottom: 180%;
+    }
 }
 
-.user4 {
-    text-align: center;
-}
-
-.user5 {
-    text-align: center;
-}
-
-.user6 {
-    text-align: center;
-}
-
-.user7 {
-    text-align: center;
+@media screen and (max-width: 480px) {
+    .user_list {
+        margin-bottom: 110%;
+    }
 }
 
 .remain_text {
@@ -788,4 +786,25 @@ table.ospot_record {
 
 .f_blog {
     text-align: center;
+}
+
+/* password_reset.htmlのCSS */
+.Pass_re {
+    margin-top: 30px;
+    font-size: 60px;
+}
+
+.email_mess {
+    margin-left: 110px;
+    font-size: 25px;
+    margin-bottom: 90px;
+}
+
+.btn_send {
+    margin-left: 270px;
+    margin-top: 50px;
+}
+
+.pass_form {
+    margin-left: 130px;
 }

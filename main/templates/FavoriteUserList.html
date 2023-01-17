@@ -13,11 +13,11 @@
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
     <div class="container">
-        <div class="row">
+        <!-- <div class="row"> -->
             <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3>Favorite User</h3>
+                <h3 style="text-transform:none">Favorite User</h3>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
     <div class="container">
         <div class="row">
@@ -27,7 +27,7 @@
                     {% for obj in favUser_list %}
                     <tr>
                         {% comment %} <td class="user1"><a href="">{{ obj.MO9_followedUserNumber}}</a></td> {% endcomment %}
-                        <td class="user1"><a href="{% url 'accounts:OtherMypage' obj.MO9_followedUserNumber %}}">{{ obj.MO9_followedUserNumber}}</a></td>
+                        <td class="user1"><a href="{% url 'accounts:OtherMypage' obj.MO9_followedUserNumber %}">{{ obj.MO9_followedUserNumber}}</a></td>
                     </tr>
                     {% endfor %}
                 </table>
