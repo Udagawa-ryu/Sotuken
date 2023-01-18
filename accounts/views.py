@@ -63,16 +63,17 @@ def UserInfoConfirmation(request):
             "MO1_openRange":request.POST.get("MO1_openRange"),
         }
         if request.POST.get('next', '') == 'confirm':
-            form = UserEditForm(initial_data)
+            form = UserEditForm(request.POST or initial_data)
             params = {"message":'',"form":form}
             return render(request,"UserInfoConfirmation.html",params)
         if request.POST.get('next', '') == 'back':
-            form = UserEditForm(initial_data)
+            form = UserEditForm(request.POST or initial_data)
             params = {"message":'',"form":form}
             return render(request,"UserInfoEdit.html",params)
         if request.POST.get('next', '') == 'next':
-            form =  UserEditForm(initial_data)
+            form =  UserEditForm(request.POST or initial_data)
             if form.is_valid():
+                print("vaild")
                 mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
                 mydata.username = request.POST.get("username")
                 mydata.MO1_userID = request.POST.get("MO1_userID")
@@ -81,6 +82,9 @@ def UserInfoConfirmation(request):
                 mydata.MO1_openRange = request.POST.get("MO1_openRange")
                 mydata.save()
                 return redirect("accounts:UserInfoComp")
+    params = {
+        'form':form,
+    }
     return render(request,"UserInfoEdit.html",params)
 
 def UserInfoRegister(request):
