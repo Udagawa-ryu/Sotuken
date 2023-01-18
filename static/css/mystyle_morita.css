@@ -896,3 +896,50 @@ table.ospot_record {
         margin-left: -20%;
     }
 }
+
+/* StoreCertification.htmlのCSS */
+.add_btn {
+    margin-left: 575px;
+    margin-top: -40px;
+    margin-bottom: 100px;
+}
+
+@media screen and (max-width: 959px) {
+    .add_btn {
+        margin-left: 43%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .add_btn {
+        margin-left: 35%;
+    }
+}
+
+.verified {
+    margin-left: 60px;
+    width: 90%;
+    margin-top: 100px;
+}
+
+@media screen and (max-width: 959px) {
+    .verified {
+        width: 87%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .verified {
+        margin-left: 5%;
+    }
+}
+
+.aida {
+    margin-top: 100px;
+}
+
+@media screen and (max-width: 480px) {
+    .aida {
+        margin-top: -40%;
+    }
+}

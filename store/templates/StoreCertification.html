@@ -1,30 +1,57 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-</head>
-<body>
-    <div>
-        <form id="add" action="{% url 'store:addStore'%}" method="POST">
-            {% csrf_token %}
-            <div>
-            <p>未認証店舗</p>
-            <table>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}店舗認証{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+  <div class="container">
+    <!-- <div class="row"> -->
+      <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+        <h3>店舗認証</h3>
+      </div>
+    <!-- </div> -->
+  </div>
+  <div class="container">
+    <div class="row row-bottom-padded-md"></div>
+      <form id="add" action="{% url 'store:addStore'%}" method="POST">
+        {% csrf_token %}
+          <table class="store_certific">
+            <tr>
+              <th class="th-center">未認証店舗</th>
                 {% for all in noauth %}
-                <tr>
                     <td class="col-3" style="font-size: larger;"><p>{{ all.MO2_storeName }}</p></td>
                     <td><input type="checkbox" name="add" value="{{ all.MO2_storeNumber }}" style="transform: scale(2);margin: 0 12px;"></td>
                 </tr>
                 {% endfor %}
             </table>
             </div>
-            <button form="add" type="submit" href="{% url 'store:addStore'%}" class="btn btn-outline-primary">店舗を追加</button>
+            <div class="add_btn">
+                <div class="col-md-12">
+                    <button form="add" type="submit" href="{% url 'store:addStore'%}" class="btnin">店舗追加</button>
+                </div>
+            </div>
         </form>
-        
         <p>{{ message }}</p>
-        <p>--------------------------------------------------------</p>
-        <p>認証済み店舗</p>
-        {% for i in auth %}
-            <p>{{ i.MO2_storeName }}</p>
-        {% endfor %}
+
+        <div class="aida">
+            <h3>　　　　</h3>
+        </div>
+        <table class="verified">
+            <tr>
+                <th class="th-center">認証済み店舗</th>
+            <td>
+            {% for i in auth %}
+                <p>{{ i.MO2_storeName }}</p>
+            {% endfor %}
+            </td>
+            </tr>
+        </table>
     </div>
-</body>
+{% endblock %}
