@@ -51,8 +51,9 @@ class BlogListView(LoginRequiredMixin, generic.ListView):
 
 def BlogRegister(request):
     CHOICE = {
-        (0,'OPEN'),
-        (1,'HIDDEN'),
+        (0,'publish to the public'),
+        (1,'publish only default spots'),
+        (2,'private'),
     }
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
@@ -87,8 +88,9 @@ def BlogConfirmation(request):
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
     CHOICE = {
-        (0,'OPEN'),
-        (1,'HIDDEN'),
+        (0,'publish to the public'),
+        (1,'publish only default spots'),
+        (2,'private'),
     }
     if request.method == 'POST':
         initial_data = {
@@ -134,7 +136,7 @@ class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['blog'] = MO7_Blog.objects.filter(MO7_blogNumber=self.kwargs['pk'])
-        print(context['blog'])
+        context['login_user'] = self.request.user
         return context
 
 # ブログ編集画面
@@ -164,6 +166,7 @@ class BlogEditView(LoginRequiredMixin, generic.UpdateView):
 class BlogDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = MO7_Blog
     template_name = "BlogDelete.html"
+    success_url = reverse_lazy('blog:blogList')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -178,12 +181,12 @@ class OpenRangeRegisterView(generic.TemplateView):
 # class OtherBlogListView(generic.TemplateView):
 #     template_name = "OtherBlogList.html"
 
-class OtherBlogListView(LoginRequiredMixin, generic.DetailView):
+class OtherBlogListView(LoginRequiredMixin, generic.ListView):
     model = MO7_Blog
     template_name = "OtherBlogList.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['blog'] = MO7_Blog.objects.filter(MO7_blogNumber=self.kwargs['pk'])
-        print(context['blog'])
+        user = CustomUser.objects.get(MO1_userNumber=self.kwargs['pk'])
+        context['blogs'] = MO7_Blog.objects.filter(MO1_userID=user).order_by('-MO7_createDate')
         return context

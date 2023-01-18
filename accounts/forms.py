@@ -37,6 +37,9 @@ class CustomSignupForm(UserCreationForm):
         self.fields["email"].required = True
         self.fields['password1'].label = 'password'
         self.fields['password2'].label = 'password(confirmation)'
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+        
 
 class CustomLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):

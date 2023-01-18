@@ -7,7 +7,7 @@
 {% block css %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
-<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'assets/css/main.css' %}"> -->
 {% endblock %}
 
 {% block contents %}
@@ -41,9 +41,15 @@
                                     </td>
                                 </tr>
                             </table>
-                <button class="store_info_cancel" type="submit" onclick="location.href='{% url 'store:StoreMypage' %}'">キャンセル</button>
-                <button class="store_delete" type="submit" onclick="location.href='{% url 'store:StoreInfoDelete' %}'">削除 </button>
+            <div class="col-md-12">
+                <div class="store_info_button">
+                <button type="submit" class="btn btn-primary btn-outline btn-lg" href="{% url 'store:StoreMypage' %}">キャンセル</button>
+                </div>
+                <div class="store_info_button">
+                <button type="submit" class="btn btn-primary btn-outline btn-lg" href="{% url 'store:StoreInfoDelete' %}">削除</button>
             </div>
+            </div>
+        </div>
         </div>
     </div>
 </div>

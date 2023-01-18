@@ -29,10 +29,12 @@
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
             
-                <div class="col-md-12 text-center">
+                <div class="text-center">
                     <p><button class="btn btn-primary btn-outline btn-lg" type="submit">Login</button></p>
                 </div>
-                <p><a class="button_secondaryAction" href="{% url 'account_reset_password' %}">パスワードを忘れましたか？</a></p>
+                <p style="text-align:center;"><a href="{% url 'accounts:signup' %}">SignUp</a></p>
+                <p style="text-align:center;"><a href="{% url 'account_reset_password' %}">Forgot your password?</a></p>
+                <p style="text-align:center;"><a href="{% url 'store:storeLogin' %}">Are you a store owner?</a></p>
             </form>
         </div>
     </div>

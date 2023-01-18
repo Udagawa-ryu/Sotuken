@@ -40,19 +40,28 @@
                 <tr>
                     <th class="th-center">OpenRangee</th>
                     <td class="td-space">
-                        {{blog.0.MO7_openRange}}
+                        {% if blog.0.MO7_openRange == 0 %}
+                        publish to the public
+                        {% elif blog.0.MO7_openRange == 1 %}
+                        publish only default spots
+                        {% elif blog.0.MO7_openRange == 2 %}
+                        private
+                        {% endif %}
                     </td>
                 </tr>
             </table>
+            {% if blog.0.MO1_userID == login_user %}
             <div class="text-center" style="margin-top: 20px;">
                 <div style="text-align: center;">
-                    <button class="button primary" type="submit" name="favo" value="favo">Favorite</button>
-                    <button class="button primary" type="submit"
+                    <button class="btnin" type="submit" style="width:130px;" name="favo" value="favo">Favorite</button>
+                    <button class="btnin" type="submit"
                         onclick="location.href='{% url 'blog:blogEdit' blog.0.MO7_blogNumber %}'">Edit</button>
-                    <button class="button primary" type="submit"
+                    <button class="btnin" type="submit"
                         onclick="location.href='{% url 'blog:blogDelete' blog.0.MO7_blogNumber %}'">Delete</button>
                 </div>
             </div>
+            {% else %}
+            {% endif %}
         </div>
     </div>
 </div>

@@ -14,6 +14,7 @@ def MypageView(request):
 
 # ポイント画面
 # class PointView(generic.TemplateView):
+@login_required
 def PointView(request):
     params = {}
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
@@ -22,6 +23,7 @@ def PointView(request):
     return render(request, "Point.html", params)
 
 # 使用ポイント画面
+@login_required
 def PointConfirmationView(request):
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     if request.method == 'POST':
@@ -41,10 +43,13 @@ def PointConfirmationView(request):
 
 
 # 使用ポイント提示画面
+@login_required
+
 def PointDisplayView(request):
     return render(request, "PointDisplay.html")
 
 # 使用ポイント入力画面
+@login_required
 def PointInputView(request):
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     # post
@@ -61,14 +66,17 @@ def PointInputView(request):
         return render(request, "PointInput.html", params)
 
 # 店舗用QRコード読み取り画面
+@login_required
 def StoreQRreadView(request):
     return render(request, "StoreQRread.html")
 
 # 訪問記録用QRコード読み取り画面
+@login_required
 def VisitQRreadView(request):
-    return render(request, "VisitQRreadhtml")
+    return render(request, "VisitQRread.html")
 
 # お気に入りブログ一覧画面
+@login_required
 def FavoriteBlogListView(request):
     params = {}
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
@@ -78,6 +86,7 @@ def FavoriteBlogListView(request):
     return render(request, "FavoriteBlogList.html", params)
 
 # お気に入りユーザ一覧画面
+@login_required
 def FavoriteUserListView(request):
     params = {}
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)

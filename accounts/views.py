@@ -154,18 +154,15 @@ def OpenRangeRegister(request):
     mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
     if request.method == 'POST':
         range = request.POST.get("demo-priority")
-        print(range)
         if range == "0":
-            range = 0
+            r = 0
         elif range == "1":
-            range = 1
+            r = 1
         else:
-            range = 2
-        print(range)
-        mydata.MO1_openRange = range
+            r = 2
+        mydata.MO1_openRange = r
         mydata.save()
-    else:
-        params = {"mydata":mydata}
+    params = {"mydata":mydata}
     return render(request,'OpenRangeRegister.html', params)
 
 @login_required

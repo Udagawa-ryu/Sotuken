@@ -11,54 +11,51 @@
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3>Your Blog</h3>
+        <!-- <div class="row"> -->
+        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+            <h3 style="text-transform:none">Your Blog</h3>
+        </div>
+        <!-- </div> -->
+    </div>
+    <div class="container">
+        <div class="animate-box">
+            <!-- 左寄せ -->
+            <div style="text-align: right; margin-bottom: 10px;">
+                <button onclick="location.href='{% url 'blog:blogRegister' %}'" class="btnin">Create</button>
+                <button onclick="location.href='{% url 'accounts:OpenRangeRegister' %}'" class="btnin"
+                    style="width:150px;">OpenRange</button>
             </div>
         </div>
     </div>
     <div class="container">
-        <!-- 左寄せ -->
-        <div id="fh5co-menu-wrap">
-            <div class="row">
-                <div class="animate-box">
-                    <ul class="actions">
-                        <!-- 作成ページ遷移ボタン -->
-                        <li><a href="{% url 'blog:blogRegister' %}" class="button primary">Create</a></li>
-                        <!-- 公開範囲設定ボタン -->
-                        <li><a href="{% url 'blog:openRangeRegister' %}" class="button primary">OpenRange</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row row-bottom-padded-md">
-            {% for blog in blogs %}
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="fh5co-blog animate-box">
-                    <a href="blogDetail/{{blog.MO7_blogNumber}}"><img class="img-responsive"
-                            src="{% static 'images/place-1.jpg' %}" alt=""></a>
-                    <div class="blog-text">
-                        <div class="prod-title">
-                            <!-- ブログタイトル -->
-                            <h3><a href='blogDetail/{{blog.MO7_blogNumber}}'>{{ blog.MO7_blogName }}</a></h3>
-                            <!-- 日付 -->
-                            <span class="posted_by">{{ blog.MO7_createDate }}</span>
-                            <!-- <span class="comment"><a href="">21<i class="icon-bubble2"></i></a></span> -->
-                            <p>
-                            <pre>{{ blog.MO7_blogText }}</pre>
-                            </p>
+        <div class="animate-box">
+            <div class="row row-bottom-padded-md">
+                {% for blog in blogs %}
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="fh5co-blog animate-box">
+                        <a href="blogDetail/{{blog.MO7_blogNumber}}"><img class="img-responsive"
+                                src="{% static 'images/place-1.jpg' %}" alt=""></a>
+                        <div class="blog-text">
+                            <div class="prod-title">
+                                <!-- ブログタイトル -->
+                                <h3><a href='blogDetail/{{blog.MO7_blogNumber}}'>{{ blog.MO7_blogName }}</a></h3>
+                                <!-- 日付 -->
+                                <span class="posted_by">{{ blog.MO7_createDate }}</span>
+                                <!-- <span class="comment"><a href="">21<i class="icon-bubble2"></i></a></span> -->
+                                <p>
+                                <pre>{{ blog.MO7_blogText }}</pre>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% empty %}
+                <div>
+                    <p>No blog</p>
+                </div>
+                {% endfor %}
+                <div class="clearfix visible-md-block"></div>
             </div>
-            {% empty %}
-            <div>
-                <p>No blog</p>
-            </div>
-            {% endfor %}
-            <div class="clearfix visible-md-block"></div>
         </div>
     </div>
 </div>

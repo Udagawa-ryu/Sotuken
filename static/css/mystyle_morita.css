@@ -161,13 +161,42 @@
     }
 }
 
+/* StoreInfoCompletion.htmlのCSS */
 .complete {
-    margin-left: 205px;
+    margin-left: 282px;
+}
+
+@media screen and (max-width: 959px) {
+    .complete {
+        margin-left: 27%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .complete {
+        margin-left: 15%;
+    }
 }
 
 .info_close {
-    margin-left: 270px;
+    margin-left: 285px;
     margin-top: 40px;
+}
+
+@media screen and (max-width: 959px) {
+    .info_close {
+        margin-left: 27%;
+        margin-top: 15%;
+        margin-bottom: 50%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .info_close {
+        margin-left: 16%;
+        margin-top: 15%;
+        margin-bottom: 60%;
+    }
 }
 
 /* BlogCompletion.htmlのCSS */
@@ -204,13 +233,42 @@
     margin-top: 40px;
 }
 
+/* StoreInfoCompletion.htmlのCSS */
 .store_complete {
-    margin-left: 150px;
+    margin-left: 215px;
+}
+
+@media screen and (max-width: 959px) {
+    .store_complete {
+        margin-left: 15%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_complete {
+        margin-left: -5%;
+    }
 }
 
 .back {
-    margin-left: 276px;
+    margin-left: 295px;
     margin-top: 40px;
+}
+
+@media screen and (max-width: 959px) {
+    .back {
+        margin-left: 29%;
+        margin-top: 15%;
+        margin-bottom: 50%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .back {
+        margin-left: 20%;
+        margin-top: 20%;
+        margin-bottom: 60%;
+    }
 }
 
 .row_justify-content-center {
@@ -328,18 +386,41 @@
     }
 }
 
+/* StoreDeleteConfirmation.htmlのCSS */
 .store_info_text {
     font-size: 25px;
-    margin-right: 50px;
+    margin-left: 100px;
 }
 
-.store_info_cancel {
-    margin-top: 50px;
+@media screen and (max-width: 959px) {
+    .store_info_text {
+        margin-left: -2%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_info_text {
+        font-size: 15px;
+        margin-left: -13%;
+    }
+}
+
+.store_info_button {
     margin-left: 150px;
+    display: inline-block;
 }
 
-.store_delete {
-    margin-left: 60px;
+@media screen and (max-width: 959px) {
+    .store_info_button {
+        margin-left: 13%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_info_button {
+        margin-left: -10%;
+        padding: 7%;
+    }
 }
 
 /* テーブル */
@@ -393,26 +474,79 @@ table.point_confirmation {
     margin-left: 70px;
 }
 
+/* PointDisplay.htmlのCSS */
 .point_disp_text {
     font-size: 30px;
-    margin-left: -170px;
+    margin-left: 100px;
     margin-bottom: 60px;
 }
 
+@media screen and (max-width: 959px) {
+    .point_disp_text {
+        margin-left: -5%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .point_disp_text {
+        margin-left: -5%;
+    }
+}
+
 .point_display {
-    margin-left: 90px;
+    margin-left: 120px;
     width: 50%;
 }
 
-.point_close {
-    margin-top: 40px;
-    margin-left: 265px;
+@media screen and (max-width: 959px) {
+    .point_display {
+        margin-left: 10%;
+        margin-bottom: 20%;
+    }
 }
 
+@media screen and (max-width: 480px) {
+    .point_display {
+        margin-left: 12%;
+        margin-top: -5%;
+    }
+}
+
+.point_close {
+    margin-top: 10px;
+    margin-left: 290px;
+}
+
+@media screen and (max-width: 959px) {
+    .point_close {
+        margin-left: 27%;
+        margin-bottom: 30%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .point_close {
+        margin-left: 16%;
+    }
+}
+
+/* PointInput.htmlのCSS */
 .point_input_text {
     margin-left: 190px;
     margin-top: 80px;
     margin-bottom: 60px;
+}
+
+@media screen and (max-width: 959px) {
+    .point_input_text {
+        margin-left: 13%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .point_input_text {
+        margin-left: 0%;
+    }
 }
 
 .point_input {
@@ -420,9 +554,16 @@ table.point_confirmation {
     width: 50%;
 }
 
-.use_point {
-    margin-bottom: 40px;
-    width: 40%;
+@media screen and (max-width: 959px) {
+    .point_input {
+        margin-left: 40%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .point_input {
+        margin-left: 12%;
+    }
 }
 
 .point_OK {
@@ -430,10 +571,31 @@ table.point_confirmation {
     margin-left: 290px;
 }
 
+@media screen and (max-width: 480px) {
+    .point_OK {
+        margin-left: 22%;
+        margin-top: 10%;
+    }
+}
+
+/* OspotVisitRegister.htmlのCSS */
 table.ospot_record {
     width: 500px;
     height: 300px;
     margin-left: 60px;
+}
+
+@media screen and (max-width: 959px) {
+    table.ospot_record {
+        margin-left: -15%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    table.ospot_record {
+        width: 120%;
+        margin-left: -25%;
+    }
 }
 
 .th-center {
@@ -456,37 +618,49 @@ table.ospot_record {
     margin-left: 430px;
 }
 
+@media screen and (max-width: 959px) {
+    .btn-record {
+        margin-left: 60%;
+        margin-top: 10%;
+        margin-bottom: 20%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .btn-record {
+        margin-left: 45%;
+    }
+}
+
+/* FavoriteUserList.htmlのCSS */
 .favorite {
     margin-left: 450px;
     margin-bottom: 40px;
 }
 
-.user1 {
-    text-align: center;
+@media screen and (max-width: 959px) {
+    .favorite {
+        margin-left: 160%;
+    }
 }
 
-.user2 {
-    text-align: center;
+@media screen and (max-width: 480px) {
+    .favorite {
+        width: 95%;
+        margin-left: 30%;
+    }
 }
 
-.user3 {
-    text-align: center;
+@media screen and (max-width: 959px) {
+    .user_list {
+        margin-bottom: 180%;
+    }
 }
 
-.user4 {
-    text-align: center;
-}
-
-.user5 {
-    text-align: center;
-}
-
-.user6 {
-    text-align: center;
-}
-
-.user7 {
-    text-align: center;
+@media screen and (max-width: 480px) {
+    .user_list {
+        margin-bottom: 110%;
+    }
 }
 
 .remain_text {
@@ -512,17 +686,23 @@ table.ospot_record {
 
 .point_log {
     margin-top: 80px;
-    width: 70%;
-    margin-left: 35px;
+    width: 100%;
 }
 
 .store_point {
     text-align: center;
 }
 
+/* OspotInfo.htmlのCSS */
 .spot_disp {
     width: 50%;
     margin-right: 450px;
+}
+
+@media screen and (max-width: 480px) {
+    .spot_disp {
+        margin-left: 0%;
+    }
 }
 
 .Spot_Name {
@@ -532,6 +712,22 @@ table.ospot_record {
 .record {
     margin-left: 600px;
     display: inline-block;
+}
+
+@media screen and (max-width: 959px) {
+    .record {
+        margin-left: 70%;
+        margin-top: -20%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .record {
+        width: 47%;
+        margin-left: 55%;
+        float: right;
+        margin-top: -80%;
+    }
 }
 
 .spot_date {
@@ -544,10 +740,40 @@ table.ospot_record {
     margin-top: -340px;
 }
 
+@media screen and (max-width: 959px) {
+    .visited_count {
+        margin-left: 60%;
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .visited_count {
+        width: 100%;
+        margin-left: 0%;
+        margin-top: 20%;
+    }
+}
+
 .spot_date {
     width: 450px;
     margin-left: 600px;
     margin-top: -30px;
+}
+
+@media screen and (max-width: 959px) {
+    .spot_date {
+        margin-left: 60%;
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .spot_date {
+        width: 100%;
+        margin-left: 0%;
+        margin-bottom: -60%;
+    }
 }
 
 .featured {
@@ -560,4 +786,64 @@ table.ospot_record {
 
 .f_blog {
     text-align: center;
+}
+
+/* password_reset.htmlのCSS */
+.Pass_re {
+    margin-top: 30px;
+    font-size: 60px;
+}
+
+.email_mess {
+    margin-left: 110px;
+    font-size: 25px;
+    margin-bottom: 90px;
+}
+
+@media screen and (max-width: 959px) {
+    .email_mess {
+        margin-left: 0%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .email_mess {
+        margin-left: -22%;
+        font-size: 18px;
+    }
+}
+
+.btn_send {
+    margin-left: 270px;
+    margin-top: 50px;
+}
+
+@media screen and (max-width: 959px) {
+    .btn_send {
+        margin-left: 35%;
+        margin-bottom: 30%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .btn_send {
+        margin-left: 18%;
+    }
+}
+
+.pass_form {
+    margin-left: 130px;
+}
+
+@media screen and (max-width: 959px) {
+    .pass_form {
+        margin-left: 0%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .pass_form {
+        width: 100%;
+        margin-left: -20%;
+    }
 }
