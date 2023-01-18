@@ -81,6 +81,7 @@ def UserInfoConfirmation(request):
                 mydata.MO1_openRange = request.POST.get("MO1_openRange")
                 mydata.save()
                 return redirect("accounts:UserInfoComp")
+    return render(request,"UserInfoEdit.html",params)
 
 def UserInfoRegister(request):
     return render(request, 'userinforegister.html')
