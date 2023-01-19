@@ -339,38 +339,37 @@
 
 /* StoreLogout.htmlのCSS */
 .store_text {
-    margin-left: 120px;
+    margin-left: 10px;
     margin-bottom: 80px;
 }
 
 @media screen and (max-width: 959px) {
     .store_text {
-        margin-left: 0%;
+        margin-left: -20%;
     }
 }
 
 @media screen and (max-width: 480px) {
     .store_text {
-        font-size: 17px;
-        margin-right: 5%;
-        margin-left: -8%;
+        font-size: 15px;
+        margin-left: -23%;
     }
 }
 
 .store_cancel {
-    margin-left: 230px;
+    margin-left: 190px;
 }
 
 @media screen and (max-width: 959px) {
     .store_cancel {
-        margin-left: 16%;
-        margin-bottom: 50%;
+        margin-left: 15%;
+        margin-bottom: 70%;
     }
 }
 
 @media screen and (max-width: 480px) {
     .store_cancel {
-        margin-left: 3%;
+        margin-left: -10%;
         margin-bottom: 70%;
     }
 }
