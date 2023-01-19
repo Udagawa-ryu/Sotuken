@@ -158,8 +158,6 @@ def OpenRangeRegister(request):
             r = 0
         elif range == "1":
             r = 1
-        else:
-            r = 2
         mydata.MO1_openRange = r
         mydata.save()
     params = {"mydata":mydata}

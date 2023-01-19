@@ -52,8 +52,7 @@ class BlogListView(LoginRequiredMixin, generic.ListView):
 def BlogRegister(request):
     CHOICE = {
         (0,'publish to the public'),
-        (1,'publish only default spots'),
-        (2,'private'),
+        (1,'private'),
     }
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
@@ -89,8 +88,7 @@ def BlogConfirmation(request):
     my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
     CHOICE = {
         (0,'publish to the public'),
-        (1,'publish only default spots'),
-        (2,'private'),
+        (1,'private'),
     }
     if request.method == 'POST':
         initial_data = {
@@ -173,8 +171,7 @@ def BlogEdit(request, pk):
     my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
     CHOICE = {
         (0,'publish to the public'),
-        (1,'publish only default spots'),
-        (2,'private'),
+        (1,'private'),
     }
     params = {"message":'初期メッセージ',"form":None,"user":user}
     if request.method == 'POST':
@@ -239,5 +236,7 @@ class OtherBlogListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = CustomUser.objects.get(MO1_userNumber=self.kwargs['pk'])
-        context['blogs'] = MO7_Blog.objects.filter(MO1_userID=user).order_by('-MO7_createDate')
+        user_or = user.MO1_openRange
+        if user_or == 0:
+            context['blogs'] = MO7_Blog.objects.filter(MO1_userID=user,MO7_openRange=0).order_by('-MO7_createDate')
         return context
