@@ -143,21 +143,72 @@ class BlogDetailView(LoginRequiredMixin, generic.DetailView):
 # class BlogEditView(generic.TemplateView):
 #     template_name = "BlogEdit.html"
 
-class BlogEditView(LoginRequiredMixin, generic.UpdateView):
-    model = MO7_Blog
-    template_name = 'BlogEdit.html'
-    form_class = BlogRegisterForm
+# class BlogEditView(LoginRequiredMixin, generic.UpdateView):
+#     model = MO7_Blog
+#     template_name = 'BlogEdit.html'
 
-    def get_success_url(self):
-        return reverse_lazy('blog:blogDetail', kwargs={'pk': self.kwargs['pk']})
+#     def visit_record(self):
+#         form = BlogRegisterForm
+#         my_record = MO6_Visit_record.objects.filter(MO1_userNumber=self.request.user)
+#         form.fields['MO6_visitRecordNumber'].queryset = my_record
+#         return form
 
-    def form_valid(self, form):
-        messages.success(self.request, 'ブログを更新しました。')
-        return super().form_valid(form)
+#     form_class = 
 
-    def form_invalid(self, form):
-        messages.error(self.request, 'ブログの更新に失敗しました。')
-        return super().form_invalid(form)
+#     def get_success_url(self,form):
+#         my_record = MO6_Visit_record.objects.filter(MO1_userNumber=self.request.user)
+#         form.fields['MO6_visitRecordNumber'].queryset = my_record
+#         return reverse_lazy('blog:blogDetail', kwargs={'pk': self.kwargs['pk']})
+
+#     def form_valid(self, form):
+#         messages.success(self.request, 'ブログを更新しました。')
+#         return super().form_valid(form)
+
+#     def form_invalid(self, form):
+#         messages.error(self.request, 'ブログの更新に失敗しました。')
+#         return super().form_invalid(form)
+
+def BlogEdit(request, pk):
+    user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
+    my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
+    CHOICE = {
+        (0,'publish to the public'),
+        (1,'publish only default spots'),
+        (2,'private'),
+    }
+    params = {"message":'初期メッセージ',"form":None,"user":user}
+    if request.method == 'POST':
+        initial_data = {
+            "MO1_userID":request.POST.get("MO1_userID"),
+            "MO7_blogName":request.POST.get("MO7_blogName"),
+            "MO7_blogText":request.POST.get("MO7_blogText"),
+            "MO6_visitRecordNumber":request.POST.get("MO6_visitRecordNumber"),
+            "MO7_openRange":request.POST.get("MO7_openRange"),
+        }
+        if request.POST.get('next', '') == 'update':
+            form = BlogRegisterForm(initial_data)
+            form.fields['MO6_visitRecordNumber'].queryset = my_record
+            form.fields['MO7_openRange'].choices = CHOICE
+            print(form)
+            if form.is_valid():
+                blog = MO7_Blog.objects.get(MO7_blogNumber=pk)
+                blog.MO1_userID = user
+                s_record = MO6_Visit_record.objects.get( MO6_visitRecordNumber = request.POST.get("MO6_visitRecordNumber"))
+                blog.MO7_blogName = request.POST.get("MO7_blogName")
+                blog.MO7_blogText = request.POST.get("MO7_blogText")
+                blog.MO6_visitRecordNumber = s_record
+                blog.MO7_openRange = request.POST.get("MO7_openRange")
+                blog.save()
+                return redirect("blog:blogList")
+            return render(request,"BlogEdit.html",params)
+    else :
+        blog = MO7_Blog.objects.get(MO7_blogNumber=pk)
+        initial_dict = dict(MO1_userID=blog.MO1_userID,MO7_blogName=blog.MO7_blogName,MO7_blogText=blog.MO7_blogText,MO6_visitRecordNumber=blog.MO6_visitRecordNumber,MO7_openRange=blog.MO7_openRange)
+        form = BlogRegisterForm(request.GET or None, initial=initial_dict)
+        form.fields['MO6_visitRecordNumber'].queryset = my_record
+        form.fields['MO7_openRange'].choices = CHOICE
+        params['form'] = form
+        return render(request,"BlogEdit.html",params)
 
 # ブログ削除画面
 # class BlogDeleteView(generic.TemplateView):
