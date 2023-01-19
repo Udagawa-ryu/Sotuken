@@ -18,7 +18,6 @@
   </div>
   <div class="container">
     <div class="animate-box">
-      <div class="row row-bottom-padded-md"></div>
       <form id="add" action="{% url 'store:addStore'%}" method="POST">
         {% csrf_token %}
         <table class="verified">
@@ -41,10 +40,6 @@
         </div>
       </form>
       <p>{{ message }}</p>
-      
-      <div class="aida">
-        <h3>　　　　</h3>
-      </div>
       <table class="verified">
         <tr>
           <th class="th-center">認証済み店舗</th>
