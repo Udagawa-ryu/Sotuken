@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">
             <div class="my-div-style">
-                <button class="favorite" type="submit">Favorite Blog</button>
+                <button class="favorite" type="submit" onclick="location.href='{% url 'main:favoriteBlogList' %}'">Favorite Blog</button>
                 <table class="user_list">
                     {% for obj in favUser_list %}
                     <tr>
