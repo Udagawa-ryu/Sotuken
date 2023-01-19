@@ -26,8 +26,8 @@
                 <table class="user_list">
                     {% for obj in favUser_list %}
                     <tr>
-                        {% comment %} <td class="user1"><a href="">{{ obj.MO9_followedUserNumber}}</a></td> {% endcomment %}
-                        <td class="user1"><a href="{% url 'accounts:OtherMypage' obj.MO9_followedUserNumber %}">{{ obj.MO9_followedUserNumber}}</a></td>
+                        <td class="user1"><a href="">{{ obj.MO9_followedUserNumber}}</a></td>
+                        {% comment %} <td class="user1"><a href="{% url 'accounts:OtherMypage' obj.MO9_followedUserNumber %}">{{ obj.MO9_followedUserNumber}}</a></td> {% endcomment %}
                     </tr>
                     {% endfor %}
                 </table>
