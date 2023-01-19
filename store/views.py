@@ -97,7 +97,7 @@ def StorePassRegister(request,store):
                 return render(request, 'StorePassRegister.html', params)
     else:
         params['form'] =  StorePassCreateForm()
-        params['message'] = 'getされました'
+        params['message'] = ''
         return render(request, 'StorePassRegister.html', params)
 
 def storeLogin(request):
