@@ -23,13 +23,14 @@
       <form id="add" action="{% url 'store:addStore'%}" method="POST">
         {% csrf_token %}
           <table class="store_certific">
-            <tr>
               <th class="th-center">未認証店舗</th>
+            <tr>
                 {% for all in noauth %}
                     <td class="col-3" style="font-size: larger;"><p>{{ all.MO2_storeName }}</p></td>
                     <td><input type="checkbox" name="add" value="{{ all.MO2_storeNumber }}" style="transform: scale(2);margin: 0 12px;"></td>
+                    </tr>
                 {% endfor %}
-                </tr>
+                </table>
             </div>
             <div class="add_btn">
                 <div class="col-md-12">
