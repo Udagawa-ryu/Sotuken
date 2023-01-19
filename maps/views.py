@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import generic
 from accounts.models import CustomUser,MO6_Visit_record
 from .models import MO3_Default_spot,MO4_Original_spot,MO5_Tag
@@ -54,11 +54,13 @@ def OspotCreate(request):
             "MO1_userNumber":request.POST.get("MO1_userNumber"),
             "MO4_OspotName":request.POST.get("MO4_OspotName"),
             "MO4_OspotAdress":request.POST.get("MO4_OspotAdress"),
+            "MO4_OspotInfo":request.POST.get("MO4_OspotInfo")
         }
         form = OspotCreateForm(request.POST or initial_data)
         if form.is_valid():
-            form.save()
-    return Map(request)
+            # form.save()
+            return redirect("maps:Map")
+    return redirect("maps:Map")
 
 @login_required
 def SpotSearch(request):
