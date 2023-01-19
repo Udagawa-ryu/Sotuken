@@ -22,13 +22,13 @@
                     <ul class="actions">
                         <form method="post" action="{% url 'accounts:FavUser' %}">
                             {% csrf_token %}
-                            <input type="hidden" name="mydata" value={{mydata}}>
+                            <input type="hidden" name="mydata" value={{mydata.MO1_userNumber}}>
                             <input type="hidden" name="user" value={{page_user.MO1_userNumber}}>
                             <input type="hidden" name="fav" value={{fav}}>
-                            {% if fav == "0" %}
+                            {% if fav == 0 %}
                                 <button type="submit" id="main">★</button>
                             {% else %}
-                                <button type="submit" id="main" class="foo">★</button>
+                                <button type="submit" id="main" style="background-color: #00CCFF;">★</button>
                             {% endif %}
                         </form>
                     </ul>
@@ -53,8 +53,10 @@
                     </article>
                     <article class="style2">
                         <span class="image">
+                            <a href="{% url 'blog:otherBlogList' page_user.MO1_userNumber %}">
                             <img src="{% static 'images/pic02.jpg' %}" alt="" />
                             <p>Blog</p>
+                            </a>
                         </span>
                         <!-- <a href="generic.html"> -->
                         <!-- </a> -->

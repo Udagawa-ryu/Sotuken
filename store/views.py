@@ -51,14 +51,22 @@ def addStore(request):
             i = MO2_store.objects.get(MO2_storeNumber=num)
             # str_encoded = cryptocode.encrypt(str(i.MO2_storeNumber),"samurai")
             # url = "http://localhost:8000/store/storePassRegister/"+str_encoded+"/"
-            url = "http://localhost:8000/store/storePassRegister/"+str(i.MO2_mailAdress)
-            subject = "認証が完了しました。以下のURLよりパスワードを設定してください。"
-            message = url
-            from_email = "admin@mail.com"  # 送信者
-            recipient_list = [i.MO2_mailAdress]  # 宛先リスト
-            send_mail(subject, message, from_email, recipient_list)
             i.is_auth = True
             i.save()
+            result, created =MO3_Default_spot.objects.get_or_create(MO2_storeNumber=i)
+            if created:
+                url = "http://localhost:8000/store/storePassRegister/"+str(i.MO2_mailAdress)
+                subject = "認証が完了しました。以下のURLよりパスワードを設定してください。"
+                message = url
+                from_email = "admin@mail.com"  # 送信者
+                recipient_list = [i.MO2_mailAdress]  # 宛先リスト
+                send_mail(subject, message, from_email, recipient_list)
+            else:
+                subject = "認証に失敗しました。"
+                message = "登録されたメールアドレスはすでに使用されている可能性がございます。"
+                from_email = "admin@mail.com"  # 送信者
+                recipient_list = [i.MO2_mailAdress]  # 宛先リスト
+                send_mail(subject, message, from_email, recipient_list)
     return redirect('store:storeCertification')
 
 # 店舗用パスワード設定画面
@@ -89,7 +97,7 @@ def StorePassRegister(request,store):
                 return render(request, 'StorePassRegister.html', params)
     else:
         params['form'] =  StorePassCreateForm()
-        params['message'] = 'getされました'
+        params['message'] = ''
         return render(request, 'StorePassRegister.html', params)
 
 def storeLogin(request):

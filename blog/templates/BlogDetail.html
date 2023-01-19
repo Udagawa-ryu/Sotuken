@@ -53,7 +53,6 @@
             {% if blog.0.MO1_userID == login_user %}
             <div class="text-center" style="margin-top: 20px;">
                 <div style="text-align: center;">
-                    <button class="btnin" type="submit" style="width:130px;" name="favo" value="favo">Favorite</button>
                     <button class="btnin" type="submit"
                         onclick="location.href='{% url 'blog:blogEdit' blog.0.MO7_blogNumber %}'">Edit</button>
                     <button class="btnin" type="submit"
@@ -61,6 +60,16 @@
                 </div>
             </div>
             {% else %}
+            <div class="text-center" style="margin-top: 20px;">
+                <div style="text-align: center;">
+                    <button class="btnin" type="submit" style="width:130px;" name="favo" value="favo">Favorite</button>
+                    <form method="post" action="{% url 'accounts:OtherMypage' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="user" value="{{ i.MO1_userNumber }}">
+                        <button class="btnin" type="submit" style="width:200px;">This users page...</button>
+                    </form>
+                </div>
+            </div>
             {% endif %}
         </div>
     </div>
