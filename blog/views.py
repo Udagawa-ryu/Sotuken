@@ -56,7 +56,7 @@ def BlogRegister(request):
     }
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     my_record = MO6_Visit_record.objects.filter(MO1_userNumber=user)
-    params = {"message":'初期メッセージ',"form":None,"user":user}
+    params = {"message":'',"form":None,"user":user}
     if request.method == 'POST':
         initial_data = {
             "MO1_userID":request.POST.get("MO1_userID"),
@@ -173,7 +173,7 @@ def BlogEdit(request, pk):
         (0,'publish to the public'),
         (1,'private'),
     }
-    params = {"message":'初期メッセージ',"form":None,"user":user}
+    params = {"message":'',"form":None,"user":user}
     if request.method == 'POST':
         initial_data = {
             "MO1_userID":request.POST.get("MO1_userID"),
@@ -196,7 +196,7 @@ def BlogEdit(request, pk):
                 blog.MO6_visitRecordNumber = s_record
                 blog.MO7_openRange = request.POST.get("MO7_openRange")
                 blog.save()
-                return redirect("blog:blogList")
+                return redirect("blog:blogDetail", pk=pk)
             return render(request,"BlogEdit.html",params)
     else :
         blog = MO7_Blog.objects.get(MO7_blogNumber=pk)
