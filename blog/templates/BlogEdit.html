@@ -22,7 +22,7 @@
         <!-- ブログ内容入力 -->
         <!-- 該当する訪問記録を選択 -->
         <p>{{ message }}</p>
-        <form method="post" action="{% url 'blog:blogConfirmation' %}">
+        <form method="post">
             {% csrf_token %}
             <table class="confirmation">
                 <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
@@ -49,7 +49,7 @@
                     </td>
                 </tr>
             </table>
-            <button class="button primary" type="submit" name="next" value="confirm">Update</button>
+            <button class="button primary" type="submit" name="next" value="update">Update</button>
         </form>
     </div>
 </div>
