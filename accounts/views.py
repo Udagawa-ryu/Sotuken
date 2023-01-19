@@ -139,15 +139,14 @@ def UserSearchResult(request):
 
 @login_required
 def OtherMypage(request):
-    if request.method == 'POST':
-        page_user = CustomUser.objects.get(MO1_userNumber = request.POST.get("user"))
-        mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
-        if MO9_Fav_Custom_user.objects.filter(MO1_userNumber = mydata.MO1_userNumber,MO9_followedUserNumber = page_user.MO1_userNumber).exists():
-            fav = 1
-        else :
-            fav = 0
-        params = {"page_user":page_user,"mydata":mydata,"fav":fav}
-        return render(request,"OtherMypage.html",params)
+    page_user = CustomUser.objects.get(MO1_userNumber = request.POST.get("user"))
+    mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+    if MO9_Fav_Custom_user.objects.filter(MO1_userNumber = mydata.MO1_userNumber,MO9_followedUserNumber = page_user.MO1_userNumber).exists():
+        fav = 1
+    else :
+        fav = 0
+    params = {"page_user":page_user,"mydata":mydata,"fav":fav}
+    return render(request,"OtherMypage.html",params)
 
 @login_required
 def OpenRangeRegister(request):
@@ -166,22 +165,12 @@ def OpenRangeRegister(request):
 @login_required
 def FavUser(request):
     if request.method == 'POST':
-        print(request.POST.get("fav"))
-        if request.POST.get("fav") == "0":
-            # page_user = CustomUser.objects.get(MO1_userNumber = request.POST.get("user"))
-            page_user = CustomUser.objects.get(MO1_userNumber = request.POST.get("user"))
-            mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
-            initial_data = {
-                "MO1_userNumber":mydata,
-                "MO9_followedUserNumber":page_user,
-            }
-            form = FavUserForm(request.POST or initial_data)
-            print(form)
-            if form.is_valid():
-                form.save()
-        else :
-            mydata = request.POST.get("mydata")
-            page_user = request.POST.get("page_user")
-            fav_data = MO9_Fav_Custom_user.objects.filter(MO1_userNumber = mydata.MO1_userNumber,MO9_followedUserNumber = page_user.MO1_userNumber)
-            fav_data.delete()
+        page_user = CustomUser.objects.get(MO1_userNumber = request.POST.get("user"))
+        mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+        result, created =MO9_Fav_Custom_user.objects.get_or_create(MO1_userNumber=mydata,MO9_followedUserNumber=page_user)
+        if created :
+            return OtherMypage(request)
+        else:
+            result.delete()
+            return OtherMypage(request)
     return OtherMypage(request)
