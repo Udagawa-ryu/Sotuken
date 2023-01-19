@@ -24,12 +24,20 @@
         {% csrf_token %}
           <table class="store_certific">
             <tr>
-              <th class="th-center">未認証店舗</th>
+              <th class="th-center"  colspan="3">未認証店舗</th>
+            </tr>
                 {% for all in noauth %}
-                    <td class="col-3" style="font-size: larger;"><p>{{ all.MO2_storeName }}</p></td>
-                    <td><input type="checkbox" name="add" value="{{ all.MO2_storeNumber }}" style="transform: scale(2);margin: 0 12px;"></td>
-                {% endfor %}
+                <tr>
+                  <td class="col-3" style="font-size: larger;">
+                    <p>{{ all.MO2_storeName }}</p>
+                  </td>
+                  <td>
+                    <p>
+                      <input type="checkbox" name="add" value="{{ all.MO2_storeNumber }}" style="transform: scale(2);margin: 0 12px;">
+                    </p>
+                  </td>
                 </tr>
+                {% endfor %}
             </div>
             <div class="add_btn">
                 <div class="col-md-12">
@@ -45,12 +53,14 @@
         <table class="verified">
             <tr>
                 <th class="th-center">認証済み店舗</th>
-            <td>
-            {% for i in auth %}
-                <p>{{ i.MO2_storeName }}</p>
-            {% endfor %}
-            </td>
             </tr>
+            {% for i in auth %}
+            <tr>
+              <td>
+                <p>{{ i.MO2_storeName }}</p>
+              </td>
+            </tr>
+            {% endfor %}
         </table>
     </div>
 {% endblock %}
