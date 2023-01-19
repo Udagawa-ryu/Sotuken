@@ -18,7 +18,6 @@
         </div>
     </div>
     <div class="container">
-        <!-- <div class="row"> -->
         <div class="animate-box">
             <section>
                 <form method="post" action="{% url 'accounts:OpenRangeRegister' %}">
@@ -27,8 +26,7 @@
                         <input id="tab1" type="radio" name="tab_btn" checked>
                         <input id="tab2" type="radio" name="tab_btn">
                         <div class="tab_area">
-                            <label class="tab1_label" for="tab1">Publish</label>
-                            <label class="tab2_label" for="tab2">Private</label>
+                            <label class="tab1_label" for="tab1">Public scope of Blog</label>
                         </div>
                         <div class="panel_area">
                             <div id="panel1" class="tab_panel">
@@ -43,19 +41,9 @@
                                 </div>
                                 <div class="col-4 col-12-small">
                                     {% if mydata.MO1_openRange == 1 %}
-                                    <input type="radio" id="demo-priority-row" name="demo-priority" value="1" checked>
+                                    <input type="radio" id="demo-priority-high" name="demo-priority" value="1" checked>
                                     {% else %}
-                                    <input type="radio" id="demo-priority-row" name="demo-priority" value="1">
-                                    {% endif %}
-                                    <label for="demo-priority-row">publish only default spots</label>
-                                </div>
-                            </div>
-                            <div id="panel2" class="tab_panel">
-                                <div class="col-4 col-12-small">
-                                    {% if mydata.MO1_openRange == 2 %}
-                                    <input type="radio" id="demo-priority-high" name="demo-priority" value="2" checked>
-                                    {% else %}
-                                    <input type="radio" id="demo-priority-high" name="demo-priority" value="2">
+                                    <input type="radio" id="demo-priority-high" name="demo-priority" value="1">
                                     {% endif %}
                                     <label for="demo-priority-high">private</label>
                                 </div>
@@ -72,6 +60,5 @@
             </section>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}

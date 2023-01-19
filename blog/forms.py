@@ -6,8 +6,7 @@ class BlogRegisterForm(forms.ModelForm):
   MO6_visitRecordNumber = forms.ModelChoiceField(label="VisitRecord",queryset=MO6_Visit_record.objects.none())
   CHOICE = {
     (0,'publish to the public'),
-    (1,'publish only default spots'),
-    (2,'private'),
+    (1,'private'),
   }
   MO7_openRange = forms.ChoiceField(label='OpenRange', choices= CHOICE)
   class Meta:

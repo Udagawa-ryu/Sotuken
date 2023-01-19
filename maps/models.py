@@ -15,7 +15,7 @@ class MO5_Tag(models.Model):
 class MO3_Default_spot(models.Model):
   MO3_DspotNumber = models.AutoField(verbose_name="デフォルトスポットナンバー", primary_key=True, editable=False)
   MO2_storeNumber = models.ForeignKey("store.MO2_store", models.CASCADE, verbose_name="ストアナンバー")
-  MO5_tagNumber = models.ManyToManyField(MO5_Tag)
+  MO5_tagNumber = models.ManyToManyField(MO5_Tag,blank=True)
   class Meta:
     verbose_name_plural = "MO3_Default_spot"
 

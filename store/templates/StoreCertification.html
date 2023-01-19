@@ -12,46 +12,47 @@
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
   <div class="container">
-    <!-- <div class="row"> -->
       <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
         <h3>店舗認証</h3>
       </div>
-    <!-- </div> -->
   </div>
   <div class="container">
-    <div class="row row-bottom-padded-md"></div>
+    <div class="animate-box">
       <form id="add" action="{% url 'store:addStore'%}" method="POST">
         {% csrf_token %}
-          <table class="store_certific">
-            <tr>
-              <th class="th-center">未認証店舗</th>
-                {% for all in noauth %}
-                    <td class="col-3" style="font-size: larger;"><p>{{ all.MO2_storeName }}</p></td>
-                    <td><input type="checkbox" name="add" value="{{ all.MO2_storeNumber }}" style="transform: scale(2);margin: 0 12px;"></td>
-                </tr>
-                {% endfor %}
-            </table>
-            </div>
-            <div class="add_btn">
-                <div class="col-md-12">
-                    <button form="add" type="submit" href="{% url 'store:addStore'%}" class="btnin">店舗追加</button>
-                </div>
-            </div>
-        </form>
-        <p>{{ message }}</p>
-
-        <div class="aida">
-            <h3>　　　　</h3>
-        </div>
         <table class="verified">
-            <tr>
-                <th class="th-center">認証済み店舗</th>
-            <td>
-            {% for i in auth %}
-                <p>{{ i.MO2_storeName }}</p>
-            {% endfor %}
+          <tr>
+            <th class="th-center" colspan="2">未認証店舗</th>
+          </tr>
+          {% for all in noauth %}
+          <tr>
+            <td class="col-3" style="font-size: larger;">
+              <p>{{ all.MO2_storeName }}</p>
             </td>
-            </tr>
+            <td>
+                <input type="checkbox" name="add" value="{{ all.MO2_storeNumber }}" style="transform: scale(2);margin: 0 12px; opacity: 1;">
+            </td>
+          </tr>
+          {% endfor %}
         </table>
+        <div style="text-align:center;">
+            <button form="add" type="submit" href="{% url 'store:addStore'%}" class="btnin">店舗追加</button>
+        </div>
+      </form>
+      <p>{{ message }}</p>
+      <table class="verified">
+        <tr>
+          <th class="th-center">認証済み店舗</th>
+        </tr>
+        {% for i in auth %}
+        <tr>
+          <td>
+            <p>{{ i.MO2_storeName }}</p>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
     </div>
+  </div>
+</div>
 {% endblock %}

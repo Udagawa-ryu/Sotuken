@@ -67,9 +67,9 @@ input::-moz-focus-inner {
 
 input, select, textarea {
 	-moz-appearance: none;
-	-webkit-appearance: none;
+	/* -webkit-appearance: none; */
 	-ms-appearance: none;
-	appearance: none;
+	/* appearance: none; */
 }
 
 /* Basic */
@@ -2140,7 +2140,7 @@ input, select, textarea {
 	select,
 	textarea {
 		-moz-appearance: none;
-		-webkit-appearance: none;
+		/* -webkit-appearance: none; */
 		-ms-appearance: none;
 		appearance: none;
 		background-color: transparent;
@@ -2211,9 +2211,9 @@ input, select, textarea {
 	input[type="checkbox"],
 	input[type="radio"] {
 		-moz-appearance: none;
-		-webkit-appearance: none;
+		/* -webkit-appearance: none; */
 		-ms-appearance: none;
-		appearance: none;
+		/* appearance: none; */
 		display: block;
 		float: left;
 		margin-right: -2em;
@@ -2445,7 +2445,7 @@ input, select, textarea {
 	button,
 	.button {
 		-moz-appearance: none;
-		-webkit-appearance: none;
+		/* -webkit-appearance: none; */
 		-ms-appearance: none;
 		appearance: none;
 		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;

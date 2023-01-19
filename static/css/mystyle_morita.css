@@ -339,38 +339,37 @@
 
 /* StoreLogout.htmlのCSS */
 .store_text {
-    margin-left: 120px;
+    margin-left: 10px;
     margin-bottom: 80px;
 }
 
 @media screen and (max-width: 959px) {
     .store_text {
-        margin-left: 0%;
+        margin-left: -20%;
     }
 }
 
 @media screen and (max-width: 480px) {
     .store_text {
-        font-size: 17px;
-        margin-right: 5%;
-        margin-left: -8%;
+        font-size: 15px;
+        margin-left: -23%;
     }
 }
 
 .store_cancel {
-    margin-left: 230px;
+    margin-left: 190px;
 }
 
 @media screen and (max-width: 959px) {
     .store_cancel {
-        margin-left: 16%;
-        margin-bottom: 50%;
+        margin-left: 15%;
+        margin-bottom: 70%;
     }
 }
 
 @media screen and (max-width: 480px) {
     .store_cancel {
-        margin-left: 3%;
+        margin-left: -10%;
         margin-bottom: 70%;
     }
 }
@@ -941,5 +940,66 @@ table.ospot_record {
 @media screen and (max-width: 480px) {
     .aida {
         margin-top: -40%;
+    }
+}
+
+/* email_confirm.htmlのCSS */
+.email_conf {
+    margin-left: 160px;
+}
+
+@media screen and (max-width: 959px) {
+    .email_conf {
+        margin-left: -10%;
+        margin-top: 20%;
+        margin-bottom: 70%;
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .email_conf {
+        margin-left: -22%;
+        margin-bottom: 120%;
+        font-size: 17px;
+    }
+}
+
+.user_comp {
+    margin-left: 110px;
+}
+
+@media screen and (max-width: 959px) {
+    .user_comp {
+        margin-left: 0%;
+        margin-top: 30%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .user_comp {
+        margin-left: -20%;
+        margin-top: 10%;
+        font-size: 13px;
+    }
+}
+
+.kakutei_btn {
+    margin-top: 60px;
+    margin-left: 295px;
+}
+
+@media screen and (max-width: 959px) {
+    .kakutei_btn {
+        margin-left: 0%;
+        margin-top: -10%;
+        padding: 30%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .kakutei_btn {
+        margin-left: 2%;
+        padding: 20%;
     }
 }
