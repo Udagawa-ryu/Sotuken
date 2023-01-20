@@ -15,11 +15,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3>UserSearch</h3>
+                <h3 style="text-transform:none">UserSearch</h3>
             </div>
         </div>
     </div>
     <div class="container">
+        <div class="animate-box">
             <form method="post" action="{% url 'accounts:UserSearchResult' %}">
                 {% csrf_token %}
 
@@ -29,9 +30,11 @@
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
 
-                <button class="login" type="submit">Search</button>
+                <div class="text-center-nh">
+                    <button class="btnin" type="submit">Search</button>
+                </div>
             </form>
+        </div>
     </div>
-
 </div>
 {% endblock %}
