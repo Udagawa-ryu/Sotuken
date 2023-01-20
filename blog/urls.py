@@ -14,4 +14,5 @@ urlpatterns = [
     # path('blogDelete', views.BlogDeleteView.as_view(), name="blogDelete"),
     path('blogDelete/<int:pk>/', views.BlogDeleteView.as_view(), name="blogDelete"),
     path('otherBlogList/<int:pk>/', views.OtherBlogListView.as_view(), name="otherBlogList"),
+    path('favBlog/<int:pk>/',views.FavBlog,name="favBlog"),
 ]

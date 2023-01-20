@@ -3,9 +3,10 @@ from django.views import generic
 from .forms import BlogRegisterForm
 from accounts.models import CustomUser,MO6_Visit_record
 from django.urls import reverse_lazy
-from blog.models import MO7_Blog
+from blog.models import MO7_Blog,MO10_Fav_Blog
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 # ブログ一覧画面
@@ -134,8 +135,15 @@ class BlogDetailView(LoginRequiredMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        blog = MO7_Blog.objects.get(MO7_blogNumber=self.kwargs['pk'])
+        mydata = CustomUser.objects.get(MO1_userNumber = self.request.user.MO1_userNumber)
         context['blog'] = MO7_Blog.objects.filter(MO7_blogNumber=self.kwargs['pk'])
         context['login_user'] = self.request.user
+        if MO10_Fav_Blog.objects.filter(MO7_blogNumber=blog.MO7_blogNumber,MO1_userNumber=mydata.MO1_userNumber).exists():
+            fav = 1
+        else:
+            fav = 0
+        context['fav'] = fav
         return context
 
 # ブログ編集画面
@@ -241,3 +249,16 @@ class OtherBlogListView(LoginRequiredMixin, generic.ListView):
         if user_or == 0:
             context['blogs'] = MO7_Blog.objects.filter(MO1_userID=user,MO7_openRange=0).order_by('-MO7_createDate')
         return context
+
+@login_required
+def FavBlog(request,pk):
+    if request.method == 'POST':
+        page_blog = MO7_Blog.objects.get(MO7_blogNumber = pk)
+        mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+        result, created = MO10_Fav_Blog.objects.get_or_create(MO7_blogNumber = page_blog,MO1_userNumber=mydata)
+        if created :
+            return redirect("blog:blogDetail", pk=pk)
+        else:
+            result.delete()
+            return redirect("blog:blogDetail", pk=pk)
+    return redirect("blog:blogDetail", pk=pk)
