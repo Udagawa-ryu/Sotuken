@@ -1,2 +1,40 @@
-<h1>店舗用QRコード表示画面</h1>
-<img src="data:image/png;base64,{{ qr }}"/>
+{% extends 'store_base.html' %}
+
+{% block title %}ログアウト{% endblock %}
+
+{% block active_login %}active{% endblock %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <table class="verified">
+            <tr>
+                <th class="th-center">訪問記録用QRコード</th>
+                <th class="th-center">ポイント用QRコード</th>
+            </tr>
+            <tr>
+                <td align="center" valign="middle">
+                    <img src="data:image/png;base64,{{ qr }}" />
+                </td>
+                <td align="center" valign="middle">
+                    <img src="data:image/png;base64,{{ qr2 }}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>ボタン</p>
+                </td>
+                <td>
+                    <p>ボタン</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}
