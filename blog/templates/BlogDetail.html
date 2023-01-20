@@ -63,8 +63,16 @@
                     {% csrf_token %}
                     <input type="hidden" name="user" value="{{ blog.0.MO1_userID.MO1_userNumber }}">
                 </form>
+                <form id="form12" method="post" action="{% url 'blog:favBlog' blog.0.MO7_blogNumber %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="fav" value="{{ fav }}">
+                <form>
                 <div style="text-align: center;">
-                    <button class="btnin" type="submit" style="width:130px;" name="favo" value="favo">Favorite</button>
+                    {% if fav == 0 %}
+                        <button class="btnin" type="submit" style="width:130px;" form="form12">Favorite</button>
+                    {% else %}
+                        <button class="btnin" style="background-color: #00CCFF;width:130px;" type="submit" form="form12">Favorite</button>
+                    {% endif %}
                     <button class="btnin" type="submit" style="width:200px;" form="form11">This users page...</button>
                 </div>
             </div>
