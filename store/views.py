@@ -17,7 +17,7 @@ from io import BytesIO
 def storeRequest(request):
     params = {'message': '仮登録が完了しました。メールが届くまでお待ちください。', 'form': None,}
     if request.method == 'POST':
-        form = StoreCreateForm(request.POST)
+        form = StoreCreateForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
             return render(request, 'StoreRequest.html', params)

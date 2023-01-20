@@ -20,7 +20,7 @@
   <div class="container">
     <div class="animate-box">
       <div class="row row-bottom-padded-md"></div>
-      <form method="post" action="{% url 'store:storeRequest' %}">
+      <form method="post" enctype="multipart/form-data" action="{% url 'store:storeRequest' %}">
         {% csrf_token %}
         {{ form.as_p }}
         {% if redirect_field_value %}

@@ -60,7 +60,7 @@ from django.core.validators import MinLengthValidator
 
 class CustomUser(AbstractUser):
     MO1_userNumber = models.AutoField(verbose_name="ユーザナンバー",primary_key=True, editable=False)
-    MO1_userID = models.CharField(verbose_name="UserID",max_length=16,validators=[MinLengthValidator(7)])
+    MO1_userID = models.CharField(verbose_name="UserID",max_length=16,validators=[MinLengthValidator(7)],unique=True)
     username = models.CharField(verbose_name="UserName",max_length=50)
     email = models.EmailField(verbose_name="MailAddres",unique=True)
     MO1_homeCountry = models.CharField(verbose_name="HomeCountry",max_length=50,blank=True)
