@@ -1003,3 +1003,57 @@ table.ospot_record {
         padding: 20%;
     }
 }
+
+/* StorePassRegister.htmlのCSS */
+.store_pass {
+    margin-left: 0px;
+    width: 80%;
+}
+
+@media screen and (max-width: 959px) {
+    .store_pass {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_pass {
+        width: 90%;
+    }
+}
+
+.store_pass_conf {
+    width: 80%;
+    margin-top: 60px;
+}
+
+@media screen and (max-width: 959px) {
+    .store_pass_conf {
+        width: 90%;
+        margin-top: 20%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .store_pass_conf {
+        width: 90%;
+    }
+}
+
+.btn_regist {
+    margin-left: 300px;
+    margin-top: 70px;
+}
+
+@media screen and (max-width: 959px) {
+    .btn_regist {
+        margin-left: 30%;
+        margin-top: 40%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .btn_regist {
+        margin-left: 21%;
+    }
+}
