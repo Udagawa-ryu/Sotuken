@@ -21,7 +21,7 @@
     <div class="row row-bottom-padded-md"></div>
       <form method="post" action="{% url 'store:storeInfoConfirmation' %}">
         {% csrf_token %}
-        <table class="confirmation">
+        <table class="confirmation" enctype="multipart/form-data">
             <tr>
                 <th class="th-center">店舗名</th>
                 <td class="td-space">{{form.MO2_storeName}}</td>

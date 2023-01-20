@@ -77,6 +77,7 @@ def BlogRegister(request):
         form = BlogRegisterForm()
         form.fields['MO6_visitRecordNumber'].queryset = my_record
         form.fields['MO7_openRange'].choices = CHOICE
+        form.fields['MO7_openRange'].initial = user.MO1_openRange
         params['form'] = form
         return render(request,"BlogRegister.html",params)
     
