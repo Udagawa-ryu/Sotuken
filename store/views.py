@@ -214,11 +214,19 @@ class storeinfocompletionView(generic.TemplateView):
 
 @login_required_store
 def storeQRView(request,mail):
-    qr = storeQRCreate(mail)
-    return render(request,"StoreQR.html",{"qr":qr})
+    qr = store_visit_QRCreate(mail)
+    qr2 = store_point_QRCreate(mail)
+    return render(request,"StoreQR.html",{"qr":qr,"qr2":qr2})
 
-def storeQRCreate(num):
+def store_visit_QRCreate(num):
     qr_str = "http://localhost:8000/visitrecord/"+str(num)
+    img = qrcode.make(qr_str)
+    buffer = BytesIO()
+    img.save(buffer, format="PNG")
+    qr = base64.b64encode(buffer.getvalue()).decode().replace("'", "")
+    return qr
+def store_point_QRCreate(num):
+    qr_str = "http://localhost:8000/StoreQRread/"+str(num)
     img = qrcode.make(qr_str)
     buffer = BytesIO()
     img.save(buffer, format="PNG")
