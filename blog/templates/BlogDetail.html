@@ -59,13 +59,13 @@
             </div>
             {% else %}
             <div class="text-center" style="margin-top: 20px;">
+                <form id="form11" method="post" action="{% url 'accounts:OtherMypage' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="user" value="{{ blog.0.MO1_userID.MO1_userNumber }}">
+                </form>
                 <div style="text-align: center;">
                     <button class="btnin" type="submit" style="width:130px;" name="favo" value="favo">Favorite</button>
-                    <form method="post" action="{% url 'accounts:OtherMypage' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="user" value="{{ i.MO1_userNumber }}">
-                        <button class="btnin" type="submit" style="width:200px;">This users page...</button>
-                    </form>
+                    <button class="btnin" type="submit" style="width:200px;" form="form11">This users page...</button>
                 </div>
             </div>
             {% endif %}
