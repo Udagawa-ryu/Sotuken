@@ -276,6 +276,24 @@
 }
 
 /* DeleteAccount.htmlのCSS */
+.account_de_text {
+    margin-left: 120px;
+}
+
+@media screen and (max-width: 959px) {
+    .account_de_text {
+        font-size: 18px;
+        margin-left: 0%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .account_de_text {
+        font-size: 15px;
+        margin-left: 10%;
+    }
+}
+
 .account {
     margin-left: 390px;
     font-size: 20px;
@@ -296,20 +314,20 @@
 }
 
 .account_cancel {
-    margin-left: 500px;
+    margin-left: 10px;
     margin-top: 50px;
 }
 
 @media screen and (max-width: 959px) {
     .account_cancel {
-        margin-left: 38%;
-        margin-bottom: 45%;
+        margin-right: 0%;
+        margin-bottom: 50%;
     }
 }
 
 @media screen and (max-width: 480px) {
     .account_cancel {
-        margin-left: 25%;
+        margin-left: 18%;
         margin-bottom: 60%;
     }
 }
