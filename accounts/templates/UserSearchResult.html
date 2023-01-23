@@ -15,30 +15,32 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3>UserSearch</h3>
+                <h3 style="text-transform:none">UserSearch</h3>
             </div>
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="my-div-style">
-                <table class="user_list">
-                {% for i in users %}
-                    <tr>
-                        <td class="user1">{{ i.username }}</td>
-                        <form method="post" action="{% url 'accounts:OtherMypage' %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="user" value="{{ i.MO1_userNumber }}">
-                            <td><button class="favorite" type="submit">UserPage</button></td>
-                        </form>
-                    </tr>
-                {% endfor %}
-                </table>
-                <a href="{% url 'accounts:UserSearch' %}" class="button primary">research</a>
+        <div class="animate-box">
+            <div class="row">
+                <div style="margin-left:20%; margin-right:20%; padding-left: 0;">
+                    <table class="user_list">
+                        {% for i in users %}
+                        <tr>
+                            <td class="user1">{{ i.username }}</td>
+                            <form method="post" action="{% url 'accounts:OtherMypage' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="user" value="{{ i.MO1_userNumber }}">
+                                <td><button class="favorite" type="submit">UserPage</button></td>
+                            </form>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="text-center-nh">
+                                            <button onclick="location.href='{% url 'accounts:UserSearch' %}'" class="btnin" style="width:150px;">research</button>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-
 </div>
 {% endblock %}

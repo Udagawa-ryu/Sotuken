@@ -13,24 +13,37 @@
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
     <div class="container">
-        <!-- <div class="row"> -->
-            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3 style="text-transform:none">Favorite User</h3>
-            </div>
-        <!-- </div> -->
+        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+            <h3 style="text-transform:none">Favorite User</h3>
+        </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="my-div-style">
-                <button class="favorite" type="submit" onclick="location.href='{% url 'main:favoriteBlogList' %}'">Favorite Blog</button>
-                <table class="user_list">
-                    {% for obj in favUser_list %}
-                    <tr>
-                        <td class="user1"><a href="">{{ obj.MO9_followedUserNumber}}</a></td>
-                        {% comment %} <td class="user1"><a href="{% url 'accounts:OtherMypage' obj.MO9_followedUserNumber %}">{{ obj.MO9_followedUserNumber}}</a></td> {% endcomment %}
-                    </tr>
-                    {% endfor %}
-                </table>
+        <!-- 左寄せ -->
+        <div id="fh5co-menu-wrap">
+            <div class="row">
+                <div class="animate-box">
+                    <ul class="actions">
+                        <button class="favorite" type="submit" onclick="location.href='{% url 'main:favoriteBlogList' %}'">Favorite
+                            Blog</button>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="animate-box">
+            <div class="row">
+                <div class="my-div-style">
+                    <table class="user_list">
+                        {% for obj in favUser_list %}
+                        <tr>
+                            <td class="user1"><a href="">{{ obj.MO9_followedUserNumber}}</a></td>
+                            {% comment %} <td class="user1"><a href="{% url 'accounts:OtherMypage' obj.MO9_followedUserNumber %}">{{
+                                    obj.MO9_followedUserNumber}}</a></td> {% endcomment %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
         </div>
     </div>
