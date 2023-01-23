@@ -38,10 +38,6 @@
                     <th class="th-center">{{ form.MO1_language.label }}</th>
                     <td class="td-space">{{form.MO1_language.value}}</td>
                 </tr>
-                <tr>
-                    <th class="th-center">{{ form.MO1_openRange.label }}</th>
-                    <td class="td-space">{{form.MO1_openRange.value}}</td>
-                </tr>
             </table>
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
@@ -52,7 +48,6 @@
                 <input type="hidden" name="MO1_userID" value={{form.MO1_userID.value}}>
                 <input type="hidden" name="MO1_homeCountry" value={{form.MO1_homeCountry.value}}>
                 <input type="hidden" name="MO1_language" value={{form.MO1_language.value}}>
-                <input type="hidden" name="MO1_openRange" value={{form.MO1_openRange.value}}>
                 <div style="text-align: center;">
                     <button type="submit" class="btnin" name="next" value="back">　Back　</button>
                     <button type="submit" class="btnin" style="width: 130px" name="next" value="next">　Update　</button>

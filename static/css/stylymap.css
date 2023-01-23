@@ -95,3 +95,7 @@ td.td-space {
     padding-right: 10px;
     color:#333333;
 }
+
+.print-off {
+    display: none;
+}

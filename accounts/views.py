@@ -23,15 +23,25 @@ def newAccount(request):
 @login_required
 def UserInfoEdit(request):
     mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+    COUNTRIES = {
+        #どこかから国の一覧データを持ってきたい
+        ("USA","USA"),
+        ("日本","JAPAN"),
+    }
+    LANGAGES = {
+        ("English","en"),
+        ("日本語","ja"),
+    }
     if request.method == 'POST':
         initial_data = {
             "username":request.POST.get("username"),
             "MO1_userID":request.POST.get("MO1_userID"),
             "MO1_homeCountry":request.POST.get("MO1_homeCountry"),
             "MO1_language":request.POST.get("MO1_language"),
-            "MO1_openRange":request.POST.get("MO1_openRange"),
         }
         form = UserEditForm(request.POST or initial_data)
+        form.fields['MO1_homeCountry'].choices = COUNTRIES
+        form.fields['MO1_language'].choices = LANGAGES
         params = {
             'form':form,
             'message' : '',
@@ -43,9 +53,10 @@ def UserInfoEdit(request):
             "MO1_userID":mydata.MO1_userID,
             "MO1_homeCountry":mydata.MO1_homeCountry,
             "MO1_language":mydata.MO1_language,
-            "MO1_openRange":mydata.MO1_openRange,
         }
         form = UserEditForm(request.POST or initial_data)
+        form.fields['MO1_homeCountry'].choices = COUNTRIES
+        form.fields['MO1_language'].choices = LANGAGES
         params = {
             'form':form,
             'message' : '',
@@ -55,23 +66,37 @@ def UserInfoEdit(request):
 @login_required
 def UserInfoConfirmation(request):
     if request.method == 'POST':
+        COUNTRIES = {
+            #どこかから国の一覧データを持ってきたい
+            ("USA","USA"),
+            ("日本","JAPAN"),
+        }
+        LANGAGES = {
+            ("English","en"),
+            ("日本語","ja"),
+        }
         initial_data = {
             "username":request.POST.get("username"),
             "MO1_userID":request.POST.get("MO1_userID"),
             "MO1_homeCountry":request.POST.get("MO1_homeCountry"),
             "MO1_language":request.POST.get("MO1_language"),
-            "MO1_openRange":request.POST.get("MO1_openRange"),
         }
         if request.POST.get('next', '') == 'confirm':
             form = UserEditForm(request.POST or initial_data)
+            form.fields['MO1_homeCountry'].choices = COUNTRIES
+            form.fields['MO1_language'].choices = LANGAGES
             params = {"message":'',"form":form}
             return render(request,"UserInfoConfirmation.html",params)
         if request.POST.get('next', '') == 'back':
             form = UserEditForm(request.POST or initial_data)
+            form.fields['MO1_homeCountry'].choices = COUNTRIES
+            form.fields['MO1_language'].choices = LANGAGES
             params = {"message":'',"form":form}
             return render(request,"UserInfoEdit.html",params)
         if request.POST.get('next', '') == 'next':
-            form =  UserEditForm(request.POST or initial_data)
+            form =  UserEditForm(request.POST or initial_data,instance=mydata)
+            form.fields['MO1_homeCountry'].choices = COUNTRIES
+            form.fields['MO1_language'].choices = LANGAGES
             print(form.is_valid())
             if form.is_valid():
                 print("vaild")
@@ -80,7 +105,6 @@ def UserInfoConfirmation(request):
                 mydata.MO1_userID = request.POST.get("MO1_userID")
                 mydata.MO1_homeCountry = request.POST.get("MO1_homeCountry")
                 mydata.MO1_language = request.POST.get("MO1_language")
-                mydata.MO1_openRange = request.POST.get("MO1_openRange")
                 mydata.save()
                 return redirect("accounts:UserInfoComp")
     params = {
