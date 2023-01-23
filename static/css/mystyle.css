@@ -428,3 +428,52 @@ td.td-space {
     padding-left: 0%;
     padding-right: 0%;
 }
+
+/* スポット情報 */
+/* テーブル横並び */
+.side-by-side {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+@media screen and (max-width:480px) {
+
+    /*　画面サイズが480pxからはここを読み込む　*/
+    .side-by-side {
+        margin-top:10px;
+        display: inline;
+    }
+}
+
+
+/* テーブル */
+.spot-table {
+    width: 60%;
+    table-layout: fixed;
+    word-break: break-all;
+    word-wrap: break-all;
+}
+@media screen and (max-width:480px) {
+
+    /*　画面サイズが480pxからはここを読み込む　*/
+    .spot-table {
+        width:100%;
+        word-break: break-all;
+        word-wrap: break-all;
+    }
+}
+
+/* テーブル */
+.spot-table2 {
+    width: 35%;
+    margin-left: 5%;
+}
+@media screen and (max-width:480px) {
+
+    /*　画面サイズが480pxからはここを読み込む　*/
+    .spot-table2 {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}

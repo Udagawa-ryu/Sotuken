@@ -131,6 +131,8 @@ def SpotSearch(request):
     return Map(request)
 
 def SpotSearch(request):
+    from django.db import connection
+    cursor = connection.cursor()
     if request.method == 'POST':
         tags_id = request.POST.getlist('tags')
         keword = request.POST.get('keyword')
@@ -141,18 +143,23 @@ def SpotSearch(request):
         else:
             sql = """select count(*), "MO2_storeNumber" from maps_mo3_default_spot inner join store_mo2_store on ( store_mo2_store."MO2_storeNumber" = "maps_mo3_default_spot"."MO2_storeNumber_id" ) inner join "maps_mo3_default_spot_MO5_tagNumber" on 
             ( "maps_mo3_default_spot"."MO3_DspotNumber" = "maps_mo3_default_spot_MO5_tagNumber"."mo3_default_spot_id" ) where "MO2_storeName" LIKE '%大原%' """
-            if tag_counter != 0:
-                sql += """ and (1=0 """
-                for i in tags_id:
-                    sql += """ or "mo5_tag_id" = """+i
-                    sql += """)"""
-                    sql += """ group by "MO2_storeNumber";"""
-                    res = MO3_Default_spot.objects.raw(sql)
-                    sql = """select * from store_mo2_store where 1=0 """
-                    for i in res:
-                        if i["count"] == tag_counter:
-                            sql += """ or "MO2_storeNumber" = """+i["MO2_storeNumber"]
-                            sql += """ group by "MO2_storeNumber"; """
-        serch = MO3_Default_spot.objects.raw(sql)
+        if tag_counter != 0:
+            sql += """ and (1=0 """
+            for i in tags_id:
+                sql += """ or "mo5_tag_id" = """+i
+            sql += """)"""
+        sql += """ group by "MO2_storeNumber";"""
+        print("sql1="+sql)
+        
+        # ここでエラー
+        res = cursor.execute(sql)
+        print(res)
+        sql = """select * from store_mo2_store where 1=0 """
+        for i in res:
+            if i["count"] == tag_counter:
+                sql += """ or "MO2_storeNumber" = """+i["MO2_storeNumber"]
+        sql += """ group by "MO2_storeNumber"; """
+        print("sql2="+sql)
+        serch = cursor.execute(sql)
         print(serch)
     return Map(request)

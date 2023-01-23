@@ -35,13 +35,16 @@
             <div class="row">
                 <div class="my-div-style">
                     <table class="user_list">
-                        {% for obj in favUser_list %}
-                        <tr>
-                            <td class="user1"><a href="">{{ obj.MO9_followedUserNumber}}</a></td>
-                            {% comment %} <td class="user1"><a href="{% url 'accounts:OtherMypage' obj.MO9_followedUserNumber %}">{{
-                                    obj.MO9_followedUserNumber}}</a></td> {% endcomment %}
-                        </tr>
-                        {% endfor %}
+                    {% for obj in favUser_list %}
+                    <tr>
+                    <td class="user1">{{ obj.MO9_followedUserNumber.username}}</td>
+                        <form method="post" action="{% url 'accounts:OtherMypage' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="user" value="{{ obj.MO9_followedUserNumber.MO1_userNumber}}">
+                            <td><button class="favorite" type="submit">UserPage</button></td>
+                        </form>
+                    </tr>
+                    {% endfor %}
                     </table>
                 </div>
             </div>
