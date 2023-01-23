@@ -53,13 +53,13 @@ class UserEditForm(forms.ModelForm):
     COUNTRIES = {
         #どこかから国の一覧データを持ってきたい
         ("USA","USA"),
-        ("日本","JAPAN"),
+        ("JAPAN","日本"),
+    }
+    LANGAGES = {
+        ("en","English"),
+        ("ja","日本語"),
     }
     MO1_homeCountry = forms.ChoiceField(label="HomeCountry",choices=COUNTRIES)
-    LANGAGES = {
-        ("English","en"),
-        ("日本語","ja"),
-    }
     MO1_language = forms.ChoiceField(label="Language",choices=LANGAGES)
     class Meta:
         model = CustomUser

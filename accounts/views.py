@@ -26,11 +26,11 @@ def UserInfoEdit(request):
     COUNTRIES = {
         #どこかから国の一覧データを持ってきたい
         ("USA","USA"),
-        ("日本","JAPAN"),
+        ("JAPAN","日本"),
     }
     LANGAGES = {
-        ("English","en"),
-        ("日本語","ja"),
+        ("en","English"),
+        ("ja","日本語"),
     }
     if request.method == 'POST':
         initial_data = {
@@ -69,11 +69,11 @@ def UserInfoConfirmation(request):
         COUNTRIES = {
             #どこかから国の一覧データを持ってきたい
             ("USA","USA"),
-            ("日本","JAPAN"),
+            ("JAPAN","日本"),
         }
         LANGAGES = {
-            ("English","en"),
-            ("日本語","ja"),
+            ("en","English"),
+            ("ja","日本語"),
         }
         initial_data = {
             "username":request.POST.get("username"),
@@ -81,11 +81,17 @@ def UserInfoConfirmation(request):
             "MO1_homeCountry":request.POST.get("MO1_homeCountry"),
             "MO1_language":request.POST.get("MO1_language"),
         }
+        for i in COUNTRIES:
+            if i[0] == request.POST.get("MO1_homeCountry"):
+                co = i[1]
+        for i in LANGAGES:
+            if i[0] == request.POST.get("MO1_language"):
+                lang = i[1]
         if request.POST.get('next', '') == 'confirm':
             form = UserEditForm(request.POST or initial_data)
             form.fields['MO1_homeCountry'].choices = COUNTRIES
             form.fields['MO1_language'].choices = LANGAGES
-            params = {"message":'',"form":form}
+            params = {"message":'',"form":form,"co":co,"lang":lang}
             return render(request,"UserInfoConfirmation.html",params)
         if request.POST.get('next', '') == 'back':
             form = UserEditForm(request.POST or initial_data)
@@ -94,7 +100,7 @@ def UserInfoConfirmation(request):
             params = {"message":'',"form":form}
             return render(request,"UserInfoEdit.html",params)
         if request.POST.get('next', '') == 'next':
-            form =  UserEditForm(request.POST or initial_data,instance=mydata)
+            form =  UserEditForm(request.POST or initial_data)
             form.fields['MO1_homeCountry'].choices = COUNTRIES
             form.fields['MO1_language'].choices = LANGAGES
             print(form.is_valid())
