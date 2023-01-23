@@ -201,11 +201,11 @@
             // marker_add関数を呼び出し、各スポットの住所を座標に変換し、マーカーリストに追加
             // 重い処理のため非同期で実行し、Promiseをpromisesに追加
             for (var i = 0; i < default_spot_counter; i++){
-                promises.push(marker_add(default_spot_data_array[i][0], default_spot_data_array[i][1],"default"));
-                console.log("default_spot_data_array[i][0]"+default_spot_data_array[i][0]+"default_spot_data_array[i][1]:"+default_spot_data_array[i][1])
+                promises.push(marker_add(default_spot_data_array[i][0], default_spot_data_array[i][1],"default",default_spot_data_array[i][2]));
+                console.log("default_spot_data_array[i][0]"+default_spot_data_array[i][0]+"default_spot_data_array[i][1]:"+default_spot_data_array[i][1]+"default_spot_data_array[i][2]:"+default_spot_data_array[i][2])
             }
             for (var i = 0; i < original_spot_counter; i++){
-                promises.push(marker_add(original_spot_data_array[i][0], original_spot_data_array[i][1],"original"));
+                promises.push(marker_add(original_spot_data_array[i][0], original_spot_data_array[i][1],"original",original_spot_data_array[i][2]));
             }
             // 全てのPromiseがresolveしたら、init関数を実行
             Promise.all(promises).then(() => {
@@ -218,18 +218,19 @@
         //      String name : 名前
         // 　　 String default_or_original : スポットの種類
         // 戻り値　Promise 変換を実行し、マーカーリストに追加するPromise
-        function marker_add(address, name, default_or_original){
+        function marker_add(address, name, default_or_original,spot_num){
             return new Promise((resolve) => {
                 // 変換関数 getLatLng
                 // 関数内の処理終了後、Promiseをresolve()
                 getLatLng(address, (result) => {
-                    console.log(name+":"+address+":"+default_or_original+"-spot")
+                    console.log(name+":"+address+":"+default_or_original+"-spot:"+spot_num)
                     // 追加するマーカーリストのテンプレート
                     // {pos: [float lat,float lng], String name}
                     var markerList_tmp = {};
                     // マーカーリストのテンプレートに座標、名前を設定
                     markerList_tmp.pos = [result.lat,result.lng];
                     markerList_tmp.name = name;
+                    markerList_tmp.spot_num = spot_num;
                     // default・originalを判断し、それぞれのマーカーリストに作成したテンプレートを追加
                     if (default_or_original == "default"){
                         default_spot_markerList.push(markerList_tmp);
@@ -288,37 +289,26 @@
                 </tr>
             </table>
         </form>
-
-
-
-
         <script>
             function address_check() {
                 address = document.getElementById('id_MO4_OspotAdress').value;
-                try{
-                    getLatLng(address, moveTo);
-                }catch (error){
-                    alert(error);
+                getLatLng(address, yes, no);
+                const flg = 0;
+                function yes(latlng){
+                    alert("yes");
+                    document.oscreate.action = "{% url 'maps:OspotCreate' %}";
+                    alert("l = ",latlng);
                 }
-
-                function moveTo(latlng){
-                    try{
-                        if (latlng){
-                            // 座標を取得できた場合
-                            alert(latlng);
-                            return true;
-                        }else{
-                            // ここにはなぜか入れない
-                            alert("住所から緯度経度に変換できません");
-                        }
-                        return false;
-                    }catch (error){
-                        alert(error);
-                    }
+                function no(latlng){
+                    alert("no");
+                    flg = 1;
+                    alert("l = ",latlng);
                 }
+                return false;
             }
         </script>
-        <form method="post" name="oscreate" action="{% url 'maps:OspotCreate' %}">
+        {% comment %} <form method="post" name="oscreate" action="{% url 'maps:OspotCreate' %}"> {% endcomment %}
+        <form method="post" name="oscreate" onsubmit="return address_check()" >
             {% csrf_token %}
             <table class="confirmation">
                 <input type="hidden" name="MO1_userNumber" value={{user.MO1_userNumber}}>
@@ -337,8 +327,8 @@
                     </td>
                 </tr>
             </table>
-            {% comment %} <input class="btn btn-primary btn-outline btn-lg" type="submit" value="create"> {% endcomment %}
-            <button class="btn btn-primary btn-outline btn-lg" onclick="address_check()">create</button>
+            <button class="btn btn-primary btn-outline btn-lg" type="submit">create</button>
+            {% comment %} <button class="btn btn-primary btn-outline btn-lg" onclick="return address_check()">create</button> {% endcomment %}
             {% comment %} <button onclick="address_check()">１を足す</button> {% endcomment %}
 
         </form>

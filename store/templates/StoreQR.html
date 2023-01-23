@@ -8,6 +8,29 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
 <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/stylemap.css' %}">
+{% endblock %}
+{% block script %}
+<script>
+try{
+    function print_btn2(){
+        alert("1");
+        //プリントしたいエリアの取得
+        var printArea = document.getElementsByClassName("print-area2");
+        //プリント用の要素「#print」を作成し、上で取得したprintAreaをその子要素に入れる。
+        ('body').append('<div id="print" class="printBc"></div>');
+        (printArea).clone().appendTo('#print');
+        //この下に、以降の処理が入ります。
+        ('body > :not(#print)').addClass('print-off');
+        window.print();
+        ('#print').remove();
+        ('.print-off').removeClass('print-off');
+        alert("pirnted");
+    };
+}catch(e){
+    alert(e);
+}
+</script>
 {% endblock %}
 
 {% block contents %}
@@ -19,22 +42,27 @@
                 <th class="th-center">ポイント用QRコード</th>
             </tr>
             <tr>
+                
                 <td align="center" valign="middle">
                     <img src="data:image/png;base64,{{ qr }}" />
                 </td>
-                <td align="center" valign="middle">
-                    <img src="data:image/png;base64,{{ qr2 }}" />
-                </td>
+                <div class="print-area2">
+                    <td align="center" valign="middle">
+                        <img src="data:image/png;base64,{{ qr2 }}" />
+                    </td>
+                </div>
+                
             </tr>
             <tr>
-                <td>
-                    <p>ボタン</p>
+                <td align="center" valign="middle">
+                    
                 </td>
-                <td>
-                    <p>ボタン</p>
+                <td align="center" valign="middle">
+                    <input type="button" class="btnin" style="width:auto;" id="pr-bt2" name="pr-bt2" value="右のQRを印刷する" onclick="return print_btn2()">
                 </td>
             </tr>
         </table>
     </div>
 </div>
+
 {% endblock %}
