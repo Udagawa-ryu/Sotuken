@@ -35,7 +35,7 @@ class MO4_Original_spot(models.Model):
     verbose_name_plural = "MO4_Original_spot"
 
   def __str__(self):
-    return f'{self.MO4_OspotName}'
+    return f'{self.MO4_OspotNumber}-{self.MO4_OspotName}'
 
 # お気に入り検索条件モデル
 class MO8_Fav_Search_condition(models.Model):

@@ -22,10 +22,12 @@
     <div class="container">
         <table class="spot_disp">
             <tr>
-                <td class="Spot_Name">Spot Name</td>
+                <td class="Spot_Name">{{spot.MO2_storeNumber.MO2_storeName}}</td>
             </tr>
             <tr>
-                <td>Spot Info<br>--------------------------<br>--------------------------</td>
+                <td>Spot Info<br>S
+                    {{ spot.MO2_storeNumber.MO2_storeInfo }}
+                </td>
             </tr>
             <tr>
                 <td>Spot Info<br>--------------------------<br>--------------------------</td>
@@ -34,14 +36,13 @@
         <button class="record" type="submit">record of <br>your visits</button>
         <table class="visited_count">
             <tr>
-                <td>You have visited 2 times.</td>
+                <td>You have visited {{ count }} times.</td>
             </tr>
         </table>
         <select class="spot_date">
-            <option>2022/12/04 12:00~12:40</option>
-            <option>2022/12/07 14:00~15:40</option>
-            <option>2022/12/08 15:00~15:40</option>
-            <option>2022/12/10 18:00~20:40</option>
+            {% for i in myrecords %}
+                <option>{{ i.MO6_createdDate }}</option>
+            {% endfor %}
         </select>
         <table class="featured">
             <tr>
@@ -49,10 +50,10 @@
             </tr>
         </table>
         <select class="blog_date" size="4">
-            <option>Blog1</option>
-            <option>Blog2</option>
-            <option>Blog3</option>
-            <option>Blog4</option>
+            {% for i in blogs %}
+                {% comment %} <option>{{ i.MO7_blogName }}-{{ i.MO1_userID.MO1_userName }}</option> {% endcomment %}
+                <option><a href="{% url 'main:Mypage'%}">{{ i.MO7_blogName }}-{{ i.MO1_userID.username }}</a></option>
+            {% endfor %}
         </select>
     </div>
 </div>

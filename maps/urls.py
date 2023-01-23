@@ -5,10 +5,11 @@ app_name = 'maps'
 urlpatterns = [
     # path('', views.MapView.as_view(), name="Map"),
     path('',views.Map,name="Map"),
-    path('OspotInfo/', views.OspotInfoView.as_view(), name="OspotInfo"),
     path('OspotVisitRegister/', views.OspotVisitRegisterView.as_view(), name="OspotVisitRegister"),
-    path('DspotInfo/', views.DspotInfoView.as_view(), name="DspotInfo"),
-    path('OspotInfo/', views.OtherMapView.as_view(), name="OtherMap"),
+    path('DspotInfo/<int:spot_num>/', views.DspotInfo, name="defalutspotinfo"),
+    path('OspotInfo/<int:spot_num>/', views.OspotInfo, name="originalspotinfo"),
+    path('usersmap/', views.OtherMapView.as_view(), name="OtherMap"),
+    path('usersmap/<int:num>',views.OtherMap,name="OtherMap"),
     path('SpotSaerch/',views.SpotSearch,name="SpotSearch"),
     path('OpotCreate/',views.OspotCreate,name="OspotCreate"),
 ]

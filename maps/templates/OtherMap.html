@@ -1,126 +1,294 @@
-<h1>他ユーザの地図画面</h1>
+{% extends 'base.html' %}
+{% comment %} <h1>地図画面</h1> {% endcomment %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>map</title>
+{% comment %} <!DOCTYPE html> {% endcomment %}
+{% comment %} <html> {% endcomment %}
+{% comment %} <head> {% endcomment %}
+{% block title %}Map{% endblock %}
+    {% comment %} <meta charset="UTF-8"> {% endcomment %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% comment %} <title>map</title> {% endcomment %}
+{% block script %}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
-    {% comment %} <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script> {% endcomment %}
     <script src="{% static 'js/leaflet.js' %}"></script>
     <script src="{% static 'js/leaflet.sprite.js' %}"></script>
     <script src="https://cdn.geolonia.com/community-geocoder.js"></script>
-    {% comment %} <script src="js/leaflet-search.min.js"></script> {% endcomment %}
     <script src="{% static 'js/leaflet-search.js' %}"></script>
-    {% comment %} <script src="{% static 'css/leaflet-search.css' %}"></script> {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/leaflet-search.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylymap.css' %}" />    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
-  <script>
-    console.log("map start");
-    {% comment %} var markerList = []; {% endcomment %}
-    var default_spot_markerList = [];
-    var original_spot_markerList = [];
+    {% comment %} <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" rel="stylesheet"> {% endcomment %}
+    {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script> {% endcomment %}
+    <script src="https://api.wikiocity.com/lib/mlgl/v1.14.0/maplibre-gl.js"></script>
+    <script src="https://api.wikiocity.com/lib/mlgl-leaflet/leaflet-maplibre-gl.js"></script>
+    {% comment %} <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq9zOaV1tEij_ymeVg4jegRhqQhjoS4QY" async defer></script> {% endcomment %}
+    {% comment %} <script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/Leaflet.GoogleMutant.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'js/lru_map.js' %}"></script> {% endcomment %}
 
-    function init() {
-      console.log("init start");
-      {% comment %} console.log("markerList="+markerList); {% endcomment %}
-      var map = L.map('mapcontainer');
-      {% comment %} L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
-        attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
-      }).addTo(map); {% endcomment %}
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        continuousWorld: false
-    }).addTo(map);
-    var searchLayer = new L.LayerGroup();
-    map.addLayer(searchLayer);
+    <script>
+        console.log("map start");
 
-    var controlSearch = new L.Control.Search({
-        position:'topright',
-        layer: searchLayer,
-        initial: false,
-        zoom: 15,
-        marker: false
-    });
-    map.addControl( controlSearch );
-      //マーカー全体が入るボックスを作る
-      {% comment %} var bound = L.latLngBounds(markerList[0].pos, markerList[0].pos); {% endcomment %}
-      var bound = L.latLngBounds([35.475243,139.40441], [35.731372,140.11212]);    
-      //markerListの設定でマーカーを追加
-      for (var num in default_spot_markerList) {
-        var mk = default_spot_markerList[num];
-        var popup = L.popup().setContent(mk.name);
-        L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
-        searchLayer.addLayer(L.marker(mk.pos, { 
-          title: mk.name, 
-          icon: L.spriteIcon('green') 
-        }).bindPopup(popup).addTo(map));
-        {% comment %} searchLayer.addLayer(mk); {% endcomment %}
-        //マーカー全体が入るボックスを広げる
-        {% comment %} bound.extend(mk.pos); {% endcomment %}
-      }
-      for (var num in original_spot_markerList) {
-        var mk = original_spot_markerList[num];
-        var popup = L.popup().setContent(mk.name);
-        L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
-        searchLayer.addLayer(L.marker(mk.pos, { 
-          title: mk.name, 
-          icon: L.spriteIcon('red') 
-        }).bindPopup(popup).addTo(map));
-        {% comment %} searchLayer.addLayer(marker); {% endcomment %}
-        //マーカー全体が入るボックスを広げる
-        {% comment %} bound.extend(mk.pos); {% endcomment %}
-      }
-      //マーカー全体が入るように地図範囲を設定する
-      map.fitBounds(bound);
-    }
+        // マーカーリスト配列の初期化
+        // データ型:　[{pos: [float 緯度][float 経度], name; String 名前},・・・]
+        var default_spot_markerList = [];
+        var original_spot_markerList = [];
+        // 日本の全体が入るboundを保存
+        var japan_bound = [[47,120], [20,155]];
 
-    function make_markerList(){
-      console.log("make_markerList start");
-      {% comment %} var data_array=[['東京都千代田区西神田2-4-11',"東京情報クリエイター工学院専門学校"],['東京都豊島区東池袋1-20-17',"大原ビジネス公務員専門学校池袋校"],['東京都立川市緑町4-8',"大原簿記公務員医療福祉保育専門学校立川校"],['神奈川県横浜市神奈川区反町1-8-14',"大原簿記情報ビジネス専門学校横浜校"],['千葉県千葉市中央区弁天1-16-2',"大原簿記公務員専門学校千葉校"]]; {% endcomment %}
-      var default_spot_data_array=[['東京都千代田区西神田2-4-11',"東京情報クリエイター工学院専門学校"],['東京都豊島区東池袋1-20-17',"大原ビジネス公務員専門学校池袋校"],['東京都立川市緑町4-8',"大原簿記公務員医療福祉保育専門学校立川校"]];
-      var original_spot_data_array=[['神奈川県横浜市神奈川区反町1-8-14',"大原簿記情報ビジネス専門学校横浜校"],['千葉県千葉市中央区弁天1-16-2',"大原簿記公務員専門学校千葉校"]];
-      const default_spot_counter = default_spot_data_array.length;
-      const original_spot_counter = original_spot_data_array.length;
+        // マップ作成、表示関数
+        function init() {
+            console.log("init start");
+            // htmlの要素mapcontainerを指定し、mapを作成
+            // 空のmapを作成し、要素を後から追加
+            var center = [36.0,140];
+            var startZoom =  '10';
+            var map = L.map('mapcontainer',{maxBounds: japan_bound, maxZoom: 20, minZoom: 5,}).setView(center, startZoom);
 
-      var promises = [];
-      for (var i = 0; i < default_spot_counter; i++){
-        promises.push(marker_add(default_spot_data_array[i][0], default_spot_data_array[i][1],"default"));
-      }
-      for (var i = 0; i < original_spot_counter; i++){
-        promises.push(marker_add(original_spot_data_array[i][0], original_spot_data_array[i][1],"original"));
-      }
-      Promise.all(promises)
-        .then(() => {
-          init();
-        });
-    }
+            // maptile選択・mapに追加
+            // 地理院標準地図
+            {% comment %} L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+                attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+            }).addTo(map); {% endcomment %}
+            // openstreetmap
+            {% comment %} L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                continuousWorld: false,
+                maxZoom: 20,
+                minZoom: 5,
+            }).addTo(map); {% endcomment %}
+            // MapTilesAPI.OSMEnglish
+            {% comment %} L.tileLayer('https://maptiles.p.rapidapi.com/es/map/v1/{z}/{x}/{y}.png?rapidapi-key={apikey}', {
+                attribution: '&copy; <a href="http://www.maptilesapi.com/">MapTiles API</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                apikey: '07b42bd84dmsha2c84c2de9e35b3p1dc440jsn35ea7f61ea22',
+                maxZoom: 20,
+                minZoom: 5,
+            }).addTo(map); {% endcomment %}
 
-    function marker_add(address, name, default_or_original){
-      return new Promise((resolve) => {
-          getLatLng(address, (result) => {
-              {% comment %} console.log("緯度: ", result.lat);
-              console.log("経度: ", result.lng); {% endcomment %}
-              console.log(name+":"+address+":"+default_or_original+"-spot")
-              var markerList_tmp = {};
-              markerList_tmp.pos = [result.lat,result.lng];
-              markerList_tmp.name = name;
-              if (default_or_original == "default"){
-                default_spot_markerList.push(markerList_tmp);
-              } else if (default_or_original == "original"){
-                original_spot_markerList.push(markerList_tmp);
-              } else {
-                console.log("default_or_original 未登録");
+            {% comment %} L.tileLayer('https://api.wikiocity.com/r/vector/en/{z}/{x}/{y}.pbf?key=d9277a1cc43ba53c284c72ed7', {
+                attribution: '&copy; <a href="https://api.wikiocity.com">Wikiocity</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                style: 'https://api.wikiocity.com/style/wikiocity-mgl-style.json?key=d9277a1cc43ba53c284c72ed7&lang=en',
+                maxZoom: 20,
+                minZoom: 5,
+            }).addTo(map); {% endcomment %}
+
+            // 言語設定
+            // intl - Language is in native language of viewed map area.
+            //ar - Arabic العربية
+            //bn - Bengali বাংলা
+            //de - German Deutsch
+            //en - English English
+            //es - Spanish Español
+            //fr - French Français
+            //el - Greek ελληνικά
+            //hi - Hindi हिन्दी, हिंदी
+            //hu - Hungarian Magyar
+            //id - Indonesian Bahasa Indonesia
+            //it - Italian Italiano
+            //ja - Japanese 日本語 (にほんご)
+            //ko - Korean 한국어
+            //nl - Dutch, Flemish Nederlands, Vlaams
+            //pl - Polish Język Polski, Polszczyzna
+            //pt - Portuguese Português
+            //ru - Russian русский
+            //sv - Swedish Svenska
+            //tr - Turkish Türkçe
+            //vi - Vietnamese Tiếng Việt
+            //zh - Chinese 中文 (Zhōngwén), 汉语, 漢語
+            // ブラウザの設定言語を取得し、マップの言語に設定
+            try {
+                mapLanguage = (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2)
               }
-              resolve();
-          });
-      });
-    }
-  </script>
-</head>
+              catch(e) {
+                mapLanguage = 'en';
+              }
+            console.log("lang = "+mapLanguage);
+            var apiKey = 'd9277a1cc43ba53c284c72ed7';
+            var targetDivId = 'map';
+   		    var mapType = 'vector';
+            var gl = L.maplibreGL({
+                attribution: '&copy; <a href="https://api.wikiocity.com">Wikiocity</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                style: 'https://api.wikiocity.com/style/wikiocity-mgl-style.json?key='+apiKey+'&lang='+mapLanguage,
+                minZoom:5
+            }).addTo(map);
+
+            {% comment %} L.tileLayer('https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyAq9zOaV1tEij_ymeVg4jegRhqQhjoS4QY',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            }); {% endcomment %}
+
+            {% comment %} L.gridLayer.googleMutant({
+                type: 'roadmap'
+            }); {% endcomment %}
+
+
+            // スポット検索コンソール設定
+            // スポット検索用レイヤーを作成し、マップに追加
+            var searchLayer = new L.LayerGroup();
+            map.addLayer(searchLayer);
+
+            // スポット検索用コンソール自体の設定を行い、マップに追加
+            var controlSearch = new L.Control.Search({
+                position:'topright',
+                layer: searchLayer,
+                initial: false,
+                zoom: 15,
+                marker: false
+            });
+            map.addControl( controlSearch );
+
+            // 地名検索コンソールを設定し、マップに追加
+            // 入力は多言語対応、検索結果出力はブラウザの設定言語
+            L.Control.geocoder({ 
+                geocoder: L.Control.Geocoder.nominatim()
+            }).addTo(map);
+
+            // 地図初期設定
+            // [左上緯度,左上経度], [右下緯度,右下経度]
+            var bound = L.latLngBounds([37.0,139.4], [35.5,140.1]);
+
+            // マーカーを地図に追加
+            for (var num in default_spot_markerList) {
+                // マーカーを変数に格納
+                var mk = default_spot_markerList[num];
+                // マーカーに関連付けるポップアップ設定
+                var popup = L.popup().setContent("<a href='{% url 'maps:defalutspotinfo' mk.spot_num %}'>"mk.name"</a>"+"<br><img src='{% static 'images/sample_image.png' %}' width='200' height='275'>");
+                // マーカーアイコン設定
+                L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
+                // 上記設定でマーカーを地図、検索用レイヤーに追加
+                searchLayer.addLayer(L.marker(mk.pos, { 
+                    title: mk.name, 
+                    icon: L.spriteIcon('green') 
+                }).bindPopup(popup).addTo(map));
+                //マーカー全体が入るボックスを広げる
+                {% comment %} bound.extend(mk.pos); {% endcomment %}
+            }
+            for (var num in original_spot_markerList) {
+                var mk = original_spot_markerList[num];
+                var popup = L.popup().setContent(mk.name+"<br><img src='{% static 'images/sample_image.png' %}' width='500' height='375'>");
+                L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
+                searchLayer.addLayer(L.marker(mk.pos, { 
+                title: mk.name, 
+                icon: L.spriteIcon('red') 
+                }).bindPopup(popup).addTo(map));
+                //マーカー全体が入るボックスを広げる
+                {% comment %} bound.extend(mk.pos); {% endcomment %}
+            }
+            //マーカー全体が入るように地図範囲を設定する
+            map.fitBounds(bound);
+        }
+
+        // マーカーリスト作成関数 make_markerList
+        function make_markerList(){
+            const d_list = JSON.parse('{{ d_list|safe }}');
+            const o_list = JSON.parse('{{ o_list|safe }}');
+            console.log("make_markerList start");
+            // データベースからスポットの情報を取得
+            // [Stirng 住所, String 名前]
+            //var default_spot_data_array=[['東京都千代田区西神田2-4-11',"東京情報クリエイター工学院専門学校"],['東京都豊島区東池袋1-20-17',"大原ビジネス公務員専門学校池袋校"],['東京都立川市緑町4-8',"大原簿記公務員医療福祉保育専門学校立川校"]];
+            //var original_spot_data_array=[['神奈川県横浜市神奈川区反町1-8-14',"大原簿記情報ビジネス専門学校横浜校"],['千葉県千葉市中央区弁天1-16-2',"大原簿記公務員専門学校千葉校"]];
+            var default_spot_data_array = d_list
+            var original_spot_data_array = o_list
+            // 各データ数を変数に格納
+            const default_spot_counter = default_spot_data_array.length;
+            const original_spot_counter = original_spot_data_array.length;
+
+            // marker_add関数で作成したPromiseを格納する配列 promises
+            // 後にPromise.allで使用
+            var promises = [];
+            // marker_add関数を呼び出し、各スポットの住所を座標に変換し、マーカーリストに追加
+            // 重い処理のため非同期で実行し、Promiseをpromisesに追加
+            for (var i = 0; i < default_spot_counter; i++){
+                promises.push(marker_add(default_spot_data_array[i][0], default_spot_data_array[i][1],"default",default_spot_data_array[i][2]));
+                console.log("default_spot_data_array[i][0]"+default_spot_data_array[i][0]+"default_spot_data_array[i][1]:"+default_spot_data_array[i][1]+"default_spot_data_array[i][2]:"+default_spot_data_array[i][2])
+            }
+            for (var i = 0; i < original_spot_counter; i++){
+                promises.push(marker_add(original_spot_data_array[i][0], original_spot_data_array[i][1],"original",original_spot_data_array[i][2]));
+            }
+            // 全てのPromiseがresolveしたら、init関数を実行
+            Promise.all(promises).then(() => {
+                init();
+            });
+        }
+
+        // 住所→座標（緯度経度）変換関数 marker_add
+        // 引数 String address : 住所
+        //      String name : 名前
+        // 　　 String default_or_original : スポットの種類
+        // 戻り値　Promise 変換を実行し、マーカーリストに追加するPromise
+        function marker_add(address, name, default_or_original,spot_num){
+            return new Promise((resolve) => {
+                // 変換関数 getLatLng
+                // 関数内の処理終了後、Promiseをresolve()
+                getLatLng(address, (result) => {
+                    console.log(name+":"+address+":"+default_or_original+"-spot:"+spot_num)
+                    // 追加するマーカーリストのテンプレート
+                    // {pos: [float lat,float lng], String name}
+                    var markerList_tmp = {};
+                    // マーカーリストのテンプレートに座標、名前を設定
+                    markerList_tmp.pos = [result.lat,result.lng];
+                    markerList_tmp.name = name;
+                    markerList_tmp.spot_num = spot_num;
+                    // default・originalを判断し、それぞれのマーカーリストに作成したテンプレートを追加
+                    if (default_or_original == "default"){
+                        default_spot_markerList.push(markerList_tmp);
+                    } else if (default_or_original == "original"){
+                        original_spot_markerList.push(markerList_tmp);
+                    } else {
+                        console.log("default_or_original 未登録");
+                    }
+                    resolve();
+                });
+            });
+        }
+    </script>
+{% endblock %}
+{% comment %} </head> {% endcomment %}
  
-<body onload="make_markerList()">
-  <div id="mapcontainer" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
-</body>
- 
-</html>
+{% comment %} <body onload="make_markerList()">
+    <div id="mapcontainer" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
+</body> {% endcomment %}
+{% block onload %}onload="make_markerList()"{% endblock %}
+{% block contents %}
+    <div id="mapfloar">
+        <div id="mapcontainer" class="mapcon"></div>
+    </div>
+    <div class="container">
+        <!-- ブログタイトル入力 -->
+        <!-- ブログ内容入力 -->
+        <!-- 該当する訪問記録を選択 -->
+        <p>{{ message }}</p>
+        <form method="post" action="{% url 'maps:SpotSearch' %}">
+            {% csrf_token %}
+            <div style="display:block;">
+                <div class="box-parent">
+                {% for i in tag_list %}
+                    <div class="box-child">
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="tags" value={{i.MO5_tagNumber}} style="transform: scale(2);margin: 0 12px;">
+                                </td>
+                                <td>
+                                    {{ i.MO5_tagName }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <table class="confirmation">
+                <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
+                <tr>
+                    <th class="th-center">{{s_form.words.label}}</th>
+                    <td class="td-space"><input type="text" name="keyword" class="hoge"></td>
+                    <td class="td-button"><button class="btn btn-primary btn-outline btn-lg" type="submit" name="next" value="confirm">SEARCH</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}
+{% comment %} </html> {% endcomment %}
