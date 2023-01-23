@@ -10,53 +10,60 @@
 
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3 style="text-transform:none">BlogConfirmation</h3>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+        <h3 style="text-transform:none">BlogConfirmation</h3>
+      </div>
     </div>
-    <div class="container">
-        <!-- <div class="row"> -->
-        <div class="animate-box">
-            <table class="confirmation">
-                <tr>
-                    <th class="th-center">BlogName</th>
-                    <td class="td-space">{{form.MO7_blogName.value}}</td>
-                </tr>
-                <tr>
-                    <th class="th-center">BlogText</th>
-                    <td class="td-space"><pre>{{form.MO7_blogText.value}}</pre></td>
-                </tr>
-                <tr>
-                    <th class="th-center">VisitRecode</th>
-                    <td class="td-space">
-                      {{form.MO6_visitRecordNumber.value}}
-                    </td>
-                </tr>
-                <tr>
-                  <th class="th-center">OpenRangee</th>
-                  <td class="td-space">
-                    {{form.MO7_openRange.value}}
-                  </td>
-              </tr>
-            </table>
-            <div class="text-center" style="margin-top: 20px;">
-              <form method="post" action="{% url 'blog:blogConfirmation' %}">
-                {% csrf_token %}
-                <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
-                <input type="hidden" name="MO7_blogName" value={{form.MO7_blogName.value}}>
-                <textarea style="display:none" name="MO7_blogText" value={{form.MO7_blogText.value}}>{{form.MO7_blogText.value}}</textarea>
-                <input type="hidden" name="MO6_visitRecordNumber" value={{form.MO6_visitRecordNumber.value}}>
-                <input type="hidden" name="MO7_openRange" value={{form.MO7_openRange.value}}>
-                <div class="text-center-nh">
-                  <button class="btnin" type="submit" name="next" value="back">Cancel</button>
-                  <button class="btnin" type="submit"  name="next" value="create">OK</button>
-                </div>
-              </form>
-            </div>
-        </div>
+  </div>
+  <div class="container">
+    <!-- <div class="row"> -->
+    <div class="animate-box">
+      <table class="confirmation">
+        <tr>
+          <th class="th-center">BlogName</th>
+          <td class="td-space">{{form.MO7_blogName.value}}</td>
+        </tr>
+        <tr>
+          <th class="th-center">BlogText</th>
+          <td class="td-space">
+            <pre>{{form.MO7_blogText.value}}</pre>
+          </td>
+        </tr>
+        <tr>
+          <th class="th-center">VisitRecode</th>
+          <td class="td-space">
+            {{recode}}
+          </td>
+        </tr>
+        <tr>
+          <th class="th-center">OpenRangee</th>
+          <td class="td-space">
+            {% if form.MO7_openRange.value == '0' %}
+            publish to the public
+            {% elif form.MO7_openRange.value == '1' %}
+            private
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+      <div class="text-center" style="margin-top: 20px;">
+        <form method="post" action="{% url 'blog:blogConfirmation' %}">
+          {% csrf_token %}
+          <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
+          <input type="hidden" name="MO7_blogName" value={{form.MO7_blogName.value}}>
+          <textarea style="display:none" name="MO7_blogText"
+            value={{form.MO7_blogText.value}}>{{form.MO7_blogText.value}}</textarea>
+          <input type="hidden" name="MO6_visitRecordNumber" value={{form.MO6_visitRecordNumber.value}}>
+          <input type="hidden" name="MO7_openRange" value={{form.MO7_openRange.value}}>
+          <div class="text-center-nh">
+            <button class="btnin" type="submit" name="next" value="back">Cancel</button>
+            <button class="btnin" type="submit" name="next" value="create">OK</button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
