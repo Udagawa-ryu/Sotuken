@@ -100,10 +100,12 @@ def BlogConfirmation(request):
             "MO6_visitRecordNumber":request.POST.get("MO6_visitRecordNumber"),
             "MO7_openRange":request.POST.get("MO7_openRange"),
         }
+        v_recode = MO6_Visit_record.objects.get(MO6_visitRecordNumber=request.POST.get("MO6_visitRecordNumber"))
+        s_record = MO6_Visit_record.objects.get(MO6_visitRecordNumber=request.POST.get("MO6_visitRecordNumber"))
         form = BlogRegisterForm(request.POST or initial_data)
         form.fields['MO6_visitRecordNumber'].queryset = my_record
         form.fields['MO7_openRange'].choices = CHOICE
-        params = {"message":'',"form":form,"user":user}
+        params = {"message":'',"form":form,"user":user,"recode":v_recode}
         if request.POST.get('next', '') == 'confirm':
             return render(request,"BlogConfirmation.html",params)
         if request.POST.get('next', '') == 'back':
@@ -199,7 +201,7 @@ def BlogEdit(request, pk):
             if form.is_valid():
                 blog = MO7_Blog.objects.get(MO7_blogNumber=pk)
                 blog.MO1_userID = user
-                s_record = MO6_Visit_record.objects.get( MO6_visitRecordNumber = request.POST.get("MO6_visitRecordNumber"))
+                s_record = MO6_Visit_record.objects.get(MO6_visitRecordNumber = request.POST.get("MO6_visitRecordNumber"))
                 blog.MO7_blogName = request.POST.get("MO7_blogName")
                 blog.MO7_blogText = request.POST.get("MO7_blogText")
                 blog.MO6_visitRecordNumber = s_record
