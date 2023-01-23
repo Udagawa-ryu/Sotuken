@@ -50,16 +50,16 @@ class CustomLoginForm(LoginForm):
             field.widget.attrs['class'] = 'form-control'
 
 class UserEditForm(forms.ModelForm):
-    COUNTRIES = [
+    COUNTRIES = {
         #どこかから国の一覧データを持ってきたい
         ("USA","USA"),
         ("JAPAN","日本"),
-    ]
-    MO1_homeCountry = forms.ChoiceField(label="HomeCountry",choices=COUNTRIES)
-    LANGAGES = [
+    }
+    LANGAGES = {
         ("en","English"),
         ("ja","日本語"),
-    ]
+    }
+    MO1_homeCountry = forms.ChoiceField(label="HomeCountry",choices=COUNTRIES)
     MO1_language = forms.ChoiceField(label="Language",choices=LANGAGES)
     class Meta:
         model = CustomUser

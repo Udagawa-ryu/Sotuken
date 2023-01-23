@@ -23,15 +23,15 @@ def newAccount(request):
 @login_required
 def UserInfoEdit(request):
     mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
-    COUNTRIES = [
+    COUNTRIES = {
         #どこかから国の一覧データを持ってきたい
         ("USA","USA"),
         ("JAPAN","日本"),
-    ]
-    LANGAGES = [
+    }
+    LANGAGES = {
         ("en","English"),
         ("ja","日本語"),
-    ]
+    }
     if request.method == 'POST':
         initial_data = {
             "username":request.POST.get("username"),
