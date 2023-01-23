@@ -154,7 +154,7 @@
                 // マーカーを変数に格納
                 var mk = default_spot_markerList[num];
                 // マーカーに関連付けるポップアップ設定
-                var popup = L.popup().setContent(mk.name+"<br><img src='{% static 'images/sample_image.png' %}' width='200' height='275'>");
+                var popup = L.popup().setContent("<a href='/maps/DspotInfo/"+mk.spot_num+"/'>"+mk.name+"</a><br><img src='{% static 'images/sample_image.png' %}' width='200' height='275'>");
                 // マーカーアイコン設定
                 L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
                 // 上記設定でマーカーを地図、検索用レイヤーに追加
@@ -167,7 +167,7 @@
             }
             for (var num in original_spot_markerList) {
                 var mk = original_spot_markerList[num];
-                var popup = L.popup().setContent(mk.name+"<br><img src='{% static 'images/sample_image.png' %}' width='500' height='375'>");
+                var popup = L.popup().setContent("<a href='/maps/OspotInfo/"+mk.spot_num+"/'>"+mk.name+"</a><br><img src='{% static 'images/sample_image.png' %}' width='500' height='375'>");
                 L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
                 searchLayer.addLayer(L.marker(mk.pos, { 
                 title: mk.name, 
@@ -289,7 +289,7 @@
                 </tr>
             </table>
         </form>
-        <script>
+        {% comment %} <script>
             function address_check() {
                 address = document.getElementById('id_MO4_OspotAdress').value;
                 getLatLng(address, yes, no);
@@ -306,9 +306,9 @@
                 }
                 return false;
             }
-        </script>
-        {% comment %} <form method="post" name="oscreate" action="{% url 'maps:OspotCreate' %}"> {% endcomment %}
-        <form method="post" name="oscreate" onsubmit="return address_check()" >
+        </script> {% endcomment %}
+        <form method="post" name="oscreate" action="{% url 'maps:OspotCreate' %}">
+        {% comment %} <form method="post" name="oscreate" onsubmit="return address_check()" > {% endcomment %}
             {% csrf_token %}
             <table class="confirmation">
                 <input type="hidden" name="MO1_userNumber" value={{user.MO1_userNumber}}>

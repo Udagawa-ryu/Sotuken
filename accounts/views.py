@@ -72,6 +72,7 @@ def UserInfoConfirmation(request):
             return render(request,"UserInfoEdit.html",params)
         if request.POST.get('next', '') == 'next':
             form =  UserEditForm(request.POST or initial_data)
+            print(form.is_valid())
             if form.is_valid():
                 print("vaild")
                 mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
