@@ -92,7 +92,11 @@ class MO6_Visit_record(models.Model):
 
     def __str__(self):
         date = self.MO6_createdDate.strftime("%Y/%m/%d")
-        return f'{date}-{self.MO1_userNumber.username}'
+        if self.MO3_DspotNumber:
+            spot_name = self.MO3_DspotNumber.MO2_storeNumber.MO2_storeName
+        else:
+            spot_name = self.MO4_OspotNumber.MO4_OspotName
+        return f'{date}-{spot_name}'
 
 class MO9_Fav_Custom_user(models.Model):
     MO1_userNumber = models.ForeignKey(CustomUser, models.CASCADE, verbose_name="ユーザナンバー",related_name='myuser')
