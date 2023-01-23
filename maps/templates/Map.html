@@ -307,8 +307,8 @@
                 return false;
             }
         </script> {% endcomment %}
-        {% comment %} <form method="post" name="oscreate" action="{% url 'maps:OspotCreate' %}"> {% endcomment %}
-        <form method="post" name="oscreate" onsubmit="return address_check()" >
+        <form method="post" name="oscreate" action="{% url 'maps:OspotCreate' %}">
+        {% comment %} <form method="post" name="oscreate" onsubmit="return address_check()" > {% endcomment %}
             {% csrf_token %}
             <table class="confirmation">
                 <input type="hidden" name="MO1_userNumber" value={{user.MO1_userNumber}}>
