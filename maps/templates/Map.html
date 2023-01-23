@@ -289,7 +289,7 @@
                 </tr>
             </table>
         </form>
-        <script>
+        {% comment %} <script>
             function address_check() {
                 address = document.getElementById('id_MO4_OspotAdress').value;
                 getLatLng(address, yes, no);
@@ -306,7 +306,7 @@
                 }
                 return false;
             }
-        </script>
+        </script> {% endcomment %}
         {% comment %} <form method="post" name="oscreate" action="{% url 'maps:OspotCreate' %}"> {% endcomment %}
         <form method="post" name="oscreate" onsubmit="return address_check()" >
             {% csrf_token %}
