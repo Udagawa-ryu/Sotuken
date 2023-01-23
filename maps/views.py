@@ -116,7 +116,7 @@ def OspotCreate(request):
         }
         form = OspotCreateForm(request.POST or initial_data)
         if form.is_valid():
-            # form.save()
+            form.save()
             return redirect("maps:Map")
     return redirect("maps:Map")
 
