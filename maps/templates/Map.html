@@ -167,7 +167,6 @@
             }
             for (var num in original_spot_markerList) {
                 var mk = original_spot_markerList[num];
-                alert(mk.spot_num);
                 var popup = L.popup().setContent("<a href='/maps/OspotInfo/"+mk.spot_num+"/'>"+mk.name+"</a><br><img src='{% static 'images/sample_image.png' %}' width='500' height='375'>");
                 L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
                 searchLayer.addLayer(L.marker(mk.pos, { 
