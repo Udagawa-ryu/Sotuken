@@ -327,7 +327,7 @@
 
 @media screen and (max-width: 480px) {
     .account_cancel {
-        margin-left: 18%;
+        /* margin-left: 18%; */
         margin-bottom: 60%;
     }
 }
