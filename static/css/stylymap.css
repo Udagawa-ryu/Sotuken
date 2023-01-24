@@ -73,6 +73,14 @@ table.confirmation {
     margin: 0 auto;
     width: 90%;
 }
+@media screen and (max-width: 480px) {
+    table.confirmation {
+        width: 100%;
+    }
+}
+table.maptable {
+    table-layout: fixed;
+}
 
 td,
 th {
@@ -86,6 +94,11 @@ th.th-center{
     height: 50px;
     text-align: center;
 }
+@media screen and (max-width: 480px) {
+    th.th-center {
+        width: 30%;
+    }
+}
 
 td.td-space {
     background: #ffefe4;
@@ -95,7 +108,37 @@ td.td-space {
     padding-right: 10px;
     color:#333333;
 }
-
 .print-off {
     display: none;
+}
+
+/* preタグのcssの無効化 */
+.pre-none {
+    display: initial;
+    padding: initial;
+    margin: initial;
+    font-size: inherit;
+    line-height: initial;
+    word-break: initial;
+    word-wrap: initial;
+    color: initial;
+    background-color: initial;
+    border: initial;
+    border-radius: initial;
+}
+.pre-none > textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+.pre-none > input {
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 27.59px;
+}
+td > input {
+    width: 100%;
+    outline: none;
+    border: none;
 }
