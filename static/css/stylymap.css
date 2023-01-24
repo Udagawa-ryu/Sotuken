@@ -73,6 +73,9 @@ table.confirmation {
     margin: 0 auto;
     width: 90%;
 }
+table.maptable {
+    table-layout: fixed;
+}
 
 td,
 th {
@@ -95,7 +98,6 @@ td.td-space {
     padding-right: 10px;
     color:#333333;
 }
-
 .print-off {
     display: none;
 }
