@@ -111,3 +111,21 @@ td.td-space {
 .print-off {
     display: none;
 }
+
+/* preタグのcssの無効化 */
+.pre-none {
+    display: initial;
+    padding: initial;
+    margin: initial;
+    font-size: initial;
+    line-height: initial;
+    word-break: initial;
+    word-wrap: initial;
+    color: initial;
+    background-color: initial;
+    border: initial;
+    border-radius: initial;
+}
+.pre-none > textarea {
+    width: 100%;
+}
