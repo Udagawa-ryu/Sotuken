@@ -159,6 +159,14 @@
 
 {% block onload %}onload="make_markerList()"{% endblock %}
 {% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                <h3>Map</h3>
+            </div>
+        </div>
+    </div>
     <div id="mapfloar">
         <div id="mapcontainer" class="mapcon"></div>
     </div>
@@ -216,7 +224,7 @@
         </script>
         <form method="post" name="oscreate" onsubmit="return address_check()" >
             {% csrf_token %}
-            <table class="confirmation">
+            <table class="confirmation maptable">
                 <input type="hidden" name="MO1_userNumber" value={{user.MO1_userNumber}}>
                 <tr>
                     <th class="th-center">SpotName</th>
@@ -224,7 +232,9 @@
                 </tr>
                 <tr>
                     <th class="th-center">SpotAdress</th>
-                    <td class="td-space"><pre>{{o_form.MO4_OspotAdress}}</pre></td>
+                    <td class="td-space">
+                        <pre>{{o_form.MO4_OspotAdress}}</pre>
+                    </td>
                 </tr>
                 <tr>
                     <th class="th-center">SpotInfo</th>
@@ -238,4 +248,5 @@
             </div>
         </form>
     </div>
+</div>
 {% endblock %}

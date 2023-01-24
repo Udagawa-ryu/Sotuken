@@ -73,6 +73,11 @@ table.confirmation {
     margin: 0 auto;
     width: 90%;
 }
+@media screen and (max-width: 480px) {
+    table.confirmation {
+        width: 100%;
+    }
+}
 table.maptable {
     table-layout: fixed;
 }
@@ -88,6 +93,11 @@ th.th-center{
     width: 20%;
     height: 50px;
     text-align: center;
+}
+@media screen and (max-width: 480px) {
+    th.th-center {
+        width: 30%;
+    }
 }
 
 td.td-space {
