@@ -117,7 +117,7 @@ td.td-space {
     display: initial;
     padding: initial;
     margin: initial;
-    font-size: initial;
+    font-size: inherit;
     line-height: initial;
     word-break: initial;
     word-wrap: initial;
@@ -128,4 +128,14 @@ td.td-space {
 }
 .pre-none > textarea {
     width: 100%;
+    border: none;
+}
+.pre-none > input {
+    width: 100%;
+    border: none;
+    height: 27.59px;
+}
+td > input {
+    width: 100%;
+    border: none;
 }
