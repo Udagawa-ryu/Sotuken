@@ -109,16 +109,18 @@ def OtherMap(request,num):
 @login_required
 def OspotCreate(request):
     if request.method == 'POST':
-        initial_data = {
-            "MO1_userNumber":request.POST.get("MO1_userNumber"),
-            "MO4_OspotName":request.POST.get("MO4_OspotName"),
-            "MO4_OspotAdress":request.POST.get("MO4_OspotAdress"),
-            "MO4_OspotInfo":request.POST.get("MO4_OspotInfo")
-        }
-        form = OspotCreateForm(request.POST or initial_data)
-        if form.is_valid():
-            form.save()
-            return redirect("maps:Map")
+        # initial_data = {
+        #     "MO1_userNumber":request.POST.get("MO1_userNumber"),
+        #     "MO4_OspotName":request.POST.get("MO4_OspotName"),
+        #     "MO4_OspotAdress":request.POST.get("MO4_OspotAdress"),
+        #     "MO4_OspotInfo":request.POST.get("MO4_OspotInfo")
+        # }
+        # form = OspotCreateForm(request.POST or initial_data)
+        # if form.is_valid():
+        #     form.save()
+        #     return redirect("maps:Map")
+        print("lat = ",request.POST.get("lat"))
+        print("lng = ",request.POST.get("lng"))
     return redirect("maps:Map")
 
 @login_required
