@@ -6,7 +6,7 @@
 
 {% block css %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<!-- <link rel="stylesheet" href="{% static 'css/mystyle_morita.css' }" /> -->
 <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
 {% endblock %}
 
@@ -20,41 +20,52 @@
         <!-- </div> -->
     </div>
     <div class="container">
-        <table class="spot_disp">
-            <tr>
-                <td class="Spot_Name">{{spot.MO2_storeNumber.MO2_storeName}}</td>
-            </tr>
-            <tr>
-                <td>Spot Info<br>
-                    {{ spot.MO2_storeNumber.MO2_storeInfo }}
-                </td>
-            </tr>
-            <tr>
-                <td>Spot Info<br>--------------------------<br>--------------------------</td>
-            </tr>
-        </table>
-        <button class="record" type="submit">record of <br>your visits</button>
-        <table class="visited_count">
-            <tr>
-                <td>You have visited {{ count }} times.</td>
-            </tr>
-        </table>
-        <select class="spot_date">
-            {% for i in myrecords %}
-                <option>{{ i.MO6_createdDate }}</option>
-            {% endfor %}
-        </select>
-        <table class="featured">
-            <tr>
-                <td class="f_blog">Featured Blogs</td>
-            </tr>
-        </table>
-        <select class="blog_date" size="4">
-            {% for i in blogs %}
-                {% comment %} <option>{{ i.MO7_blogName }}-{{ i.MO1_userID.MO1_userName }}</option> {% endcomment %}
-                <option><a href="{% url 'main:Mypage'%}">{{ i.MO7_blogName }}-{{ i.MO1_userID.username }}</a></option>
-            {% endfor %}
-        </select>
+        <div class="animate-box">
+            <div style=" text-align: right; margin-bottom: 15px;">
+                <button class="btnin" style="width: 200px;" type="submit">record of <br>your visits</button>
+            </div>
+            <div class="side-by-side">
+                <table class="spot-table">
+                    <tr>
+                        <td class="Spot_Name">{{ spot.MO2_storeNumber.MO2_storeName }}</td>
+                    </tr>
+                    <tr>
+                        <td>Spot Info<br>
+                            {{ spot.MO2_storeNumber.MO2_storeInfo }}
+                        </td>
+                    </tr>
+                </table>
+                <table class="spot-table2">
+                    <tr>
+                        <th>You have visited {{ count }} times.</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select>
+                                {% for i in records %}
+                                <option>{{ i.MO6_createdDate }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <table>
+                <tr>
+                    <th class="f_blog">Featured Blogs</th>
+                </tr>
+                <tr>
+                    <td>
+                        <select class="blog_date" size="4">
+                            {% for i in blogs %}
+                            {% comment %} <option>{{ i.MO7_blogName }}-{{ i.MO1_userID.MO1_userName }}</option> {% endcomment %}
+                            <option><a href="{% url 'main:Mypage'%}">{{ i.MO7_blogName }}-{{ i.MO1_userID.username }}</a></option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 {% endblock %}
