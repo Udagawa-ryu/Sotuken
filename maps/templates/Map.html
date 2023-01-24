@@ -91,6 +91,34 @@
             }
             //マーカー全体が入るように地図範囲を設定する
             map.fitBounds(bound);
+
+            map.on('click', onMapClick);
+            var clickMarker = null;
+            function onMapClick(e) {
+                if (clickMarker) {
+                    map.removeLayer(clickMarker);
+                }
+                var lat = e.latlng.lat;
+                var lng = e.latlng.lng;
+                // 地理院地図サーバから標高を求める
+                // http://maps.gsi.go.jp/development/elevation_s.html
+                var src = 'https://cyberjapandata2.gsi.go.jp/general/dem/scripts/getelevation.php?lon=' + lng + '&lat=' + lat ;
+                var req = new XMLHttpRequest();
+                req.onreadystatechange = function() {
+                    if(req.readyState == 4 && req.status == 200) {
+                        var json = req.responseText;
+                        var results = JSON.parse(json);
+                        //var popStr = '緯度：' + lat + '<br>経度：' + lng + '<br>標高：' + results.elevation + 'm';
+                        var popStr = '<input type="hidden" name="lat" form="test-oscreate" value='+lat+'>'+'<input type="hidden" name="lng" form="test-oscreate" value='+lng+'>'+'<a href="#scroll"><button class="btn btn-primary btn-outline btn-lg">create</button></a>';
+                        clickMarker = L.marker(e.latlng).on('click', onMarkerClick).addTo(map).bindPopup(popStr).openPopup();
+                    }
+                };
+                req.open("GET", src, false);
+                req.send(null)
+            }
+            function onMarkerClick(e) {
+                map.removeLayer(clickMarker);
+            }
         }
 
         // マーカーリスト作成関数 make_markerList
@@ -162,7 +190,7 @@
     <div id="mapfloar">
         <div id="mapcontainer" class="mapcon"></div>
     </div>
-    <div class="container">
+    <div class="container"  id="scroll">
         <!-- ブログタイトル入力 -->
         <!-- ブログ内容入力 -->
         <!-- 該当する訪問記録を選択 -->
@@ -196,7 +224,7 @@
                 </tr>
             </table>
         </form>
-        <script>
+        {% comment %} <script>
             function address_check() {
                 address = document.getElementById('id_MO4_OspotAdress').value;
                 getLatLng(address, yes, no);
@@ -213,8 +241,8 @@
                     return false;
                 }
             }
-        </script>
-        <form method="post" name="oscreate" onsubmit="return address_check()" >
+        </script> {% endcomment %}
+        <form method="post" id="test-oscreate" name="oscreate" action="{% url 'maps:OspotCreate' %}" >
             {% csrf_token %}
             <table class="confirmation">
                 <input type="hidden" name="MO1_userNumber" value={{user.MO1_userNumber}}>
