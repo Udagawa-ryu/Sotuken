@@ -129,13 +129,16 @@ td.td-space {
 .pre-none > textarea {
     width: 100%;
     border: none;
+    outline: none;
 }
 .pre-none > input {
     width: 100%;
     border: none;
+    outline: none;
     height: 27.59px;
 }
 td > input {
     width: 100%;
+    outline: none;
     border: none;
 }

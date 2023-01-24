@@ -171,82 +171,86 @@
         <div id="mapcontainer" class="mapcon"></div>
     </div>
     <div class="container">
-        <!-- ブログタイトル入力 -->
-        <!-- ブログ内容入力 -->
-        <!-- 該当する訪問記録を選択 -->
-        <p>{{ message }}</p>
-        <form method="post" action="{% url 'maps:SpotSearch' %}">
-            {% csrf_token %}
-            <div style="display:block;">
-                <div class="box-parent">
-                {% for i in tag_list %}
-                    <div class="box-child">
-                        <table>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="tags" value={{i.MO5_tagNumber}} style="transform: scale(2);margin: 0 12px;">
-                                </td>
-                                <td>
-                                    {{ i.MO5_tagName }}
-                                </td>
-                            </tr>
-                        </table>
+        <div class="animate-box">
+            <!-- ブログタイトル入力 -->
+            <!-- ブログ内容入力 -->
+            <!-- 該当する訪問記録を選択 -->
+            <p>{{ message }}</p>
+            <form method="post" action="{% url 'maps:SpotSearch' %}">
+                {% csrf_token %}
+                <div style="display:block;">
+                    <div class="box-parent">
+                        {% for i in tag_list %}
+                        <div class="box-child">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="tags" value={{i.MO5_tagNumber}}
+                                            style="transform: scale(2);margin: 0 12px;">
+                                    </td>
+                                    <td>
+                                        {{ i.MO5_tagName }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
                 </div>
-            </div>
-            <table class="confirmation">
-                <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
-                <tr>
-                    <th class="th-center">{{s_form.words.label}}</th>
-                    <td class="td-space"><input type="text" name="keyword" class="hoge"></td>
-                    <td class="td-button"><button class="btn btn-primary btn-outline btn-lg" type="submit" name="next" value="confirm">SEARCH</button></td>
-                </tr>
-            </table>
-        </form>
-        <script>
-            function address_check() {
-                address = document.getElementById('id_MO4_OspotAdress').value;
-                getLatLng(address, yes, no);
-                const flg = 0;
-                function yes(latlng){
-                    alert("yes");
-                    document.oscreate.action = "{% url 'maps:OspotCreate' %}";
-                    alert("l = ",latlng.lat);
+                <table class="confirmation">
+                    <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
+                    <tr>
+                        <th class="th-center">{{s_form.words.label}}</th>
+                        <td class="td-space"><input type="text" name="keyword" class="hoge"></td>
+                        <td class="td-button"><button class="btn btn-primary btn-outline btn-lg" type="submit" name="next"
+                                value="confirm">SEARCH</button></td>
+                    </tr>
+                </table>
+            </form>
+            <script>
+                function address_check() {
+                    address = document.getElementById('id_MO4_OspotAdress').value;
+                    getLatLng(address, yes, no);
+                    const flg = 0;
+                    function yes(latlng) {
+                        alert("yes");
+                        document.oscreate.action = "{% url 'maps:OspotCreate' %}";
+                        alert("l = ", latlng.lat);
+                    }
+                    function no(latlng) {
+                        alert("no");
+                        flg = 1;
+                        alert("l = ", latlng);
+                        return false;
+                    }
                 }
-                function no(latlng){
-                    alert("no");
-                    flg = 1;
-                    alert("l = ",latlng);
-                    return false;
-                }
-            }
-        </script>
-        <form method="post" name="oscreate" onsubmit="return address_check()" >
-            {% csrf_token %}
-            <table class="confirmation maptable">
-                <input type="hidden" name="MO1_userNumber" value={{user.MO1_userNumber}}>
-                <tr>
-                    <th class="th-center">SpotName</th>
-                    <td class="td-space">{{o_form.MO4_OspotName}}</td>
-                </tr>
-                <tr>
-                    <th class="th-center">SpotAdress</th>
-                    <td class="td-space">
-                        <pre class="pre-none">{{o_form.MO4_OspotAdress}}</pre>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="th-center">SpotInfo</th>
-                    <td class="td-space" style="padding-top: 10px;">
-                        <pre class="pre-none">{{o_form.MO4_OspotInfo}}</pre>
-                    </td>
-                </tr>
-            </table>
-            <div style="text-align: center; margin-bottom:15px;">
-                <button class="btn btn-primary btn-outline btn-lg" type="submit">create</button>
-            </div>
-        </form>
+            </script>
+            <form method="post" name="oscreate" onsubmit="return address_check()">
+                {% csrf_token %}
+                <table class="confirmation maptable">
+                    <input type="hidden" name="MO1_userNumber" value={{user.MO1_userNumber}}>
+                    <tr>
+                        <th class="th-center">SpotName</th>
+                        <td class="td-space">{{o_form.MO4_OspotName}}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">SpotAdress</th>
+                        <td class="td-space">
+                            <pre class="pre-none">{{o_form.MO4_OspotAdress}}</pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">SpotInfo</th>
+                        <td class="td-space" style="padding-top: 10px;">
+                            <pre class="pre-none">{{o_form.MO4_OspotInfo}}</pre>
+                        </td>
+                    </tr>
+                </table>
+                <div style="text-align: center; margin-bottom:15px;">
+                    <button class="btn btn-primary btn-outline btn-lg" type="submit">create</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
