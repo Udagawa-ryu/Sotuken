@@ -133,9 +133,6 @@ def SpotSearch(request):
 
 def SpotSearch(request):
     from django.db import connection
-    from samuraiwalk.settings_common import connector
-    cursor = connection.cursor()
-    # cursor2 = connector.cursor()
     if request.method == 'POST':
         tags_id = request.POST.getlist('tags')
         keword = request.POST.get('keyword')
@@ -154,20 +151,15 @@ def SpotSearch(request):
         sql += """ group by "MO2_storeNumber";"""
         sql_test = "select * from maps_mo3_default_spot;"
         print("sql1="+sql)
-        # res = MO3_Default_spot.objects.raw(sql_test)
         res = MO2_store.objects.raw(sql)
         print("r = ",res)
         for i in res:
             print("i = {}-{}".format(i.count,i.MO2_storeNumber))
         
-        # # ここでエラー
-        # res = cursor.execute(sql_test)
-        # print("r = ",res)
         sql = """select * from maps_mo3_default_spot where 1=0 """
         for i in res:
             if i.count == tag_counter:
                 sql += """ or "MO2_storeNumber_id" = """+str(i.MO2_storeNumber)
-        # sql += """ group by "MO2_storeNumber"; """
         sql += """ ; """
         print("sql2="+sql)
         serch = MO3_Default_spot.objects.raw(sql)
