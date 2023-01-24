@@ -100,13 +100,12 @@ def UserInfoConfirmation(request):
             params = {"message":'',"form":form}
             return render(request,"UserInfoEdit.html",params)
         if request.POST.get('next', '') == 'next':
-            form =  UserEditForm(request.POST or initial_data)
+            mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
+            form =  UserEditForm(request.POST or initial_data,instance=mydata)
             form.fields['MO1_homeCountry'].choices = COUNTRIES
             form.fields['MO1_language'].choices = LANGAGES
             print(form.is_valid())
             if form.is_valid():
-                print("vaild")
-                mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
                 mydata.username = request.POST.get("username")
                 mydata.MO1_userID = request.POST.get("MO1_userID")
                 mydata.MO1_homeCountry = request.POST.get("MO1_homeCountry")
