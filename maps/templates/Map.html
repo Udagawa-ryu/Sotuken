@@ -289,7 +289,7 @@
                 </tr>
             </table>
         </form>
-        {% comment %} <script>
+        <script>
             function address_check() {
                 address = document.getElementById('id_MO4_OspotAdress').value;
                 getLatLng(address, yes, no);
@@ -297,18 +297,18 @@
                 function yes(latlng){
                     alert("yes");
                     document.oscreate.action = "{% url 'maps:OspotCreate' %}";
-                    alert("l = ",latlng);
+                    alert("l = ",latlng.lat);
                 }
                 function no(latlng){
                     alert("no");
                     flg = 1;
                     alert("l = ",latlng);
+                    return false;
                 }
-                return false;
             }
-        </script> {% endcomment %}
-        <form method="post" name="oscreate" action="{% url 'maps:OspotCreate' %}">
-        {% comment %} <form method="post" name="oscreate" onsubmit="return address_check()" > {% endcomment %}
+        </script>
+        {% comment %} <form method="post" name="oscreate" action="{% url 'maps:OspotCreate' %}"> {% endcomment %}
+        <form method="post" name="oscreate" onsubmit="return address_check()" >
             {% csrf_token %}
             <table class="confirmation">
                 <input type="hidden" name="MO1_userNumber" value={{user.MO1_userNumber}}>

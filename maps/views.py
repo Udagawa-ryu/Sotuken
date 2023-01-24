@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.views import generic
 from accounts.models import CustomUser,MO6_Visit_record
 from .models import MO3_Default_spot,MO4_Original_spot,MO5_Tag
+from store.models import MO2_store
 from .forms import *
 from blog.models import MO7_Blog
 import json
@@ -132,7 +133,9 @@ def SpotSearch(request):
 
 def SpotSearch(request):
     from django.db import connection
+    from samuraiwalk.settings_common import connector
     cursor = connection.cursor()
+    # cursor2 = connector.cursor()
     if request.method == 'POST':
         tags_id = request.POST.getlist('tags')
         keword = request.POST.get('keyword')
@@ -149,17 +152,46 @@ def SpotSearch(request):
                 sql += """ or "mo5_tag_id" = """+i
             sql += """)"""
         sql += """ group by "MO2_storeNumber";"""
+        sql_test = "select * from maps_mo3_default_spot;"
         print("sql1="+sql)
-        
-        # ここでエラー
-        res = cursor.execute(sql)
-        print(res)
-        sql = """select * from store_mo2_store where 1=0 """
+        # res = MO3_Default_spot.objects.raw(sql_test)
+        res = MO2_store.objects.raw(sql)
+        print("r = ",res)
         for i in res:
-            if i["count"] == tag_counter:
-                sql += """ or "MO2_storeNumber" = """+i["MO2_storeNumber"]
-        sql += """ group by "MO2_storeNumber"; """
+            print("i = {}-{}".format(i.count,i.MO2_storeNumber))
+        
+        # # ここでエラー
+        # res = cursor.execute(sql_test)
+        # print("r = ",res)
+        sql = """select * from maps_mo3_default_spot where 1=0 """
+        for i in res:
+            if i.count == tag_counter:
+                sql += """ or "MO2_storeNumber_id" = """+str(i.MO2_storeNumber)
+        # sql += """ group by "MO2_storeNumber"; """
+        sql += """ ; """
         print("sql2="+sql)
-        serch = cursor.execute(sql)
-        print(serch)
+        serch = MO3_Default_spot.objects.raw(sql)
+        user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
+        o_spotform = OspotCreateForm()
+        searchform = SpotSearchForm()
+        tag_list = MO5_Tag.objects.all()
+        o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = request.user.MO1_userNumber)
+        d_list = []
+        o_list = []
+        for i in serch:
+            d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber])
+        for i in o_spot:
+            o_list.append([i.MO4_OspotAdress,i.MO4_OspotName, i.MO4_OspotNumber])
+        print(d_list)
+        params = {
+            'd_list': json.dumps(d_list),
+            'o_list': json.dumps(o_list),
+            'o_form':o_spotform,
+            's_form':searchform,
+            'tag_list':tag_list,
+            'user':user,
+        }
+    return render(request,"Map.html",params)
+
+def addressSearch(request):
     return Map(request)
