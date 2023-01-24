@@ -1,14 +1,7 @@
 {% extends 'base.html' %}
-{% comment %} <h1>地図画面</h1> {% endcomment %}
 {% load static %}
-{% comment %} <!DOCTYPE html> {% endcomment %}
-{% comment %} <html> {% endcomment %}
-{% comment %} <head> {% endcomment %}
 {% block title %}Map{% endblock %}
-    {% comment %} <meta charset="UTF-8"> {% endcomment %}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    {% comment %} <title>map</title> {% endcomment %}
 {% block script %}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
     <script src="{% static 'js/leaflet.js' %}"></script>
@@ -16,17 +9,11 @@
     <script src="https://cdn.geolonia.com/community-geocoder.js"></script>
     <script src="{% static 'js/leaflet-search.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/leaflet-search.css' %}">
-    <link rel="stylesheet" href="{% static 'css/stylymap.css' %}" />    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+    <link rel="stylesheet" href="{% static 'css/stylymap.css' %}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-
-    {% comment %} <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" rel="stylesheet"> {% endcomment %}
-    {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script> {% endcomment %}
-    <script src="https://api.wikiocity.com/lib/mlgl/v1.14.0/maplibre-gl.js"></script>
-    <script src="https://api.wikiocity.com/lib/mlgl-leaflet/leaflet-maplibre-gl.js"></script>
-    {% comment %} <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq9zOaV1tEij_ymeVg4jegRhqQhjoS4QY" async defer></script> {% endcomment %}
-    {% comment %} <script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script> {% endcomment %}
-    {% comment %} <script src="{% static 'js/Leaflet.GoogleMutant.js' %}"></script> {% endcomment %}
-    {% comment %} <script src="{% static 'js/lru_map.js' %}"></script> {% endcomment %}
+    <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRh_82v_as8gc1SMbHnvHPSK2w1plRQdk&callback=initMap"></script>y
 
     <script>
         console.log("map start");
@@ -48,81 +35,9 @@
             var map = L.map('mapcontainer',{maxBounds: japan_bound, maxZoom: 20, minZoom: 5,}).setView(center, startZoom);
 
             // maptile選択・mapに追加
-            // 地理院標準地図
-            {% comment %} L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
-                attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
-            }).addTo(map); {% endcomment %}
-            // openstreetmap
-            {% comment %} L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                continuousWorld: false,
-                maxZoom: 20,
-                minZoom: 5,
-            }).addTo(map); {% endcomment %}
-            // MapTilesAPI.OSMEnglish
-            {% comment %} L.tileLayer('https://maptiles.p.rapidapi.com/es/map/v1/{z}/{x}/{y}.png?rapidapi-key={apikey}', {
-                attribution: '&copy; <a href="http://www.maptilesapi.com/">MapTiles API</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                apikey: '07b42bd84dmsha2c84c2de9e35b3p1dc440jsn35ea7f61ea22',
-                maxZoom: 20,
-                minZoom: 5,
-            }).addTo(map); {% endcomment %}
-
-            {% comment %} L.tileLayer('https://api.wikiocity.com/r/vector/en/{z}/{x}/{y}.pbf?key=d9277a1cc43ba53c284c72ed7', {
-                attribution: '&copy; <a href="https://api.wikiocity.com">Wikiocity</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                style: 'https://api.wikiocity.com/style/wikiocity-mgl-style.json?key=d9277a1cc43ba53c284c72ed7&lang=en',
-                maxZoom: 20,
-                minZoom: 5,
-            }).addTo(map); {% endcomment %}
-
-            // 言語設定
-            // intl - Language is in native language of viewed map area.
-            //ar - Arabic العربية
-            //bn - Bengali বাংলা
-            //de - German Deutsch
-            //en - English English
-            //es - Spanish Español
-            //fr - French Français
-            //el - Greek ελληνικά
-            //hi - Hindi हिन्दी, हिंदी
-            //hu - Hungarian Magyar
-            //id - Indonesian Bahasa Indonesia
-            //it - Italian Italiano
-            //ja - Japanese 日本語 (にほんご)
-            //ko - Korean 한국어
-            //nl - Dutch, Flemish Nederlands, Vlaams
-            //pl - Polish Język Polski, Polszczyzna
-            //pt - Portuguese Português
-            //ru - Russian русский
-            //sv - Swedish Svenska
-            //tr - Turkish Türkçe
-            //vi - Vietnamese Tiếng Việt
-            //zh - Chinese 中文 (Zhōngwén), 汉语, 漢語
-            // ブラウザの設定言語を取得し、マップの言語に設定
-            try {
-                mapLanguage = (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2)
-              }
-              catch(e) {
-                mapLanguage = 'en';
-              }
-            console.log("lang = "+mapLanguage);
-            var apiKey = 'd9277a1cc43ba53c284c72ed7';
-            var targetDivId = 'map';
-   		    var mapType = 'vector';
-            var gl = L.maplibreGL({
-                attribution: '&copy; <a href="https://api.wikiocity.com">Wikiocity</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                style: 'https://api.wikiocity.com/style/wikiocity-mgl-style.json?key='+apiKey+'&lang='+mapLanguage,
-                minZoom:5
+            L.gridLayer.googleMutant({
+                type: "roadmap",
             }).addTo(map);
-
-            {% comment %} L.tileLayer('https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyAq9zOaV1tEij_ymeVg4jegRhqQhjoS4QY',{
-                maxZoom: 20,
-                subdomains:['mt0','mt1','mt2','mt3']
-            }); {% endcomment %}
-
-            {% comment %} L.gridLayer.googleMutant({
-                type: 'roadmap'
-            }); {% endcomment %}
-
 
             // スポット検索コンソール設定
             // スポット検索用レイヤーを作成し、マップに追加
@@ -163,7 +78,6 @@
                     icon: L.spriteIcon('green') 
                 }).bindPopup(popup).addTo(map));
                 //マーカー全体が入るボックスを広げる
-                {% comment %} bound.extend(mk.pos); {% endcomment %}
             }
             for (var num in original_spot_markerList) {
                 var mk = original_spot_markerList[num];
@@ -174,7 +88,6 @@
                 icon: L.spriteIcon('red') 
                 }).bindPopup(popup).addTo(map));
                 //マーカー全体が入るボックスを広げる
-                {% comment %} bound.extend(mk.pos); {% endcomment %}
             }
             //マーカー全体が入るように地図範囲を設定する
             map.fitBounds(bound);
@@ -187,8 +100,6 @@
             console.log("make_markerList start");
             // データベースからスポットの情報を取得
             // [Stirng 住所, String 名前]
-            //var default_spot_data_array=[['東京都千代田区西神田2-4-11',"東京情報クリエイター工学院専門学校"],['東京都豊島区東池袋1-20-17',"大原ビジネス公務員専門学校池袋校"],['東京都立川市緑町4-8',"大原簿記公務員医療福祉保育専門学校立川校"]];
-            //var original_spot_data_array=[['神奈川県横浜市神奈川区反町1-8-14',"大原簿記情報ビジネス専門学校横浜校"],['千葉県千葉市中央区弁天1-16-2',"大原簿記公務員専門学校千葉校"]];
             var default_spot_data_array = d_list
             var original_spot_data_array = o_list
             // 各データ数を変数に格納
@@ -245,11 +156,7 @@
         }
     </script>
 {% endblock %}
-{% comment %} </head> {% endcomment %}
- 
-{% comment %} <body onload="make_markerList()">
-    <div id="mapcontainer" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
-</body> {% endcomment %}
+
 {% block onload %}onload="make_markerList()"{% endblock %}
 {% block contents %}
     <div id="mapfloar">
@@ -307,7 +214,6 @@
                 }
             }
         </script>
-        {% comment %} <form method="post" name="oscreate" action="{% url 'maps:OspotCreate' %}"> {% endcomment %}
         <form method="post" name="oscreate" onsubmit="return address_check()" >
             {% csrf_token %}
             <table class="confirmation">
@@ -330,10 +236,6 @@
             <div style="text-align: center; margin-bottom:15px;">
                 <button class="btn btn-primary btn-outline btn-lg" type="submit">create</button>
             </div>
-            {% comment %} <button class="btn btn-primary btn-outline btn-lg" onclick="return address_check()">create</button> {% endcomment %}
-            {% comment %} <button onclick="address_check()">１を足す</button> {% endcomment %}
-
         </form>
     </div>
 {% endblock %}
-{% comment %} </html> {% endcomment %}
