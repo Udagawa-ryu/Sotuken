@@ -13,20 +13,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3 style="text-transform:none">Your FavoriteBlog</h3>
+                <h3 style="text-transform:none">Your Favorite Blog</h3>
             </div>
         </div>
     </div>
     <div class="container">
         <!-- 左寄せ -->
-        <div id="fh5co-menu-wrap">
-            <div class="row">
-                <div class="animate-box">
-                    <ul class="actions">
-                        <!-- 作成ページ遷移ボタン -->
-                        <button type="submit" onclick="location.href='{% url 'main:favoriteUserList' %}'" class="fav_blog" style="text-transform:none">Favorite User</button></li>
-                    </ul>
-                </div>
+        <div class="animate-box">
+            <div style="text-align:right;">
+                <!-- 作成ページ遷移ボタン -->
+                <button type="submit" onclick="location.href='{% url 'main:favoriteUserList' %}'" class="btnin" style="width:150px;" style="text-transform:none">Favorite<br>User</button>
             </div>
         </div>
     </div>
