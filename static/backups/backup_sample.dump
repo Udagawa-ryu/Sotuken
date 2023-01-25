@@ -1,0 +1,2690 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.18
+-- Dumped by pg_dump version 10.18
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+ALTER TABLE ONLY public.maps_mo8_fav_search_condition DROP CONSTRAINT "maps_mo8_fav_search__MO5_tagNumber_id_4d8323ff_fk_maps_mo5_";
+ALTER TABLE ONLY public.maps_mo8_fav_search_condition DROP CONSTRAINT "maps_mo8_fav_search__MO1_userNumber_id_e17064da_fk_accounts_";
+ALTER TABLE ONLY public."maps_mo4_original_spot_MO5_tagNumber" DROP CONSTRAINT maps_mo4_original_sp_mo5_tag_id_7f03289e_fk_maps_mo5_;
+ALTER TABLE ONLY public."maps_mo4_original_spot_MO5_tagNumber" DROP CONSTRAINT maps_mo4_original_sp_mo4_original_spot_id_551ef9a5_fk_maps_mo4_;
+ALTER TABLE ONLY public.maps_mo4_original_spot DROP CONSTRAINT "maps_mo4_original_sp_MO1_userNumber_id_9cffce83_fk_accounts_";
+ALTER TABLE ONLY public."maps_mo3_default_spot_MO5_tagNumber" DROP CONSTRAINT maps_mo3_default_spo_mo5_tag_id_c31231c8_fk_maps_mo5_;
+ALTER TABLE ONLY public."maps_mo3_default_spot_MO5_tagNumber" DROP CONSTRAINT maps_mo3_default_spo_mo3_default_spot_id_0d5adb49_fk_maps_mo3_;
+ALTER TABLE ONLY public.maps_mo3_default_spot DROP CONSTRAINT "maps_mo3_default_spo_MO2_storeNumber_id_66a5c380_fk_store_mo2";
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_user_id_c564eba6_fk_accounts_;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co;
+ALTER TABLE ONLY public.blog_mo7_blog DROP CONSTRAINT "blog_mo7_blog_MO6_visitRecordNumbe_ba3b7b5c_fk_accounts_";
+ALTER TABLE ONLY public.blog_mo7_blog DROP CONSTRAINT "blog_mo7_blog_MO1_userID_id_8eb3f9c7_fk_accounts_";
+ALTER TABLE ONLY public.blog_mo10_fav_blog DROP CONSTRAINT "blog_mo10_fav_blog_MO7_blogNumber_id_deff692a_fk_blog_mo7_";
+ALTER TABLE ONLY public.blog_mo10_fav_blog DROP CONSTRAINT "blog_mo10_fav_blog_MO1_userNumber_id_1854b36e_fk_accounts_";
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm;
+ALTER TABLE ONLY public.accounts_mo9_fav_custom_user DROP CONSTRAINT "accounts_mo9_fav_cus_MO9_followedUserNumb_ab5192ab_fk_accounts_";
+ALTER TABLE ONLY public.accounts_mo9_fav_custom_user DROP CONSTRAINT "accounts_mo9_fav_cus_MO1_userNumber_id_87ac0e34_fk_accounts_";
+ALTER TABLE ONLY public.accounts_mo6_visit_record DROP CONSTRAINT "accounts_mo6_visit_r_MO4_OspotNumber_id_94dc3cc1_fk_maps_mo4_";
+ALTER TABLE ONLY public.accounts_mo6_visit_record DROP CONSTRAINT "accounts_mo6_visit_r_MO3_DspotNumber_id_7edef852_fk_maps_mo3_";
+ALTER TABLE ONLY public.accounts_mo6_visit_record DROP CONSTRAINT "accounts_mo6_visit_r_MO1_userNumber_id_9d5ae305_fk_accounts_";
+ALTER TABLE ONLY public.accounts_customuser_groups DROP CONSTRAINT accounts_customuser_groups_group_id_86ba5f9e_fk_auth_group_id;
+ALTER TABLE ONLY public.accounts_customuser_user_permissions DROP CONSTRAINT accounts_customuser__permission_id_aea3d0e5_fk_auth_perm;
+ALTER TABLE ONLY public.accounts_customuser_groups DROP CONSTRAINT accounts_customuser__customuser_id_bc55088e_fk_accounts_;
+ALTER TABLE ONLY public.accounts_customuser_user_permissions DROP CONSTRAINT accounts_customuser__customuser_id_0deaefae_fk_accounts_;
+ALTER TABLE ONLY public.account_emailconfirmation DROP CONSTRAINT account_emailconfirm_email_address_id_5b7f8c58_fk_account_e;
+ALTER TABLE ONLY public.account_emailaddress DROP CONSTRAINT account_emailaddress_user_id_2c513194_fk_accounts_;
+DROP INDEX public."store_mo2_store_MO2_mailAdress_6600a0e6_like";
+DROP INDEX public."maps_mo8_fav_search_condition_MO5_tagNumber_id_4d8323ff";
+DROP INDEX public."maps_mo8_fav_search_condition_MO1_userNumber_id_e17064da";
+DROP INDEX public."maps_mo4_original_spot_MO5_tagNumber_mo5_tag_id_7f03289e";
+DROP INDEX public."maps_mo4_original_spot_MO5_mo4_original_spot_id_551ef9a5";
+DROP INDEX public."maps_mo4_original_spot_MO1_userNumber_id_9cffce83";
+DROP INDEX public."maps_mo3_default_spot_MO5_tagNumber_mo5_tag_id_c31231c8";
+DROP INDEX public."maps_mo3_default_spot_MO5__mo3_default_spot_id_0d5adb49";
+DROP INDEX public."maps_mo3_default_spot_MO2_storeNumber_id_66a5c380";
+DROP INDEX public.django_site_domain_a2e37b91_like;
+DROP INDEX public.django_session_session_key_c0390e0f_like;
+DROP INDEX public.django_session_expire_date_a5c62663;
+DROP INDEX public.django_admin_log_user_id_c564eba6;
+DROP INDEX public.django_admin_log_content_type_id_c4bce8eb;
+DROP INDEX public."blog_mo7_blog_MO6_visitRecordNumber_id_ba3b7b5c";
+DROP INDEX public."blog_mo7_blog_MO1_userID_id_8eb3f9c7";
+DROP INDEX public."blog_mo10_fav_blog_MO7_blogNumber_id_deff692a";
+DROP INDEX public."blog_mo10_fav_blog_MO1_userNumber_id_1854b36e";
+DROP INDEX public.auth_permission_content_type_id_2f476e4b;
+DROP INDEX public.auth_group_permissions_permission_id_84c5c92e;
+DROP INDEX public.auth_group_permissions_group_id_b120cbf9;
+DROP INDEX public.auth_group_name_a6ea08ec_like;
+DROP INDEX public."accounts_mo9_fav_custom_user_MO9_followedUserNumber_id_ab5192ab";
+DROP INDEX public."accounts_mo9_fav_custom_user_MO1_userNumber_id_87ac0e34";
+DROP INDEX public."accounts_mo6_visit_record_MO4_OspotNumber_id_94dc3cc1";
+DROP INDEX public."accounts_mo6_visit_record_MO3_DspotNumber_id_7edef852";
+DROP INDEX public."accounts_mo6_visit_record_MO1_userNumber_id_9d5ae305";
+DROP INDEX public.accounts_customuser_user_permissions_permission_id_aea3d0e5;
+DROP INDEX public.accounts_customuser_user_permissions_customuser_id_0deaefae;
+DROP INDEX public.accounts_customuser_groups_group_id_86ba5f9e;
+DROP INDEX public.accounts_customuser_groups_customuser_id_bc55088e;
+DROP INDEX public.accounts_customuser_email_4fd8e7ce_like;
+DROP INDEX public."accounts_customuser_MO1_userID_c01c6f60_like";
+DROP INDEX public.account_emailconfirmation_key_f43612bd_like;
+DROP INDEX public.account_emailconfirmation_email_address_id_5b7f8c58;
+DROP INDEX public.account_emailaddress_user_id_2c513194;
+DROP INDEX public.account_emailaddress_email_03be32b2_like;
+ALTER TABLE ONLY public.store_mo2_store DROP CONSTRAINT store_mo2_store_pkey;
+ALTER TABLE ONLY public.store_mo2_store DROP CONSTRAINT "store_mo2_store_MO2_mailAdress_key";
+ALTER TABLE ONLY public.maps_mo8_fav_search_condition DROP CONSTRAINT maps_mo8_fav_search_condition_pkey;
+ALTER TABLE ONLY public.maps_mo5_tag DROP CONSTRAINT maps_mo5_tag_pkey;
+ALTER TABLE ONLY public.maps_mo4_original_spot DROP CONSTRAINT maps_mo4_original_spot_pkey;
+ALTER TABLE ONLY public."maps_mo4_original_spot_MO5_tagNumber" DROP CONSTRAINT "maps_mo4_original_spot_M_mo4_original_spot_id_mo5_17034d3a_uniq";
+ALTER TABLE ONLY public."maps_mo4_original_spot_MO5_tagNumber" DROP CONSTRAINT "maps_mo4_original_spot_MO5_tagNumber_pkey";
+ALTER TABLE ONLY public.maps_mo3_default_spot DROP CONSTRAINT maps_mo3_default_spot_pkey;
+ALTER TABLE ONLY public."maps_mo3_default_spot_MO5_tagNumber" DROP CONSTRAINT "maps_mo3_default_spot_MO_mo3_default_spot_id_mo5__d465fd27_uniq";
+ALTER TABLE ONLY public."maps_mo3_default_spot_MO5_tagNumber" DROP CONSTRAINT "maps_mo3_default_spot_MO5_tagNumber_pkey";
+ALTER TABLE ONLY public.django_site DROP CONSTRAINT django_site_pkey;
+ALTER TABLE ONLY public.django_site DROP CONSTRAINT django_site_domain_a2e37b91_uniq;
+ALTER TABLE ONLY public.django_session DROP CONSTRAINT django_session_pkey;
+ALTER TABLE ONLY public.django_migrations DROP CONSTRAINT django_migrations_pkey;
+ALTER TABLE ONLY public.django_content_type DROP CONSTRAINT django_content_type_pkey;
+ALTER TABLE ONLY public.django_content_type DROP CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_pkey;
+ALTER TABLE ONLY public.blog_mo7_blog DROP CONSTRAINT blog_mo7_blog_pkey;
+ALTER TABLE ONLY public.blog_mo10_fav_blog DROP CONSTRAINT blog_mo10_fav_blog_pkey;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_pkey;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq;
+ALTER TABLE ONLY public.auth_group DROP CONSTRAINT auth_group_pkey;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_pkey;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq;
+ALTER TABLE ONLY public.auth_group DROP CONSTRAINT auth_group_name_key;
+ALTER TABLE ONLY public.accounts_mo9_fav_custom_user DROP CONSTRAINT accounts_mo9_fav_custom_user_pkey;
+ALTER TABLE ONLY public.accounts_mo6_visit_record DROP CONSTRAINT accounts_mo6_visit_record_pkey;
+ALTER TABLE ONLY public.accounts_customuser_user_permissions DROP CONSTRAINT accounts_customuser_user_permissions_pkey;
+ALTER TABLE ONLY public.accounts_customuser_user_permissions DROP CONSTRAINT accounts_customuser_user_customuser_id_permission_9632a709_uniq;
+ALTER TABLE ONLY public.accounts_customuser DROP CONSTRAINT accounts_customuser_pkey;
+ALTER TABLE ONLY public.accounts_customuser_groups DROP CONSTRAINT accounts_customuser_groups_pkey;
+ALTER TABLE ONLY public.accounts_customuser_groups DROP CONSTRAINT accounts_customuser_groups_customuser_id_group_id_c074bdcb_uniq;
+ALTER TABLE ONLY public.accounts_customuser DROP CONSTRAINT accounts_customuser_email_key;
+ALTER TABLE ONLY public.accounts_customuser DROP CONSTRAINT "accounts_customuser_MO1_userID_c01c6f60_uniq";
+ALTER TABLE ONLY public.account_emailconfirmation DROP CONSTRAINT account_emailconfirmation_pkey;
+ALTER TABLE ONLY public.account_emailconfirmation DROP CONSTRAINT account_emailconfirmation_key_key;
+ALTER TABLE ONLY public.account_emailaddress DROP CONSTRAINT account_emailaddress_pkey;
+ALTER TABLE ONLY public.account_emailaddress DROP CONSTRAINT account_emailaddress_email_key;
+ALTER TABLE public.store_mo2_store ALTER COLUMN "MO2_storeNumber" DROP DEFAULT;
+ALTER TABLE public.maps_mo8_fav_search_condition ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.maps_mo5_tag ALTER COLUMN "MO5_tagNumber" DROP DEFAULT;
+ALTER TABLE public."maps_mo4_original_spot_MO5_tagNumber" ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.maps_mo4_original_spot ALTER COLUMN "MO4_OspotNumber" DROP DEFAULT;
+ALTER TABLE public."maps_mo3_default_spot_MO5_tagNumber" ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.maps_mo3_default_spot ALTER COLUMN "MO3_DspotNumber" DROP DEFAULT;
+ALTER TABLE public.django_site ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.django_migrations ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.django_content_type ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.django_admin_log ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.blog_mo7_blog ALTER COLUMN "MO7_blogNumber" DROP DEFAULT;
+ALTER TABLE public.blog_mo10_fav_blog ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_permission ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_group_permissions ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_group ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.accounts_mo9_fav_custom_user ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.accounts_mo6_visit_record ALTER COLUMN "MO6_visitRecordNumber" DROP DEFAULT;
+ALTER TABLE public.accounts_customuser_user_permissions ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.accounts_customuser_groups ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.accounts_customuser ALTER COLUMN "MO1_userNumber" DROP DEFAULT;
+ALTER TABLE public.account_emailconfirmation ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.account_emailaddress ALTER COLUMN id DROP DEFAULT;
+DROP SEQUENCE public."store_mo2_store_MO2_storeNumber_seq";
+DROP TABLE public.store_mo2_store;
+DROP SEQUENCE public.maps_mo8_fav_search_condition_id_seq;
+DROP TABLE public.maps_mo8_fav_search_condition;
+DROP SEQUENCE public."maps_mo5_tag_MO5_tagNumber_seq";
+DROP TABLE public.maps_mo5_tag;
+DROP SEQUENCE public."maps_mo4_original_spot_MO5_tagNumber_id_seq";
+DROP TABLE public."maps_mo4_original_spot_MO5_tagNumber";
+DROP SEQUENCE public."maps_mo4_original_spot_MO4_OspotNumber_seq";
+DROP TABLE public.maps_mo4_original_spot;
+DROP SEQUENCE public."maps_mo3_default_spot_MO5_tagNumber_id_seq";
+DROP TABLE public."maps_mo3_default_spot_MO5_tagNumber";
+DROP SEQUENCE public."maps_mo3_default_spot_MO3_DspotNumber_seq";
+DROP TABLE public.maps_mo3_default_spot;
+DROP SEQUENCE public.django_site_id_seq;
+DROP TABLE public.django_site;
+DROP TABLE public.django_session;
+DROP SEQUENCE public.django_migrations_id_seq;
+DROP TABLE public.django_migrations;
+DROP SEQUENCE public.django_content_type_id_seq;
+DROP TABLE public.django_content_type;
+DROP SEQUENCE public.django_admin_log_id_seq;
+DROP TABLE public.django_admin_log;
+DROP SEQUENCE public."blog_mo7_blog_MO7_blogNumber_seq";
+DROP TABLE public.blog_mo7_blog;
+DROP SEQUENCE public.blog_mo10_fav_blog_id_seq;
+DROP TABLE public.blog_mo10_fav_blog;
+DROP SEQUENCE public.auth_permission_id_seq;
+DROP TABLE public.auth_permission;
+DROP SEQUENCE public.auth_group_permissions_id_seq;
+DROP TABLE public.auth_group_permissions;
+DROP SEQUENCE public.auth_group_id_seq;
+DROP TABLE public.auth_group;
+DROP SEQUENCE public.accounts_mo9_fav_custom_user_id_seq;
+DROP TABLE public.accounts_mo9_fav_custom_user;
+DROP SEQUENCE public."accounts_mo6_visit_record_MO6_visitRecordNumber_seq";
+DROP TABLE public.accounts_mo6_visit_record;
+DROP SEQUENCE public.accounts_customuser_user_permissions_id_seq;
+DROP TABLE public.accounts_customuser_user_permissions;
+DROP SEQUENCE public.accounts_customuser_groups_id_seq;
+DROP TABLE public.accounts_customuser_groups;
+DROP SEQUENCE public."accounts_customuser_MO1_userNumber_seq";
+DROP TABLE public.accounts_customuser;
+DROP SEQUENCE public.account_emailconfirmation_id_seq;
+DROP TABLE public.account_emailconfirmation;
+DROP SEQUENCE public.account_emailaddress_id_seq;
+DROP TABLE public.account_emailaddress;
+DROP EXTENSION plpgsql;
+DROP SCHEMA public;
+--
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO postgres;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: account_emailaddress; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.account_emailaddress (
+    id integer NOT NULL,
+    email character varying(254) NOT NULL,
+    verified boolean NOT NULL,
+    "primary" boolean NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.account_emailaddress OWNER TO postgres;
+
+--
+-- Name: account_emailaddress_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.account_emailaddress_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_emailaddress_id_seq OWNER TO postgres;
+
+--
+-- Name: account_emailaddress_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.account_emailaddress_id_seq OWNED BY public.account_emailaddress.id;
+
+
+--
+-- Name: account_emailconfirmation; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.account_emailconfirmation (
+    id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    sent timestamp with time zone,
+    key character varying(64) NOT NULL,
+    email_address_id integer NOT NULL
+);
+
+
+ALTER TABLE public.account_emailconfirmation OWNER TO postgres;
+
+--
+-- Name: account_emailconfirmation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.account_emailconfirmation_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_emailconfirmation_id_seq OWNER TO postgres;
+
+--
+-- Name: account_emailconfirmation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.account_emailconfirmation_id_seq OWNED BY public.account_emailconfirmation.id;
+
+
+--
+-- Name: accounts_customuser; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.accounts_customuser (
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(50) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    date_joined timestamp with time zone NOT NULL,
+    "MO1_userNumber" integer NOT NULL,
+    "MO1_userID" character varying(16) NOT NULL,
+    email character varying(254) NOT NULL,
+    "MO1_homeCountry" character varying(50) NOT NULL,
+    "MO1_language" character varying(50) NOT NULL,
+    "MO1_openRange" integer NOT NULL,
+    "MO1_point" integer NOT NULL,
+    "MO1_createDate" timestamp with time zone NOT NULL,
+    "MO1_updateDate" timestamp with time zone NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL
+);
+
+
+ALTER TABLE public.accounts_customuser OWNER TO postgres;
+
+--
+-- Name: accounts_customuser_MO1_userNumber_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."accounts_customuser_MO1_userNumber_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."accounts_customuser_MO1_userNumber_seq" OWNER TO postgres;
+
+--
+-- Name: accounts_customuser_MO1_userNumber_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."accounts_customuser_MO1_userNumber_seq" OWNED BY public.accounts_customuser."MO1_userNumber";
+
+
+--
+-- Name: accounts_customuser_groups; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.accounts_customuser_groups (
+    id integer NOT NULL,
+    customuser_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.accounts_customuser_groups OWNER TO postgres;
+
+--
+-- Name: accounts_customuser_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.accounts_customuser_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.accounts_customuser_groups_id_seq OWNER TO postgres;
+
+--
+-- Name: accounts_customuser_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.accounts_customuser_groups_id_seq OWNED BY public.accounts_customuser_groups.id;
+
+
+--
+-- Name: accounts_customuser_user_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.accounts_customuser_user_permissions (
+    id integer NOT NULL,
+    customuser_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.accounts_customuser_user_permissions OWNER TO postgres;
+
+--
+-- Name: accounts_customuser_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.accounts_customuser_user_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.accounts_customuser_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: accounts_customuser_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.accounts_customuser_user_permissions_id_seq OWNED BY public.accounts_customuser_user_permissions.id;
+
+
+--
+-- Name: accounts_mo6_visit_record; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.accounts_mo6_visit_record (
+    "MO6_visitRecordNumber" integer NOT NULL,
+    "MO6_dateofvisit" timestamp with time zone NOT NULL,
+    "MO1_userNumber_id" integer NOT NULL,
+    "MO3_DspotNumber_id" integer,
+    "MO4_OspotNumber_id" integer,
+    "MO6_createdDate" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.accounts_mo6_visit_record OWNER TO postgres;
+
+--
+-- Name: accounts_mo6_visit_record_MO6_visitRecordNumber_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."accounts_mo6_visit_record_MO6_visitRecordNumber_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."accounts_mo6_visit_record_MO6_visitRecordNumber_seq" OWNER TO postgres;
+
+--
+-- Name: accounts_mo6_visit_record_MO6_visitRecordNumber_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."accounts_mo6_visit_record_MO6_visitRecordNumber_seq" OWNED BY public.accounts_mo6_visit_record."MO6_visitRecordNumber";
+
+
+--
+-- Name: accounts_mo9_fav_custom_user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.accounts_mo9_fav_custom_user (
+    id integer NOT NULL,
+    "MO1_userNumber_id" integer NOT NULL,
+    "MO9_followedUserNumber_id" integer NOT NULL
+);
+
+
+ALTER TABLE public.accounts_mo9_fav_custom_user OWNER TO postgres;
+
+--
+-- Name: accounts_mo9_fav_custom_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.accounts_mo9_fav_custom_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.accounts_mo9_fav_custom_user_id_seq OWNER TO postgres;
+
+--
+-- Name: accounts_mo9_fav_custom_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.accounts_mo9_fav_custom_user_id_seq OWNED BY public.accounts_mo9_fav_custom_user.id;
+
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: blog_mo10_fav_blog; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.blog_mo10_fav_blog (
+    id integer NOT NULL,
+    "MO1_userNumber_id" integer NOT NULL,
+    "MO7_blogNumber_id" integer NOT NULL
+);
+
+
+ALTER TABLE public.blog_mo10_fav_blog OWNER TO postgres;
+
+--
+-- Name: blog_mo10_fav_blog_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.blog_mo10_fav_blog_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.blog_mo10_fav_blog_id_seq OWNER TO postgres;
+
+--
+-- Name: blog_mo10_fav_blog_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.blog_mo10_fav_blog_id_seq OWNED BY public.blog_mo10_fav_blog.id;
+
+
+--
+-- Name: blog_mo7_blog; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.blog_mo7_blog (
+    "MO7_blogNumber" integer NOT NULL,
+    "MO7_blogName" character varying(50) NOT NULL,
+    "MO7_blogText" text,
+    "MO7_openRange" integer NOT NULL,
+    "MO7_createDate" timestamp with time zone NOT NULL,
+    "MO7_updateDate" timestamp with time zone NOT NULL,
+    "MO1_userID_id" integer NOT NULL,
+    "MO6_visitRecordNumber_id" integer NOT NULL
+);
+
+
+ALTER TABLE public.blog_mo7_blog OWNER TO postgres;
+
+--
+-- Name: blog_mo7_blog_MO7_blogNumber_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."blog_mo7_blog_MO7_blogNumber_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."blog_mo7_blog_MO7_blogNumber_seq" OWNER TO postgres;
+
+--
+-- Name: blog_mo7_blog_MO7_blogNumber_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."blog_mo7_blog_MO7_blogNumber_seq" OWNED BY public.blog_mo7_blog."MO7_blogNumber";
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: django_site; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_site (
+    id integer NOT NULL,
+    domain character varying(100) NOT NULL,
+    name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.django_site OWNER TO postgres;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_site_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_site_id_seq OWNER TO postgres;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_site_id_seq OWNED BY public.django_site.id;
+
+
+--
+-- Name: maps_mo3_default_spot; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.maps_mo3_default_spot (
+    "MO3_DspotNumber" integer NOT NULL,
+    "MO2_storeNumber_id" integer NOT NULL
+);
+
+
+ALTER TABLE public.maps_mo3_default_spot OWNER TO postgres;
+
+--
+-- Name: maps_mo3_default_spot_MO3_DspotNumber_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."maps_mo3_default_spot_MO3_DspotNumber_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."maps_mo3_default_spot_MO3_DspotNumber_seq" OWNER TO postgres;
+
+--
+-- Name: maps_mo3_default_spot_MO3_DspotNumber_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."maps_mo3_default_spot_MO3_DspotNumber_seq" OWNED BY public.maps_mo3_default_spot."MO3_DspotNumber";
+
+
+--
+-- Name: maps_mo3_default_spot_MO5_tagNumber; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."maps_mo3_default_spot_MO5_tagNumber" (
+    id integer NOT NULL,
+    mo3_default_spot_id integer NOT NULL,
+    mo5_tag_id integer NOT NULL
+);
+
+
+ALTER TABLE public."maps_mo3_default_spot_MO5_tagNumber" OWNER TO postgres;
+
+--
+-- Name: maps_mo3_default_spot_MO5_tagNumber_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."maps_mo3_default_spot_MO5_tagNumber_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."maps_mo3_default_spot_MO5_tagNumber_id_seq" OWNER TO postgres;
+
+--
+-- Name: maps_mo3_default_spot_MO5_tagNumber_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."maps_mo3_default_spot_MO5_tagNumber_id_seq" OWNED BY public."maps_mo3_default_spot_MO5_tagNumber".id;
+
+
+--
+-- Name: maps_mo4_original_spot; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.maps_mo4_original_spot (
+    "MO4_OspotNumber" integer NOT NULL,
+    "MO4_OspotName" character varying(50) NOT NULL,
+    "MO4_OspotInfo" text,
+    "MO4_OspotAdress" character varying(50),
+    "MO4_createDate" timestamp with time zone NOT NULL,
+    "MO1_userNumber_id" integer NOT NULL
+);
+
+
+ALTER TABLE public.maps_mo4_original_spot OWNER TO postgres;
+
+--
+-- Name: maps_mo4_original_spot_MO4_OspotNumber_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."maps_mo4_original_spot_MO4_OspotNumber_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."maps_mo4_original_spot_MO4_OspotNumber_seq" OWNER TO postgres;
+
+--
+-- Name: maps_mo4_original_spot_MO4_OspotNumber_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."maps_mo4_original_spot_MO4_OspotNumber_seq" OWNED BY public.maps_mo4_original_spot."MO4_OspotNumber";
+
+
+--
+-- Name: maps_mo4_original_spot_MO5_tagNumber; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."maps_mo4_original_spot_MO5_tagNumber" (
+    id integer NOT NULL,
+    mo4_original_spot_id integer NOT NULL,
+    mo5_tag_id integer NOT NULL
+);
+
+
+ALTER TABLE public."maps_mo4_original_spot_MO5_tagNumber" OWNER TO postgres;
+
+--
+-- Name: maps_mo4_original_spot_MO5_tagNumber_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."maps_mo4_original_spot_MO5_tagNumber_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."maps_mo4_original_spot_MO5_tagNumber_id_seq" OWNER TO postgres;
+
+--
+-- Name: maps_mo4_original_spot_MO5_tagNumber_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."maps_mo4_original_spot_MO5_tagNumber_id_seq" OWNED BY public."maps_mo4_original_spot_MO5_tagNumber".id;
+
+
+--
+-- Name: maps_mo5_tag; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.maps_mo5_tag (
+    "MO5_tagNumber" integer NOT NULL,
+    "MO5_tagName" character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.maps_mo5_tag OWNER TO postgres;
+
+--
+-- Name: maps_mo5_tag_MO5_tagNumber_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."maps_mo5_tag_MO5_tagNumber_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."maps_mo5_tag_MO5_tagNumber_seq" OWNER TO postgres;
+
+--
+-- Name: maps_mo5_tag_MO5_tagNumber_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."maps_mo5_tag_MO5_tagNumber_seq" OWNED BY public.maps_mo5_tag."MO5_tagNumber";
+
+
+--
+-- Name: maps_mo8_fav_search_condition; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.maps_mo8_fav_search_condition (
+    id integer NOT NULL,
+    "MO1_userNumber_id" integer NOT NULL,
+    "MO5_tagNumber_id" integer NOT NULL
+);
+
+
+ALTER TABLE public.maps_mo8_fav_search_condition OWNER TO postgres;
+
+--
+-- Name: maps_mo8_fav_search_condition_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.maps_mo8_fav_search_condition_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.maps_mo8_fav_search_condition_id_seq OWNER TO postgres;
+
+--
+-- Name: maps_mo8_fav_search_condition_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.maps_mo8_fav_search_condition_id_seq OWNED BY public.maps_mo8_fav_search_condition.id;
+
+
+--
+-- Name: store_mo2_store; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.store_mo2_store (
+    "MO2_storeNumber" integer NOT NULL,
+    "MO2_storeName" character varying(30) NOT NULL,
+    "MO2_storeInfo" text,
+    "MO2_phoneNumber" character varying(20),
+    "MO2_address" character varying(50) NOT NULL,
+    "MO2_mailAdress" character varying(254) NOT NULL,
+    "MO2_password" character varying(255),
+    "MO2_createDate" timestamp with time zone NOT NULL,
+    "MO2_updateDate" timestamp with time zone NOT NULL,
+    is_active boolean NOT NULL,
+    is_auth boolean NOT NULL,
+    "MO2_images1" character varying(100),
+    "MO2_images2" character varying(100),
+    "MO2_images3" character varying(100)
+);
+
+
+ALTER TABLE public.store_mo2_store OWNER TO postgres;
+
+--
+-- Name: store_mo2_store_MO2_storeNumber_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."store_mo2_store_MO2_storeNumber_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."store_mo2_store_MO2_storeNumber_seq" OWNER TO postgres;
+
+--
+-- Name: store_mo2_store_MO2_storeNumber_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."store_mo2_store_MO2_storeNumber_seq" OWNED BY public.store_mo2_store."MO2_storeNumber";
+
+
+--
+-- Name: account_emailaddress id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_emailaddress ALTER COLUMN id SET DEFAULT nextval('public.account_emailaddress_id_seq'::regclass);
+
+
+--
+-- Name: account_emailconfirmation id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_emailconfirmation ALTER COLUMN id SET DEFAULT nextval('public.account_emailconfirmation_id_seq'::regclass);
+
+
+--
+-- Name: accounts_customuser MO1_userNumber; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser ALTER COLUMN "MO1_userNumber" SET DEFAULT nextval('public."accounts_customuser_MO1_userNumber_seq"'::regclass);
+
+
+--
+-- Name: accounts_customuser_groups id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser_groups ALTER COLUMN id SET DEFAULT nextval('public.accounts_customuser_groups_id_seq'::regclass);
+
+
+--
+-- Name: accounts_customuser_user_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.accounts_customuser_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: accounts_mo6_visit_record MO6_visitRecordNumber; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_mo6_visit_record ALTER COLUMN "MO6_visitRecordNumber" SET DEFAULT nextval('public."accounts_mo6_visit_record_MO6_visitRecordNumber_seq"'::regclass);
+
+
+--
+-- Name: accounts_mo9_fav_custom_user id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_mo9_fav_custom_user ALTER COLUMN id SET DEFAULT nextval('public.accounts_mo9_fav_custom_user_id_seq'::regclass);
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: blog_mo10_fav_blog id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.blog_mo10_fav_blog ALTER COLUMN id SET DEFAULT nextval('public.blog_mo10_fav_blog_id_seq'::regclass);
+
+
+--
+-- Name: blog_mo7_blog MO7_blogNumber; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.blog_mo7_blog ALTER COLUMN "MO7_blogNumber" SET DEFAULT nextval('public."blog_mo7_blog_MO7_blogNumber_seq"'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: django_site id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_site ALTER COLUMN id SET DEFAULT nextval('public.django_site_id_seq'::regclass);
+
+
+--
+-- Name: maps_mo3_default_spot MO3_DspotNumber; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo3_default_spot ALTER COLUMN "MO3_DspotNumber" SET DEFAULT nextval('public."maps_mo3_default_spot_MO3_DspotNumber_seq"'::regclass);
+
+
+--
+-- Name: maps_mo3_default_spot_MO5_tagNumber id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."maps_mo3_default_spot_MO5_tagNumber" ALTER COLUMN id SET DEFAULT nextval('public."maps_mo3_default_spot_MO5_tagNumber_id_seq"'::regclass);
+
+
+--
+-- Name: maps_mo4_original_spot MO4_OspotNumber; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo4_original_spot ALTER COLUMN "MO4_OspotNumber" SET DEFAULT nextval('public."maps_mo4_original_spot_MO4_OspotNumber_seq"'::regclass);
+
+
+--
+-- Name: maps_mo4_original_spot_MO5_tagNumber id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."maps_mo4_original_spot_MO5_tagNumber" ALTER COLUMN id SET DEFAULT nextval('public."maps_mo4_original_spot_MO5_tagNumber_id_seq"'::regclass);
+
+
+--
+-- Name: maps_mo5_tag MO5_tagNumber; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo5_tag ALTER COLUMN "MO5_tagNumber" SET DEFAULT nextval('public."maps_mo5_tag_MO5_tagNumber_seq"'::regclass);
+
+
+--
+-- Name: maps_mo8_fav_search_condition id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo8_fav_search_condition ALTER COLUMN id SET DEFAULT nextval('public.maps_mo8_fav_search_condition_id_seq'::regclass);
+
+
+--
+-- Name: store_mo2_store MO2_storeNumber; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.store_mo2_store ALTER COLUMN "MO2_storeNumber" SET DEFAULT nextval('public."store_mo2_store_MO2_storeNumber_seq"'::regclass);
+
+
+--
+-- Data for Name: account_emailaddress; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.account_emailaddress (id, email, verified, "primary", user_id) FROM stdin;
+1	yota.001012@gmail.com	t	t	1
+2	user2.0@gmail.com	t	t	3
+3	user3.0@gmail.com	t	t	4
+\.
+
+
+--
+-- Data for Name: account_emailconfirmation; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.account_emailconfirmation (id, created, sent, key, email_address_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: accounts_customuser; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.accounts_customuser (password, last_login, is_superuser, username, first_name, last_name, date_joined, "MO1_userNumber", "MO1_userID", email, "MO1_homeCountry", "MO1_language", "MO1_openRange", "MO1_point", "MO1_createDate", "MO1_updateDate", is_staff, is_active) FROM stdin;
+user1	2022-12-01 11:14:29+09	f				2022-12-01 11:14:18+09	2	user1	user1@example.com			0	0	2022-12-01 11:15:00.578301+09	2022-12-01 11:15:00.578301+09	f	t
+pbkdf2_sha256$150000$D6MVfZq9JUt7$tHeaBzmLDHam7LAlj4InPvJT+UPUPgDDWu4VhM1h1mY=	\N	f	user2			2023-01-11 14:50:53.075769+09	3	2	user2.0@gmail.com	日本	日本語	0	0	2023-01-11 14:50:53.232351+09	2023-01-11 14:50:53.232351+09	f	t
+pbkdf2_sha256$150000$yW3vzlRnPkLI$7XPoozbH0Jo+iA1mh6NWdd5mkZCrRtkl89PQq9oQ2AE=	2023-01-16 09:50:05.04544+09	f	user3			2023-01-11 14:52:57.756143+09	4	3	user3.0@gmail.com	日本	日本語	0	0	2023-01-11 14:52:57.858886+09	2023-01-11 14:52:57.859866+09	f	t
+pbkdf2_sha256$150000$QfRXBsQVtDnm$jb3KBzUh6pZ/A+10j/wkbGCZ9A7T5QF6PJSESwQ2HOw=	2023-01-25 10:28:31.301928+09	t	admin			2022-11-25 12:17:37.790246+09	1	admin	yota.001012@gmail.com	japan	japanese	0	0	2022-11-25 12:17:37.898267+09	2022-11-25 12:17:37.898267+09	t	t
+\.
+
+
+--
+-- Data for Name: accounts_customuser_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.accounts_customuser_groups (id, customuser_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: accounts_customuser_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.accounts_customuser_user_permissions (id, customuser_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: accounts_mo6_visit_record; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.accounts_mo6_visit_record ("MO6_visitRecordNumber", "MO6_dateofvisit", "MO1_userNumber_id", "MO3_DspotNumber_id", "MO4_OspotNumber_id", "MO6_createdDate") FROM stdin;
+\.
+
+
+--
+-- Data for Name: accounts_mo9_fav_custom_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.accounts_mo9_fav_custom_user (id, "MO1_userNumber_id", "MO9_followedUserNumber_id") FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add content type	4	add_contenttype
+14	Can change content type	4	change_contenttype
+15	Can delete content type	4	delete_contenttype
+16	Can view content type	4	view_contenttype
+17	Can add session	5	add_session
+18	Can change session	5	change_session
+19	Can delete session	5	delete_session
+20	Can view session	5	view_session
+21	Can add user	6	add_customuser
+22	Can change user	6	change_customuser
+23	Can delete user	6	delete_customuser
+24	Can view user	6	view_customuser
+25	Can add site	7	add_site
+26	Can change site	7	change_site
+27	Can delete site	7	delete_site
+28	Can view site	7	view_site
+29	Can add email address	8	add_emailaddress
+30	Can change email address	8	change_emailaddress
+31	Can delete email address	8	delete_emailaddress
+32	Can view email address	8	view_emailaddress
+33	Can add email confirmation	9	add_emailconfirmation
+34	Can change email confirmation	9	change_emailconfirmation
+35	Can delete email confirmation	9	delete_emailconfirmation
+36	Can view email confirmation	9	view_emailconfirmation
+37	Can add m o9_ fav_ custom_user	10	add_mo9_fav_custom_user
+38	Can change m o9_ fav_ custom_user	10	change_mo9_fav_custom_user
+39	Can delete m o9_ fav_ custom_user	10	delete_mo9_fav_custom_user
+40	Can view m o9_ fav_ custom_user	10	view_mo9_fav_custom_user
+41	Can add m o6_ visit_record	11	add_mo6_visit_record
+42	Can change m o6_ visit_record	11	change_mo6_visit_record
+43	Can delete m o6_ visit_record	11	delete_mo6_visit_record
+44	Can view m o6_ visit_record	11	view_mo6_visit_record
+45	Can add m o5_ tag	12	add_mo5_tag
+46	Can change m o5_ tag	12	change_mo5_tag
+47	Can delete m o5_ tag	12	delete_mo5_tag
+48	Can view m o5_ tag	12	view_mo5_tag
+49	Can add m o8_ fav_ search_condition	13	add_mo8_fav_search_condition
+50	Can change m o8_ fav_ search_condition	13	change_mo8_fav_search_condition
+51	Can delete m o8_ fav_ search_condition	13	delete_mo8_fav_search_condition
+52	Can view m o8_ fav_ search_condition	13	view_mo8_fav_search_condition
+53	Can add m o4_ original_spot	14	add_mo4_original_spot
+54	Can change m o4_ original_spot	14	change_mo4_original_spot
+55	Can delete m o4_ original_spot	14	delete_mo4_original_spot
+56	Can view m o4_ original_spot	14	view_mo4_original_spot
+57	Can add m o3_ default_spot	15	add_mo3_default_spot
+58	Can change m o3_ default_spot	15	change_mo3_default_spot
+59	Can delete m o3_ default_spot	15	delete_mo3_default_spot
+60	Can view m o3_ default_spot	15	view_mo3_default_spot
+61	Can add m o7_ blog	16	add_mo7_blog
+62	Can change m o7_ blog	16	change_mo7_blog
+63	Can delete m o7_ blog	16	delete_mo7_blog
+64	Can view m o7_ blog	16	view_mo7_blog
+65	Can add m o10_ fav_ blog	17	add_mo10_fav_blog
+66	Can change m o10_ fav_ blog	17	change_mo10_fav_blog
+67	Can delete m o10_ fav_ blog	17	delete_mo10_fav_blog
+68	Can view m o10_ fav_ blog	17	view_mo10_fav_blog
+69	Can add m o2_store	18	add_mo2_store
+70	Can change m o2_store	18	change_mo2_store
+71	Can delete m o2_store	18	delete_mo2_store
+72	Can view m o2_store	18	view_mo2_store
+\.
+
+
+--
+-- Data for Name: blog_mo10_fav_blog; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.blog_mo10_fav_blog (id, "MO1_userNumber_id", "MO7_blogNumber_id") FROM stdin;
+\.
+
+
+--
+-- Data for Name: blog_mo7_blog; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.blog_mo7_blog ("MO7_blogNumber", "MO7_blogName", "MO7_blogText", "MO7_openRange", "MO7_createDate", "MO7_updateDate", "MO1_userID_id", "MO6_visitRecordNumber_id") FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2022-11-29 12:30:35.176025+09	1	1 - 東京情報クリエイター工学院専門学校	1	[{"added": {}}]	18	1
+2	2022-11-29 12:31:28.115205+09	2	2 - 大原ビジネス公務員専門学校池袋校	1	[{"added": {}}]	18	1
+3	2022-11-29 12:32:09.301116+09	3	3 - 大原簿記公務員医療福祉保育専門学校立川校	1	[{"added": {}}]	18	1
+4	2022-11-29 12:32:54.242967+09	4	4 - 大原簿記情報ビジネス専門学校横浜校	1	[{"added": {}}]	18	1
+5	2022-11-29 12:33:31.139122+09	5	5 - 大原簿記公務員専門学校千葉校	1	[{"added": {}}]	18	1
+6	2022-12-01 11:08:48.989186+09	5	5 - 大原簿記公務員専門学校千葉校	2	[{"changed": {"fields": ["is_active", "is_auth"]}}]	18	1
+7	2022-12-01 11:09:05.005121+09	4	4 - 大原簿記情報ビジネス専門学校横浜校	2	[{"changed": {"fields": ["is_active", "is_auth"]}}]	18	1
+8	2022-12-01 11:09:17.32623+09	3	3 - 大原簿記公務員医療福祉保育専門学校立川校	2	[{"changed": {"fields": ["is_active", "is_auth"]}}]	18	1
+9	2022-12-01 11:09:24.951201+09	2	2 - 大原ビジネス公務員専門学校池袋校	2	[{"changed": {"fields": ["is_active", "is_auth"]}}]	18	1
+10	2022-12-01 11:09:32.850447+09	1	1 - 東京情報クリエイター工学院専門学校	2	[{"changed": {"fields": ["is_active", "is_auth"]}}]	18	1
+11	2022-12-01 11:10:07.0754+09	7	7	1	[{"added": {}}]	12	1
+12	2022-12-01 11:10:34.235861+09	7	7	3		12	1
+13	2022-12-01 11:10:44.310016+09	8	8	1	[{"added": {}}]	12	1
+14	2022-12-01 11:10:54.647472+09	8	8	2	[]	12	1
+15	2022-12-01 11:11:23.32695+09	1	1	1	[{"added": {}}]	15	1
+16	2022-12-01 11:12:15.034957+09	1	1	2	[]	15	1
+17	2022-12-01 11:12:34.237466+09	2	2	1	[{"added": {}}]	15	1
+18	2022-12-01 11:13:07.227373+09	3	3	1	[{"added": {}}]	15	1
+19	2022-12-01 11:15:00.610298+09	2	2-	1	[{"added": {}}]	6	1
+20	2023-01-16 10:59:58.39612+09	9	9-restaurant	1	[{"added": {}}]	12	1
+21	2023-01-16 11:00:51.383913+09	10	10-restaurant	1	[{"added": {}}]	12	1
+22	2023-01-16 11:12:24.815372+09	11	11-Nature	1	[{"added": {}}]	12	1
+23	2023-01-16 11:12:44.786657+09	12	12-History/Culture	1	[{"added": {}}]	12	1
+24	2023-01-16 11:13:00.343381+09	13	13-hotel	1	[{"added": {}}]	12	1
+25	2023-01-16 11:13:25.635891+09	14	14-gift	1	[{"added": {}}]	12	1
+26	2023-01-16 12:01:15.399653+09	3	大原簿記公務員医療福祉保育専門学校立川校	2	[{"changed": {"fields": ["MO5_tagNumber"]}}]	15	1
+27	2023-01-16 14:07:19.231779+09	6	6 - store_sample	1	[{"added": {}}]	18	1
+28	2023-01-16 14:07:50.427134+09	4	store_sample	1	[{"added": {}}]	15	1
+29	2023-01-18 10:16:28.088046+09	3	大原original_sample1	1	[{"added": {}}]	14	1
+30	2023-01-18 10:59:34.419091+09	6	6 - store_sample	2	[{"changed": {"fields": ["is_auth"]}}]	18	1
+31	2023-01-18 11:00:06.834815+09	1	東京情報クリエイター工学院専門学校	2	[]	15	1
+32	2023-01-18 11:00:13.650752+09	3	大原簿記公務員医療福祉保育専門学校立川校	2	[{"changed": {"fields": ["MO5_tagNumber"]}}]	15	1
+33	2023-01-18 11:00:19.408192+09	4	store_sample	2	[{"changed": {"fields": ["MO5_tagNumber"]}}]	15	1
+34	2023-01-18 11:00:22.526815+09	2	大原ビジネス公務員専門学校池袋校	2	[]	15	1
+35	2023-01-18 11:00:26.280802+09	1	東京情報クリエイター工学院専門学校	2	[]	15	1
+36	2023-01-18 11:00:35.750236+09	3	大原original_sample1	2	[]	14	1
+37	2023-01-18 11:01:11.64864+09	14	14-gift	3		12	1
+38	2023-01-18 11:01:11.667277+09	13	13-hotel	3		12	1
+39	2023-01-18 11:01:11.670029+09	12	12-History/Culture	3		12	1
+40	2023-01-18 11:01:11.672022+09	11	11-Nature	3		12	1
+41	2023-01-18 11:01:11.673987+09	10	10-restaurant	3		12	1
+42	2023-01-18 11:01:11.675721+09	9	9-restaurant	3		12	1
+43	2023-01-18 11:11:29.369339+09	4	store_sample	3		15	1
+44	2023-01-18 11:14:50.673991+09	5	store_sample	1	[{"added": {}}]	15	1
+45	2023-01-18 11:16:23.347704+09	6	6 - store_sample	2	[{"changed": {"fields": ["MO2_address"]}}]	18	1
+46	2023-01-23 12:21:16.510497+09	6	6-a	3		14	1
+47	2023-01-23 12:21:16.526146+09	5	5-sample1	3		14	1
+48	2023-01-23 12:21:16.527145+09	4	4-sample1	3		14	1
+49	2023-01-23 12:32:28.764108+09	15	15-お土産	1	[{"added": {}}]	12	1
+50	2023-01-23 12:32:41.620821+09	16	16-アウトドア	1	[{"added": {}}]	12	1
+51	2023-01-23 12:32:51.142852+09	17	17-イベント	1	[{"added": {}}]	12	1
+52	2023-01-23 12:33:00.1428+09	18	18-カフェ	1	[{"added": {}}]	12	1
+53	2023-01-23 12:33:06.611842+09	19	19-グルメ	1	[{"added": {}}]	12	1
+54	2023-01-23 12:33:39.07277+09	20	20-レストラン	1	[{"added": {}}]	12	1
+55	2023-01-23 12:33:57.287974+09	21	21-美術館・博物館	1	[{"added": {}}]	12	1
+56	2023-01-23 12:34:42.398996+09	3	3-大原original_sample1	2	[]	14	1
+57	2023-01-23 12:35:14.783879+09	1	東京情報クリエイター工学院専門学校	2	[{"changed": {"fields": ["MO5_tagNumber"]}}]	15	1
+58	2023-01-23 12:35:20.906486+09	2	大原ビジネス公務員専門学校池袋校	2	[{"changed": {"fields": ["MO5_tagNumber"]}}]	15	1
+59	2023-01-23 12:35:30.091027+09	3	大原簿記公務員医療福祉保育専門学校立川校	2	[{"changed": {"fields": ["MO5_tagNumber"]}}]	15	1
+60	2023-01-23 12:35:38.1738+09	3	大原簿記公務員医療福祉保育専門学校立川校	2	[{"changed": {"fields": ["MO5_tagNumber"]}}]	15	1
+61	2023-01-23 12:35:43.318755+09	5	store_sample	2	[{"changed": {"fields": ["MO5_tagNumber"]}}]	15	1
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	contenttypes	contenttype
+5	sessions	session
+6	accounts	customuser
+7	sites	site
+8	account	emailaddress
+9	account	emailconfirmation
+10	accounts	mo9_fav_custom_user
+11	accounts	mo6_visit_record
+12	maps	mo5_tag
+13	maps	mo8_fav_search_condition
+14	maps	mo4_original_spot
+15	maps	mo3_default_spot
+16	blog	mo7_blog
+17	blog	mo10_fav_blog
+18	store	mo2_store
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2022-11-25 12:16:43.220102+09
+2	auth	0001_initial	2022-11-25 12:16:43.265102+09
+3	accounts	0001_initial	2022-11-25 12:16:43.352102+09
+4	account	0001_initial	2022-11-25 12:16:43.458105+09
+5	account	0002_email_max_length	2022-11-25 12:16:43.598101+09
+6	accounts	0002_auto_20221124_1324	2022-11-25 12:16:43.660103+09
+7	admin	0001_initial	2022-11-25 12:16:43.697104+09
+8	admin	0002_logentry_remove_auto_add	2022-11-25 12:16:43.730105+09
+9	admin	0003_logentry_add_action_flag_choices	2022-11-25 12:16:43.742102+09
+10	contenttypes	0002_remove_content_type_name	2022-11-25 12:16:43.772103+09
+11	auth	0002_alter_permission_name_max_length	2022-11-25 12:16:43.779103+09
+12	auth	0003_alter_user_email_max_length	2022-11-25 12:16:43.791102+09
+13	auth	0004_alter_user_username_opts	2022-11-25 12:16:43.804108+09
+14	auth	0005_alter_user_last_login_null	2022-11-25 12:16:43.820104+09
+15	auth	0006_require_contenttypes_0002	2022-11-25 12:16:43.822103+09
+16	auth	0007_alter_validators_add_error_messages	2022-11-25 12:16:43.833103+09
+17	auth	0008_alter_user_username_max_length	2022-11-25 12:16:43.843102+09
+18	auth	0009_alter_user_last_name_max_length	2022-11-25 12:16:43.853101+09
+19	auth	0010_alter_group_name_max_length	2022-11-25 12:16:43.865103+09
+20	auth	0011_update_proxy_permissions	2022-11-25 12:16:43.876102+09
+21	sessions	0001_initial	2022-11-25 12:16:43.891102+09
+22	sites	0001_initial	2022-11-25 12:16:43.916103+09
+23	sites	0002_alter_domain_unique	2022-11-25 12:16:43.932103+09
+24	store	0001_initial	2022-11-28 14:43:36.137409+09
+25	store	0002_auto_20221125_1404	2022-11-28 14:43:36.157411+09
+26	store	0003_auto_20221126_0913	2022-11-28 14:43:36.16541+09
+27	maps	0001_initial	2022-11-28 14:43:36.229455+09
+28	accounts	0003_auto_20221128_1426	2022-11-28 14:43:36.329313+09
+29	accounts	0004_auto_20221128_1426	2022-11-28 14:43:36.377854+09
+30	blog	0001_initial	2022-11-28 14:43:36.447713+09
+31	accounts	0005_auto_20221129_1055	2022-12-01 10:58:50.273508+09
+32	accounts	0006_auto_20221130_1355	2022-12-01 10:58:50.515382+09
+33	maps	0002_auto_20221129_1150	2022-12-01 10:58:50.681164+09
+34	store	0004_auto_20221129_1224	2022-12-01 10:58:50.733408+09
+35	store	0005_mo2_store_last_login	2022-12-01 10:58:50.740371+09
+36	store	0006_remove_mo2_store_last_login	2022-12-01 10:58:50.747371+09
+37	store	0007_auto_20221130_1055	2022-12-01 10:58:50.760239+09
+38	accounts	0007_mo6_visit_record_mo6_createddate	2022-12-06 09:34:18.862227+09
+39	maps	0003_auto_20230119_1355	2023-01-20 09:28:32.530453+09
+40	accounts	0008_auto_20230120_0943	2023-01-23 09:31:31.937242+09
+41	accounts	0009_auto_20230120_1437	2023-01-23 09:31:32.079346+09
+42	blog	0002_auto_20230120_1437	2023-01-23 09:31:32.121531+09
+43	store	0008_auto_20230119_1437	2023-01-23 09:31:32.145506+09
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+ig8ffn4a59wuxfym3a7w2potvv6reqfy	MzZkMTlmNGI5Y2E4M2VlZTUyNWM0M2VlMGY5NTUyNGNhYzNlNDJjMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2MDYzYjkyYzQ1NGNkZjFhMDgxZTVlZGNkMjVlY2U0ZTMxMDFiYzY5In0=	2022-12-09 12:18:40.266892+09
+yszied36l5rwmaq0ohh61e1b63k52uvi	MzZkMTlmNGI5Y2E4M2VlZTUyNWM0M2VlMGY5NTUyNGNhYzNlNDJjMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2MDYzYjkyYzQ1NGNkZjFhMDgxZTVlZGNkMjVlY2U0ZTMxMDFiYzY5In0=	2022-12-12 11:41:31.117362+09
+ggstrgvnplbvykvt7n5mcssac47womrt	MzZkMTlmNGI5Y2E4M2VlZTUyNWM0M2VlMGY5NTUyNGNhYzNlNDJjMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2MDYzYjkyYzQ1NGNkZjFhMDgxZTVlZGNkMjVlY2U0ZTMxMDFiYzY5In0=	2022-12-13 12:27:05.34704+09
+3qn8yi3focuxniex8jztcp60v9n9wh7y	NDc5YTNkOTEzY2EzYzQwNzI1NjY5ZDQxZWMyODkwZWJiZTMzOGFhODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSJ9	2022-12-15 11:08:06.957767+09
+t2pf586t0ut33i5okhpji3kixl0jajey	NDc5YTNkOTEzY2EzYzQwNzI1NjY5ZDQxZWMyODkwZWJiZTMzOGFhODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSJ9	2022-12-07 11:39:47.572178+09
+ft6ps9qc02441sn0wtyrocop9pf377c6	NDc5YTNkOTEzY2EzYzQwNzI1NjY5ZDQxZWMyODkwZWJiZTMzOGFhODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSJ9	2022-12-12 11:04:41.401648+09
+csbew2j6t60z10arfmkemi8rgj5u20pa	MTdjMDZiNWFiOGNhYTY2MWZkMzdhODk3YjFmYTcyOGM3ZGY0YWQ5ZTp7Il9zZXNzaW9uX2V4cGlyeSI6MCwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJhbGxhdXRoLmFjY291bnQuYXV0aF9iYWNrZW5kcy5BdXRoZW50aWNhdGlvbkJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2MDYzYjkyYzQ1NGNkZjFhMDgxZTVlZGNkMjVlY2U0ZTMxMDFiYzY5In0=	2023-01-06 00:52:28.329277+09
+puoqw9s4n71g695v8x8zf4l4vi7cockc	NWI5OGNjNDQ0Yzk1YWRmZWRjZmNlZDMzZTRhZTJkMTYyMTUzN2E0Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-06 10:59:33.188784+09
+ymf0gx2e3coannabm0czo87rzx064evt	NWI5OGNjNDQ0Yzk1YWRmZWRjZmNlZDMzZTRhZTJkMTYyMTUzN2E0Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-11 11:15:13.334186+09
+ue4uh1epfwu2axyvqfqsc180mv0dhsch	NWI5OGNjNDQ0Yzk1YWRmZWRjZmNlZDMzZTRhZTJkMTYyMTUzN2E0Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-11 12:27:10.60265+09
+6yahirieu0pczobpgm9m08pm0wegt38j	ZWQ0NjgxMzg0ZTViYTU1YWRjYTExMWYxOTNiNWJmOGU5Y2NmY2I5NDp7ImFjY291bnRfdXNlciI6IjQiLCJfYXV0aF91c2VyX2lkIjoiNCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImFsbGF1dGguYWNjb3VudC5hdXRoX2JhY2tlbmRzLkF1dGhlbnRpY2F0aW9uQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjU2ZmM0NjBhZmFkMjRjYmQ0YWE5MTkwODg0NzQ5ZWJkMzdhOTJjMGIiLCJfc2Vzc2lvbl9leHBpcnkiOjB9	2023-01-11 15:54:10.688564+09
+nxlr6arqxxgafxudustvmiqu68e8coun	OWVlZTA1MzFlODBjMmQzNTY2OTBkZWM4ZjIwNjkzMjE3ZGQ3YzBkMjp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTZmYzQ2MGFmYWQyNGNiZDRhYTkxOTA4ODQ3NDllYmQzN2E5MmMwYiIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-12 11:22:39.120652+09
+v5s5cr9vxjmqrwzaj6r48a1bmfkxt4z4	OWVlZTA1MzFlODBjMmQzNTY2OTBkZWM4ZjIwNjkzMjE3ZGQ3YzBkMjp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTZmYzQ2MGFmYWQyNGNiZDRhYTkxOTA4ODQ3NDllYmQzN2E5MmMwYiIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-12 12:22:50.913712+09
+ikpd70evpjh7kqjfxzuavevktv1p2sm0	OWVlZTA1MzFlODBjMmQzNTY2OTBkZWM4ZjIwNjkzMjE3ZGQ3YzBkMjp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTZmYzQ2MGFmYWQyNGNiZDRhYTkxOTA4ODQ3NDllYmQzN2E5MmMwYiIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-12 13:30:08.516006+09
+ab6q9gft5kamhvvpk0uwgnaxvwh6zxwm	OWVlZTA1MzFlODBjMmQzNTY2OTBkZWM4ZjIwNjkzMjE3ZGQ3YzBkMjp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTZmYzQ2MGFmYWQyNGNiZDRhYTkxOTA4ODQ3NDllYmQzN2E5MmMwYiIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-12 15:49:20.067215+09
+yd8acgrsvrr25dug4qs5l1ukvptncgwh	OWVlZTA1MzFlODBjMmQzNTY2OTBkZWM4ZjIwNjkzMjE3ZGQ3YzBkMjp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTZmYzQ2MGFmYWQyNGNiZDRhYTkxOTA4ODQ3NDllYmQzN2E5MmMwYiIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-13 11:50:12.381688+09
+4qsiru73wnd9j5q59a6d6r1punab0brp	OWVlZTA1MzFlODBjMmQzNTY2OTBkZWM4ZjIwNjkzMjE3ZGQ3YzBkMjp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTZmYzQ2MGFmYWQyNGNiZDRhYTkxOTA4ODQ3NDllYmQzN2E5MmMwYiIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-13 12:52:56.336681+09
+8jjdj7sz302f6zbkri9w8huzxiecy71v	OWVlZTA1MzFlODBjMmQzNTY2OTBkZWM4ZjIwNjkzMjE3ZGQ3YzBkMjp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTZmYzQ2MGFmYWQyNGNiZDRhYTkxOTA4ODQ3NDllYmQzN2E5MmMwYiIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-13 15:18:47.942797+09
+wrba0tg7llkuemysio0asd8u0ngvqco8	OWVlZTA1MzFlODBjMmQzNTY2OTBkZWM4ZjIwNjkzMjE3ZGQ3YzBkMjp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTZmYzQ2MGFmYWQyNGNiZDRhYTkxOTA4ODQ3NDllYmQzN2E5MmMwYiIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-14 22:21:34.076461+09
+cgyso5gadbxtqrmqow21zucaxig9rhbw	NWY3OTY1ZTg2NmJlN2U0MDA1OTczZGVhZjg3YjdhZTc1MTdkZDE5NDp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTZmYzQ2MGFmYWQyNGNiZDRhYTkxOTA4ODQ3NDllYmQzN2E5MmMwYiIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-16 10:50:05.120192+09
+ipgicw2sh2eeum6lazh9znj9tmcym5h3	NDc5YTNkOTEzY2EzYzQwNzI1NjY5ZDQxZWMyODkwZWJiZTMzOGFhODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSJ9	2023-01-16 11:58:36.245335+09
+1t1uucv84wghfwk17le8zbm587v0xv8w	NDc5YTNkOTEzY2EzYzQwNzI1NjY5ZDQxZWMyODkwZWJiZTMzOGFhODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSJ9	2023-01-16 13:00:13.790479+09
+7bxenlcvtawjqs3vvm6jgzpmuc6axn8m	NDc5YTNkOTEzY2EzYzQwNzI1NjY5ZDQxZWMyODkwZWJiZTMzOGFhODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSJ9	2023-01-16 15:06:01.481542+09
+sgp9i0jwbaxgdyu3d7zhndc6uhyk3jtg	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-17 10:48:25.802329+09
+gyenwnpk6b0iq7pmgz85jq7nxhsvdquo	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-17 11:33:19.201507+09
+9m8jnpuz337di5q05o2q5hm8my0mzfer	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-17 11:43:56.06418+09
+cmy2ev34o0m9peypio4tn9ljmfiendpc	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-17 13:23:40.206539+09
+s3maa4ih25tsnzv7hbdn8s9dqqnicd3c	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-17 15:07:24.39375+09
+puezd3rzmv4cl3h3mj936z6xxp51sawn	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-18 10:38:19.488687+09
+xymb5914hirh3rdtalwj3j8rfx4fftpc	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-18 11:41:10.461972+09
+rswmw9k8ztzvhjzqih4hehiuh1p92k4v	NWI5OGNjNDQ0Yzk1YWRmZWRjZmNlZDMzZTRhZTJkMTYyMTUzN2E0Njp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=	2023-01-18 12:59:36.147873+09
+bmt662aloy9vcs5zl7w659d5oiaomy7f	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-18 14:46:27.080838+09
+2xn0msiohfk0wblpn4p8o1rrz1z3q9d3	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-18 15:51:56.293516+09
+cf2qqy7pzy81i5ljwxjtz6dhbpfe4za7	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-19 10:38:47.037346+09
+urqz1pyaql5rnqruplb6o59nmqux8gcr	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-19 11:41:31.732791+09
+i50kzkgo1473rhb5m0kmgjzpyi6fxra8	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-19 12:44:05.560717+09
+oib7rbxxi6pxs3nt5rk5ytbtas9ogymk	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-19 14:44:17.937738+09
+ydrvqsj954vf46hogxbbnl1qf157qnuu	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-19 15:51:23.556915+09
+a8vlchkfysxpmznvz7txopwhfgt6tbcm	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-20 10:28:58.720718+09
+e9yjfy00qqvbbbg63uwjuj5qedfv9uod	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-20 11:30:44.023273+09
+dwaprw2pu3vsmh4wujbx5k9cqmi8a8hb	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-20 12:37:13.414838+09
+c8qv7mvnj5hzkmvo4rj1t828os9zb4jm	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-20 13:37:40.610404+09
+d3et7le4gzra6swzlxjxpnpwwk1evgsn	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-20 14:41:06.59868+09
+gi0t9j6krl2wzmzkwlcfeecvew0wqz7p	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-24 10:38:50.690674+09
+8h5uzhd3khkwvs25t48i3onws7bik8bo	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-20 15:57:52.683201+09
+e7y9ug8muyl96004jwtk2jp2n7vjjcyf	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-24 12:34:33.489352+09
+5owrlcprem4y1w6an4gdi9974y699h29	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-23 10:32:07.775742+09
+zk7u7g165oxc45wb04zzncr3wb0wferz	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-24 14:49:26.391863+09
+9ho3k8aq5nengx9vodpfjiny0sx8b9u4	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-24 15:57:34.06011+09
+93u8lnuc70dpljmal20jegywrkxpmk1a	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-23 12:02:49.924441+09
+6pnteh64jimw93fscuh2l5pzeb9cmmtz	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-25 11:28:31.336423+09
+omqwi4jpz72xzt68hqg2efywf8hqy49j	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-23 12:03:38.096407+09
+8ukk4879ise7lw0iqzuxefy4t1p3bl4t	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-23 13:10:54.781347+09
+wx31qegna4xpx4xtlyjkhp1v2uq5j3yp	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-23 14:42:47.236363+09
+gn8z2wkko9u14kkhoqbpqjokvhdgq6dy	ZjVkNWY4MjQzYjg0NjdjYmZlZWJkMmE3MzU4YTI0NGU5Yzg3ZmEzZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiYWxsYXV0aC5hY2NvdW50LmF1dGhfYmFja2VuZHMuQXV0aGVudGljYXRpb25CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjA2M2I5MmM0NTRjZGYxYTA4MWU1ZWRjZDI1ZWNlNGUzMTAxYmM2OSIsIl9zZXNzaW9uX2V4cGlyeSI6MzYwMH0=	2023-01-23 15:57:01.158255+09
+\.
+
+
+--
+-- Data for Name: django_site; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_site (id, domain, name) FROM stdin;
+1	example.com	example.com
+\.
+
+
+--
+-- Data for Name: maps_mo3_default_spot; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.maps_mo3_default_spot ("MO3_DspotNumber", "MO2_storeNumber_id") FROM stdin;
+1	1
+2	2
+3	3
+5	6
+\.
+
+
+--
+-- Data for Name: maps_mo3_default_spot_MO5_tagNumber; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."maps_mo3_default_spot_MO5_tagNumber" (id, mo3_default_spot_id, mo5_tag_id) FROM stdin;
+1	1	8
+2	2	8
+3	3	8
+8	5	8
+9	1	16
+10	1	17
+11	1	18
+12	1	15
+13	2	16
+14	2	15
+15	3	15
+16	3	16
+17	3	17
+18	3	18
+19	3	19
+20	3	20
+21	3	21
+22	5	15
+23	5	16
+24	5	17
+25	5	18
+26	5	19
+27	5	20
+28	5	21
+\.
+
+
+--
+-- Data for Name: maps_mo4_original_spot; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.maps_mo4_original_spot ("MO4_OspotNumber", "MO4_OspotName", "MO4_OspotInfo", "MO4_OspotAdress", "MO4_createDate", "MO1_userNumber_id") FROM stdin;
+3	大原original_sample1	original_sample1	埼玉県朝霞市西弁財1-7-25	2023-01-18 10:16:28.049337+09	1
+\.
+
+
+--
+-- Data for Name: maps_mo4_original_spot_MO5_tagNumber; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."maps_mo4_original_spot_MO5_tagNumber" (id, mo4_original_spot_id, mo5_tag_id) FROM stdin;
+3	3	8
+\.
+
+
+--
+-- Data for Name: maps_mo5_tag; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.maps_mo5_tag ("MO5_tagNumber", "MO5_tagName") FROM stdin;
+8	school
+15	お土産
+16	アウトドア
+17	イベント
+18	カフェ
+19	グルメ
+20	レストラン
+21	美術館・博物館
+\.
+
+
+--
+-- Data for Name: maps_mo8_fav_search_condition; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.maps_mo8_fav_search_condition (id, "MO1_userNumber_id", "MO5_tagNumber_id") FROM stdin;
+\.
+
+
+--
+-- Data for Name: store_mo2_store; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.store_mo2_store ("MO2_storeNumber", "MO2_storeName", "MO2_storeInfo", "MO2_phoneNumber", "MO2_address", "MO2_mailAdress", "MO2_password", "MO2_createDate", "MO2_updateDate", is_active, is_auth, "MO2_images1", "MO2_images2", "MO2_images3") FROM stdin;
+5	大原簿記公務員専門学校千葉校		\N	千葉県千葉市中央区弁天1-16-2	sample@5.gmail.com	\N	2022-11-29 12:33:31.138115+09	2022-11-29 12:33:31.138115+09	t	t			
+4	大原簿記情報ビジネス専門学校横浜校		\N	神奈川県横浜市神奈川区反町1-8-14	sample@4.gmail.com	\N	2022-11-29 12:32:54.242967+09	2022-11-29 12:32:54.242967+09	t	t			
+3	大原簿記公務員医療福祉保育専門学校立川校		\N	東京都立川市緑町4-8	sample@3.gmail.com	\N	2022-11-29 12:32:09.300116+09	2022-11-29 12:32:09.300116+09	t	t			
+2	大原ビジネス公務員専門学校池袋校		\N	東京都豊島区東池袋1-20-17	sample@2.gmail.com	\N	2022-11-29 12:31:28.114208+09	2022-11-29 12:31:28.114208+09	t	t			
+1	東京情報クリエイター工学院専門学校		\N	東京都千代田区西神田2-4-11	sample@1.gmail.com	\N	2022-11-29 12:30:35.165038+09	2022-11-29 12:30:35.165038+09	t	t			
+6	store_sample		\N	東京都千代田区千代田1-1	store1@gmail.com	\N	2023-01-16 14:07:19.228036+09	2023-01-16 14:07:19.228036+09	t	t			
+\.
+
+
+--
+-- Name: account_emailaddress_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.account_emailaddress_id_seq', 3, true);
+
+
+--
+-- Name: account_emailconfirmation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.account_emailconfirmation_id_seq', 1, false);
+
+
+--
+-- Name: accounts_customuser_MO1_userNumber_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."accounts_customuser_MO1_userNumber_seq"', 4, true);
+
+
+--
+-- Name: accounts_customuser_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.accounts_customuser_groups_id_seq', 1, false);
+
+
+--
+-- Name: accounts_customuser_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.accounts_customuser_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: accounts_mo6_visit_record_MO6_visitRecordNumber_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."accounts_mo6_visit_record_MO6_visitRecordNumber_seq"', 1, false);
+
+
+--
+-- Name: accounts_mo9_fav_custom_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.accounts_mo9_fav_custom_user_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 72, true);
+
+
+--
+-- Name: blog_mo10_fav_blog_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.blog_mo10_fav_blog_id_seq', 1, false);
+
+
+--
+-- Name: blog_mo7_blog_MO7_blogNumber_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."blog_mo7_blog_MO7_blogNumber_seq"', 1, false);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 61, true);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 18, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 43, true);
+
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_site_id_seq', 1, true);
+
+
+--
+-- Name: maps_mo3_default_spot_MO3_DspotNumber_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."maps_mo3_default_spot_MO3_DspotNumber_seq"', 5, true);
+
+
+--
+-- Name: maps_mo3_default_spot_MO5_tagNumber_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."maps_mo3_default_spot_MO5_tagNumber_id_seq"', 28, true);
+
+
+--
+-- Name: maps_mo4_original_spot_MO4_OspotNumber_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."maps_mo4_original_spot_MO4_OspotNumber_seq"', 6, true);
+
+
+--
+-- Name: maps_mo4_original_spot_MO5_tagNumber_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."maps_mo4_original_spot_MO5_tagNumber_id_seq"', 3, true);
+
+
+--
+-- Name: maps_mo5_tag_MO5_tagNumber_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."maps_mo5_tag_MO5_tagNumber_seq"', 21, true);
+
+
+--
+-- Name: maps_mo8_fav_search_condition_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.maps_mo8_fav_search_condition_id_seq', 1, false);
+
+
+--
+-- Name: store_mo2_store_MO2_storeNumber_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."store_mo2_store_MO2_storeNumber_seq"', 6, true);
+
+
+--
+-- Name: account_emailaddress account_emailaddress_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_emailaddress
+    ADD CONSTRAINT account_emailaddress_email_key UNIQUE (email);
+
+
+--
+-- Name: account_emailaddress account_emailaddress_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_emailaddress
+    ADD CONSTRAINT account_emailaddress_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_emailconfirmation account_emailconfirmation_key_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_emailconfirmation
+    ADD CONSTRAINT account_emailconfirmation_key_key UNIQUE (key);
+
+
+--
+-- Name: account_emailconfirmation account_emailconfirmation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_emailconfirmation
+    ADD CONSTRAINT account_emailconfirmation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: accounts_customuser accounts_customuser_MO1_userID_c01c6f60_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser
+    ADD CONSTRAINT "accounts_customuser_MO1_userID_c01c6f60_uniq" UNIQUE ("MO1_userID");
+
+
+--
+-- Name: accounts_customuser accounts_customuser_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser
+    ADD CONSTRAINT accounts_customuser_email_key UNIQUE (email);
+
+
+--
+-- Name: accounts_customuser_groups accounts_customuser_groups_customuser_id_group_id_c074bdcb_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser_groups
+    ADD CONSTRAINT accounts_customuser_groups_customuser_id_group_id_c074bdcb_uniq UNIQUE (customuser_id, group_id);
+
+
+--
+-- Name: accounts_customuser_groups accounts_customuser_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser_groups
+    ADD CONSTRAINT accounts_customuser_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: accounts_customuser accounts_customuser_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser
+    ADD CONSTRAINT accounts_customuser_pkey PRIMARY KEY ("MO1_userNumber");
+
+
+--
+-- Name: accounts_customuser_user_permissions accounts_customuser_user_customuser_id_permission_9632a709_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser_user_permissions
+    ADD CONSTRAINT accounts_customuser_user_customuser_id_permission_9632a709_uniq UNIQUE (customuser_id, permission_id);
+
+
+--
+-- Name: accounts_customuser_user_permissions accounts_customuser_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser_user_permissions
+    ADD CONSTRAINT accounts_customuser_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: accounts_mo6_visit_record accounts_mo6_visit_record_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_mo6_visit_record
+    ADD CONSTRAINT accounts_mo6_visit_record_pkey PRIMARY KEY ("MO6_visitRecordNumber");
+
+
+--
+-- Name: accounts_mo9_fav_custom_user accounts_mo9_fav_custom_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_mo9_fav_custom_user
+    ADD CONSTRAINT accounts_mo9_fav_custom_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blog_mo10_fav_blog blog_mo10_fav_blog_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.blog_mo10_fav_blog
+    ADD CONSTRAINT blog_mo10_fav_blog_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blog_mo7_blog blog_mo7_blog_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.blog_mo7_blog
+    ADD CONSTRAINT blog_mo7_blog_pkey PRIMARY KEY ("MO7_blogNumber");
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: django_site django_site_domain_a2e37b91_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_site
+    ADD CONSTRAINT django_site_domain_a2e37b91_uniq UNIQUE (domain);
+
+
+--
+-- Name: django_site django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_site
+    ADD CONSTRAINT django_site_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: maps_mo3_default_spot_MO5_tagNumber maps_mo3_default_spot_MO5_tagNumber_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."maps_mo3_default_spot_MO5_tagNumber"
+    ADD CONSTRAINT "maps_mo3_default_spot_MO5_tagNumber_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: maps_mo3_default_spot_MO5_tagNumber maps_mo3_default_spot_MO_mo3_default_spot_id_mo5__d465fd27_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."maps_mo3_default_spot_MO5_tagNumber"
+    ADD CONSTRAINT "maps_mo3_default_spot_MO_mo3_default_spot_id_mo5__d465fd27_uniq" UNIQUE (mo3_default_spot_id, mo5_tag_id);
+
+
+--
+-- Name: maps_mo3_default_spot maps_mo3_default_spot_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo3_default_spot
+    ADD CONSTRAINT maps_mo3_default_spot_pkey PRIMARY KEY ("MO3_DspotNumber");
+
+
+--
+-- Name: maps_mo4_original_spot_MO5_tagNumber maps_mo4_original_spot_MO5_tagNumber_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."maps_mo4_original_spot_MO5_tagNumber"
+    ADD CONSTRAINT "maps_mo4_original_spot_MO5_tagNumber_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: maps_mo4_original_spot_MO5_tagNumber maps_mo4_original_spot_M_mo4_original_spot_id_mo5_17034d3a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."maps_mo4_original_spot_MO5_tagNumber"
+    ADD CONSTRAINT "maps_mo4_original_spot_M_mo4_original_spot_id_mo5_17034d3a_uniq" UNIQUE (mo4_original_spot_id, mo5_tag_id);
+
+
+--
+-- Name: maps_mo4_original_spot maps_mo4_original_spot_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo4_original_spot
+    ADD CONSTRAINT maps_mo4_original_spot_pkey PRIMARY KEY ("MO4_OspotNumber");
+
+
+--
+-- Name: maps_mo5_tag maps_mo5_tag_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo5_tag
+    ADD CONSTRAINT maps_mo5_tag_pkey PRIMARY KEY ("MO5_tagNumber");
+
+
+--
+-- Name: maps_mo8_fav_search_condition maps_mo8_fav_search_condition_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo8_fav_search_condition
+    ADD CONSTRAINT maps_mo8_fav_search_condition_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: store_mo2_store store_mo2_store_MO2_mailAdress_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.store_mo2_store
+    ADD CONSTRAINT "store_mo2_store_MO2_mailAdress_key" UNIQUE ("MO2_mailAdress");
+
+
+--
+-- Name: store_mo2_store store_mo2_store_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.store_mo2_store
+    ADD CONSTRAINT store_mo2_store_pkey PRIMARY KEY ("MO2_storeNumber");
+
+
+--
+-- Name: account_emailaddress_email_03be32b2_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX account_emailaddress_email_03be32b2_like ON public.account_emailaddress USING btree (email varchar_pattern_ops);
+
+
+--
+-- Name: account_emailaddress_user_id_2c513194; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX account_emailaddress_user_id_2c513194 ON public.account_emailaddress USING btree (user_id);
+
+
+--
+-- Name: account_emailconfirmation_email_address_id_5b7f8c58; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX account_emailconfirmation_email_address_id_5b7f8c58 ON public.account_emailconfirmation USING btree (email_address_id);
+
+
+--
+-- Name: account_emailconfirmation_key_f43612bd_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX account_emailconfirmation_key_f43612bd_like ON public.account_emailconfirmation USING btree (key varchar_pattern_ops);
+
+
+--
+-- Name: accounts_customuser_MO1_userID_c01c6f60_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "accounts_customuser_MO1_userID_c01c6f60_like" ON public.accounts_customuser USING btree ("MO1_userID" varchar_pattern_ops);
+
+
+--
+-- Name: accounts_customuser_email_4fd8e7ce_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX accounts_customuser_email_4fd8e7ce_like ON public.accounts_customuser USING btree (email varchar_pattern_ops);
+
+
+--
+-- Name: accounts_customuser_groups_customuser_id_bc55088e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX accounts_customuser_groups_customuser_id_bc55088e ON public.accounts_customuser_groups USING btree (customuser_id);
+
+
+--
+-- Name: accounts_customuser_groups_group_id_86ba5f9e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX accounts_customuser_groups_group_id_86ba5f9e ON public.accounts_customuser_groups USING btree (group_id);
+
+
+--
+-- Name: accounts_customuser_user_permissions_customuser_id_0deaefae; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX accounts_customuser_user_permissions_customuser_id_0deaefae ON public.accounts_customuser_user_permissions USING btree (customuser_id);
+
+
+--
+-- Name: accounts_customuser_user_permissions_permission_id_aea3d0e5; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX accounts_customuser_user_permissions_permission_id_aea3d0e5 ON public.accounts_customuser_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: accounts_mo6_visit_record_MO1_userNumber_id_9d5ae305; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "accounts_mo6_visit_record_MO1_userNumber_id_9d5ae305" ON public.accounts_mo6_visit_record USING btree ("MO1_userNumber_id");
+
+
+--
+-- Name: accounts_mo6_visit_record_MO3_DspotNumber_id_7edef852; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "accounts_mo6_visit_record_MO3_DspotNumber_id_7edef852" ON public.accounts_mo6_visit_record USING btree ("MO3_DspotNumber_id");
+
+
+--
+-- Name: accounts_mo6_visit_record_MO4_OspotNumber_id_94dc3cc1; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "accounts_mo6_visit_record_MO4_OspotNumber_id_94dc3cc1" ON public.accounts_mo6_visit_record USING btree ("MO4_OspotNumber_id");
+
+
+--
+-- Name: accounts_mo9_fav_custom_user_MO1_userNumber_id_87ac0e34; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "accounts_mo9_fav_custom_user_MO1_userNumber_id_87ac0e34" ON public.accounts_mo9_fav_custom_user USING btree ("MO1_userNumber_id");
+
+
+--
+-- Name: accounts_mo9_fav_custom_user_MO9_followedUserNumber_id_ab5192ab; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "accounts_mo9_fav_custom_user_MO9_followedUserNumber_id_ab5192ab" ON public.accounts_mo9_fav_custom_user USING btree ("MO9_followedUserNumber_id");
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: blog_mo10_fav_blog_MO1_userNumber_id_1854b36e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "blog_mo10_fav_blog_MO1_userNumber_id_1854b36e" ON public.blog_mo10_fav_blog USING btree ("MO1_userNumber_id");
+
+
+--
+-- Name: blog_mo10_fav_blog_MO7_blogNumber_id_deff692a; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "blog_mo10_fav_blog_MO7_blogNumber_id_deff692a" ON public.blog_mo10_fav_blog USING btree ("MO7_blogNumber_id");
+
+
+--
+-- Name: blog_mo7_blog_MO1_userID_id_8eb3f9c7; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "blog_mo7_blog_MO1_userID_id_8eb3f9c7" ON public.blog_mo7_blog USING btree ("MO1_userID_id");
+
+
+--
+-- Name: blog_mo7_blog_MO6_visitRecordNumber_id_ba3b7b5c; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "blog_mo7_blog_MO6_visitRecordNumber_id_ba3b7b5c" ON public.blog_mo7_blog USING btree ("MO6_visitRecordNumber_id");
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: django_site_domain_a2e37b91_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_site_domain_a2e37b91_like ON public.django_site USING btree (domain varchar_pattern_ops);
+
+
+--
+-- Name: maps_mo3_default_spot_MO2_storeNumber_id_66a5c380; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "maps_mo3_default_spot_MO2_storeNumber_id_66a5c380" ON public.maps_mo3_default_spot USING btree ("MO2_storeNumber_id");
+
+
+--
+-- Name: maps_mo3_default_spot_MO5__mo3_default_spot_id_0d5adb49; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "maps_mo3_default_spot_MO5__mo3_default_spot_id_0d5adb49" ON public."maps_mo3_default_spot_MO5_tagNumber" USING btree (mo3_default_spot_id);
+
+
+--
+-- Name: maps_mo3_default_spot_MO5_tagNumber_mo5_tag_id_c31231c8; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "maps_mo3_default_spot_MO5_tagNumber_mo5_tag_id_c31231c8" ON public."maps_mo3_default_spot_MO5_tagNumber" USING btree (mo5_tag_id);
+
+
+--
+-- Name: maps_mo4_original_spot_MO1_userNumber_id_9cffce83; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "maps_mo4_original_spot_MO1_userNumber_id_9cffce83" ON public.maps_mo4_original_spot USING btree ("MO1_userNumber_id");
+
+
+--
+-- Name: maps_mo4_original_spot_MO5_mo4_original_spot_id_551ef9a5; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "maps_mo4_original_spot_MO5_mo4_original_spot_id_551ef9a5" ON public."maps_mo4_original_spot_MO5_tagNumber" USING btree (mo4_original_spot_id);
+
+
+--
+-- Name: maps_mo4_original_spot_MO5_tagNumber_mo5_tag_id_7f03289e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "maps_mo4_original_spot_MO5_tagNumber_mo5_tag_id_7f03289e" ON public."maps_mo4_original_spot_MO5_tagNumber" USING btree (mo5_tag_id);
+
+
+--
+-- Name: maps_mo8_fav_search_condition_MO1_userNumber_id_e17064da; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "maps_mo8_fav_search_condition_MO1_userNumber_id_e17064da" ON public.maps_mo8_fav_search_condition USING btree ("MO1_userNumber_id");
+
+
+--
+-- Name: maps_mo8_fav_search_condition_MO5_tagNumber_id_4d8323ff; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "maps_mo8_fav_search_condition_MO5_tagNumber_id_4d8323ff" ON public.maps_mo8_fav_search_condition USING btree ("MO5_tagNumber_id");
+
+
+--
+-- Name: store_mo2_store_MO2_mailAdress_6600a0e6_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "store_mo2_store_MO2_mailAdress_6600a0e6_like" ON public.store_mo2_store USING btree ("MO2_mailAdress" varchar_pattern_ops);
+
+
+--
+-- Name: account_emailaddress account_emailaddress_user_id_2c513194_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_emailaddress
+    ADD CONSTRAINT account_emailaddress_user_id_2c513194_fk_accounts_ FOREIGN KEY (user_id) REFERENCES public.accounts_customuser("MO1_userNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_emailconfirmation account_emailconfirm_email_address_id_5b7f8c58_fk_account_e; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.account_emailconfirmation
+    ADD CONSTRAINT account_emailconfirm_email_address_id_5b7f8c58_fk_account_e FOREIGN KEY (email_address_id) REFERENCES public.account_emailaddress(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: accounts_customuser_user_permissions accounts_customuser__customuser_id_0deaefae_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser_user_permissions
+    ADD CONSTRAINT accounts_customuser__customuser_id_0deaefae_fk_accounts_ FOREIGN KEY (customuser_id) REFERENCES public.accounts_customuser("MO1_userNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: accounts_customuser_groups accounts_customuser__customuser_id_bc55088e_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser_groups
+    ADD CONSTRAINT accounts_customuser__customuser_id_bc55088e_fk_accounts_ FOREIGN KEY (customuser_id) REFERENCES public.accounts_customuser("MO1_userNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: accounts_customuser_user_permissions accounts_customuser__permission_id_aea3d0e5_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser_user_permissions
+    ADD CONSTRAINT accounts_customuser__permission_id_aea3d0e5_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: accounts_customuser_groups accounts_customuser_groups_group_id_86ba5f9e_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_customuser_groups
+    ADD CONSTRAINT accounts_customuser_groups_group_id_86ba5f9e_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: accounts_mo6_visit_record accounts_mo6_visit_r_MO1_userNumber_id_9d5ae305_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_mo6_visit_record
+    ADD CONSTRAINT "accounts_mo6_visit_r_MO1_userNumber_id_9d5ae305_fk_accounts_" FOREIGN KEY ("MO1_userNumber_id") REFERENCES public.accounts_customuser("MO1_userNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: accounts_mo6_visit_record accounts_mo6_visit_r_MO3_DspotNumber_id_7edef852_fk_maps_mo3_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_mo6_visit_record
+    ADD CONSTRAINT "accounts_mo6_visit_r_MO3_DspotNumber_id_7edef852_fk_maps_mo3_" FOREIGN KEY ("MO3_DspotNumber_id") REFERENCES public.maps_mo3_default_spot("MO3_DspotNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: accounts_mo6_visit_record accounts_mo6_visit_r_MO4_OspotNumber_id_94dc3cc1_fk_maps_mo4_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_mo6_visit_record
+    ADD CONSTRAINT "accounts_mo6_visit_r_MO4_OspotNumber_id_94dc3cc1_fk_maps_mo4_" FOREIGN KEY ("MO4_OspotNumber_id") REFERENCES public.maps_mo4_original_spot("MO4_OspotNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: accounts_mo9_fav_custom_user accounts_mo9_fav_cus_MO1_userNumber_id_87ac0e34_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_mo9_fav_custom_user
+    ADD CONSTRAINT "accounts_mo9_fav_cus_MO1_userNumber_id_87ac0e34_fk_accounts_" FOREIGN KEY ("MO1_userNumber_id") REFERENCES public.accounts_customuser("MO1_userNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: accounts_mo9_fav_custom_user accounts_mo9_fav_cus_MO9_followedUserNumb_ab5192ab_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.accounts_mo9_fav_custom_user
+    ADD CONSTRAINT "accounts_mo9_fav_cus_MO9_followedUserNumb_ab5192ab_fk_accounts_" FOREIGN KEY ("MO9_followedUserNumber_id") REFERENCES public.accounts_customuser("MO1_userNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: blog_mo10_fav_blog blog_mo10_fav_blog_MO1_userNumber_id_1854b36e_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.blog_mo10_fav_blog
+    ADD CONSTRAINT "blog_mo10_fav_blog_MO1_userNumber_id_1854b36e_fk_accounts_" FOREIGN KEY ("MO1_userNumber_id") REFERENCES public.accounts_customuser("MO1_userNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: blog_mo10_fav_blog blog_mo10_fav_blog_MO7_blogNumber_id_deff692a_fk_blog_mo7_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.blog_mo10_fav_blog
+    ADD CONSTRAINT "blog_mo10_fav_blog_MO7_blogNumber_id_deff692a_fk_blog_mo7_" FOREIGN KEY ("MO7_blogNumber_id") REFERENCES public.blog_mo7_blog("MO7_blogNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: blog_mo7_blog blog_mo7_blog_MO1_userID_id_8eb3f9c7_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.blog_mo7_blog
+    ADD CONSTRAINT "blog_mo7_blog_MO1_userID_id_8eb3f9c7_fk_accounts_" FOREIGN KEY ("MO1_userID_id") REFERENCES public.accounts_customuser("MO1_userNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: blog_mo7_blog blog_mo7_blog_MO6_visitRecordNumbe_ba3b7b5c_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.blog_mo7_blog
+    ADD CONSTRAINT "blog_mo7_blog_MO6_visitRecordNumbe_ba3b7b5c_fk_accounts_" FOREIGN KEY ("MO6_visitRecordNumber_id") REFERENCES public.accounts_mo6_visit_record("MO6_visitRecordNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_accounts_ FOREIGN KEY (user_id) REFERENCES public.accounts_customuser("MO1_userNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: maps_mo3_default_spot maps_mo3_default_spo_MO2_storeNumber_id_66a5c380_fk_store_mo2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo3_default_spot
+    ADD CONSTRAINT "maps_mo3_default_spo_MO2_storeNumber_id_66a5c380_fk_store_mo2" FOREIGN KEY ("MO2_storeNumber_id") REFERENCES public.store_mo2_store("MO2_storeNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: maps_mo3_default_spot_MO5_tagNumber maps_mo3_default_spo_mo3_default_spot_id_0d5adb49_fk_maps_mo3_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."maps_mo3_default_spot_MO5_tagNumber"
+    ADD CONSTRAINT maps_mo3_default_spo_mo3_default_spot_id_0d5adb49_fk_maps_mo3_ FOREIGN KEY (mo3_default_spot_id) REFERENCES public.maps_mo3_default_spot("MO3_DspotNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: maps_mo3_default_spot_MO5_tagNumber maps_mo3_default_spo_mo5_tag_id_c31231c8_fk_maps_mo5_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."maps_mo3_default_spot_MO5_tagNumber"
+    ADD CONSTRAINT maps_mo3_default_spo_mo5_tag_id_c31231c8_fk_maps_mo5_ FOREIGN KEY (mo5_tag_id) REFERENCES public.maps_mo5_tag("MO5_tagNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: maps_mo4_original_spot maps_mo4_original_sp_MO1_userNumber_id_9cffce83_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo4_original_spot
+    ADD CONSTRAINT "maps_mo4_original_sp_MO1_userNumber_id_9cffce83_fk_accounts_" FOREIGN KEY ("MO1_userNumber_id") REFERENCES public.accounts_customuser("MO1_userNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: maps_mo4_original_spot_MO5_tagNumber maps_mo4_original_sp_mo4_original_spot_id_551ef9a5_fk_maps_mo4_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."maps_mo4_original_spot_MO5_tagNumber"
+    ADD CONSTRAINT maps_mo4_original_sp_mo4_original_spot_id_551ef9a5_fk_maps_mo4_ FOREIGN KEY (mo4_original_spot_id) REFERENCES public.maps_mo4_original_spot("MO4_OspotNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: maps_mo4_original_spot_MO5_tagNumber maps_mo4_original_sp_mo5_tag_id_7f03289e_fk_maps_mo5_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."maps_mo4_original_spot_MO5_tagNumber"
+    ADD CONSTRAINT maps_mo4_original_sp_mo5_tag_id_7f03289e_fk_maps_mo5_ FOREIGN KEY (mo5_tag_id) REFERENCES public.maps_mo5_tag("MO5_tagNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: maps_mo8_fav_search_condition maps_mo8_fav_search__MO1_userNumber_id_e17064da_fk_accounts_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo8_fav_search_condition
+    ADD CONSTRAINT "maps_mo8_fav_search__MO1_userNumber_id_e17064da_fk_accounts_" FOREIGN KEY ("MO1_userNumber_id") REFERENCES public.accounts_customuser("MO1_userNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: maps_mo8_fav_search_condition maps_mo8_fav_search__MO5_tagNumber_id_4d8323ff_fk_maps_mo5_; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maps_mo8_fav_search_condition
+    ADD CONSTRAINT "maps_mo8_fav_search__MO5_tagNumber_id_4d8323ff_fk_maps_mo5_" FOREIGN KEY ("MO5_tagNumber_id") REFERENCES public.maps_mo5_tag("MO5_tagNumber") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
