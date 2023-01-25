@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'dbbackup',
 ]
 
 MIDDLEWARE = [
@@ -187,3 +188,9 @@ MEDIA_URL = '/media/'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 3600
+
+
+
+# バックアップ設定
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': os.path.join(BASE_DIR, 'static/backups')}
