@@ -5,7 +5,7 @@ from django import forms
 class OspotCreateForm(forms.ModelForm):
     class Meta:
         model = MO4_Original_spot
-        fields = ('MO1_userNumber','MO4_OspotName','MO4_OspotAdress','MO4_OspotInfo')
+        fields = ('MO1_userNumber','MO4_OspotName','MO4_OspotInfo','MO4_OspotLat','MO4_OspotLng')
 
 class SpotSearchForm(forms.Form):
     words = forms.CharField(label="keyword",max_length=40)

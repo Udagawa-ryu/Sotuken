@@ -86,6 +86,7 @@ class MO6_Visit_record(models.Model):
     MO6_dateofvisit = models.DateTimeField(verbose_name="訪問記録", auto_now_add=True)
     MO3_DspotNumber = models.ForeignKey("maps.MO3_Default_spot", models.CASCADE, verbose_name="デフォルトスポットナンバー",null=True,blank=True)
     MO4_OspotNumber = models.ForeignKey("maps.MO4_Original_spot", models.CASCADE, verbose_name="オリジナルスポットナンバー",null=True,blank=True)
+    MO6_visitDate = models.DateTimeField(verbose_name="訪問日時",default=timezone.now)
     MO6_createdDate = models.DateTimeField(verbose_name="作成日時", auto_now_add=True)
     class Meta:
         verbose_name_plural = "MO6_Visit_record"

@@ -22,7 +22,8 @@ def Map(request):
     for i in d_spot:
         d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber])
     for i in o_spot:
-        o_list.append([i.MO4_OspotAdress,i.MO4_OspotName, i.MO4_OspotNumber])
+        address = [i.MO4_OspotLat,i.MO4_OspotLng]
+        o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber])
     params = {
         'd_list': json.dumps(d_list),
         'o_list': json.dumps(o_list),
@@ -109,18 +110,20 @@ def OtherMap(request,num):
 @login_required
 def OspotCreate(request):
     if request.method == 'POST':
-        # initial_data = {
-        #     "MO1_userNumber":request.POST.get("MO1_userNumber"),
-        #     "MO4_OspotName":request.POST.get("MO4_OspotName"),
-        #     "MO4_OspotAdress":request.POST.get("MO4_OspotAdress"),
-        #     "MO4_OspotInfo":request.POST.get("MO4_OspotInfo")
-        # }
-        # form = OspotCreateForm(request.POST or initial_data)
-        # if form.is_valid():
-        #     form.save()
-        #     return redirect("maps:Map")
-        print("lat = ",request.POST.get("lat"))
-        print("lng = ",request.POST.get("lng"))
+        initial_data = {
+            "MO1_userNumber":request.POST.get("MO1_userNumber"),
+            "MO4_OspotName":request.POST.get("MO4_OspotName"),
+            "MO4_OspotInfo":request.POST.get("MO4_OspotInfo"),
+            "MO4_OspotLat":request.POST.get("lat"),
+            "MO4_OspotLng":request.POST.get("lng"),
+        }
+        form = OspotCreateForm(initial_data)
+        if form.is_valid() == False:
+            for i in form:
+                print(i)
+        if form.is_valid():
+            form.save()
+            return redirect("maps:Map")
     return redirect("maps:Map")
 
 @login_required
