@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from django.views import generic
 from blog.models import MO7_Blog,MO10_Fav_Blog,MO9_Fav_Custom_user
-from accounts.models import CustomUser
+from maps.models import MO3_Default_spot
+from accounts.models import CustomUser,MO6_Visit_record
 from django.urls import reverse_lazy
 from .forms import *
 from django.contrib.auth.decorators import login_required
@@ -99,6 +100,7 @@ def FavoriteUserListView(request):
 def visitrecordcreate(request,pk):
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     d_spot = MO3_Default_spot.objects.get(MO2_storeNumber = pk)
-    record = MO6_Visit_record(MO1_userNumber=user,MO3_Default_spot=d_spot)
-    record.save()
+    record = MO6_Visit_record.objects.create(MO1_userNumber=user,MO3_DspotNumber=d_spot)
+    user.MO1_point += 10
+    user.save()
     return redirect("main:Mypage")

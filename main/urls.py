@@ -12,4 +12,5 @@ urlpatterns = [
     path('VisitQRread/',views.VisitQRreadView, name="VisitQRread"),
     path('favoriteBlogList/', views.FavoriteBlogListView, name="favoriteBlogList"),
     path('favoriteUserList/', views.FavoriteUserListView, name="favoriteUserList"),
+    path('visitrecord/<int:pk>/',views.visitrecordcreate,name="visitrecord"),
 ]
