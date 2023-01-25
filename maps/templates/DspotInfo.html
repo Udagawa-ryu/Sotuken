@@ -56,12 +56,11 @@
                 </tr>
                 <tr>
                     <td>
-                        <select class="blog_date" size="4">
+                        <table>
                             {% for i in blogs %}
-                            {% comment %} <option>{{ i.MO7_blogName }}-{{ i.MO1_userID.MO1_userName }}</option> {% endcomment %}
-                            <option><a href="{% url 'main:Mypage'%}">{{ i.MO7_blogName }}-{{ i.MO1_userID.username }}</a></option>
+                                <a href="{% url 'blog:blogDetail' i.MO7_blogNumber %}">“ {{ i.MO7_blogName }} ” - {{ i.MO1_userID.username }}</a><br>
                             {% endfor %}
-                        </select>
+                        </table>
                     </td>
                 </tr>
             </table>
