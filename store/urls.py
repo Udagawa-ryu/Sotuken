@@ -19,5 +19,5 @@ urlpatterns = [
     path('storeLogoutCheck/',views.storeLogout,name="storeLogoutCheck"),
     path('storeInfoDelete/',views.storeinfodelete,name="StoreInfoDelete"),
     path('statistics/',views.statistics,name="Statictics"),
-    path('kari/',views.plt_leq,name="kari"),
+    # path('kari/',views.plt_leq,name="kari"),
 ]

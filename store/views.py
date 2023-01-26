@@ -91,9 +91,7 @@ def StorePassRegister(request,store):
                 params['message'] = "入力が完了しました。"
                 request.session['storeLogin'] = mystore.MO2_mailAdress
                 request.session.set_expiry(settings.SESSION_COOKIE_AGE)
-                qr = storeQRView(mystore.MO2_storeNumber)
-                params = {'qr':qr}
-                return render(request,'StoreQR.html',params)
+                return redirect("store:storeQR")
             else:
                 params['message'] = '再入力して下さい'
                 params['form'] = StorePassCreateForm()
@@ -270,12 +268,16 @@ def statistics(request,mail):
         total=Count('MO1_userNumber__MO1_homeCountry')
     ).order_by('total')
     image2 = plt_circle(visiter_country)
-    datedata=plt_leq()
+    datedata=get_datedata()
+    count = []
+    date_f = []
     for i in datedata:
         visiter_count = MO6_Visit_record.objects.filter(
             MO3_DspotNumber=dspot,MO6_visitDate__gte=i[0],MO6_visitDate__lt=i[1],
         ).count()
-        print(visiter_count)
+        count.append(visiter_count)
+        date_f.append()
+        
     params = {
         'store':mystore,
         'image2':image2
@@ -285,7 +287,7 @@ def statistics(request,mail):
 
 import datetime 
 from dateutil.relativedelta import relativedelta
-def plt_leq():
+def get_datedata():
     now = timezone.now()
     # date = [[now+1,now-6],[2023-01-15,2023-01-21]]
     # 今日の日時を取得   
@@ -303,10 +305,6 @@ def plt_leq():
         array.append([one_week_ago,current_day_of_sunday-relativedelta(days=1)])
         current_day_of_sunday = one_week_ago
     print(array)
-    # obj = MO6_Visit_record.objects.filter(MO6_createdDate__lte=array[0][1])
-    # print(obj)
-    # print("n=",now)
-    # return render(request,"karioki.html")
     return array
 
 def plt_circle(visiter):
