@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.urls import reverse
 from django.views import generic
 from accounts.models import CustomUser,MO6_Visit_record
 from .models import MO3_Default_spot,MO4_Original_spot,MO5_Tag
@@ -6,6 +7,7 @@ from store.models import MO2_store
 from .forms import *
 from blog.models import MO7_Blog
 import json
+import datetime
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -59,19 +61,35 @@ def OspotInfo(request,spot_num):
 
 class OspotVisitRegisterView(generic.TemplateView):
     template_name = "OspotVisitRegister.html"
+def OspotVisitRegister(request):
+    print(request.POST.get("spot"))
+    spot = MO4_Original_spot.objects.get(MO4_OspotNumber=request.POST.get("spot"))
+    params = {
+        "spot":spot,
+    }
+    return render(request,"OspotVisitRegister.html",params)
+
+
+def OspotVisitcreate(request):
+    user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
+    num = int(request.POST.get("spot"))
+    o_spot = MO4_Original_spot.objects.get(MO4_OspotNumber=num)
+    time = request.POST.get("time")
+    date = request.POST.get("date")
+    t =time.split(":")
+    d =date.split("-")
+    visited = datetime.datetime(int(d[0]),int(d[1]),int(d[2]),int(t[0]),int(t[1]),00)
+    record = MO6_Visit_record.objects.create(MO1_userNumber=user,MO4_OspotNumber=o_spot,MO6_visitDate=visited)
+    return redirect("maps:originalspotinfo",num)
+
 
 @login_required
 def DspotInfo(request,spot_num):
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     spot = MO3_Default_spot.objects.get(MO3_DspotNumber=spot_num)
-    print("s = ",spot)
     records = MO6_Visit_record.objects.filter(MO3_DspotNumber=spot)
     myrecords = MO6_Visit_record.objects.filter(MO3_DspotNumber=spot,MO1_userNumber=mydata)
     blogs = MO7_Blog.objects.filter(MO6_visitRecordNumber__in=records,MO7_openRange=0)
-    for i in records:
-        print("r = ",i)
-    for i in blogs:
-        print("b = ",i)
     params = {
         "spot":spot,
         "count":len(myrecords),
@@ -189,6 +207,3 @@ def SpotSearch(request):
             'user':user,
         }
     return render(request,"Map.html",params)
-
-def addressSearch(request):
-    return Map(request)

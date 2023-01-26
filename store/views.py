@@ -8,7 +8,10 @@ from .decorators import *
 from django.conf import settings
 from django.contrib.auth.hashers import make_password,check_password
 from PIL import Image
+from django.utils import timezone
+import matplotlib.pyplot as plt
 import qrcode
+from django.db.models import Sum,Count
 import base64
 from io import BytesIO
 # Create your views here.
@@ -256,4 +259,55 @@ def storeinfodelete(request,mail):
     request.session.pop('storeLogin')
     return redirect('store:storeRequest')
 
+@login_required_store
+def statistics(request,mail):
+    mystore = MO2_store.objects.get(MO2_mailAdress = mail)
+    dspot = MO3_Default_spot.objects.get(MO3_DspotNumber=mystore.MO2_storeNumber)
+    print("dspot = ",dspot)
+    visiter_country = MO6_Visit_record.objects.filter(MO3_DspotNumber=dspot).select_related().values(
+        'MO1_userNumber__MO1_homeCountry'
+    ).annotate(
+        total=Count('MO1_userNumber__MO1_homeCountry')
+    ).order_by('total')
+    image2 = plt_circle(visiter_country)
+    plt_leq()
+    params = {
+        'store':mystore,
+        'image2':image2
+    }
+    return render(request,"Statistics.html",params)
 
+def plt_leq(request):
+    now = timezone.now()
+    # date = [[now+1,now-6],[2023-01-15,2023-01-21]]
+    print("n=",now)
+    return render(request,"karioki.html")
+
+def plt_circle(visiter):
+    data = []
+    labels = []
+    for i in visiter:
+        data.append(i['total'])
+        labels.append(i['MO1_userNumber__MO1_homeCountry'])
+    # create figure
+    fig, ax = plt.subplots()
+    plt.rcParams['font.family'] = 'Yu Gothic'
+    ax.pie(data, #データ
+                 startangle=90, #円グラフ開始軸を指定
+                 labels=labels, #ラベル
+                 autopct="%1.1f%%",#パーセント表示
+                 counterclock=False, #逆時計回り
+                )
+    ax.axis("equal")
+    image = Output_Graph()
+    return image
+
+def Output_Graph():
+    buffer = BytesIO()
+    plt.savefig(buffer, format="png")
+    buffer.seek(0)
+    img = buffer.getvalue()
+    graph = base64.b64encode(img)
+    graph = graph.decode("utf-8")
+    buffer.close()
+    return graph

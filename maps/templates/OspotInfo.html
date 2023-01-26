@@ -22,7 +22,11 @@
     <div class="container">
         <div class="animate-box">
             <div style=" text-align: right; margin-bottom: 15px;">
-                <button class="btnin" style="width: 200px;" type="submit">record of <br>your visits</button>
+                <form method="post" action="{% url 'maps:OspotVisitRegister' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="spot" value={{spot.MO4_OspotNumber}}>
+                    <button class="btnin" style="width: 200px;" type="submit">record of <br>your visits</button>
+                </form>
             </div>
             <div class="side-by-side">
                 <table class="spot-table">
