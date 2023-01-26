@@ -16,7 +16,6 @@
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRh_82v_as8gc1SMbHnvHPSK2w1plRQdk&callback=initMap"></script>
 
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/easy-button.css' %}">
     <script src="{% static 'js/easy-button.js' %}"></script>
 
@@ -92,7 +91,7 @@
                 geocoder: L.Control.Geocoder.nominatim()
             }).addTo(map);
 
-            L.easyButton('fas fa-comment-alt', function(btn, easyMap){
+            L.easyButton("<img src=\"{% static 'images/current_location_icon.jpg' %}\">", function(btn, easyMap){
                 if (clickMarker) {
                     map.removeLayer(clickMarker);
                 }
