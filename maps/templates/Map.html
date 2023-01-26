@@ -154,43 +154,20 @@
                         var json = req.responseText;
                         var results = JSON.parse(json);
                         //var popStr = '緯度：' + lat + '<br>経度：' + lng + '<br>標高：' + results.elevation + 'm';
-                        var popStr = '<input type="hidden" name="lat" form="test-oscreate" value='+lat+'>'+'<input type="hidden" name="lng" form="test-oscreate" value='+lng+'>'+'<a href="#scroll"><button class="btn btn-primary btn-outline btn-lg">create</button></a>';
+                        var popStr = '<a href="#scroll"><button class="btn btn-primary btn-outline btn-lg">create</button></a>';
                         clickMarker = L.marker(e.latlng).on('click', onMarkerClick).addTo(map).bindPopup(popStr).openPopup();
                     }
                 };
                 req.open("GET", src, false);
                 req.send(null)
+                document.getElementById("form-lat").value=lat;
+                document.getElementById("form-lng").value=lng;
+                document.getElementById("createform").style.display="block";
             }
             function onMarkerClick(e) {
                 map.removeLayer(clickMarker);
+                document.getElementById("createform").style.display="none";
             }
-            {% comment %} function current_location_oscreat(){
-                alert("oscreate");
-                if (clickMarker) {
-                    alert("1");
-                    map.removeLayer(clickMarker);
-                }
-                alert("2");
-                navigator.geolocation.getCurrentPosition((position)=> {
-                    var req = new XMLHttpRequest();
-                    req.onreadystatechange = function() {
-                        if(req.readyState == 4 && req.status == 200) {
-                            var json = req.responseText;
-                            var results = JSON.parse(json);
-                            alert("3");
-                            //緯度
-                            let lat = position.coords.latitude;
-                            //経度
-                            let lng = position.coords.longitude;
-                            var popStr = '<input type="hidden" name="lat" form="test-oscreate" value='+lat+'>'+'<input type="hidden" name="lng" form="test-oscreate" value='+lng+'>'+'<a href="#scroll"><button class="btn btn-primary btn-outline btn-lg">create</button></a>';
-                            alert("4");
-                            clickMarker = L.marker([lat,lng]).on('click', onMarkerClick).addTo(map).bindPopup(popStr).openPopup();
-                            alert("5");
-                        }
-                    };
-                });
-            } {% endcomment %}
-            
         }
 
         // マーカーリスト作成関数 make_markerList
@@ -316,10 +293,11 @@
                     </tr>
                 </table>
             </form>
-            <div class="box26">
-                <span class="box-title">OriginlSpot registration field</span>
+            <div id="createform" style="display:none;">
                 <form method="post" id="test-oscreate" name="oscreate" action="{% url 'maps:OspotCreate' %}">
                     {% csrf_token %}
+                    <input type="hidden" id="form-lat" name="lat" form="test-oscreate" value=''>
+                    <input type="hidden" id="form-lng" name="lng" form="test-oscreate" value=''>
                     <table class="confirmation maptable">
                         <input type="hidden" name="MO1_userNumber" value={{user.MO1_userNumber}}>
                         <tr>
