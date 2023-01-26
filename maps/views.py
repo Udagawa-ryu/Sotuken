@@ -51,9 +51,13 @@ def OspotInfo(request,spot_num):
     else:
         records = ""
     blogs = MO7_Blog.objects.filter(MO6_visitRecordNumber__in=records)
+    if records == "":
+        count=0
+    else:
+        count = records.count()
     params = {
         "spot":spot,
-        "count":records.count(),
+        "count":count,
         "records":records,
         "blogs":blogs,
     }
@@ -88,11 +92,20 @@ def DspotInfo(request,spot_num):
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     spot = MO3_Default_spot.objects.get(MO3_DspotNumber=spot_num)
     records = MO6_Visit_record.objects.filter(MO3_DspotNumber=spot)
+    if MO6_Visit_record.objects.filter(MO3_DspotNumber=spot,MO1_userNumber=mydata).exists():
+        myrecords = MO6_Visit_record.objects.filter(MO3_DspotNumber=spot,MO1_userNumber=mydata)
+    else:
+        myrecords = ""
+
     myrecords = MO6_Visit_record.objects.filter(MO3_DspotNumber=spot,MO1_userNumber=mydata)
     blogs = MO7_Blog.objects.filter(MO6_visitRecordNumber__in=records,MO7_openRange=0)
+    if myrecords == "":
+        count = 0
+    else:
+        count = myrecords.count()
     params = {
         "spot":spot,
-        "count":len(myrecords),
+        "count":count,
         "myrecords":myrecords,
         "blogs":blogs,
     }

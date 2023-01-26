@@ -260,7 +260,7 @@ def storeinfodelete(request,mail):
 @login_required_store
 def statistics(request,mail):
     mystore = MO2_store.objects.get(MO2_mailAdress = mail)
-    dspot = MO3_Default_spot.objects.get(MO3_DspotNumber=mystore.MO2_storeNumber)
+    dspot = MO3_Default_spot.objects.get(MO2_storeNumber=mystore.MO2_storeNumber)
     print("dspot = ",dspot)
     visiter_country = MO6_Visit_record.objects.filter(MO3_DspotNumber=dspot).select_related().values(
         'MO1_userNumber__MO1_homeCountry'
@@ -276,10 +276,13 @@ def statistics(request,mail):
             MO3_DspotNumber=dspot,MO6_visitDate__gte=i[0],MO6_visitDate__lt=i[1],
         ).count()
         count.append(visiter_count)
-        date_f.append()
-        
+        date_f.append("{:02}月{:02}日".format(i[0].month,i[0].day))
+    count = list(reversed(count))
+    date_f = list(reversed(date_f))
+    image = Plot_Graph(date_f,count)
     params = {
         'store':mystore,
+        'image':image,
         'image2':image2
     }
     return render(request,"Statistics.html",params)
@@ -292,19 +295,13 @@ def get_datedata():
     # date = [[now+1,now-6],[2023-01-15,2023-01-21]]
     # 今日の日時を取得   
     current_day = timezone.now() + relativedelta(hours=+9)
-    print(current_day)
     # 今週の日曜日の日時を取得    
     current_day_of_sunday = current_day + relativedelta(days=6-datetime.date.today().weekday())
-    print("n=",current_day)
     array = []
     for i in range(8):
         one_week_ago = current_day_of_sunday + relativedelta(weeks=-1)
-        # 日曜～日曜
-        # array.append([one_week_ago,current_day_of_sunday])
-        # 日曜～土曜        
         array.append([one_week_ago,current_day_of_sunday-relativedelta(days=1)])
         current_day_of_sunday = one_week_ago
-    print(array)
     return array
 
 def plt_circle(visiter):
@@ -325,6 +322,17 @@ def plt_circle(visiter):
     ax.axis("equal")
     image = Output_Graph()
     return image
+
+def Plot_Graph(x,y):
+	plt.switch_backend("AGG")        #スクリプトを出力させない
+	plt.figure(figsize=(10,5))       #グラフサイズ
+	plt.bar(x,y)                     #グラフ作成
+	plt.xticks(rotation=45)          #X軸値を45度傾けて表示
+	plt.xlabel("beginning of the week")               #xラベル
+	plt.ylabel("visiter")             #yラベル
+	plt.tight_layout()               #レイアウト
+	graph = Output_Graph()           #グラフプロット
+	return graph
 
 def Output_Graph():
     buffer = BytesIO()
