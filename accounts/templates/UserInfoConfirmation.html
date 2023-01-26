@@ -51,6 +51,8 @@
                 <div style="text-align: center;">
                     <button type="submit" class="btnin" name="next" value="back">　Back　</button>
                     <button type="submit" class="btnin" style="width: 130px" name="next" value="next">　Update　</button>
+                    {% comment %} formactionを入れる事で確認画面に遷移はできるが、変更したデータが更新されずに遷移してしまう {% endcomment %}
+                    {% comment %} <button type="submit" formaction="{% url 'accounts:UserInfoComp' %}" class="btnin" style="width: 130px" name="next" value="update">　Update　</button> {% endcomment %}
                 </div>
             </form>
         </div>
