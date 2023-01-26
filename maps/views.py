@@ -174,30 +174,32 @@ def SpotSearch(request):
         tags_id = request.POST.getlist('tags')
         keword = request.POST.get('keyword')
         tag_counter = len(tags_id)
-        if keword == "":
-            sql = """select count(*), "MO2_storeNumber" from maps_mo3_default_spot inner join store_mo2_store on ( store_mo2_store."MO2_storeNumber" = "maps_mo3_default_spot"."MO2_storeNumber_id" ) inner join "maps_mo3_default_spot_MO5_tagNumber" on 
-            ( "maps_mo3_default_spot"."MO3_DspotNumber" = "maps_mo3_default_spot_MO5_tagNumber"."mo3_default_spot_id" ) where 1=1 """
+        if tag_counter!=0:
+            if keword == "":
+                sql = """select count(*), "MO2_storeNumber" from maps_mo3_default_spot inner join store_mo2_store on ( store_mo2_store."MO2_storeNumber" = "maps_mo3_default_spot"."MO2_storeNumber_id" ) inner join "maps_mo3_default_spot_MO5_tagNumber" on 
+                ( "maps_mo3_default_spot"."MO3_DspotNumber" = "maps_mo3_default_spot_MO5_tagNumber"."mo3_default_spot_id" ) where 1=1 """
+            else:
+                sql = """select count(*), "MO2_storeNumber" from maps_mo3_default_spot inner join store_mo2_store on ( store_mo2_store."MO2_storeNumber" = "maps_mo3_default_spot"."MO2_storeNumber_id" ) inner join "maps_mo3_default_spot_MO5_tagNumber" on 
+                ( "maps_mo3_default_spot"."MO3_DspotNumber" = "maps_mo3_default_spot_MO5_tagNumber"."mo3_default_spot_id" ) where "MO2_storeName" LIKE '%大原%' """
+            if tag_counter != 0:
+                sql += """ and (1=0 """
+                for i in tags_id:
+                    sql += """ or "mo5_tag_id" = """+i
+                sql += """)"""
+            sql += """ group by "MO2_storeNumber";"""
+            print("sql1="+sql)
+            res = MO2_store.objects.raw(sql)
+            print("r = ",res)
+            for i in res:
+                print("i = {}-{}".format(i.count,i.MO2_storeNumber))
+            
+            sql = """select * from maps_mo3_default_spot where 1=0 """
+            for i in res:
+                if i.count == tag_counter:
+                    sql += """ or "MO2_storeNumber_id" = """+str(i.MO2_storeNumber)
+            sql += """ ; """
         else:
-            sql = """select count(*), "MO2_storeNumber" from maps_mo3_default_spot inner join store_mo2_store on ( store_mo2_store."MO2_storeNumber" = "maps_mo3_default_spot"."MO2_storeNumber_id" ) inner join "maps_mo3_default_spot_MO5_tagNumber" on 
-            ( "maps_mo3_default_spot"."MO3_DspotNumber" = "maps_mo3_default_spot_MO5_tagNumber"."mo3_default_spot_id" ) where "MO2_storeName" LIKE '%大原%' """
-        if tag_counter != 0:
-            sql += """ and (1=0 """
-            for i in tags_id:
-                sql += """ or "mo5_tag_id" = """+i
-            sql += """)"""
-        sql += """ group by "MO2_storeNumber";"""
-        sql_test = "select * from maps_mo3_default_spot;"
-        print("sql1="+sql)
-        res = MO2_store.objects.raw(sql)
-        print("r = ",res)
-        for i in res:
-            print("i = {}-{}".format(i.count,i.MO2_storeNumber))
-        
-        sql = """select * from maps_mo3_default_spot where 1=0 """
-        for i in res:
-            if i.count == tag_counter:
-                sql += """ or "MO2_storeNumber_id" = """+str(i.MO2_storeNumber)
-        sql += """ ; """
+            sql = "select * from maps_mo3_default_spot;"
         print("sql2="+sql)
         serch = MO3_Default_spot.objects.raw(sql)
         user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
