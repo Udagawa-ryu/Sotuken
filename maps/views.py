@@ -127,7 +127,8 @@ def OtherMap(request,num):
     for i in d_spot:
         d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber])
     for i in o_spot:
-        o_list.append([i.MO4_OspotAdress,i.MO4_OspotName, i.MO4_OspotNumber])
+        address = [i.MO4_OspotLat,i.MO4_OspotLng]
+        o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber])
     params = {
         'd_list': json.dumps(d_list),
         'o_list': json.dumps(o_list),
@@ -209,7 +210,8 @@ def SpotSearch(request):
         for i in serch:
             d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber])
         for i in o_spot:
-            o_list.append([i.MO4_OspotAdress,i.MO4_OspotName, i.MO4_OspotNumber])
+            address = [i.MO4_OspotLat,i.MO4_OspotLng]
+            o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber])
         print(d_list)
         params = {
             'd_list': json.dumps(d_list),
