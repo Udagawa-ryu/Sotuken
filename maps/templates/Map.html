@@ -293,27 +293,30 @@
                 </table>
             </form>
             <div id="createform" style="display:none;">
-                <form method="post" id="test-oscreate" name="oscreate" action="{% url 'maps:OspotCreate' %}">
-                    {% csrf_token %}
-                    <input type="hidden" id="form-lat" name="lat" form="test-oscreate" value=''>
-                    <input type="hidden" id="form-lng" name="lng" form="test-oscreate" value=''>
-                    <table class="confirmation maptable">
-                        <input type="hidden" name="MO1_userNumber" value={{user.MO1_userNumber}}>
-                        <tr>
-                            <th class="th-center">SpotName</th>
-                            <td class="td-space">{{o_form.MO4_OspotName}}</td>
-                        </tr>
-                        <tr>
-                            <th class="th-center">SpotInfo</th>
-                            <td class="td-space" style="padding-top: 10px;">
-                                <pre class="pre-none">{{o_form.MO4_OspotInfo}}</pre>
-                            </td>
-                        </tr>
-                    </table>
-                    <div style="text-align: center; margin-bottom:15px;">
-                        <button class="btn btn-primary btn-outline btn-lg" type="submit">create</button>
-                    </div>
-                </form>
+                <div class="box26">
+                    <span class="box-title">Registration field for original spots</span>
+                    <form method="post" id="test-oscreate" name="oscreate" action="{% url 'maps:OspotCreate' %}">
+                        {% csrf_token %}
+                        <input type="hidden" id="form-lat" name="lat" form="test-oscreate" value=''>
+                        <input type="hidden" id="form-lng" name="lng" form="test-oscreate" value=''>
+                        <table class="confirmation maptable">
+                            <input type="hidden" name="MO1_userNumber" value={{user.MO1_userNumber}}>
+                            <tr>
+                                <th class="th-center">SpotName</th>
+                                <td class="td-space">{{o_form.MO4_OspotName}}</td>
+                            </tr>
+                            <tr>
+                                <th class="th-center">SpotInfo</th>
+                                <td class="td-space" style="padding-top: 10px;">
+                                    <pre class="pre-none">{{o_form.MO4_OspotInfo}}</pre>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="text-align: center; margin-bottom:15px;">
+                            <button class="btn btn-primary btn-outline btn-lg" type="submit">create</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
