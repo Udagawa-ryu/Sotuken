@@ -91,7 +91,7 @@ def StorePassRegister(request,store):
                 params['message'] = "入力が完了しました。"
                 request.session['storeLogin'] = mystore.MO2_mailAdress
                 request.session.set_expiry(settings.SESSION_COOKIE_AGE)
-                qr = storeQRCreate(mystore.MO2_storeNumber)
+                qr = storeQRView(mystore.MO2_storeNumber)
                 params = {'qr':qr}
                 return render(request,'StoreQR.html',params)
             else:
@@ -270,18 +270,44 @@ def statistics(request,mail):
         total=Count('MO1_userNumber__MO1_homeCountry')
     ).order_by('total')
     image2 = plt_circle(visiter_country)
-    plt_leq()
+    datedata=plt_leq()
+    for i in datedata:
+        visiter_count = MO6_Visit_record.objects.filter(
+            MO3_DspotNumber=dspot,MO6_visitDate__gte=i[0],MO6_visitDate__lt=i[1],
+        ).count()
+        print(visiter_count)
     params = {
         'store':mystore,
         'image2':image2
     }
     return render(request,"Statistics.html",params)
 
-def plt_leq(request):
+
+import datetime 
+from dateutil.relativedelta import relativedelta
+def plt_leq():
     now = timezone.now()
     # date = [[now+1,now-6],[2023-01-15,2023-01-21]]
-    print("n=",now)
-    return render(request,"karioki.html")
+    # 今日の日時を取得   
+    current_day = timezone.now() + relativedelta(hours=+9)
+    print(current_day)
+    # 今週の日曜日の日時を取得    
+    current_day_of_sunday = current_day + relativedelta(days=6-datetime.date.today().weekday())
+    print("n=",current_day)
+    array = []
+    for i in range(8):
+        one_week_ago = current_day_of_sunday + relativedelta(weeks=-1)
+        # 日曜～日曜
+        # array.append([one_week_ago,current_day_of_sunday])
+        # 日曜～土曜        
+        array.append([one_week_ago,current_day_of_sunday-relativedelta(days=1)])
+        current_day_of_sunday = one_week_ago
+    print(array)
+    # obj = MO6_Visit_record.objects.filter(MO6_createdDate__lte=array[0][1])
+    # print(obj)
+    # print("n=",now)
+    # return render(request,"karioki.html")
+    return array
 
 def plt_circle(visiter):
     data = []

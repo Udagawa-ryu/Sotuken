@@ -53,7 +53,7 @@ def OspotInfo(request,spot_num):
     blogs = MO7_Blog.objects.filter(MO6_visitRecordNumber__in=records)
     params = {
         "spot":spot,
-        "count":1,
+        "count":records.count(),
         "records":records,
         "blogs":blogs,
     }
