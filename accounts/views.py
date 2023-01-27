@@ -39,7 +39,7 @@ def UserInfoEdit(request):
             "MO1_homeCountry":request.POST.get("MO1_homeCountry"),
             "MO1_language":request.POST.get("MO1_language"),
         }
-        form = UserEditForm(request.POST or initial_data)
+        form = UserEditForm(request.POST,instance=mydata)
         form.fields['MO1_homeCountry'].choices = COUNTRIES
         form.fields['MO1_language'].choices = LANGAGES
         params = {
@@ -54,7 +54,7 @@ def UserInfoEdit(request):
             "MO1_homeCountry":mydata.MO1_homeCountry,
             "MO1_language":mydata.MO1_language,
         }
-        form = UserEditForm(request.POST or initial_data)
+        form = UserEditForm(request.POST or initial_data,instance=mydata)
         form.fields['MO1_homeCountry'].choices = COUNTRIES
         form.fields['MO1_language'].choices = LANGAGES
         params = {
@@ -65,6 +65,7 @@ def UserInfoEdit(request):
 
 @login_required
 def UserInfoConfirmation(request):
+    mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
     if request.method == 'POST':
         COUNTRIES = {
             #どこかから国の一覧データを持ってきたい
@@ -88,13 +89,13 @@ def UserInfoConfirmation(request):
             if i[0] == request.POST.get("MO1_language"):
                 lang = i[1]
         if request.POST.get('next', '') == 'confirm':
-            form = UserEditForm(request.POST or initial_data)
+            form = UserEditForm(request.POST or initial_data,instance=mydata)
             form.fields['MO1_homeCountry'].choices = COUNTRIES
             form.fields['MO1_language'].choices = LANGAGES
             params = {"message":'',"form":form,"co":co,"lang":lang}
             return render(request,"UserInfoConfirmation.html",params)
         if request.POST.get('next', '') == 'back':
-            form = UserEditForm(request.POST or initial_data)
+            form = UserEditForm(request.POST or initial_data,instance=mydata)
             form.fields['MO1_homeCountry'].choices = COUNTRIES
             form.fields['MO1_language'].choices = LANGAGES
             params = {"message":'',"form":form}
