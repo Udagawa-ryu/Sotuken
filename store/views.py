@@ -205,7 +205,7 @@ def storeInfoEditView(request,mail):
             "MO2_images2":request.POST.get('MO2_images2'),
             "MO2_images3":request.POST.get('MO2_images3'),
         }
-        form = StoreUpdateForm(request.POST or initial_data)
+        form = StoreUpdateForm(request.POST or initial_data,instance=mystore)
         params = {
             'form':form,
             'message' : '',
@@ -221,7 +221,7 @@ def storeInfoEditView(request,mail):
             "MO2_images2":mystore.MO2_images2,
             "MO2_images3":mystore.MO2_images3,
         }
-        form = StoreUpdateForm(request.POST or initial_data)
+        form = StoreUpdateForm(request.POST or initial_data,instance=mystore)
         params = {
             'form':form,
             'message' : '',
@@ -230,6 +230,7 @@ def storeInfoEditView(request,mail):
 # 店舗用情報編集画面
 @login_required_store
 def storeInfoConfirmationView(request,mail):
+    mystore = MO2_store.objects.get(MO2_mailAdress = mail)
     if request.method == 'POST':
         initial_data = {
             "MO2_storeName":request.POST.get('MO2_storeName'),
@@ -241,15 +242,15 @@ def storeInfoConfirmationView(request,mail):
             "MO2_images3":request.POST.get('MO2_images3'),
         }
         if request.POST.get('next', '') == 'confirm':
-            form = StoreUpdateForm(initial_data)
+            form = StoreUpdateForm(initial_data,instance=mystore)
             params = {"message":'',"form":form}
             return render(request,"StoreInfoConfirmation.html",params)
         if request.POST.get('next', '') == 'back':
-            form = StoreUpdateForm(initial_data)
+            form = StoreUpdateForm(initial_data,instance=mystore)
             params = {"message":'',"form":form}
             return render(request,"StoreInfoEdit.html",params)
         if request.POST.get('next', '') == 'next':
-            form = StoreUpdateForm(initial_data)
+            form = StoreUpdateForm(initial_data,instance=mystore)
             if form.is_valid():
                 mystore = MO2_store.objects.get(MO2_mailAdress = mail)
                 mystore.MO2_storeName = request.POST.get('MO2_storeName')
