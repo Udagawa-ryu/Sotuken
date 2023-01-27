@@ -21,24 +21,20 @@
     </div>
     <div class="container">
         <div class="animate-box">
-            <div class="row">
-                <div style="margin-left:20%; margin-right:20%; padding-left: 0;">
-                    <table class="user_list">
-                        {% for i in users %}
-                        <tr>
-                            <td class="user1">{{ i.username }}</td>
-                            <form method="post" action="{% url 'accounts:OtherMypage' %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="user" value="{{ i.MO1_userNumber }}">
-                                <td><button class="favorite" type="submit">UserPage</button></td>
-                            </form>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                    <div class="text-center-nh">
-                                            <button onclick="location.href='{% url 'accounts:UserSearch' %}'" class="btnin" style="width:150px;">research</button>
-                    </div>
-                </div>
+            <table class="user_list">
+                {% for i in users %}
+                <tr>
+                    <td class="user1">{{ i.username }}</td>
+                    <form method="post" action="{% url 'accounts:OtherMypage' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="user" value="{{ i.MO1_userNumber }}">
+                        <td style="text-align:right;"><button class="btnin" style="width:150px;" type="submit">UserPage</button></td>
+                    </form>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="text-center-nh">
+                <button onclick="location.href='{% url 'accounts:UserSearch' %}'" class="btnin" style="width:150px;">research</button>
             </div>
         </div>
     </div>

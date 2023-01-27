@@ -726,6 +726,7 @@ table.ospot_record {
 @media screen and (max-width: 480px) {
     .user_list {
         margin-bottom: 110%;
+        width: 100%;
     }
 }
 

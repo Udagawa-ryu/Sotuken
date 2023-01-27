@@ -20,7 +20,7 @@
     <div class="container">
         <!-- 左寄せ -->
         <div class="animate-box">
-            <div style="text-align:right;">
+            <div style="text-align:right; margin-bottom:20px;">
                 <!-- 作成ページ遷移ボタン -->
                 <button type="submit" onclick="location.href='{% url 'main:favoriteUserList' %}'" class="btnin" style="width:150px;" style="text-transform:none">Favorite<br>User</button>
             </div>
@@ -35,12 +35,22 @@
                         <a href="{% url 'blog:blogDetail' obj.MO7_blogNumber.MO7_blogNumber %}"><img class="img-responsive" src="{% static 'images/place-1.jpg' %}" alt=""></a>
                         <div class="blog-text">
                             <div class="prod-title">
-                                <h3><a href="{% url 'blog:blogDetail' obj.MO7_blogNumber.MO7_blogNumber %}">{{ obj.MO7_blogNumber.MO7_blogText}}</a></h3>
+                                <!-- ブログタイトル -->
+                                <h3><a href="{% url 'blog:blogDetail' obj.MO7_blogNumber.MO7_blogNumber %}">{{ obj.MO7_blogNumber.MO7_blogName}}</a></h3>
+                                <!-- 日付 -->
+                                <span class="posted_by">{{ obj.MO7_blogNumber.MO7_createDate }}</span>
+                                <p>
+                                <pre>{{ obj.MO7_blogNumber.MO7_blogText }}</pre>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+                {% empty %}
+                <div>
+                    <p>No blog</p>
+                </div>
+                {% endfor %}
         </div>
     </div>
 </div>
