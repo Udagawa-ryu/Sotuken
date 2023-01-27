@@ -1,0 +1,41 @@
+{% extends 'store_base.html' %}
+
+{% block title %}パスワード設定画面{% endblock %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+<div class="container">
+    <!-- <div class="row"> -->
+        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+            <h1 class="Pass_regi">パスワード再設定</h1>
+        </div>
+    <!-- </div> -->
+</div>
+<div class="container">
+    <!-- <div class="row"> -->
+        <div class="my-div-style">
+            <div class="animate-box">
+        <form method="post" action="{% url 'store:storepasschangeregister' %}">
+            {% csrf_token %}
+            <p>{{ message }}</p>
+                <p class="store_pass">メールアドレス:<input type="mail" name="mail" required style="width:70%;"></p>
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <!--登録ボタン-->
+            <div class="btn_regist">
+            <button type="submit" class="btnin">送信</button>
+            </div>
+        </form>
+            </div>
+        </div>
+    <!-- </div> -->
+</div>
+</div>
+{% endblock %}

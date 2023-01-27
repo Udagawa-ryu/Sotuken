@@ -17,8 +17,8 @@ class StoreCreateForm(forms.ModelForm):
         }
 
 class StorePassCreateForm(forms.Form):
-    password1 = forms.CharField(label='パスワード1', widget=forms.PasswordInput(), min_length=8)
-    password2 = forms.CharField(label='パスワード2', widget=forms.PasswordInput(), min_length=8)
+    password1 = forms.CharField(label='パスワード1', widget=forms.PasswordInput(), min_length=8,max_length=12)
+    password2 = forms.CharField(label='パスワード2', widget=forms.PasswordInput(), min_length=8,max_length=12)
 
 class StoreLoginForm(forms.ModelForm):
     class Meta:

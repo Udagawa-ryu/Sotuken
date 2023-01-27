@@ -131,6 +131,58 @@ def storeLogin(request):
         return render(request,'StoreLogin.html',params)
     return render(request,'StoreLogin.html',params)
 
+def storeChangePasswordresister(request):
+    params = {'message': '', 'form': None}
+    if request.method == 'POST':
+        if MO2_store.objects.filter(MO2_mailAdress=request.POST.get("mail")).exists():
+            store = MO2_store.objects.get(MO2_mailAdress=request.POST.get("mail"))
+            if store.is_active == False:
+                params['message'] = "店舗登録が解除されています。"
+                return render(request,'StorePassChange.html',params)
+            else:
+                url = "http://localhost:8000/store/storePassform/"+str(store.MO2_mailAdress)
+                subject = "以下より新しいパスワードを設定してください。"
+                message = url
+                from_email = "admin@mail.com"  # 送信者
+                recipient_list = [store.MO2_mailAdress]  # 宛先リスト
+                send_mail(subject, message, from_email, recipient_list)
+                params['message'] = "メールアドレスにパスワード再設定用リンクを送りました。"
+                return render(request,'storepassmail.html',params)
+        else:
+            params['form'] = StorePassCreateForm()
+            params['message'] = "そのメールアドレスは登録されていません。"
+            return render(request,'StorePassChange.html',params)
+    else:
+        params['form'] = None
+        params['message'] = "メールアドレスを入力してください"
+        return render(request,'StorePassChange.html',params)
+
+def storePassChangeform(request,mail):
+    store = MO2_store.objects.get(MO2_mailAdress=mail)
+    params = {'message': '', 'form': None,'store':store,"flg":0}
+    if request.method == 'POST':
+        form = StorePassCreateForm(request.POST)
+        if request.POST['password1'] != request.POST['password2']:
+            params['message'] = "入力された二つのパスワードが違います。再入力してください。"
+            params['form'] =  StorePassCreateForm()
+            return render(request, 'StorePassform.html', params)
+        else:
+            if form.is_valid():
+                en_pass = make_password(request.POST['password1'])
+                store.MO2_password = en_pass
+                store.save()
+                params['message'] = "パスワード変更が完了しました。"
+                params['flg'] = 1
+                return render(request, 'StorePassform.html', params)
+            else:
+                params['message'] = '再入力して下さい'
+                params['form'] = StorePassCreateForm()
+                return render(request, 'StorePassRegister.html', params)
+    else:
+        params['form'] = StorePassCreateForm()
+        params['message'] = '新しいパスワードを入力してください'
+        return render(request,'StorePassform.html',params)
+
 @login_required_store
 def IndexView(request,mail):
     mystore = MO2_store.objects.get(MO2_mailAdress = mail)
