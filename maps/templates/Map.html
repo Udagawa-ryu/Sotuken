@@ -97,10 +97,13 @@
                 }
                 navigator.geolocation.getCurrentPosition((position)=> {
                     let lat = position.coords.latitude;
-                        //経度
-                        let lng = position.coords.longitude;
-                        var popStr = '<input type="hidden" name="lat" form="test-oscreate" value='+lat+'>'+'<input type="hidden" name="lng" form="test-oscreate" value='+lng+'>'+'<a href="#scroll"><button class="btn btn-primary btn-outline btn-lg">create</button></a>';
-                        clickMarker = L.marker([lat,lng]).on('click', onMarkerClick).addTo(map).bindPopup(popStr).openPopup();
+                    //経度
+                    let lng = position.coords.longitude;
+                    var popStr = '<a href="#scroll"><button class="btn btn-primary btn-outline btn-lg">create</button></a>';
+                    clickMarker = L.marker([lat,lng]).on('click', onMarkerClick).addTo(map).bindPopup(popStr).openPopup();
+                    document.getElementById("form-lat").value=lat;
+                    document.getElementById("form-lng").value=lng;
+                    document.getElementById("createform").style.display="block";
                 });
             }).addTo(map);
 

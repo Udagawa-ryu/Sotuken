@@ -20,6 +20,7 @@ class CustomSignupForm(UserCreationForm):
     }
     MO1_language = forms.ChoiceField(label="Language",choices=LANGAGES)
     MO1_openRange = forms.ChoiceField(label="OpenRange",choices={(0,"Open"),(1,"Hidden")})
+    MO1_userID = forms.CharField(label="UserID",min_length=7,max_length=15)
     class Meta:
         model = CustomUser
         fields = ["email","username","MO1_userID","MO1_homeCountry","MO1_language","MO1_openRange"]
@@ -61,6 +62,7 @@ class UserEditForm(forms.ModelForm):
     }
     MO1_homeCountry = forms.ChoiceField(label="HomeCountry",choices=COUNTRIES)
     MO1_language = forms.ChoiceField(label="Language",choices=LANGAGES)
+    MO1_userID = forms.CharField(label="UserID",min_length=7,max_length=15)
     class Meta:
         model = CustomUser
         fields = ["username","MO1_userID","MO1_homeCountry","MO1_language"]
@@ -70,6 +72,10 @@ class UserEditForm(forms.ModelForm):
             "MO1_homeCountry":"HomeCountry",
             "MO1_language":"Language",
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
 
 class UserSearchForm(forms.Form):
     s_user = forms.CharField(label="UserSearch")
