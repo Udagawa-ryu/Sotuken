@@ -48,24 +48,24 @@
                     <section class="tiles">
                         <article class="style3">
                             <span class="image">
-                                <img src="{% static 'images/pic01.jpg' %}" alt="" />
+                                <a href="{% url 'store:storeQR' %}">
+                                    <img src="{% static 'images/pic01.jpg' %}" alt="" />
                                 <p>QRコード</p>
+                                </a>
                             </span>
-                            <div class="content">
+                            {% comment %} <div class="content">
                                 <p></p>
-                            </div>
+                            </div> {% endcomment %}
                             <!-- <a href="generic.html"> -->
                             <!-- </a> -->
                         </article>
                         <article class="style6">
                             <span class="image">
                                 <a href="{% url 'store:Statictics' %}">
-                                <img src="{% static 'images/pic02.jpg' %}" alt="" />
+                                    <img src="{% static 'images/pic02.jpg' %}" alt="" />
                                 <p>統計情報</p>
                                 </a>
                             </span>
-                            <!-- <a href="generic.html"> -->
-                            <!-- </a> -->
                         </article>
                     </section>
                 </div>
