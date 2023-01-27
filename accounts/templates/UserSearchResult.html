@@ -23,6 +23,8 @@
         <div class="animate-box">
             <table class="user_list">
                 {% for i in users %}
+                {% if  user.username == i.username %}
+                {% else %}
                 <tr>
                     <td class="user1">{{ i.username }}</td>
                     <form method="post" action="{% url 'accounts:OtherMypage' %}">
@@ -31,6 +33,7 @@
                         <td style="text-align:right;"><button class="btnin" style="width:150px;" type="submit">UserPage</button></td>
                     </form>
                 </tr>
+                {% endif %}
                 {% endfor %}
             </table>
             <div class="text-center-nh">
