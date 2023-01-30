@@ -192,11 +192,11 @@
             // marker_add関数を呼び出し、各スポットの住所を座標に変換し、マーカーリストに追加
             // 重い処理のため非同期で実行し、Promiseをpromisesに追加
             for (var i = 0; i < default_spot_counter; i++){
-                promises.push(marker_add(default_spot_data_array[i][0], default_spot_data_array[i][1],"default",default_spot_data_array[i][2]));
+                promises.push(marker_add(default_spot_data_array[i][0], default_spot_data_array[i][1],"default",default_spot_data_array[i][2],default_spot_data_array[i][3]));
                 console.log("default_spot_data_array[i][0]"+default_spot_data_array[i][0]+"default_spot_data_array[i][1]:"+default_spot_data_array[i][1]+"default_spot_data_array[i][2]:"+default_spot_data_array[i][2])
             }
             for (var i = 0; i < original_spot_counter; i++){
-                promises.push(marker_add(original_spot_data_array[i][0], original_spot_data_array[i][1],"original",original_spot_data_array[i][2]));
+                promises.push(marker_add(original_spot_data_array[i][0], original_spot_data_array[i][1],"original",original_spot_data_array[i][2],original_spot_data_array[i][3]));
             }
             // 全てのPromiseがresolveしたら、init関数を実行
             Promise.all(promises).then(() => {
@@ -209,7 +209,7 @@
         //      String name : 名前
         // 　　 String default_or_original : スポットの種類
         // 戻り値　Promise 変換を実行し、マーカーリストに追加するPromise
-        function marker_add(address, name, default_or_original,spot_num){
+        function marker_add(address, name, default_or_original,spot_num,url){
             return new Promise((resolve) => {
                 // 変換関数 getLatLng
                 // 関数内の処理終了後、Promiseをresolve()
@@ -223,6 +223,7 @@
                         markerList_tmp.pos = [result.lat,result.lng];
                         markerList_tmp.name = name;
                         markerList_tmp.spot_num = spot_num;
+                        markerList_tmp.url = url;
                         // default・originalを判断し、それぞれのマーカーリストに作成したテンプレートを追加
                         if (default_or_original == "default"){
                             default_spot_markerList.push(markerList_tmp);
@@ -238,6 +239,7 @@
                     markerList_tmp.pos = address;
                     markerList_tmp.name = name;
                     markerList_tmp.spot_num = spot_num;
+                    markerList_tmp.url = url;
                     original_spot_markerList.push(markerList_tmp);
                     resolve();
                 }

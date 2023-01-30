@@ -11,21 +11,33 @@ import datetime
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+def image_url(spot):
+    if spot.MO2_storeNumber.MO2_images1 == "":
+        url = "{% static 'images/noimage.jpg' %}"
+        return url
+    else:
+        url = "/media/store_images/"+spot.MO2_storeNumber.MO2_storeName+"/image1.png"
+        return url
+
 @login_required
 def Map(request):
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     o_spotform = OspotCreateForm()
     searchform = SpotSearchForm()
     tag_list = MO5_Tag.objects.all()
-    d_spot = MO3_Default_spot.objects.all()
+    d_spot = MO3_Default_spot.objects.select_related('MO2_storeNumber')
     o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = request.user.MO1_userNumber)
     d_list = []
     o_list = []
     for i in d_spot:
-        d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber])
+        image = image_url(i)
+        print(image)
+        d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber,image])
     for i in o_spot:
+        url = "{% static 'images/noimage.jpg' %}"
         address = [i.MO4_OspotLat,i.MO4_OspotLng]
-        o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber])
+        print(url)
+        o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber,url])
     params = {
         'd_list': json.dumps(d_list),
         'o_list': json.dumps(o_list),
@@ -35,6 +47,7 @@ def Map(request):
         'user':user,
     }
     return render(request,"Map.html",params)
+
 
 
 class MapView(generic.TemplateView):
