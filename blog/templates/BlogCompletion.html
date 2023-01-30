@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}BlogCompletion{% endblock %}
+{% block title %}Blog Completion | SAMURAI WALK{% endblock %}
 
 {% block active_login %}active{% endblock %}
 
 {% block css %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
 <link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
 {% endblock %}
 
@@ -14,21 +15,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3>BlogCompletion</h3>
+                <h3 style="text-transform:none">Blog Completion</h3>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="animate-box">
-            <div class="row">
-                <div class="my-div-style">
-                    <h2 class="completed">Completed!</h2>
-                </div>
-                <div class="blog_comp">
-                    <div class="col-md-12 text-center">
-                        <p><button type="submit" class="btn btn-primary btn-outline btn-lg"
-                                onclick="location.href='{% url 'main:Mypage' %}'">OK</button></p>
-                    </div>
+            <div class="text-center-nh">
+                <h2 style="text-transform:none">Completed!</h2>
+                <div class="space2">
+                    <button type="submit" class="btnin"
+                                onclick="location.href='{% url 'main:Mypage' %}'">OK</button>
                 </div>
             </div>
             </div>

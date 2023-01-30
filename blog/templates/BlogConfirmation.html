@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}BlogConfirmation{% endblock %}
+{% block title %}Blog Confirmation | SAMURAI WALK{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
@@ -13,12 +13,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-        <h3 style="text-transform:none">BlogConfirmation</h3>
+        <h3 style="text-transform:none">Blog Confirm</h3>
       </div>
     </div>
   </div>
   <div class="container">
-    <!-- <div class="row"> -->
     <div class="animate-box">
       <table class="confirmation">
         <tr>
@@ -48,7 +47,7 @@
           </td>
         </tr>
       </table>
-      <div class="text-center" style="margin-top: 20px;">
+      <div class="text-center space">
         <form method="post" action="{% url 'blog:blogConfirmation' %}">
           {% csrf_token %}
           <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
