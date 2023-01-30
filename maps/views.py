@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 def image_url(spot):
     if spot.MO2_storeNumber.MO2_images1 == "":
-        url = "{% static 'images/noimage.jpg' %}"
+        url = "/static/images/noimage.jpg"
         return url
     else:
         url = "/media/store_images/"+spot.MO2_storeNumber.MO2_storeName+"/image1.png"
@@ -31,12 +31,10 @@ def Map(request):
     o_list = []
     for i in d_spot:
         image = image_url(i)
-        print(image)
         d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber,image])
     for i in o_spot:
-        url = "{% static 'images/noimage.jpg' %}"
+        url = "/static/images/noimage.jpg"
         address = [i.MO4_OspotLat,i.MO4_OspotLng]
-        print(url)
         o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber,url])
     params = {
         'd_list': json.dumps(d_list),

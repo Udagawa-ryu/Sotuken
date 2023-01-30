@@ -117,7 +117,7 @@
                 // マーカーを変数に格納
                 var mk = default_spot_markerList[num];
                 // マーカーに関連付けるポップアップ設定
-                var popup = L.popup().setContent("<a href='/maps/DspotInfo/"+mk.spot_num+"/'>"+mk.name+"</a><br><img class='gazo' src='{% static 'images/sample_image.png' %}' >");
+                var popup = L.popup().setContent("<a href='/maps/DspotInfo/"+mk.spot_num+"/'>"+mk.name+"</a><br><img class='gazo' src='"+mk.url+"' >");
                 // マーカーアイコン設定
                 L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
                 // 上記設定でマーカーを地図、検索用レイヤーに追加
@@ -129,7 +129,7 @@
             }
             for (var num in original_spot_markerList) {
                 var mk = original_spot_markerList[num];
-                var popup = L.popup().setContent("<a href='/maps/OspotInfo/"+mk.spot_num+"/'>"+mk.name+"</a><br><img class='gazo' src='{% static 'images/sample_image.png' %}' >");
+                var popup = L.popup().setContent("<a href='/maps/OspotInfo/"+mk.spot_num+"/'>"+mk.name+"</a><br><img class='gazo' src='"+mk.url+"' >");
                 L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
                 searchLayer.addLayer(L.marker(mk.pos, { 
                 title: mk.name, 
@@ -239,7 +239,6 @@
                     markerList_tmp.pos = address;
                     markerList_tmp.name = name;
                     markerList_tmp.spot_num = spot_num;
-                    markerList_tmp.url = url;
                     original_spot_markerList.push(markerList_tmp);
                     resolve();
                 }
