@@ -511,3 +511,18 @@ td.td-space {
     margin-right:auto;
     margin-left:auto;
 }
+
+/* 店舗パスワード登録(PC) */
+@media screen and (max-width: 1280px) {
+    .storepass-registr {
+        width:50%;
+        margin-right:auto;
+        margin-left:auto;
+    }
+}
+/* 店舗パスワード登録(スマホ) */
+@media screen and (max-width: 480px) {
+    .storepass-registr {
+        width: 100%;
+    }
+}
