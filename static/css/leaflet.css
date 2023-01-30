@@ -231,13 +231,13 @@
 /* ポップアップのサイズ(PC) */
 @media screen and (max-width: 1280px) {
     .leaflet-popup {
-        width:500px;
+        max-width: 240px;
     }
 }
 /* ポップアップのサイズ(スマホ) */
 @media screen and (max-width: 480px) {
     .leaflet-popup {
-        width:300px;
+        max-width: 115px;
     }
 }
 
