@@ -1,1 +1,101 @@
-<h1>店舗QRコード読み取り画面</h1>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CK9PC4CD47"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-28042024-1');
+gtag('config', 'G-CK9PC4CD47');
+</script>
+<meta charset="UTF-8">
+<meta name="robots" content="none">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#000000">
+<link href="https://iwb.jp/s/common.css" rel="stylesheet">
+<style>
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem;
+  font-size: 14px;
+  text-align: center;
+}
+
+pre {
+  text-align: left;
+}
+
+#canvas {
+  width: 100%;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body>
+<div id="loading">📱 ブラウザのカメラの使用を許可してください。</div>
+<canvas id="canvas" hidden></canvas>
+{% comment %} 全画面表示 {% endcomment %}
+{% comment %} <canvas id="canvas" hidden style="position:absolute;top:0;left:0;right:0;bottom:0;"></canvas> {% endcomment %}
+<div class="xxsense">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- WPad -->
+<ins class="adsbygoogle"
+style="display:inline-block;width:336px;height:280px"
+data-ad-client="ca-pub-4331355790825703"
+data-ad-slot="8762248525"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<ins class="adsbygoogle"
+style="display:inline-block;width:336px;height:280px"
+data-ad-client="ca-pub-4331355790825703"
+data-ad-slot="8762248525"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<script>
+const pathname = location.pathname.replace('/s/', '/').replace(/[^/]+\.html$/, '')
+</script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+<script>
+const video = document.createElement('video');
+const canvasElement = document.getElementById('canvas');
+const canvas = canvasElement.getContext('2d');
+const loading = document.getElementById('loading');
+let isReadQR = false;
+
+navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+  .then((stream) => {
+    video.srcObject = stream;
+    video.setAttribute('playsinline', true);
+    video.play();
+    requestAnimationFrame(tick);
+  });
+
+function tick() {
+  loading.textContent = '⌛ ロード中...';
+  if (video.readyState === video.HAVE_ENOUGH_DATA) {
+    loading.hidden = true;
+    canvasElement.hidden = false;
+    canvasElement.height = video.videoHeight;
+    canvasElement.width = video.videoWidth;
+    canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+    var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+    var code = jsQR(imageData.data, imageData.width, imageData.height, {
+      inversionAttempts: 'dontInvert',
+    });
+    if (code && !isReadQR) {
+      location.href = code.data;
+      isReadQR = true;
+    }
+  }
+  requestAnimationFrame(tick);
+}
+</script>
+</body>
+</html>

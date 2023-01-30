@@ -19,21 +19,23 @@
 </div>
 <div class="container">
     <!-- <div class="row"> -->
-        <div class="my-div-style">
+        <div style="margin-right:auto; margin-left:auto;">
             <div class="animate-box">
-        <form method="post" action="{% url 'store:storePassRegister' store.MO2_mailAdress %}">
-            {% csrf_token %}
-                <p class="store_pass">パスワード : {{form.password1}}</p>
-                <p class="store_pass_conf">パスワード確認 : {{form.password2}}</p>
-            {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-            {% endif %}
-            <!--登録ボタン-->
-            <div class="btn_regist">
-            <button type="submit" class="btnin">登録</button>
-            </div>
-        </form>
-        <p>{{ message }}</p>
+                <form method="post" action="{% url 'store:storePassRegister' store.MO2_mailAdress %}">
+                    {% csrf_token %}
+                    <div class="storepass-registr">
+                        <p>パスワード : {{form.password1}}</p>
+                        <p>パスワード確認 : {{form.password2}}</p>
+                    </div>
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <!--登録ボタン-->
+                    <div class="text-center-nh" style="margin-top:50px;">
+                        <button type="submit" class="btnin">登録</button>
+                    </div>
+                </form>
+                <p>{{ message }}</p>
             </div>
         </div>
     <!-- </div> -->

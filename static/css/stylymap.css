@@ -29,6 +29,10 @@
         border:1px solid #ccc;/* 装飾用 */
         box-sizing:border-box;/* 装飾用 */
     }
+    .gazo{
+        max-width: 200px;
+        max-height: 200px;
+    }
 }
 
 @media screen and (max-width: 980px) {
@@ -42,6 +46,10 @@
         height: 400px;
         width: 80%;
     }
+    .gazo{
+        max-width: 150px;;
+        max-height: 150px;
+    }
 }
 
 @media screen and (max-width: 736px) {
@@ -51,6 +59,10 @@
         margin-bottom: 2%;
         height: 400px;
         width: 80%;
+    }
+    .gazo{
+        max-width: 100px;
+        max-height: 100px;
     }
 }
 
@@ -64,6 +76,10 @@
         margin-bottom: 2%;
         height: 400px;
         width: 80%;
+    }
+    .gazo{
+        max-width: 75px;
+        max-height: 75px;
     }
 }
 

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Log In{% endblock %}
+{% block title %}User Info Confirmation | SAMURAI WALK{% endblock %}
 
 {% block active_login %}active{% endblock %}
 
@@ -13,10 +13,8 @@
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3 style="text-transform:none">User Info Confirmation</h3>
-            </div>
+        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+            <h3 style="text-transform:none">User Info Confirm</h3>
         </div>
     </div>
     <div class="container">
@@ -48,7 +46,7 @@
                 <input type="hidden" name="MO1_userID" value={{form.MO1_userID.value}}>
                 <input type="hidden" name="MO1_homeCountry" value={{form.MO1_homeCountry.value}}>
                 <input type="hidden" name="MO1_language" value={{form.MO1_language.value}}>
-                <div style="text-align: center;">
+                <div class="text-center-nh space">
                     <button type="submit" class="btnin" name="next" value="back">　Back　</button>
                     <button type="submit" class="btnin" style="width: 130px" name="next" value="next">　Update　</button>
                     {% comment %} formactionを入れる事で確認画面に遷移はできるが、変更したデータが更新されずに遷移してしまう {% endcomment %}
