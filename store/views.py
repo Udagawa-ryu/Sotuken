@@ -192,25 +192,102 @@ def IndexView(request,mail):
     }
     return render(request,'StoreMypage.html',params)
 
+# @login_required_store
+# def storeInfoEditView(request,mail):
+#     mystore = MO2_store.objects.get(MO2_mailAdress = mail)
+#     if request.method == 'POST':
+#         initial_data = {
+#             "MO2_storeName":request.POST.get('MO2_storeName'),
+#             "MO2_storeInfo":request.POST.get('MO2_storeInfo'),
+#             "MO2_phoneNumber":request.POST.get('MO2_phoneNumber'),
+#             "MO2_address":request.POST.get('MO2_address'),
+#             "MO2_images1":request.POST.get('MO2_images1'),
+#             "MO2_images2":request.POST.get('MO2_images2'),
+#             "MO2_images3":request.POST.get('MO2_images3'),
+#         }
+#         form = StoreUpdateForm(request.POST or initial_data,instance=mystore)
+#         params = {
+#             'form':form,
+#             'message' : '',
+#         }
+#         return render(request,"StoreInfoEdit.html",params)
+#     else :
+#         initial_data = {
+#             "MO2_storeName":mystore.MO2_storeName,
+#             "MO2_storeInfo":mystore.MO2_storeInfo,
+#             "MO2_phoneNumber":mystore.MO2_phoneNumber,
+#             "MO2_address":mystore.MO2_address,
+#             "MO2_images1":mystore.MO2_images1,
+#             "MO2_images2":mystore.MO2_images2,
+#             "MO2_images3":mystore.MO2_images3,
+#         }
+#         form = StoreUpdateForm(request.POST or initial_data,instance=mystore)
+#         params = {
+#             'form':form,
+#             'message' : '',
+#         }
+#         return render(request,"StoreInfoEdit.html",params)
+# # 店舗用情報編集画面
+# @login_required_store
+# def storeInfoConfirmationView(request,mail):
+#     mystore = MO2_store.objects.get(MO2_mailAdress = mail)
+#     if request.method == 'POST':
+#         initial_data = {
+#             "MO2_storeName":request.POST.get('MO2_storeName'),
+#             "MO2_storeInfo":request.POST.get('MO2_storeInfo'),
+#             "MO2_phoneNumber":request.POST.get('MO2_phoneNumber'),
+#             "MO2_address":request.POST.get('MO2_address'),
+#             "MO2_images1":request.POST.get('MO2_images1'),
+#             "MO2_images2":request.POST.get('MO2_images2'),
+#             "MO2_images3":request.POST.get('MO2_images3'),
+#         }
+#         if request.POST.get('next', '') == 'confirm':
+#             form = StoreUpdateForm(initial_data,instance=mystore)
+#             params = {"message":'',"form":form}
+#             return render(request,"StoreInfoConfirmation.html",params)
+#         if request.POST.get('next', '') == 'back':
+#             form = StoreUpdateForm(initial_data,instance=mystore)
+#             params = {"message":'',"form":form}
+#             return render(request,"StoreInfoEdit.html",params)
+#         if request.POST.get('next', '') == 'next':
+#             form = StoreUpdateForm(initial_data,instance=mystore)
+#             if form.is_valid():
+#                 mystore = MO2_store.objects.get(MO2_mailAdress = mail)
+#                 mystore.MO2_storeName = request.POST.get('MO2_storeName')
+#                 mystore.MO2_storeInfo = request.POST.get('MO2_storeInfo')
+#                 mystore.MO2_phoneNumber = request.POST.get('MO2_phoneNumber')
+#                 mystore.MO2_address = request.POST.get('MO2_address')
+#                 mystore.MO2_images1 = request.POST.get('MO2_images1')
+#                 mystore.MO2_images2 = request.POST.get('MO2_images2')
+#                 mystore.MO2_images3 = request.POST.get('MO2_images3')
+#                 mystore.save()
+#                 return redirect("store:storeinfocomp")
+
 @login_required_store
 def storeInfoEditView(request,mail):
     mystore = MO2_store.objects.get(MO2_mailAdress = mail)
     if request.method == 'POST':
-        initial_data = {
-            "MO2_storeName":request.POST.get('MO2_storeName'),
-            "MO2_storeInfo":request.POST.get('MO2_storeInfo'),
-            "MO2_phoneNumber":request.POST.get('MO2_phoneNumber'),
-            "MO2_address":request.POST.get('MO2_address'),
-            "MO2_images1":request.POST.get('MO2_images1'),
-            "MO2_images2":request.POST.get('MO2_images2'),
-            "MO2_images3":request.POST.get('MO2_images3'),
-        }
-        form = StoreUpdateForm(request.POST or initial_data,instance=mystore)
-        params = {
-            'form':form,
-            'message' : '',
-        }
-        return render(request,"StoreInfoEdit.html",params)
+        form = StoreUpdateForm(request.POST,request.FILES,instance=mystore)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect("store:storeinfocomp")
+        else:
+            initial_data = {
+                "MO2_storeName":mystore.MO2_storeName,
+                "MO2_storeInfo":mystore.MO2_storeInfo,
+                "MO2_phoneNumber":mystore.MO2_phoneNumber,
+                "MO2_address":mystore.MO2_address,
+                "MO2_images1":mystore.MO2_images1,
+                "MO2_images2":mystore.MO2_images2,
+                "MO2_images3":mystore.MO2_images3,
+            }
+            form = StoreUpdateForm(initial_data,instance=mystore)
+            params = {
+                'form':form,
+                'message' : '編集できませんでした',
+            }
+            return render(request,"StoreInfoEdit.html",params)
     else :
         initial_data = {
             "MO2_storeName":mystore.MO2_storeName,
@@ -221,47 +298,12 @@ def storeInfoEditView(request,mail):
             "MO2_images2":mystore.MO2_images2,
             "MO2_images3":mystore.MO2_images3,
         }
-        form = StoreUpdateForm(request.POST or initial_data,instance=mystore)
+        form = StoreUpdateForm(initial_data,instance=mystore)
         params = {
             'form':form,
             'message' : '',
         }
         return render(request,"StoreInfoEdit.html",params)
-# 店舗用情報編集画面
-@login_required_store
-def storeInfoConfirmationView(request,mail):
-    mystore = MO2_store.objects.get(MO2_mailAdress = mail)
-    if request.method == 'POST':
-        initial_data = {
-            "MO2_storeName":request.POST.get('MO2_storeName'),
-            "MO2_storeInfo":request.POST.get('MO2_storeInfo'),
-            "MO2_phoneNumber":request.POST.get('MO2_phoneNumber'),
-            "MO2_address":request.POST.get('MO2_address'),
-            "MO2_images1":request.POST.get('MO2_images1'),
-            "MO2_images2":request.POST.get('MO2_images2'),
-            "MO2_images3":request.POST.get('MO2_images3'),
-        }
-        if request.POST.get('next', '') == 'confirm':
-            form = StoreUpdateForm(initial_data,instance=mystore)
-            params = {"message":'',"form":form}
-            return render(request,"StoreInfoConfirmation.html",params)
-        if request.POST.get('next', '') == 'back':
-            form = StoreUpdateForm(initial_data,instance=mystore)
-            params = {"message":'',"form":form}
-            return render(request,"StoreInfoEdit.html",params)
-        if request.POST.get('next', '') == 'next':
-            form = StoreUpdateForm(initial_data,instance=mystore)
-            if form.is_valid():
-                mystore = MO2_store.objects.get(MO2_mailAdress = mail)
-                mystore.MO2_storeName = request.POST.get('MO2_storeName')
-                mystore.MO2_storeInfo = request.POST.get('MO2_storeInfo')
-                mystore.MO2_phoneNumber = request.POST.get('MO2_phoneNumber')
-                mystore.MO2_address = request.POST.get('MO2_address')
-                mystore.MO2_images1 = request.POST.get('MO2_images1')
-                mystore.MO2_images2 = request.POST.get('MO2_images2')
-                mystore.MO2_images3 = request.POST.get('MO2_images3')
-                mystore.save()
-                return redirect("store:storeinfocomp")
 
 class storeinfocompletionView(generic.TemplateView):
     template_name = "StoreInfoCompletion.html"
