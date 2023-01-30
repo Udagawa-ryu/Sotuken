@@ -1,57 +1,34 @@
-{% extends "account/base.html" %}
+<!-- {% load i18n } -->
 
-{% load i18n %}
+{% extends 'base.html' %}
 
-{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+{% block title %}Singin{% endblock %}
 
-{% block content %}
-    <h1>{% trans "Verify Your E-mail Address" %}</h1>
+{% block active_login %}active{% endblock %}
 
-    <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification e-mail in your main inbox, check your spam folder. Please contact us if you do not receive the verification e-mail within a few minutes.{% endblocktrans %}</p>
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
 {% endblock %}
 
-
-{% comment %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block head_title %}{% endblock %}</title>
-    {% block extra_head %}
-    {% endblock %}
-  </head>
-  <body>
-    {% block body %}
-
-    {% if messages %}
-    <div>
-      <strong>Messages:</strong>
-      <ul>
-        {% for message in messages %}
-        <li>{{message}}</li>
-        {% endfor %}
-      </ul>
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+  <div class="container">
+    <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+      <h3 style="text-transform:none">Signin</h3>
     </div>
-    {% endif %}
-
-    <div>
-      <strong>Menu:</strong>
-      <ul>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
-        {% else %}
-        <li><a href="{% url 'account_login' %}">Sign In</a></li>
-        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-        {% endif %}
-      </ul>
+  </div>
+  <div class="container">
+    <div class="animate-box">
+      <div class="text-center-nh"></div>
+      <h3 class="text-center-nh" style="text-transform:none">
+        We have sent an e-mail to you for verification.<br>
+        Follow the link provided to finalize the signup process.<br>
+        If you do not see the verification e-mail in your main inbox, check your spam folder.<br>
+        Please contact us if you do not receive the verification e-mail within a few minutes.
+      </h3>
     </div>
-    {% block content %}
-    {% endblock %}
-    {% endblock %}
-    {% block extra_body %}
-    {% endblock %}
-  </body>
-</html>
-{% endcomment %}
+  </div>
+</div>
+{% endblock %}
