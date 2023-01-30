@@ -383,7 +383,13 @@ table.confirmation {
     border-collapse: separate;
     border-spacing: 0px 5px;
     margin: 0 auto;
-    width: 90%;
+    width: 80%;
+}
+@media screen and (max-width:480px) {
+    /*　画面サイズが480pxからはここを読み込む　*/
+    table.confirmation {
+        width:100%;
+    }
 }
 
 td,

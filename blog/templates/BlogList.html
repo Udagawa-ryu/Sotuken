@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}BlogList{% endblock %}
+{% block title %}BlogList | SAMURAI WALK{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
@@ -11,22 +11,20 @@
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
     <div class="container">
-        <!-- <div class="row"> -->
         <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
             <h3 style="text-transform:none">Your Blog</h3>
         </div>
-        <!-- </div> -->
     </div>
     <div class="container">
         <div class="animate-box">
             <!-- 左寄せ -->
-            <div style="text-align: right; margin-bottom: 10px;">
+            <div style="text-align: right;">
                 <button onclick="location.href='{% url 'blog:blogRegister' %}'" class="btnin" style="width: 100px;">Create</button>
                 <button onclick="location.href='{% url 'accounts:OpenRangeRegister' %}'" class="btnin"style="width:150px;">OpenRange</button>
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container space">
         <div class="animate-box">
             <div class="row row-bottom-padded-md">
                 {% for blog in blogs %}
@@ -40,7 +38,6 @@
                                 <h3><a href='blogDetail/{{blog.MO7_blogNumber}}'>{{ blog.MO7_blogName }}</a></h3>
                                 <!-- 日付 -->
                                 <span class="posted_by">{{ blog.MO7_createDate }}</span>
-                                <!-- <span class="comment"><a href="">21<i class="icon-bubble2"></i></a></span> -->
                                 <p>
                                 <pre>{{ blog.MO7_blogText }}</pre>
                                 </p>

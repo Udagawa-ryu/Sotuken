@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}BlogDelete{% endblock %}
+{% block title %}Blog Delete | SAMURAI WALK{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
@@ -13,14 +13,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3>BlogDelete</h3>
+                <h3 style="text-transform:none">Blog Delete</h3>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="animate-box">
             <div class="text-center">
-                <h4>Are you sure you want to delete this blog?</h4>
+                <h4 style="text-transform:none">Are you sure you want to delete this blog?</h4>
             </div>
             <table class="confirmation">
                 <tr>
@@ -40,7 +40,7 @@
                     </td>
                 </tr>
             </table>
-            <div class="text-center" style="margin-top: 20px;">
+            <div class="text-center">
                 <form method="post" id="delete_form">
                     {% csrf_token %}
                     <input type="hidden">
