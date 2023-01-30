@@ -19,21 +19,21 @@
     </div>
 
     <div class="container">
-        <div class="row">
-            <div style="padding-right: 2rem">
-                <div class="animate-box">
-                    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-                        {% csrf_token %}
-                
-                        {{ form.as_p }}
-                
-                        {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                        {% endif %}
-                
-                        <button class="toroku" type="submit">Register</button>
-                    </form>
-                </div>
+        <div class="signup-form">
+            <div class="animate-box">
+                <form class="signup" method="post" action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+        
+                    {{ form.as_p }}
+        
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    
+                    <div class="text-center-nh space">
+                        <button class="btnin" style="width:150px;" type="submit">Register</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

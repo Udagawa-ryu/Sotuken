@@ -526,3 +526,26 @@ td.td-space {
         width: 100%;
     }
 }
+
+/* スペース */
+.space {
+    margin-top:40px;
+}
+
+/* サインアップフォーム */
+.signup-form {
+    margin-right: auto;
+    margin-left: auto;
+}
+/* サインアップフォーム(PC) */
+@media screen and (max-width: 1280px) {
+    .signup-form {
+        width:40%;
+    }
+}
+/* サインアップフォーム(スマホ) */
+@media screen and (max-width: 480px) {
+    .signup-form {
+        width: 100%;
+    }
+}
