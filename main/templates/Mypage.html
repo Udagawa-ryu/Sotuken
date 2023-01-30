@@ -9,16 +9,13 @@
         <div id="main">
             <div class="inner animate-box">
                 <section class="tiles">
-                    <article class="style1">
+                    <article class="style4">
                         <span class="image">
-                            <a href="{% url 'main:favoriteUserList' %}">
-                            <img src="{% static 'images/pic01.jpg' %}" alt="" />
-                            <p>Favorite</p>
+                            <a href="{% url 'maps:Map' %}">
+                                <img src="{% static 'images/pic04.jpg' %}" alt="" />
+                            <p>Map</p>
                             </a>
                         </span>
-                        <div class="content">
-                            <p></p>
-                        </div>
                         <!-- <a href="generic.html"> -->
                         <!-- </a> -->
                     </article>
@@ -42,13 +39,16 @@
                         <!-- <a href="generic.html"> -->
                         <!-- </a> -->
                     </article>
-                    <article class="style4">
+                    <article class="style1">
                         <span class="image">
-                            <a href="{% url 'maps:Map' %}">
-                                <img src="{% static 'images/pic04.jpg' %}" alt="" />
-                            <p>Map</p>
+                            <a href="{% url 'main:favoriteUserList' %}">
+                            <img src="{% static 'images/pic01.jpg' %}" alt="" />
+                            <p>Favorite</p>
                             </a>
                         </span>
+                        <div class="content">
+                            <p></p>
+                        </div>
                         <!-- <a href="generic.html"> -->
                         <!-- </a> -->
                     </article>
