@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Delete Account{% endblock %}
+{% block title %}Delete Account | SAMURAI WALK{% endblock %}
 
 {% block active_login %}active{% endblock %}
 
@@ -13,24 +13,22 @@
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
     <div class="container">
-        <!-- <div class="row"> -->
-            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3 style="text-transform:none">Delete Account</h3>
-            </div>
-        <!-- </div> -->
+        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+            <h3 style="text-transform:none">Delete Account</h3>
+        </div>
     </div>
     <div class="container">
-            <div class="animate-box">
-                <div class="account-div-style">
-                <h3 class="account_de_text" style="text-transform:none">Are you sure you want to delete your account?</h3>
+        <div class="animate-box">
+            <div class="account-div-style">
                 <div class="text-center-nh">
-                    <div class="account_cancel">
-                    <button class="btnin" type="submit" style="width: 100px;" onclick="location.href='{% url 'main:Mypage' %}'">Cancel</button>
-                    <button class="btnin" type="submit" style="width: 100px;" onclick="location.href='{% url 'accounts:signup' %}'">Delete</button>
+                    <h4 style="text-transform:none">Are you sure you want to delete your account?</h4>
+                    <div class="space2">
+                        <button class="btnin" type="submit" style="width: 100px;" onclick="location.href='{% url 'main:Mypage' %}'">Cancel</button>
+                        <button class="btnin" type="submit" style="width: 100px;" onclick="location.href='{% url 'accounts:signup' %}'">Delete</button>
                     </div>
                 </div>
-                </div>
             </div>
+        </div>
     </div>
 </div>
 {% endblock %}

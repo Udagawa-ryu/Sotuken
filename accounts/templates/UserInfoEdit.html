@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}UserInfoEdit{% endblock %}
+{% block title %}UserInfoEdit | SAMURAI WALK{% endblock %}
 
 {% block active_login %}active{% endblock %}
 
@@ -44,7 +44,7 @@
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-                <div class="text-center-nh" style="margin-top:10px;">
+                <div class="text-center-nh space">
                     <button type="submit" class="btnin" name="next" value="confirm" style="width:130px">　Update　</button>
                 </div>
             </form>

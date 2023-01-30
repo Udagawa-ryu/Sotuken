@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Log Out{% endblock %}
+{% block title %}LogOut | SAMURAI WALK{% endblock %}
 
 {% block active_login %}active{% endblock %}
 
@@ -19,9 +19,9 @@
     </div>
     <div class="container">
         <div class="animate-box">
-            <div class="text-center-nh"></div>
-                <h2 class="text-center-nh" style="text-transform:none">Do you want to log out?</h2>
-                <div style="text-align:center;">
+            <div class="text-center-nh">
+                <h2 class="text-center-nh" style="text-transform:none">Do you want to Logout?</h2>
+                <div class="space2">
                     <button class="btnin" style="width:100px;" type="submit" onclick="location.href='{% url 'main:Mypage' %}'">Cancel</button>
                     <button class="btnin" style="width:100px;" type="submit" onclick="location.href='{% url 'account_logout' %}'">LogOut</button>
                 </div>
