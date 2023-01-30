@@ -13,15 +13,13 @@
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
     <div class="container">
-        <!-- <div class="row"> -->
-            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3 class="point" style="text-transform:none">Point Input</h3>
-            </div>
-        <!-- </div> -->
+        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+            <h3 class="point" style="text-transform:none">Point Input</h3>
+        </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="my-div-style">
+        <div class="animate-box">
+            <div class="text-center-nh">
                 <form method="post" action="{% url 'main:PointConfirmation' %}">
                     {% csrf_token %}
                     <table class="point_input">
@@ -30,8 +28,7 @@
                             <td class="td-space">{{mydata.MO1_point}}</td>
                         </tr>
                     </table>
-                    <h2 class="point_input_text" style="text-transform:none">Use Points</h2>
-                    <!-- <input type="text" class = "use_point" value="pt"> -->
+                    <h2 style="text-transform:none">Use Points</h2>
                     {{form.point}}
                     <button class="point_OK" type="submit" name="next" value="comfirm">OK</button>
                 </form>

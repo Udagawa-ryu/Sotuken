@@ -492,9 +492,10 @@ td.td-space {
 table.point_confirmation {
     border-collapse: separate;
     border-spacing: 0px 5px;
-    margin-left: 150px;
+    margin-left: auto;
+    margin-right:auto;
     margin-top: 50px;
-    width: 40%;
+    width: 30%;
 }
 
 @media screen and (max-width: 959px) {
@@ -505,7 +506,8 @@ table.point_confirmation {
 
 @media screen and (max-width: 480px) {
     table.point_confirmation {
-        margin-left: 7%;
+        margin-left: auto;
+        margin-right:auto;
         width: 55%;
     }
 }
@@ -543,11 +545,11 @@ table.point_confirmation {
 /* PointDisplay.htmlのCSS */
 .point_disp_text {
     font-size: 30px;
-    margin-left: 100px;
+    /* margin-left: 100px; */
     margin-bottom: 60px;
 }
 
-@media screen and (max-width: 959px) {
+/* @media screen and (max-width: 959px) {
     .point_disp_text {
         margin-left: -5%;
     }
@@ -557,11 +559,12 @@ table.point_confirmation {
     .point_disp_text {
         margin-left: -5%;
     }
-}
+} */
 
 .point_display {
-    margin-left: 120px;
-    width: 50%;
+    margin-left: auto;
+    margin-right:auto;
+    width: 30%;
 }
 
 @media screen and (max-width: 959px) {
@@ -573,8 +576,9 @@ table.point_confirmation {
 
 @media screen and (max-width: 480px) {
     .point_display {
-        margin-left: 12%;
-        margin-top: -5%;
+        margin-left: auto;
+        margin-right:auto;
+        width:60%;
     }
 }
 
@@ -616,8 +620,9 @@ table.point_confirmation {
 }
 
 .point_input {
-    margin-left: 550px;
-    width: 50%;
+    margin-left: auto;
+    margin-right:0;
+    width: 30%;
 }
 
 @media screen and (max-width: 959px) {
@@ -628,18 +633,21 @@ table.point_confirmation {
 
 @media screen and (max-width: 480px) {
     .point_input {
-        margin-left: 12%;
+        margin-left: auto;
+        margin-right: auto;
+        width:80%;
     }
 }
 
 .point_OK {
     margin-top: 40px;
-    margin-left: 290px;
+    margin-left: 20px;
 }
 
 @media screen and (max-width: 480px) {
     .point_OK {
-        margin-left: 22%;
+        margin-left: 100px;
+        margin-right:100px;
         margin-top: 10%;
     }
 }
@@ -725,7 +733,7 @@ table.ospot_record {
 
 @media screen and (max-width: 480px) {
     .user_list {
-        margin-bottom: 110%;
+        margin-bottom: 10%;
         width: 100%;
     }
 }

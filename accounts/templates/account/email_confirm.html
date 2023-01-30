@@ -14,35 +14,32 @@
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
     <div class="container">
-        <!-- <div class="row"> -->
-            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h1>ユーザー登録</h1>
-            </div>
-        <!-- </div> -->
+        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+            <h1>User Registration</h1>
+        </div>
     </div>
     <div class="container">
-        <!-- <div class="row"> -->
-            <div class="my-div-style">
-            {% if confirmation %}
-
-                <p class="user_comp">ユーザー登録を確定するには、以下のボタンを押してください。</p>
-
+        <div class="animate-box">
+            <div class="text-center-nh">
+                {% if confirmation %}
+                <h4 style="text-transform:none">To confirm your user registration, press the button below.</h4>
+                
                 <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
                     {% csrf_token %}
-                    <div class="kakutei_btn">
-                    <button class="btnin" type="submit" >確定</button>
+                    <div style="margin-top:20px;">
+                        <button class="btnin" style="width:150px;" type="submit">Decision</button>
                     </div>
                 </form>
-
-            {% else %}
-
+                
+                {% else %}
+                
                 {% url 'account_email' as email_url %}
-
-                <p class="email_conf">リンクの有効期限が過ぎています。 <a href="{{ email_url }}">再申請</a>.</p>
-
-            {% endif %}
+                
+                <p class="email_conf">The link has expired. <a href="{{ email_url }}">Reapplication</a>.</p>
+                
+                {% endif %}
             </div>
-        <!-- </div> -->
+        </div>
     </div>
 </div>
 {% endblock %}
