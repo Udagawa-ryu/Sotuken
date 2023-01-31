@@ -322,7 +322,7 @@ def store_visit_QRCreate(num):
     qr = base64.b64encode(buffer.getvalue()).decode().replace("'", "")
     return qr
 def store_point_QRCreate(num):
-    qr_str = "http://localhost:8000/StoreQRread/"+str(num)
+    qr_str = "http://localhost:8000/PointInput/"+str(num)
     img = qrcode.make(qr_str)
     buffer = BytesIO()
     img.save(buffer, format="PNG")

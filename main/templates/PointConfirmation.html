@@ -29,9 +29,10 @@
                 </table>
                 <form method="post" action="{% url 'main:PointConfirmation' %}">
                     {% csrf_token %}
+                    <input type="hidden" name="store" value={{store.MO2_storeNumber}}>
                     <input type="hidden" name="point" value="{{form.point.value}}">
                     <button class="btnin" type="submit" name="next" value="back">Cancel</button>
-                    <button class="btnin" type="submit" name="next" value="next" href="{% url 'main:PointInput' %}">Use</button>
+                    <button class="btnin" type="submit" name="next" value="next">Use</button>
                 </form>
             </div>
         </div>
