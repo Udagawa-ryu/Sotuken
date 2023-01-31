@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Point{% endblock %}
+{% block title %}Point | SAMURAI WALK{% endblock %}
 
 {% block active_login %}active{% endblock %}
 
@@ -13,11 +13,9 @@
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
     <div class="container">
-        <!-- <div class="row"> -->
         <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
             <h3 style="text-transform:none">Point</h3>
         </div>
-        <!-- </div> -->
     </div>
     <div class="container">
         <div class="animate-box">
@@ -30,8 +28,8 @@
                     </tr>
                 </table>
                 <div style="text-align:center;">
-                    <button style="width: 100px;" class="btnin" type="button" onclick="location.href='/PointInput'">Use</button>
-                    <button style="width: 100px" class="btnin" type="submit">Save</button>
+                    <button style="width: 100px;" class="btnin" type="button" onclick="location.href='{% url 'main:PointInput' %}'">Use</button>
+                    <button style="width: 100px" class="btnin" type="submit" onclick="location.href='{% url 'main:StoreQRread' %}'">QR</button>
                 </div>
 
                 <div class="point-display point-disp-table">
