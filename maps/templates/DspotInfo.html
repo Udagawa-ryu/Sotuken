@@ -21,51 +21,41 @@
     <div class="container">
         <div class="animate-box">
             <!-- 画像スライド -->
+            {% if img_count != 0%}
             <div class="container1">
                 <div class="carousel">
-                    <input type="radio" id="carousel-1" name="carousel[]" checked>
-                    <input type="radio" id="carousel-2" name="carousel[]">
-                    <input type="radio" id="carousel-3" name="carousel[]">
-                    <input type="radio" id="carousel-4" name="carousel[]">
-                    <input type="radio" id="carousel-5" name="carousel[]">
+                    {% for i in img_id%}
+                        {% if i == "carousel-1" %}
+                        <input type="radio" id="{{i}}" name="carousel[]" checked>
+                        {% else %}
+                        <input type="radio" id="{{i}}" name="carousel[]">
+                        {% endif %}
+                    {% endfor %}
                     <ul class="carousel__items">
+                        {% for a in img_link %}
                         <li class="carousel__item" id="paddingnone"><img
-                                src="//lh5.googleusercontent.com/-cTEgPOnd3l8/U8-EmaZ4KNI/AAAAAAAABc8/6eacbALkQ6A/w1358-h905-no/carousel-1.JPG"
+                                src="{{a}}"
                                 alt=""></li>
-                        <li class="carousel__item" id="paddingnone"><img
-                                src="//lh4.googleusercontent.com/-ntVHbbWX5eo/U8-EmV8P4cI/AAAAAAAABc4/ICYBGkcztTc/w1358-h905-no/carousel-2.jpg"
-                                alt=""></li>
-                        <li class="carousel__item" id="paddingnone"><img
-                                src="//lh5.googleusercontent.com/-batEXUZE_e4/U8-EmLF9-hI/AAAAAAAABc0/J3tJVUa6Buk/w1358-h905-no/carousel-3.jpg"
-                                alt=""></li>
-                        <li class="carousel__item" id="paddingnone"><img
-                                src="//lh5.googleusercontent.com/-gywqIeMvel0/U8-EolKdtkI/AAAAAAAABdM/G0-NHuvvJUU/w1358-h905-no/carousel-4.jpg"
-                                alt=""></li>
-                        <li class="carousel__item" id="paddingnone"><img src="{% static 'images/pic03.jpg' %}" alt="" /></li>
+                        {% endfor %}
                     </ul>
                     <div class="carousel__prev">
-                        <label for="carousel-1"></label>
-                        <label for="carousel-2"></label>
-                        <label for="carousel-3"></label>
-                        <label for="carousel-4"></label>
-                        <label for="carousel-5"></label>
+                        {% for i in img_id%}
+                        <label for="{{i}}"></label>
+                        {% endfor %}
                     </div>
                     <div class="carousel__next">
-                        <label for="carousel-1"></label>
-                        <label for="carousel-2"></label>
-                        <label for="carousel-3"></label>
-                        <label for="carousel-4"></label>
-                        <label for="carousel-5"></label>
+                        {% for i in img_id%}
+                        <label for="{{i}}"></label>
+                        {% endfor %}
                     </div>
                     <div class="carousel__nav">
-                        <label for="carousel-1"></label>
-                        <label for="carousel-2"></label>
-                        <label for="carousel-3"></label>
-                        <label for="carousel-4"></label>
-                        <label for="carousel-5"></label>
+                        {% for i in img_id%}
+                        <label for="{{i}}"></label>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
+            {% endif %}
             <div class="side-by-side">
                 <table class="spot-table">
                     <tr>

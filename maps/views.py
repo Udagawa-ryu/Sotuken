@@ -57,6 +57,9 @@ class OspotInfoView(generic.TemplateView):
 def OspotInfo(request,spot_num):
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     spot = MO4_Original_spot.objects.get(MO4_OspotNumber = spot_num)
+    mine = 0
+    if spot.MO1_userNumber != mydata.MO1_userNumber:
+        mine = 1
     if MO6_Visit_record.objects.filter(MO4_OspotNumber=spot.MO4_OspotNumber).exists():
         records = MO6_Visit_record.objects.filter(MO4_OspotNumber=spot)
     else:
@@ -71,6 +74,7 @@ def OspotInfo(request,spot_num):
         "count":count,
         "records":records,
         "blogs":blogs,
+        "mine":mine,
     }
     return render(request,"OspotInfo.html",params)
 
@@ -102,12 +106,30 @@ def OspotVisitcreate(request):
 def DspotInfo(request,spot_num):
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     spot = MO3_Default_spot.objects.get(MO3_DspotNumber=spot_num)
+    # store = MO2_store.objects.get(MO2_storeNumber=spot.MO2_storeNumber)
+    img_link = []
+    img_id = []
+    img_count = 0
+    if spot.MO2_storeNumber.MO2_images1 != "":
+        url = "/media/"+str(spot.MO2_storeNumber.MO2_images1)
+        img_link.append(url)
+        img_id.append("carousel-1")
+        img_count += 1
+    if spot.MO2_storeNumber.MO2_images2 != "":
+        url = "/media/"+str(spot.MO2_storeNumber.MO2_images2)
+        img_link.append(url)
+        img_id.append("carousel-2")
+        img_count += 1
+    if spot.MO2_storeNumber.MO2_images3 != "":
+        url = "/media/"+str(spot.MO2_storeNumber.MO2_images3)
+        img_link.append(url)
+        img_id.append("carousel-3")
+        img_count += 1
     records = MO6_Visit_record.objects.filter(MO3_DspotNumber=spot)
     if MO6_Visit_record.objects.filter(MO3_DspotNumber=spot,MO1_userNumber=mydata).exists():
         myrecords = MO6_Visit_record.objects.filter(MO3_DspotNumber=spot,MO1_userNumber=mydata)
     else:
         myrecords = ""
-
     myrecords = MO6_Visit_record.objects.filter(MO3_DspotNumber=spot,MO1_userNumber=mydata)
     blogs = MO7_Blog.objects.filter(MO6_visitRecordNumber__in=records,MO7_openRange=0)
     if myrecords == "":
@@ -119,6 +141,9 @@ def DspotInfo(request,spot_num):
         "count":count,
         "myrecords":myrecords,
         "blogs":blogs,
+        "img_link":img_link,
+        "img_id":img_id,
+        "img_count":img_count
     }
     return render(request,"DspotInfo.html",params)
 
@@ -148,7 +173,7 @@ def OtherMap(request,num):
         'user':mydata,
         'page_user':page_user,
     }
-    return render(request,"Map.html",params)
+    return render(request,"OtherMap.html",params)
 
 @login_required
 def OspotCreate(request):

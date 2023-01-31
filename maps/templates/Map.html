@@ -22,7 +22,6 @@
 
 
     <script>
-        console.log("map start");
 
         // マーカーリスト配列の初期化
         // データ型:　[{pos: [float 緯度][float 経度], name; String 名前},・・・]
@@ -59,7 +58,6 @@
         } {% endcomment %}
         // マップ作成、表示関数
         function init() {
-            console.log("init start");
             // htmlの要素mapcontainerを指定し、mapを作成
             // 空のmapを作成し、要素を後から追加
             var center = [36.0,140];
@@ -177,7 +175,6 @@
         function make_markerList(){
             const d_list = JSON.parse('{{ d_list|safe }}');
             const o_list = JSON.parse('{{ o_list|safe }}');
-            console.log("make_markerList start");
             // データベースからスポットの情報を取得
             // [Stirng 住所, String 名前]
             var default_spot_data_array = d_list
@@ -193,7 +190,6 @@
             // 重い処理のため非同期で実行し、Promiseをpromisesに追加
             for (var i = 0; i < default_spot_counter; i++){
                 promises.push(marker_add(default_spot_data_array[i][0], default_spot_data_array[i][1],"default",default_spot_data_array[i][2],default_spot_data_array[i][3]));
-                console.log("default_spot_data_array[i][0]"+default_spot_data_array[i][0]+"default_spot_data_array[i][1]:"+default_spot_data_array[i][1]+"default_spot_data_array[i][2]:"+default_spot_data_array[i][2])
             }
             for (var i = 0; i < original_spot_counter; i++){
                 promises.push(marker_add(original_spot_data_array[i][0], original_spot_data_array[i][1],"original",original_spot_data_array[i][2],original_spot_data_array[i][3]));
@@ -215,7 +211,6 @@
                 // 関数内の処理終了後、Promiseをresolve()
                 if (default_or_original == "default"){
                     getLatLng(address, (result) => {
-                        console.log(name+":"+address+":"+default_or_original+"-spot:"+spot_num)
                         // 追加するマーカーリストのテンプレート
                         // {pos: [float lat,float lng], String name}
                         var markerList_tmp = {};
