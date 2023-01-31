@@ -659,19 +659,19 @@ table.point_confirmation {
 table.ospot_record {
     width: 500px;
     height: 300px;
-    margin-left: 60px;
+    margin-left: auto;
+    margin-right:auto;
 }
 
 @media screen and (max-width: 959px) {
     table.ospot_record {
-        margin-left: -15%;
+        /* margin-left: -15%; */
     }
 }
 
 @media screen and (max-width: 480px) {
     table.ospot_record {
-        width: 120%;
-        margin-left: -25%;
+        width: 90%;
     }
 }
 

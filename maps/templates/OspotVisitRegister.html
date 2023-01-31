@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}OspotVisitRegister{% endblock %}
+{% block title %}OspotVisitRegister | SAMURAI WALK{% endblock %}
 
 {% block active_login %}active{% endblock %}
 
@@ -20,8 +20,8 @@
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="my-div-style">
+        <div class="animate-box">
+            <div class="text-center-nh">
                 <form method="post" action="{% url 'maps:OspotVisitCreate' %}">
                     {% csrf_token %}
                     <input type="hidden" name="spot" value={{spot.MO4_OspotNumber}}>
@@ -40,7 +40,7 @@
                             <td class="td-time"><input type="time" name="time" required class="ospot_time"></td>
                         </tr>
                     </table>
-                    <button class="btn-record" type="submit">Record</button>
+                    <button class="btnin" type="submit">Record</button>
                 </form>
             </div>
         </div>
