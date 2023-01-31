@@ -558,3 +558,16 @@ td.td-space {
         width: 100%;
     }
 }
+
+/* カメラ */
+.camera-size {
+    width: 640px;
+    height: 480px;
+}
+/* サインアップフォーム(スマホ) */
+@media screen and (max-width: 480px) {
+    .camera-size {
+        width: 320px;
+        height: 240px;
+    }
+}
