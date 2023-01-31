@@ -1,6 +1,6 @@
 {% extends 'store_base.html' %}
 
-{% block title %}パスワード設定画面{% endblock %}
+{% block title %}パスワード設定 | SAMURAI WALK{% endblock %}
 
 {% block css %}
 {% load static %}
@@ -10,21 +10,17 @@
 
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
-<div class="container">
-    <!-- <div class="row"> -->
+    <div class="container">
         <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-            <h1 class="Pass_regi">パスワード再設定</h1>
+            <h3>パスワード再設定</h3>
         </div>
-    <!-- </div> -->
-</div>
-<div class="container">
-    <!-- <div class="row"> -->
-        <div align="center">
-            <div class="animate-box" >
-                <p >{{ message }}</p>
+    </div>
+    <div class="container">
+        <div class="animate-box">
+            <div class="text-center-nh">
+                <p>{{ message }}</p>
             </div>
         </div>
-    <!-- </div> -->
-</div>
+    </div>
 </div>
 {% endblock %}

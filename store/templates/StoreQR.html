@@ -1,6 +1,6 @@
 {% extends 'store_base.html' %}
 
-{% block title %}ログアウト{% endblock %}
+{% block title %}storeQR | SAMURAI WALK{% endblock %}
 
 {% block active_login %}active{% endblock %}
 
@@ -42,7 +42,6 @@ try{
                 <th class="th-center">ポイント用QRコード</th>
             </tr>
             <tr>
-                
                 <td align="center" valign="middle">
                     <img src="data:image/png;base64,{{ qr }}" />
                 </td>
@@ -51,7 +50,6 @@ try{
                         <img src="data:image/png;base64,{{ qr2 }}" />
                     </td>
                 </div>
-                
             </tr>
             <tr>
                 <td align="center" valign="middle">

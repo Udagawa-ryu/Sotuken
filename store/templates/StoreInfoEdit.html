@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}店舗情報編集{% endblock %}
+{% block title %}店舗情報編集 | SAMURAI WALK{% endblock %}
 
 {% block css %}
   <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
@@ -69,7 +69,7 @@
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
         <!--登録ボタン-->
-        <div style="text-align: center;">
+        <div class="text-center-nh space">
           <button style="width: 100px" type="submit" class="btnin" name="next" value="confirm">更新</button>
         </div>
       </form>

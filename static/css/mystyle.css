@@ -384,6 +384,7 @@ table.confirmation {
     border-spacing: 0px 5px;
     margin: 0 auto;
     width: 80%;
+    word-break: break-all;
 }
 @media screen and (max-width:480px) {
     /*　画面サイズが480pxからはここを読み込む　*/
@@ -556,5 +557,18 @@ td.td-space {
 @media screen and (max-width: 480px) {
     .signup-form {
         width: 100%;
+    }
+}
+
+/* カメラ */
+.camera-size {
+    width: 640px;
+    height: 480px;
+}
+/* サインアップフォーム(スマホ) */
+@media screen and (max-width: 480px) {
+    .camera-size {
+        width: 320px;
+        height: 240px;
     }
 }

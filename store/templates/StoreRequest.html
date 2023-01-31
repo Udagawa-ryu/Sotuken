@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}店舗登録申請{% endblock %}
+{% block title %}店舗登録申請 | SAMURAI WALK{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
@@ -19,21 +19,22 @@
   </div>
   <div class="container">
     <div class="animate-box">
-      <div class="row row-bottom-padded-md"></div>
-      <form method="post" enctype="multipart/form-data" action="{% url 'store:storeRequest' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <!--登録ボタン-->
-        {% if form != None %}
-          <div class="col-md-12 text-center">
-            <button type="submit" class="btnin">　登録　</button>
-          </div>
-        {% endif %}
-      </form>
-      <p>{{ message }}</p>
+      <div class="signup-form">
+        <form method="post" enctype="multipart/form-data" action="{% url 'store:storeRequest' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <!--登録ボタン-->
+          {% if form != None %}
+            <div class="text-center-nh space">
+              <button type="submit" class="btnin">　登録　</button>
+            </div>
+          {% endif %}
+        </form>
+        <p>{{ message }}</p>
+      </div>
     </div>
   </div>
 </div>
