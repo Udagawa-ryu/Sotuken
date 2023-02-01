@@ -33,6 +33,14 @@
                         {{ blog.0.MO7_blogText }}
                     </td>
                 </tr>
+                {% for i in img %}
+                <tr>
+                    <th class="th-center">Image{{forloop.counter}}</th>
+                    <td class="td-space">
+                        <img class="gazo" src={{i}}>
+                    </td>
+                </tr>
+                {% endfor %}
                 <tr>
                     <th class="th-center">VisitRecode</th>
                     <td class="td-space">
