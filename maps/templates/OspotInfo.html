@@ -22,7 +22,7 @@
     <div class="container">
         <div class="animate-box">
             <div style=" text-align: right; margin-bottom: 15px;">
-                {% if mine == 0 %}
+                {% if mine != 1 %}
                 <form method="post" action="{% url 'maps:OspotVisitRegister' %}">
                     {% csrf_token %}
                     <input type="hidden" name="spot" value={{spot.MO4_OspotNumber}}>

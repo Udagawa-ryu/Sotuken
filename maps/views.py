@@ -58,7 +58,7 @@ def OspotInfo(request,spot_num):
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     spot = MO4_Original_spot.objects.get(MO4_OspotNumber = spot_num)
     mine = 0
-    if spot.MO1_userNumber != mydata.MO1_userNumber:
+    if spot.MO1_userNumber != mydata:
         mine = 1
     if MO6_Visit_record.objects.filter(MO4_OspotNumber=spot.MO4_OspotNumber).exists():
         records = MO6_Visit_record.objects.filter(MO4_OspotNumber=spot)
