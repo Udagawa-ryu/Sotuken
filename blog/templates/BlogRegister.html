@@ -26,35 +26,31 @@
             <form method="post" action="{% url 'blog:blogRegister' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <table class="confirmation">
-                    {% for i in form %}
-                    <p>{{i.label}}</p>
-                    <p>{{i.errors}}</p>
-                    {% endfor %}
                     <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
                     <tr>
-                        <th class="th-center">BlogName</th>
+                        <th class="th-center">Title</th>
                         <td class="td-space">{{form.MO7_blogName}}</td>
                     </tr>
                     <tr>
-                        <th class="th-center">BlogText</th>
+                        <th class="th-center">Contents</th>
                         <td class="td-space">
                             <pre>{{form.MO7_blogText}}</pre>
                         </td>
                     </tr>
                     <tr>
-                        <th class="th-center">BlogImage1</th>
+                        <th class="th-center">Image1</th>
                         <td class="td-space">
                             {{form.MO7_blogImage1}}
                         </td>
                     </tr>
                     <tr>
-                        <th class="th-center">BlogImage2</th>
+                        <th class="th-center">Image2</th>
                         <td class="td-space">
                             {{form.MO7_blogImage2}}
                         </td>
                     </tr>
                     <tr>
-                        <th class="th-center">BlogImage3</th>
+                        <th class="th-center">Image3</th>
                         <td class="td-space">
                             {{form.MO7_blogImage3}}
                         </td>

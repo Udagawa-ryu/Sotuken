@@ -22,18 +22,18 @@
         <div class="animate-box">
             <table class="confirmation">
                 <tr>
-                    <th class="th-center">BlogName</th>
+                    <th class="th-center">Title</th>
                     <td class="td-space">{{blog.0.MO7_blogName}}</td>
                 </tr>
                 <tr>
-                    <th class="th-center">BlogText</th>
+                    <th class="th-center">Contents</th>
                     <td class="td-space">
                         {{blog.0.MO7_blogText}}
                     </td>
                 </tr>
                 {% for i in img %}
                 <tr>
-                    <th class="th-center">BlogImage{{forloop.counter}}</th>
+                    <th class="th-center">Image{{forloop.counter}}</th>
                     <td class="td-space">
                         <img class="gazo" src={{i}}>
                     </td>

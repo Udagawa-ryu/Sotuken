@@ -228,6 +228,9 @@ def BlogEdit(request, pk):
             "MO1_userID":request.POST.get("MO1_userID"),
             "MO7_blogName":request.POST.get("MO7_blogName"),
             "MO7_blogText":request.POST.get("MO7_blogText"),
+            "MO7_blogImage1":request.FILES.get("MO7_blogImage1"),
+            "MO7_blogImage2":request.FILES.get("MO7_blogImage2"),
+            "MO7_blogImage3":request.FILES.get("MO7_blogImage3"),
             "MO6_visitRecordNumber":request.POST.get("MO6_visitRecordNumber"),
             "MO7_openRange":request.POST.get("MO7_openRange"),
         }
@@ -242,6 +245,9 @@ def BlogEdit(request, pk):
                 s_record = MO6_Visit_record.objects.get(MO6_visitRecordNumber = request.POST.get("MO6_visitRecordNumber"))
                 blog.MO7_blogName = request.POST.get("MO7_blogName")
                 blog.MO7_blogText = request.POST.get("MO7_blogText")
+                blog.MO7_blogImage1 = request.FILES.get("MO7_blogImage1")
+                blog.MO7_blogImage2 = request.FILES.get("MO7_blogImage2")
+                blog.MO7_blogImage3 = request.FILES.get("MO7_blogImage3")
                 blog.MO6_visitRecordNumber = s_record
                 blog.MO7_openRange = request.POST.get("MO7_openRange")
                 blog.save()
@@ -249,7 +255,7 @@ def BlogEdit(request, pk):
             return render(request,"BlogEdit.html",params)
     else :
         blog = MO7_Blog.objects.get(MO7_blogNumber=pk)
-        initial_dict = dict(MO1_userID=blog.MO1_userID,MO7_blogName=blog.MO7_blogName,MO7_blogText=blog.MO7_blogText,MO6_visitRecordNumber=blog.MO6_visitRecordNumber,MO7_openRange=blog.MO7_openRange)
+        initial_dict = dict(MO1_userID=blog.MO1_userID,MO7_blogName=blog.MO7_blogName,MO7_blogText=blog.MO7_blogText,MO7_blogImage1=blog.MO7_blogImage1,MO7_blogImage2=blog.MO7_blogImage2,MO7_blogImage3=blog.MO7_blogImage3,MO6_visitRecordNumber=blog.MO6_visitRecordNumber,MO7_openRange=blog.MO7_openRange)
         form = BlogRegisterForm(request.GET or None, initial=initial_dict)
         form.fields['MO6_visitRecordNumber'].queryset = my_record
         form.fields['MO7_openRange'].choices = CHOICE
@@ -266,8 +272,22 @@ class BlogDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy('blog:blogList')
 
     def get_context_data(self, **kwargs):
+        blog = MO7_Blog.objects.get(MO7_blogNumber=self.kwargs['pk'])
         context = super().get_context_data(**kwargs)
         context['blog'] = MO7_Blog.objects.filter(MO7_blogNumber=self.kwargs['pk'])
+        img_list = list()
+        if bool(blog.MO7_blogImage1) == True:
+            img_paht = "/media/"+str(blog.MO7_blogImage1)
+            img_list.append(img_paht)
+        if bool(blog.MO7_blogImage2) == True:
+            img_paht = "/media/"+str(blog.MO7_blogImage2)
+            img_list.append(img_paht)
+        if bool(blog.MO7_blogImage3) == True:
+            img_paht = "/media/"+str(blog.MO7_blogImage3)
+            img_list.append(img_paht)
+        print(img_list)
+        context['img'] = img_list
+
         return context
 
 # マイブログ公開範囲設定入力画面
