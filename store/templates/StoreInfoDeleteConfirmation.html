@@ -1,13 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'store_base.html' %}
 
-{% block title %}店舗登録内容削除確認画面{% endblock %}
+{% block title %}店舗登録内容削除確認 | SAMURAI WALK{% endblock %}
 
 {% block active_login %}active{% endblock %}
 
 {% block css %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
-<!-- <link rel="stylesheet" href="{% static 'assets/css/main.css' %}"> -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
 {% endblock %}
 
 {% block contents %}
@@ -20,36 +19,33 @@
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="my-div-style">
-                <h2 class="store_info_text">この登録内容を削除してもよろしいですか？</h2>
-                            <table class="confirmation">
-                                <tr>
-                                    <th class="th-center">店舗名</th>
-                                    <td class="td-space">{{ mystore.MO2_storeName }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="th-center">住所</th>
-                                    <td class="td-space">
-                                        {{ mystore.MO2_address }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="th-center">メールアドレス</th>
-                                    <td class="td-space">
-                                        {{ mystore.MO2_mailAdress }}
-                                    </td>
-                                </tr>
-                            </table>
-            <div class="col-md-12">
-                <div class="store_info_button">
-                <button type="submit" class="btn btn-primary btn-outline btn-lg" onclick="location.href='{% url 'store:StoreMypage' %}'">キャンセル</button>
+        <div class="animate-box">
+            <div class="text-center-nh">
+                <h2>この登録内容を削除してもよろしいですか？</h2>
+                <table class="confirmation">
+                    <tr>
+                        <th class="th-center">店舗名</th>
+                        <td class="td-space">{{ mystore.MO2_storeName }}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">住所</th>
+                        <td class="td-space">
+                            {{ mystore.MO2_address }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">メールアドレス</th>
+                        <td class="td-space">
+                            {{ mystore.MO2_mailAdress }}
+                        </td>
+                    </tr>
+                </table>
+                <div class="text-center-nh space">
+                    <button type="submit" class="btnin" style="width:150px;"
+                        onclick="location.href='{% url 'store:StoreMypage' %}'">キャンセル</button>
+                    <button type="submit" class="btnin" onclick="location.href='{% url 'store:StoreInfoDelete' %}'">削除</button>
                 </div>
-                <div class="store_info_button">
-                <button type="submit" class="btn btn-primary btn-outline btn-lg" onclick="location.href='{% url 'store:StoreInfoDelete' %}'">削除</button>
             </div>
-            </div>
-        </div>
         </div>
     </div>
 </div>
