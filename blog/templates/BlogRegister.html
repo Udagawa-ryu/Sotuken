@@ -26,10 +26,6 @@
             <form method="post" action="{% url 'blog:blogRegister' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <table class="confirmation">
-                    {% for i in form %}
-                    <p>{{i.label}}</p>
-                    <p>{{i.errors}}</p>
-                    {% endfor %}
                     <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
                     <tr>
                         <th class="th-center">Title</th>
