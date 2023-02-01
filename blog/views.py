@@ -7,6 +7,8 @@ from blog.models import MO7_Blog,MO10_Fav_Blog
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from samuraiwalk.settings_common import MEDIA_ROOT
+import os
 # Create your views here.
 
 # ブログ一覧画面
@@ -63,17 +65,27 @@ def BlogRegister(request):
             "MO1_userID":request.POST.get("MO1_userID"),
             "MO7_blogName":request.POST.get("MO7_blogName"),
             "MO7_blogText":request.POST.get("MO7_blogText"),
+            "MO7_blogImage1":request.FILES.get("MO7_blogImage1"),
             "MO6_visitRecordNumber":request.POST.get("MO6_visitRecordNumber"),
             "MO7_openRange":request.POST.get("MO7_openRange"),
         }
-        form = BlogRegisterForm(request.POST or initial_data)
+        form = BlogRegisterForm(request.POST or initial_data, request.FILES)
         form.fields['MO6_visitRecordNumber'].queryset = my_record
         form.fields['MO7_openRange'].choices = CHOICE
         params = {
             'form':form,
             'message' : '',
         }
-        return render(request, 'BlogRegister.html', params)
+        if request.POST.get('next', '') == 'confirm':
+            if form.is_valid():
+                form.save()
+                return redirect("blog:blogCompletion")
+            else:
+                for ele in form :
+                    print(ele)
+                params["message"] = "入力データが正しくありません"
+                # print(form)
+                return render(request,"BlogRegister.html",params)
     else :
         form = BlogRegisterForm()
         form.fields['MO6_visitRecordNumber'].queryset = my_record
@@ -81,8 +93,6 @@ def BlogRegister(request):
         form.fields['MO7_openRange'].initial = user.MO1_openRange
         params['form'] = form
         return render(request,"BlogRegister.html",params)
-    
-
 
 # ブログ内容確認画面
 def BlogConfirmation(request):
@@ -97,26 +107,42 @@ def BlogConfirmation(request):
             "MO1_userID":request.POST.get("MO1_userID"),
             "MO7_blogName":request.POST.get("MO7_blogName"),
             "MO7_blogText":request.POST.get("MO7_blogText"),
+            "MO7_blogImage1":request.FILES.get("MO7_blogImage1"),
             "MO6_visitRecordNumber":request.POST.get("MO6_visitRecordNumber"),
             "MO7_openRange":request.POST.get("MO7_openRange"),
         }
         v_recode = MO6_Visit_record.objects.get(MO6_visitRecordNumber=request.POST.get("MO6_visitRecordNumber"))
-        s_record = MO6_Visit_record.objects.get(MO6_visitRecordNumber=request.POST.get("MO6_visitRecordNumber"))
-        form = BlogRegisterForm(request.POST or initial_data)
+        form = BlogRegisterForm(request.POST or initial_data, request.FILES)
         form.fields['MO6_visitRecordNumber'].queryset = my_record
         form.fields['MO7_openRange'].choices = CHOICE
         params = {"message":'',"form":form,"user":user,"recode":v_recode}
         if request.POST.get('next', '') == 'confirm':
+            img = request.FILES.get("MO7_blogImage1")
+            if img is not None:
+                static_paht = MEDIA_ROOT[0]
+                file_paht = static_paht+"/"+str(user.MO1_userNumber)+"alias_img"
+                os.makedirs(file_paht, exist_ok=True)
+                file_name = str(user.MO1_userNumber)+"user.jpg"
+                paht = os.path.join(file_paht, file_name)
+                print("ここ",file_paht)
+                with open(paht, "wb+") as f:
+                    for chunk in img.chunks():
+                        f.write(chunk)
             return render(request,"BlogConfirmation.html",params)
         if request.POST.get('next', '') == 'back':
             return render(request,"BlogRegister.html",params)
         if request.POST.get('next', '') == 'create':
+            # img_path = MEDIA_ROOT[0]+"/"+str(user.MO1_userNumber)+"alias_img/"+str(user.MO1_userNumber)+"user.jpg"
+            # print("ここ",img_path)
+            # form.fields['MO7_blogImage1'] = open(img_path,"r")
             if form.is_valid():
                 form.save()
                 return redirect("blog:blogCompletion")
             else:
+                for ele in form :
+                    print(ele)
                 params["message"] = "入力データが正しくありません"
-                print(form)
+                # print(form)
                 return render(request,"BlogRegister.html",params)
         else:
             # 正常動作ではここは通らない。エラーページへの遷移でも良い
@@ -140,6 +166,18 @@ class BlogDetailView(LoginRequiredMixin, generic.DetailView):
         blog = MO7_Blog.objects.get(MO7_blogNumber=self.kwargs['pk'])
         mydata = CustomUser.objects.get(MO1_userNumber = self.request.user.MO1_userNumber)
         context['blog'] = MO7_Blog.objects.filter(MO7_blogNumber=self.kwargs['pk'])
+        img_list = list()
+        if bool(blog.MO7_blogImage1) == True:
+            img_paht = "/media/"+str(blog.MO7_blogImage1)
+            img_list.append(img_paht)
+        if bool(blog.MO7_blogImage2) == True:
+            img_paht = "/media/"+str(blog.MO7_blogImage2)
+            img_list.append(img_paht)
+        if bool(blog.MO7_blogImage3) == True:
+            img_paht = "/media/"+str(blog.MO7_blogImage3)
+            img_list.append(img_paht)
+        print(img_list)
+        context['img'] = img_list
         context['login_user'] = self.request.user
         if MO10_Fav_Blog.objects.filter(MO7_blogNumber=blog.MO7_blogNumber,MO1_userNumber=mydata.MO1_userNumber).exists():
             fav = 1

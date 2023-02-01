@@ -12,11 +12,14 @@ class BlogRegisterForm(forms.ModelForm):
   class Meta:
     model = MO7_Blog
     # フォームに入力したいフィールドを選択
-    fields = ('MO1_userID','MO7_blogName','MO7_blogText','MO6_visitRecordNumber','MO7_openRange')
+    fields = ('MO1_userID','MO7_blogName','MO7_blogText','MO7_blogImage1','MO7_blogImage2','MO7_blogImage3','MO6_visitRecordNumber','MO7_openRange')
     # フォームのラベルの表示をフィールド名から任意の文字に変更
     labels = {
       'MO7_blogName':"BlogName",
       'MO7_blogText':"BlogText",
+      'MO7_blogImage1':'BlogImage1',
+      'MO7_blogImage2':'BlogImage2',
+      'MO7_blogImage3':'BlogImage3',
       'MO6_visitRecordNumber':'record',
       'MO7_openRange':'OpenRange',
     }
