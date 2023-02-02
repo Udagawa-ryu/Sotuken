@@ -64,7 +64,7 @@ def OspotInfo(request,spot_num):
         records = MO6_Visit_record.objects.filter(MO4_OspotNumber=spot)
     else:
         records = ""
-    blogs = MO7_Blog.objects.filter(MO6_visitRecordNumber__in=records)
+    blogs = MO7_Blog.objects.filter(MO6_visitRecordNumber__in=records,MO7_openRange=0)
     if records == "":
         count=0
     else:
@@ -238,11 +238,17 @@ def SpotSearch(request):
             sql = "select * from maps_mo3_default_spot;"
         print("sql2="+sql)
         serch = MO3_Default_spot.objects.raw(sql)
+        flg = 0
         user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
+        if request.POST.get("MO1_userID")==request.POST.get("page_user"):
+            o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = user)
+            page_user = user
+        else:
+            page_user = CustomUser.objects.get(MO1_userNumber = int(request.POST.get("page_user")))
+            o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = page_user)
         o_spotform = OspotCreateForm()
         searchform = SpotSearchForm()
         tag_list = MO5_Tag.objects.all()
-        o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = request.user.MO1_userNumber)
         d_list = []
         o_list = []
         for i in serch:
@@ -258,5 +264,10 @@ def SpotSearch(request):
             's_form':searchform,
             'tag_list':tag_list,
             'user':user,
+            'page_user':page_user,
         }
+        if user == page_user:
+            return render(request,"Map.html",params)
+        else:
+            return render(request,"OtherMap.html",params)
     return render(request,"Map.html",params)

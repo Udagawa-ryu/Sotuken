@@ -250,6 +250,8 @@ def BlogEdit(request, pk):
                 blog.MO7_blogImage3 = request.FILES.get("MO7_blogImage3")
                 blog.MO6_visitRecordNumber = s_record
                 blog.MO7_openRange = request.POST.get("MO7_openRange")
+                if blog.MO7_openRange == 1:
+                    fav = MO10_Fav_Blog.objects.filter(MO7_blogNumber=blog.MO7_blogNumber).delete()
                 blog.save()
                 return redirect("blog:blogDetail", pk=pk)
             return render(request,"BlogEdit.html",params)
