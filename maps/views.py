@@ -161,10 +161,12 @@ def OtherMap(request,num):
     d_list = []
     o_list = []
     for i in d_spot:
-        d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber])
+        image = image_url(i)
+        d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber,image])
     for i in o_spot:
+        url = "/static/images/noimage.jpg"
         address = [i.MO4_OspotLat,i.MO4_OspotLng]
-        o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber])
+        o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber,url])
     params = {
         'd_list': json.dumps(d_list),
         'o_list': json.dumps(o_list),
@@ -252,10 +254,12 @@ def SpotSearch(request):
         d_list = []
         o_list = []
         for i in serch:
-            d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber])
+            image = image_url(i)
+            d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber,image])
         for i in o_spot:
+            url = "/static/images/noimage.jpg"
             address = [i.MO4_OspotLat,i.MO4_OspotLng]
-            o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber])
+            o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber,url])
         print(d_list)
         params = {
             'd_list': json.dumps(d_list),

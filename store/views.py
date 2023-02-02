@@ -438,3 +438,40 @@ def Output_Graph():
     graph = graph.decode("utf-8")
     buffer.close()
     return graph
+
+
+def store_tag(request):
+    return render(request,"Storetag.html")
+# def member_manage(request, id):
+#     classinfo = T7_Class.objects.get(id=id)  # クラスの情報をとる
+#     classmem = T8_ClassMember.objects.filter(
+#         classMember_class_id=id)  # クラスのメンバー
+#     classmem_id = T8_ClassMember.objects.filter(
+#         classMember_class_id=id).values_list('classMember_student_id', flat=True)
+#     all_students = T6_S_Students.objects.filter(
+#         s_students_subject_id=classinfo.class_subject_id).exclude(s_students_student_id_id__in=classmem_id)  # 科目の選択メンバー
+#     param = {'classmem': classmem,
+#              'noclassmem': all_students,
+#              'id': id,
+#              }
+#     return render(request, 'membermanage.html', param)
+
+
+# def addmember(request, id):
+#     users_id = request.POST.getlist('add')
+#     users = CustomUser.objects.filter(id__in=users_id)
+#     class_info = T7_Class.objects.get(id=id)
+#     for i in users:
+#         new = T8_ClassMember.objects.create(
+#             classMember_student_id=i,
+#             classMember_class_id=class_info,
+#         )
+#         new.save()
+#     return redirect('accounts:membermanage', id)
+
+
+# def removemember(request, id):
+#     user_id = request.POST.getlist('removemem')
+#     T8_ClassMember.objects.filter(
+#         classMember_class_id=id, classMember_student_id_id__in=user_id).delete()
+#     return redirect('accounts:membermanage', id)
