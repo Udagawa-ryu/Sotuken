@@ -10,15 +10,12 @@
 
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
-<div class="container">
-    <!-- <div class="row"> -->
+    <div class="container">
         <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
             <h1 class="Pass_regi">パスワード設定</h1>
         </div>
-    <!-- </div> -->
-</div>
-<div class="container">
-    <!-- <div class="row"> -->
+    </div>
+    <div class="container">
         <div style="margin-right:auto; margin-left:auto;">
             <div class="animate-box">
                 <form method="post" action="{% url 'store:storePassRegister' store.MO2_mailAdress %}">
@@ -38,7 +35,6 @@
                 <p>{{ message }}</p>
             </div>
         </div>
-    <!-- </div> -->
-</div>
+    </div>
 </div>
 {% endblock %}
