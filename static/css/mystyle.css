@@ -572,3 +572,8 @@ td.td-space {
         height: 240px;
     }
 }
+
+/* 店舗タグ */
+.disp-flex {
+    display: flex;
+}
