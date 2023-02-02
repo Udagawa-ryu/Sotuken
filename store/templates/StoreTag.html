@@ -20,24 +20,47 @@
         <div class="animate-box">
             <div class="disp-flex">
                 <table class="tag-table" style="margin-right:50px;">
+                <form id="addtag" action="{% url 'store:addtag'%}" method="POST">
+                    {% csrf_token %}
                     <tr>
-                        <th class="tag-th">タグ</th>
+                        <th class="tag-th" colspan="2">すべてのタグ</th>
                     </tr>
-                    <tr>
-                        <td>タグ</td>
-                    </tr>
+                    <tr></tr>
+                    {% for i in tags %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="add" value={{ i.MO5_tagNumber }} style="transform: scale(2);margin: 0 12px; opacity: 1;">
+                            </td>
+                            <td>
+                                {{ i.MO5_tagName }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </form>
                 </table>
                 <table class="tag-table">
-                    <tr>
-                        <th class="tag-th">タグ</th>
-                    </tr>
-                    <tr>
-                        <td>タグ</td>
-                    </tr>
+                    <form id="subtag" action="{% url 'store:subtag'%}" method="POST">
+                        {% csrf_token %}
+                        <tr>
+                            <th class="tag-th" th class="tag-th" colspan="2">現在のタグ</th>
+                        </tr>
+                        <tr></tr>
+                        {% for i in mytags %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="sub" value={{ i.MO5_tagNumber }} style="transform: scale(2);margin: 0 12px; opacity: 1;">
+                                </td>
+                                <td>
+                                    {{ i.MO5_tagName }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </form>
                 </table>
             </div>
             <div class="text-center-nh space">
-                <button class="btnin">登録</button>
+                <button class="btnin" type="submit" form="addtag">登録</button>
+                <button class="btnin" type="submit" form="subtag">取り除く</button>
             </div>
         </div>
     </div>

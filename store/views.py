@@ -14,6 +14,7 @@ import qrcode
 from django.db.models import Sum,Count
 import base64
 from io import BytesIO
+from maps.models import MO5_Tag
 # Create your views here.
 
 # 店舗用スポット登録申請画面
@@ -439,9 +440,42 @@ def Output_Graph():
     buffer.close()
     return graph
 
+@login_required_store
+def store_tag(request,mail):
+    store = MO2_store.objects.get(MO2_mailAdress=mail)
+    dspot = MO3_Default_spot.objects.get(MO2_storeNumber=store)
+    mytags = dspot.MO5_tagNumber.all()
+    mytags_id = dspot.MO5_tagNumber.all().values_list('MO5_tagNumber', flat=True)
+    alltags = MO5_Tag.objects.all().exclude(MO5_tagNumber__in=mytags_id)
+    params = {
+        "store":store,
+        "mytags":mytags,
+        "tags":alltags,
+        "now":dspot,
+    }
+    return render(request,"Storetag.html",params)
 
-def store_tag(request):
-    return render(request,"Storetag.html")
+@login_required_store
+def addtag(request,mail):
+    tagnum = request.POST.getlist("add")
+    taglist = MO5_Tag.objects.filter(MO5_tagNumber__in=tagnum)
+    store = MO2_store.objects.get(MO2_mailAdress=mail)
+    dspot = MO3_Default_spot.objects.get(MO2_storeNumber=store)
+    for i in taglist:
+        dspot.MO5_tagNumber.add(i)
+    store.save()
+    return store_tag(request)
+
+@login_required_store
+def subtag(request,mail):
+    tagnum = request.POST.getlist("sub")
+    taglist = MO5_Tag.objects.filter(MO5_tagNumber__in=tagnum)
+    store = MO2_store.objects.get(MO2_mailAdress=mail)
+    dspot = MO3_Default_spot.objects.get(MO2_storeNumber=store)
+    for i in taglist:
+        dspot.MO5_tagNumber.remove(i)
+    store.save()
+    return store_tag(request)
 # def member_manage(request, id):
 #     classinfo = T7_Class.objects.get(id=id)  # クラスの情報をとる
 #     classmem = T8_ClassMember.objects.filter(
