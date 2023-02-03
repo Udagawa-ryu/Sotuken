@@ -12,9 +12,9 @@
 {% block contents %}
 <div id="fh5co-blog-section" class="fh5co-section-gray">
   <div class="container">
-      <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-        <h3>店舗認証</h3>
-      </div>
+    <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+      <h3>店舗認証</h3>
+    </div>
   </div>
   <div class="container">
     <div class="animate-box">
@@ -22,21 +22,42 @@
         {% csrf_token %}
         <table class="verified">
           <tr>
-            <th class="th-center" colspan="2">未認証店舗</th>
+            <th class="th-center" colspan="4">未認証店舗</th>
+          </tr>
+          <tr>
+            <th colspan="1">
+              店舗名
+            </th>
+            <th colspan="1">
+              店舗情報
+            </th>
+            <th colspan="1">
+              住所
+            </th>
+            <th colspan="1">
+              認証
+            </th>
           </tr>
           {% for all in noauth %}
           <tr>
             <td class="col-3" style="font-size: larger;">
               <p>{{ all.MO2_storeName }}</p>
             </td>
+            <td class="col-3" style="font-size: larger;">
+              <p>{{ all.MO2_storeInfo }}</p>
+            </td>
+            <td class="col-3" style="font-size: larger;">
+              <p>{{ all.MO2_address }}</p>
+            </td>
             <td>
-                <input type="checkbox" name="add" value="{{ all.MO2_storeNumber }}" style="transform: scale(2);margin: 0 12px; opacity: 1;">
+              <input type="checkbox" name="add" value="{{ all.MO2_storeNumber }}"
+                style="transform: scale(2);margin: 0 12px; opacity: 1;">
             </td>
           </tr>
           {% endfor %}
         </table>
         <div style="text-align:center;">
-            <button form="add" type="submit" href="{% url 'store:addStore'%}" class="btnin">店舗追加</button>
+          <button form="add" type="submit" href="{% url 'store:addStore'%}" class="btnin">店舗追加</button>
         </div>
       </form>
       <p>{{ message }}</p>
