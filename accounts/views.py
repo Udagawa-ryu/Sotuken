@@ -152,7 +152,7 @@ def AccountDelete(request):
     mydata = CustomUser.objects.get(MO1_userNumber = request.user.MO1_userNumber)
     mydata.is_active = False
     mydata.save()
-    return redirect('account_logout')
+    return redirect('account_signup')
 
 @login_required
 def UserSearch(request):

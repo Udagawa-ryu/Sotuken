@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Point Display | SAMURAI WALK{% endblock %}
+
+{% block active_login %}active{% endblock %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock %}
+
+{% block contents %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+            <h3 class="point" style="text-transform:none">Record complete!</h3>
+        </div>
+    </div>
+    <div class="container">
+        <div class="animate-box">
+            <div class="text-center-nh">
+                <h4 style="text-transform:none">saved your record.</h4>
+                <table class="point_display">
+                    <tr>
+                        <th class="th-center">Where</th>
+                        <td class="td-space">{{store.MO2_storeName}}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">When</th>
+                        <td class="td-space">{{record.MO6_createdDate|date:"y/n/j H:i"}}</td>
+                    </tr>
+                    <tr>
+                        <th class="th-center">Point</th>
+                        <td class="td-space">+{{point.MO11_pointSize}}</td>
+                    </tr>
+                </table>
+                <div>
+                    <button class="btnin" type="submit" onclick="location.href='{% url 'main:Point' %}'">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
