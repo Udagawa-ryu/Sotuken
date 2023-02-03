@@ -20,24 +20,27 @@
 
     <div class="container">
         <div class="animate-box">
-            <form method="post">
+            <h2 align=center>{{ message }}</h2>
+            <form method="post" action="{% url 'main:countact' %}">
                 {% csrf_token %}
                 <table class="confirmation">
                     <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
                     <tr>
                         <th class="th-center">MailAddress</th>
                         <td class="td-space">
-                            {{form.MO7_blogImage2}}
+                            <input type="email" name="email" style="width=80%;">
                         </td>
                     </tr>
                     <tr>
                         <th class="th-center">Title</th>
-                        <td class="td-space">{{form.MO7_blogName}}</td>
+                        <td class="td-space">
+                            <input type="text" name="subjectname" >
+                        </td>
                     </tr>
                     <tr>
                         <th class="th-center">Contents</th>
                         <td class="td-space">
-                            <pre>{{form.MO7_blogText}}</pre>
+                            <pre><textarea name="subjectdetail"></textarea></pre>
                         </td>
                     </tr>
 

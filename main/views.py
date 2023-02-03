@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
 # Create your views here.
 
 # マイページ画面
@@ -139,3 +140,14 @@ def visitrecordcreate(request,mail):
     user.save()
     MO11_Pointrecord.objects.create(MO1_userNumber=user,MO2_storeNumber=store,MO11_pointSize=10)
     return redirect("main:Mypage")
+
+def Countact(request):
+    params = {"message":""}
+    if request.method== 'POST':
+        subject = request.POST.get("subjectname")
+        message = request.POST.get("subjectdetail")
+        from_email = request.POST.get("email")
+        recipient_list = ["admin@mail.com"]
+        send_mail(subject, message, from_email, recipient_list)
+        params["message"] = "Your inquiry has been received"
+    return render(request,"ContactUs.html",params)

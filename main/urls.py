@@ -14,4 +14,5 @@ urlpatterns = [
     path('favoriteBlogList/', views.FavoriteBlogListView, name="favoriteBlogList"),
     path('favoriteUserList/', views.FavoriteUserListView, name="favoriteUserList"),
     path('visitrecord/<str:mail>/',views.visitrecordcreate,name="visitrecord"),
+    path('Countact/',views.Countact,name="countact"),
 ]

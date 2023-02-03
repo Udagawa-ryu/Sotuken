@@ -7,6 +7,7 @@ from maps.models import MO3_Default_spot
 from .decorators import *
 from django.conf import settings
 from django.contrib.auth.hashers import make_password,check_password
+from django.core.mail import send_mail
 from PIL import Image
 from django.utils import timezone
 import matplotlib.pyplot as plt

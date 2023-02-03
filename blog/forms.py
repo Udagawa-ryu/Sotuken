@@ -2,8 +2,6 @@ from .models import *
 from accounts.models import *
 from django import forms
 
-class ImageWidget(forms.widgets.ClearableFileInput):
-    template_name = "catalog/widgets/image_widget.html"
 class BlogRegisterForm(forms.ModelForm):
   MO6_visitRecordNumber = forms.ModelChoiceField(label="VisitRecord",queryset=MO6_Visit_record.objects.none())
   CHOICE = {
@@ -25,7 +23,6 @@ class BlogRegisterForm(forms.ModelForm):
       'MO6_visitRecordNumber':'record',
       'MO7_openRange':'OpenRange',
     }
-    widgets = {"MO7_blogImage1": ImageWidget}
     # フォームの動きをモデルのフィールドとは違うものにしたいときに記述
     # widgets = {
     #   'MO7_openRange':forms.ChoiceField(label='OpenRange', widget=forms.RadioSelect, choices= CHOICE, initial=0)
