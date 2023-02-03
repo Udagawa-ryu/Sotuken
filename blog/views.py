@@ -242,6 +242,8 @@ def BlogEdit(request, pk):
             print(form)
             if form.is_valid():
                 form.save()
+                if blog.MO7_openRange == 1:
+                    fav = MO10_Fav_Blog.objects.filter(MO7_blogNumber=blog.MO7_blogNumber).delete()
                 return redirect("blog:blogDetail", pk=pk)
             return render(request,"BlogEdit.html",params)
     else :

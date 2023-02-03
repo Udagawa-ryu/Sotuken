@@ -1,5 +1,6 @@
 from .models import *
 from django import forms
+from maps.models import MO3_Default_spot,MO5_Tag
 
 class StoreCreateForm(forms.ModelForm):
     class Meta:

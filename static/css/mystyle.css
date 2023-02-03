@@ -572,3 +572,30 @@ td.td-space {
         height: 240px;
     }
 }
+
+/* 店舗タグ */
+.disp-flex {
+    display: flex;
+}
+@media screen and (max-width: 480px) {
+    .disp-flex {
+        display: block;
+    }
+}
+.tag-table {
+    width: 55%;
+}
+th.tag-th {
+    background: #F78536;
+    text-align:center;
+    color:#fff;
+    height: 50px;
+    vertical-align: middle;
+    padding:0%;
+}
+/* タグテーブル(スマホ) */
+@media screen and (max-width: 480px) {
+    .tag-table {
+        width: 100%;
+    }
+}

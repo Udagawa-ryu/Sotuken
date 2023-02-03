@@ -20,6 +20,9 @@ urlpatterns = [
     path('storeInfoDelete/',views.storeinfodelete,name="StoreInfoDelete"),
     path('statistics/',views.statistics,name="Statictics"),
     path('storePassChangeRegister/',views.storeChangePasswordresister,name="storepasschangeregister"),
-    path('storePassform/<str:mail>/',views.storePassChangeform,name="storePassform")
-    # path('kari/',views.plt_leq,name="kari"),
+    path('storePassform/<str:mail>/',views.storePassChangeform,name="storePassform"),
+    path('StoreTag/',views.store_tag,name="StoreTag"),
+    path('addtag/',views.addtag,name="addtag"),
+    path('subtag/',views.subtag,name="subtag"),
+    # path('kari/',views.kari,name="kari"),
 ]

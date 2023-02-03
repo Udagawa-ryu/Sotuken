@@ -58,13 +58,13 @@ def OspotInfo(request,spot_num):
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     spot = MO4_Original_spot.objects.get(MO4_OspotNumber = spot_num)
     mine = 0
-    if spot.MO1_userNumber != mydata.MO1_userNumber:
+    if spot.MO1_userNumber != mydata:
         mine = 1
     if MO6_Visit_record.objects.filter(MO4_OspotNumber=spot.MO4_OspotNumber).exists():
         records = MO6_Visit_record.objects.filter(MO4_OspotNumber=spot)
     else:
         records = ""
-    blogs = MO7_Blog.objects.filter(MO6_visitRecordNumber__in=records)
+    blogs = MO7_Blog.objects.filter(MO6_visitRecordNumber__in=records,MO7_openRange=0)
     if records == "":
         count=0
     else:
@@ -161,10 +161,12 @@ def OtherMap(request,num):
     d_list = []
     o_list = []
     for i in d_spot:
-        d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber])
+        image = image_url(i)
+        d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber,image])
     for i in o_spot:
+        url = "/static/images/noimage.jpg"
         address = [i.MO4_OspotLat,i.MO4_OspotLng]
-        o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber])
+        o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber,url])
     params = {
         'd_list': json.dumps(d_list),
         'o_list': json.dumps(o_list),
@@ -238,18 +240,26 @@ def SpotSearch(request):
             sql = "select * from maps_mo3_default_spot;"
         print("sql2="+sql)
         serch = MO3_Default_spot.objects.raw(sql)
+        flg = 0
         user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
+        if request.POST.get("MO1_userID")==request.POST.get("page_user"):
+            o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = user)
+            page_user = user
+        else:
+            page_user = CustomUser.objects.get(MO1_userNumber = int(request.POST.get("page_user")))
+            o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = page_user)
         o_spotform = OspotCreateForm()
         searchform = SpotSearchForm()
         tag_list = MO5_Tag.objects.all()
-        o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = request.user.MO1_userNumber)
         d_list = []
         o_list = []
         for i in serch:
-            d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber])
+            image = image_url(i)
+            d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber,image])
         for i in o_spot:
+            url = "/static/images/noimage.jpg"
             address = [i.MO4_OspotLat,i.MO4_OspotLng]
-            o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber])
+            o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber,url])
         print(d_list)
         params = {
             'd_list': json.dumps(d_list),
@@ -258,5 +268,10 @@ def SpotSearch(request):
             's_form':searchform,
             'tag_list':tag_list,
             'user':user,
+            'page_user':page_user,
         }
+        if user == page_user:
+            return render(request,"Map.html",params)
+        else:
+            return render(request,"OtherMap.html",params)
     return render(request,"Map.html",params)

@@ -35,35 +35,33 @@ try{
 
 {% block contents %}
 <div class="container">
-    <div class="row">
-        <table class="verified">
-            <tr>
-                <th class="th-center">訪問記録用QRコード</th>
-                <th class="th-center">ポイント用QRコード</th>
-            </tr>
-            <tr>
+    <table class="verified">
+        <tr>
+            <th class="th-center">訪問記録用QRコード</th>
+            <th class="th-center">ポイント用QRコード</th>
+        </tr>
+        <tr>
+            <td align="center" valign="middle">
+                <img src="data:image/png;base64,{{ qr }}" />
+            </td>
+            <div class="print-area2">
                 <td align="center" valign="middle">
-                    <img src="data:image/png;base64,{{ qr }}" />
+                    <img src="data:image/png;base64,{{ qr2 }}" />
                 </td>
-                <div class="print-area2">
-                    <td align="center" valign="middle">
-                        <img src="data:image/png;base64,{{ qr2 }}" />
-                    </td>
-                </div>
-            </tr>
-            <tr>
-                <td align="center" valign="middle">
-                    
-                </td>
-                <td align="center" valign="middle">
-                    <input type="button" class="btnin" style="width:auto;" id="pr-bt2" name="pr-bt2" value="右のQRを印刷する" onclick="return print_btn2()">
-                </td>
-            </tr>
-        </table>
+            </div>
+        </tr>
+        <tr>
+            <td align="center" valign="middle">
+                
+            </td>
+            <td align="center" valign="middle">
+                <input type="button" class="btnin" style="width:auto;" id="pr-bt2" name="pr-bt2" value="右のQRを印刷する" onclick="return print_btn2()">
+            </td>
+        </tr>
+    </table>
 
-        <div class="text-center-nh" style="margin-bottom:10px;">
-            <button class="btnin" style="width:200px;" onclick="location.href='{% url 'store:StoreMypage' %}'">マイページへ</button>
-        </div>
+    <div class="text-center-nh" style="margin-bottom:10px;">
+        <button class="btnin" style="width:200px;" onclick="location.href='{% url 'store:StoreMypage' %}'">マイページへ</button>
     </div>
 </div>
 

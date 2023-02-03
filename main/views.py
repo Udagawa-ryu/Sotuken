@@ -83,9 +83,9 @@ def PointDisplayView(request):
 
 # 使用ポイント入力画面
 @login_required
-def PointInputView(request,pk):
+def PointInputView(request,mail):
     mydata = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
-    store = MO2_store.objects.get(MO2_storeNumber=pk)
+    store = MO2_store.objects.get(MO2_mailAdress=mail)
     # post
     if request.method== 'POST':
         subpoint = request.POST.get("point")
@@ -130,10 +130,10 @@ def FavoriteUserListView(request):
 
 
 @login_required
-def visitrecordcreate(request,pk):
+def visitrecordcreate(request,mail):
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
-    d_spot = MO3_Default_spot.objects.get(MO2_storeNumber = pk)
-    store = MO2_store.objects.get(MO2_storeNumber=d_spot.MO2_storeNumber.MO2_storeNumber)
+    store = MO2_store.objects.get(MO2_mailAdress=mail)
+    d_spot = MO3_Default_spot.objects.get(MO2_storeNumber = store)
     record = MO6_Visit_record.objects.create(MO1_userNumber=user,MO3_DspotNumber=d_spot)
     user.MO1_point += 10
     user.save()
