@@ -138,8 +138,13 @@ def visitrecordcreate(request,mail):
     record = MO6_Visit_record.objects.create(MO1_userNumber=user,MO3_DspotNumber=d_spot)
     user.MO1_point += 10
     user.save()
-    MO11_Pointrecord.objects.create(MO1_userNumber=user,MO2_storeNumber=store,MO11_pointSize=10)
-    return redirect("main:Mypage")
+    point = MO11_Pointrecord.objects.create(MO1_userNumber=user,MO2_storeNumber=store,MO11_pointSize=10)
+    params = {
+        "store":store,
+        "record":record,
+        "point":point,
+    }
+    return render(request,"recordcomp.html",params)
 
 def Countact(request):
     params = {"message":""}
