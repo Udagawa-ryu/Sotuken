@@ -573,6 +573,7 @@ td.td-space {
     }
 }
 
+
 /* 店舗タグ */
 .disp-flex {
     display: flex;
@@ -582,8 +583,21 @@ td.td-space {
         display: block;
     }
 }
+/* タブテーブルスクロール */
+.tab-scroll {
+    overflow: auto;
+    overflow-x: hidden;
+    width: 48%;
+    height: 400px;
+}
+@media screen and (max-width: 480px) {
+    .tab-scroll {
+        width: 100%;
+    }
+}
+/* タグテーブル */
 .tag-table {
-    width: 55%;
+    width: 100%;
 }
 th.tag-th {
     background: #F78536;
@@ -592,7 +606,23 @@ th.tag-th {
     height: 50px;
     vertical-align: middle;
     padding:0%;
+    position: sticky;
+    top: 0;
+    left: 0;
 }
+td.tag-check {
+    width: 10%;
+}
+
+.tab-margin {
+    margin-right: 4%;
+}
+@media screen and (max-width: 480px) {
+    .tab-margin {
+        margin-bottom: 25px;
+    }
+}
+
 /* タグテーブル(スマホ) */
 @media screen and (max-width: 480px) {
     .tag-table {
