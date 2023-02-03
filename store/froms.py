@@ -20,17 +20,19 @@ class StoreCreateForm(forms.ModelForm):
 class StorePassCreateForm(forms.Form):
     password1 = forms.CharField(label='パスワード1', widget=forms.PasswordInput(), min_length=8,max_length=12)
     password2 = forms.CharField(label='パスワード2', widget=forms.PasswordInput(), min_length=8,max_length=12)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
 
 class StoreLoginForm(forms.ModelForm):
+    MO2_password = forms.CharField(label='パスワード1', widget=forms.PasswordInput(), min_length=8,max_length=12)
     class Meta:
         model = MO2_store
         fields = ("MO2_mailAdress","MO2_password")
         labels = {
             "MO2_mailAdress": "メールアドレス",
             "MO2_password":"パスワード",
-        }
-        widgets = {
-            "MO2_password": forms.PasswordInput()
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
