@@ -609,6 +609,7 @@ th.tag-th {
     position: sticky;
     top: 0;
     left: 0;
+    z-index: 10;
 }
 td.tag-check {
     width: 10%;
