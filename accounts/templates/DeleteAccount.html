@@ -23,8 +23,10 @@
                 <div class="text-center-nh">
                     <h4 style="text-transform:none">Are you sure you want to delete your account?</h4>
                     <div class="space2">
-                        <button class="btnin" type="submit" style="width: 100px;" onclick="location.href='{% url 'main:Mypage' %}'">Cancel</button>
-                        <button class="btnin" type="submit" style="width: 100px;" onclick="location.href='{% url 'accounts:signup' %}'">Delete</button>
+                        <button class="btnin" type="submit" style="width: 100px;"
+                            onclick="location.href='{% url 'main:Mypage' %}'">Cancel</button>
+                        <button class="btnin" type="submit" name="next" value="confirm" style="width: 100px;"
+                            onclick="location.href='{% url 'accounts:signup' %}'">Delete</button>
                     </div>
                 </div>
             </div>

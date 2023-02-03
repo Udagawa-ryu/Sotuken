@@ -223,6 +223,7 @@ def BlogEdit(request, pk):
         (1,'private'),
     }
     params = {"message":'',"form":None,"user":user}
+    blog = MO7_Blog.objects.get(MO7_blogNumber=pk)
     if request.method == 'POST':
         initial_data = {
             "MO1_userID":request.POST.get("MO1_userID"),
@@ -235,28 +236,17 @@ def BlogEdit(request, pk):
             "MO7_openRange":request.POST.get("MO7_openRange"),
         }
         if request.POST.get('next', '') == 'update':
-            form = BlogRegisterForm(initial_data)
+            form = BlogRegisterForm(initial_data,instance=blog)
             form.fields['MO6_visitRecordNumber'].queryset = my_record
             form.fields['MO7_openRange'].choices = CHOICE
             print(form)
             if form.is_valid():
-                blog = MO7_Blog.objects.get(MO7_blogNumber=pk)
-                blog.MO1_userID = user
-                s_record = MO6_Visit_record.objects.get(MO6_visitRecordNumber = request.POST.get("MO6_visitRecordNumber"))
-                blog.MO7_blogName = request.POST.get("MO7_blogName")
-                blog.MO7_blogText = request.POST.get("MO7_blogText")
-                blog.MO7_blogImage1 = request.FILES.get("MO7_blogImage1")
-                blog.MO7_blogImage2 = request.FILES.get("MO7_blogImage2")
-                blog.MO7_blogImage3 = request.FILES.get("MO7_blogImage3")
-                blog.MO6_visitRecordNumber = s_record
-                blog.MO7_openRange = request.POST.get("MO7_openRange")
-                blog.save()
+                form.save()
                 return redirect("blog:blogDetail", pk=pk)
             return render(request,"BlogEdit.html",params)
     else :
-        blog = MO7_Blog.objects.get(MO7_blogNumber=pk)
-        initial_dict = dict(MO1_userID=blog.MO1_userID,MO7_blogName=blog.MO7_blogName,MO7_blogText=blog.MO7_blogText,MO7_blogImage1=blog.MO7_blogImage1,MO7_blogImage2=blog.MO7_blogImage2,MO7_blogImage3=blog.MO7_blogImage3,MO6_visitRecordNumber=blog.MO6_visitRecordNumber,MO7_openRange=blog.MO7_openRange)
-        form = BlogRegisterForm(request.GET or None, initial=initial_dict)
+        # initial_dict = dict(MO1_userID=blog.MO1_userID,MO7_blogName=blog.MO7_blogName,MO7_blogText=blog.MO7_blogText,MO7_blogImage1=blog.MO7_blogImage1,MO7_blogImage2=blog.MO7_blogImage2,MO7_blogImage3=blog.MO7_blogImage3,MO6_visitRecordNumber=blog.MO6_visitRecordNumber,MO7_openRange=blog.MO7_openRange)
+        form = BlogRegisterForm(instance=blog)
         form.fields['MO6_visitRecordNumber'].queryset = my_record
         form.fields['MO7_openRange'].choices = CHOICE
         params['form'] = form
