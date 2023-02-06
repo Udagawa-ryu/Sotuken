@@ -31,3 +31,13 @@ class MO2_store(models.Model):
 
     def __str__(self):
         return f'{self.MO2_storeNumber} - {self.MO2_storeName}'
+
+class MO12_storeEng(models.Model):
+    MO12_storeEngNumber = models.AutoField(verbose_name="英表記ナンバー",primary_key=True, editable=False)
+    MO2_storeNumber = models.ForeignKey(MO2_store,models.CASCADE,verbose_name="店舗ナンバー")
+    MO12_storeNameEng = models.CharField(verbose_name="英表記店舗名",max_length=200)
+    class Meta:
+        verbose_name_plural = "MO12_storeEng"
+
+    def __str__(self):
+        return f'{self.MO12_storeEngNumber}-{self.MO2_storeNumber.MO2_storeName}'

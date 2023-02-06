@@ -24,5 +24,5 @@ urlpatterns = [
     path('StoreTag/',views.store_tag,name="StoreTag"),
     path('addtag/',views.addtag,name="addtag"),
     path('subtag/',views.subtag,name="subtag"),
-    # path('kari/',views.kari,name="kari"),
+    path('kari/',views.kari,name="kari"),
 ]

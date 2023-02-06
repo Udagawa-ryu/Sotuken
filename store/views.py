@@ -16,6 +16,7 @@ from django.db.models import Sum,Count
 import base64
 from io import BytesIO
 from maps.models import MO5_Tag
+
 # Create your views here.
 
 # 店舗用スポット登録申請画面
@@ -66,6 +67,8 @@ def addStore(request):
                 from_email = "admin@mail.com"  # 送信者
                 recipient_list = [i.MO2_mailAdress]  # 宛先リスト
                 send_mail(subject, message, from_email, recipient_list)
+                t=translator.translate(str(i.MO2_storeName),dest='en',src='ja').text
+                MO12_storeEng.objects.create(MO2_storeNumber=i,MO12_storeNameEng=t)
             else:
                 subject = "認証に失敗しました。"
                 message = "登録されたメールアドレスはすでに使用されている可能性がございます。"
@@ -510,3 +513,16 @@ def subtag(request,mail):
 #     T8_ClassMember.objects.filter(
 #         classMember_class_id=id, classMember_student_id_id__in=user_id).delete()
 #     return redirect('accounts:membermanage', id)
+
+# 翻訳APIをインポート
+from googletrans import Translator
+# Translatorクラスのインスタンスを生成
+translator = Translator()
+
+@login_required_store
+def kari(request,mail):
+    i = MO2_store.objects.get(MO2_mailAdress=mail)
+    # t=translator.translate(str(i.MO2_storeName),dest='en',src='ja').text
+    t=translator.translate("仮店舗",dest='en',src='ja').text
+    print(t)
+    return render(request,"karioki.html")
