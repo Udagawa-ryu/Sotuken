@@ -127,11 +127,17 @@
                                         <li><a href="{% url 'main:favoriteBlogList' %}">FavoriteBlog</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{% url 'blog:blogList' %}">Blog</a></li>
+                                <li>
+                                    <a href="#">Blog</a>
+                                    <ul class="fh5co-sub-menu">
+                                        <li><a href="{% url 'blog:blogList' %}">My Blog</a></li>
+                                        <li><a href="{% url 'accounts:OpenRangeRegister' %}">PublicScope</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="{% url 'main:Point' %}">Point</a></li>
                                 <li><a href="{% url 'maps:Map' %}">Map</a></li>
-                                <li><a href="{% url 'accounts:OpenRangeRegister' %}">PublicScope</a></li>
                                 <li><a href="{% url 'accounts:UserSearch' %}">Search</a></li>
+                                <li><a href="{% url 'main:countact' %}">Contact</a></li>
                                 {% if request.user.is_authenticated %}
                                 <li><a href="{% url 'accounts:logout' %}">LogOut</a></li>
                                 {% else %}
