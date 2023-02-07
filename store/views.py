@@ -67,8 +67,10 @@ def addStore(request):
                 from_email = "admin@mail.com"  # 送信者
                 recipient_list = [i.MO2_mailAdress]  # 宛先リスト
                 send_mail(subject, message, from_email, recipient_list)
-                t=translator.translate(str(i.MO2_storeName),dest='en',src='ja').text
-                MO12_storeEng.objects.create(MO2_storeNumber=i,MO12_storeNameEng=t)
+                lngs = ["en","de","it","fr","es","pl"]
+                for lng in lngs:
+                    t=translator.translate(str(i.MO2_storeName),dest=lng, src="auto").text
+                    MO12_storeEng.objects.create(MO2_storeNumber=i,MO12_storeNameLng=lng,MO12_storeNameEng=t)
             else:
                 subject = "認証に失敗しました。"
                 message = "登録されたメールアドレスはすでに使用されている可能性がございます。"

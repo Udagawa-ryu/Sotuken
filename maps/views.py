@@ -9,6 +9,7 @@ from blog.models import MO7_Blog
 import json
 import datetime
 from django.contrib.auth.decorators import login_required
+from django.db import connection
 
 # 翻訳APIをインポート
 from googletrans import Translator
@@ -37,34 +38,34 @@ def Map(request):
     d_list = []
     o_list = []
     d = ""
-    eng_d_spot = MO12_storeEng.objects.values_list("MO12_storeNameEng")
+    eng_d_spot = MO12_storeEng.objects.filter(MO12_storeNameLng="en").values_list("MO12_storeNameEng")
     
     print("d_spot.len="+str(len(d_spot)))
     # test=["Tokyo Information Creator Kogakuin College","Ohara Business Civil Servant College Ikebukuro Campus","Ohara Bookkeeping Civil Servant Medical Welfare Nursing College Tachikawa Campus","store_sample","store_owner_sample1","store_owner_sample2","store_owner_sample3","Mother Farm","Kasai Rinkai Park","Nikko Toshogu Shrine","Ashikaga Flower Park","Roppongi Hills","Hitachi Seaside Park","New Enoshima Aquarium","Tokyo Dome City","Tobu Zoological Park","Choeizan Ikegami Honmonji","Tokyo Summer Land","Mobility Resort Motegi","Railway Museum","Yoyogi Park","Lalaport Tachikawa Tachihi","Onshi Ueno Zoo","Tokyo DisneySea","Yomiuri Land","Showa Kinen Park","Sanrio Puroland","Tokyo Disneyland"]
     # print("test.len=",str(len(test)))
     # for i in d_spot:
     #     d+=str(i.MO2_storeNumber.MO2_storeName)+"*******"
-    for i in eng_d_spot:
-        d+=i[0].replace('\'', "`")+"*"
-    print(d)
-    print()
+    # for i in eng_d_spot:
+    #     d+=i[0].replace('\'', "`")+"*"
+    # print(d)
+    # print()
     # t=translator.translate(d, dest=user.MO1_language, src='ja').text
-    t=translator.translate(d, dest="zh-CN", src='en').text
-    print(t)
-    print()
-    s=t.split("*")
-    print("s.len="+str(len(s)))
-    print(s)
-    for i in range(d_spot_len):
-        d_spot[i].MO2_storeNumber.MO2_storeName = s[i]
-        # print(s[i])
+    # t=translator.translate(d, dest="", src='en').text
+    # print(t)
+    # print()
+    # s=t.split("*")
+    # print("s.len="+str(len(s)))
+    # print(s)
+    # for i in range(d_spot_len):
+    #     d_spot[i].MO2_storeNumber.MO2_storeName = s[i]
+    #     # print(s[i])
     for i in d_spot:
         image = image_url(i)
         # print(i.MO2_storeNumber.MO2_storeName)
         # name = translator.translate(i.MO2_storeNumber.MO2_storeName, dest=user.MO1_language, src='ja').text
         name = i.MO2_storeNumber.MO2_storeName
         # print(name)
-        d_list.append([i.MO2_storeNumber.MO2_address,name.replace('\'', '\''),i.MO3_DspotNumber,image])
+        d_list.append([i.MO2_storeNumber.MO2_address,name.replace('\'', '`'),i.MO3_DspotNumber,image])
     # print("2")
     for i in o_spot:
         url = "/static/images/noimage.jpg"
@@ -241,7 +242,6 @@ def SpotSearch(request):
     return Map(request)
 
 def SpotSearch(request):
-    from django.db import connection
     if request.method == 'POST':
         tags_id = request.POST.getlist('tags')
         keword = request.POST.get('keyword')
@@ -255,29 +255,24 @@ def SpotSearch(request):
             sql += """ where 1=1 """
         else:
             sql += """ where "MO2_storeName" LIKE '%"""+keword+"""%' """
+            # sql += """where "MO2_storeName" = '東京ディズニーランド' """
         if tag_counter != 0:
             sql += """ and (1=0 """
             for i in tags_id:
                 sql += """ or "mo5_tag_id" = """+i
             sql += """)"""
         sql += """ group by "MO2_storeNumber";"""
-        print("sql1="+sql)
-        res = MO2_store.objects.raw(sql)
-        # print("res="+str(res))
-        print(len(res))
-        for i in res:
-            print("i = {}-{}".format(i.count,i.MO2_storeNumber))
-
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        res = cursor.fetchall()
         sql = """select * from maps_mo3_default_spot where 1=0 """
-        for i in res:
-            if i.count == tag_counter:
-                sql += """ or "MO2_storeNumber_id" = """+str(i.MO2_storeNumber)
+        for i in range(len(res)):
+            if tag_counter == 0:
+                sql += """ or "MO2_storeNumber_id" = """+str(res[i][1])
+            elif res[i][0] == tag_counter:
+                sql += """ or "MO2_storeNumber_id" = """+str(res[i][1])
         sql += """ ; """
-        # else:
-        #     sql = "select * from maps_mo3_default_spot;"
-        # print("sql2="+sql)
         serch = MO3_Default_spot.objects.raw(sql)
-        flg = 0
         user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
         if request.POST.get("MO1_userID")==request.POST.get("page_user"):
             o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = user)
@@ -297,7 +292,6 @@ def SpotSearch(request):
             url = "/static/images/noimage.jpg"
             address = [i.MO4_OspotLat,i.MO4_OspotLng]
             o_list.append([address,i.MO4_OspotName, i.MO4_OspotNumber,url])
-        print(d_list)
         params = {
             'd_list': json.dumps(d_list),
             'o_list': json.dumps(o_list),

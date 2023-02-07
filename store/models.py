@@ -35,9 +35,10 @@ class MO2_store(models.Model):
 class MO12_storeEng(models.Model):
     MO12_storeEngNumber = models.AutoField(verbose_name="英表記ナンバー",primary_key=True, editable=False)
     MO2_storeNumber = models.ForeignKey(MO2_store,models.CASCADE,verbose_name="店舗ナンバー")
-    MO12_storeNameEng = models.CharField(verbose_name="英表記店舗名",max_length=200)
+    MO12_storeNameLng = models.CharField(verbose_name="選択言語",max_length=20,default="en")
+    MO12_storeNameEng = models.CharField(verbose_name="翻訳語店舗名",max_length=200)
     class Meta:
         verbose_name_plural = "MO12_storeEng"
 
     def __str__(self):
-        return f'{self.MO12_storeEngNumber}-{self.MO2_storeNumber.MO2_storeName}'
+        return f'{self.MO12_storeEngNumber}-{self.MO12_storeNameLng}-{self.MO2_storeNumber.MO2_storeName}'
