@@ -45,9 +45,7 @@ def Map(request):
             name = i.MO2_storeNumber.MO2_storeName
         else:
             name = dic_eng[i.MO2_storeNumber.MO2_storeNumber]
-        # print(name)
         d_list.append([i.MO2_storeNumber.MO2_address,name.replace('\'', '`'),i.MO3_DspotNumber,image])
-    # print("2")
     for i in o_spot:
         url = "/static/images/noimage.jpg"
         address = [i.MO4_OspotLat,i.MO4_OspotLng]
@@ -235,8 +233,7 @@ def SpotSearch(request):
         if keword == "":
             sql += """ where 1=1 """
         else:
-            sql += """ where "MO2_storeName" LIKE '%"""+keword+"""%' """
-            # sql += """where "MO2_storeName" = '東京ディズニーランド' """
+            sql += " where \"MO2_storeName\" LIKE '%{}%' "
         if tag_counter != 0:
             sql += """ and (1=0 """
             for i in tags_id:
@@ -244,7 +241,7 @@ def SpotSearch(request):
             sql += """)"""
         sql += """ group by "MO2_storeNumber";"""
         cursor = connection.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql.format(keword))
         res = cursor.fetchall()
         sql = """select * from maps_mo3_default_spot where 1=0 """
         for i in range(len(res)):
