@@ -26,7 +26,7 @@ class StorePassCreateForm(forms.Form):
             field.widget.attrs['class'] = 'form-control'
 
 class StoreLoginForm(forms.ModelForm):
-    MO2_password = forms.CharField(label='パスワード1', widget=forms.PasswordInput(), min_length=8,max_length=12)
+    MO2_password = forms.CharField(label='パスワード', widget=forms.PasswordInput(), min_length=8,max_length=12)
     class Meta:
         model = MO2_store
         fields = ("MO2_mailAdress","MO2_password")
