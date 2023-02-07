@@ -17,6 +17,8 @@ import base64
 from io import BytesIO
 from maps.models import MO5_Tag
 from django.db import connection
+import os
+from samuraiwalk.settings_common import MEDIA_URL,MEDIA_ROOT
 
 # Create your views here.
 
@@ -205,8 +207,9 @@ def IndexView(request,mail):
 def storeInfoEditView(request,mail):
     mystore = MO2_store.objects.get(MO2_mailAdress = mail)
     if request.method == 'POST':
+        if mystore.MO2_storeName != request.POST.get("MO2_storeName"):
+            namechange(mystore.MO2_storeNumber,request.POST.get("MO2_storeName"))
         form = StoreUpdateForm(request.POST,request.FILES,instance=mystore)
-        print(form)
         if form.is_valid():
             form.save()
             return redirect("store:storeinfocomp")
@@ -242,6 +245,18 @@ def storeInfoEditView(request,mail):
             'message' : '',
         }
         return render(request,"StoreInfoEdit.html",params)
+
+def namechange(store,n_name):
+    mystore = MO2_store.objects.get(MO2_storeNumber = store)
+    new_add = MEDIA_ROOT[0]+"/store_images/"+n_name
+    old_add = MEDIA_ROOT[0]+"/store_images/"+mystore.MO2_storeName
+    os.rename(old_add,new_add)
+    mystore.save()
+    item = MO12_storeEng.objects.filter(MO2_storeNumber=mystore)
+    for i in item:
+        new_trance = translator.translate(str(n_name),dest=i.MO12_storeNameLng, src="auto").text
+        i.MO12_storeNameEng = new_trance
+        i.save()
 
 class storeinfocompletionView(generic.TemplateView):
     template_name = "StoreInfoCompletion.html"
