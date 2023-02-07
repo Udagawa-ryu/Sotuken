@@ -16,6 +16,7 @@ from django.db.models import Sum,Count
 import base64
 from io import BytesIO
 from maps.models import MO5_Tag
+from django.db import connection
 
 # Create your views here.
 
@@ -67,7 +68,7 @@ def addStore(request):
                 from_email = "admin@mail.com"  # 送信者
                 recipient_list = [i.MO2_mailAdress]  # 宛先リスト
                 send_mail(subject, message, from_email, recipient_list)
-                lngs = ["en","de","it","fr","es","pl"]
+                lngs = ["en","de","it","fr","es","pl","zh-CN"]
                 for lng in lngs:
                     t=translator.translate(str(i.MO2_storeName),dest=lng, src="auto").text
                     MO12_storeEng.objects.create(MO2_storeNumber=i,MO12_storeNameLng=lng,MO12_storeNameEng=t)
@@ -199,76 +200,6 @@ def IndexView(request,mail):
     }
     return render(request,'StoreMypage.html',params)
 
-# @login_required_store
-# def storeInfoEditView(request,mail):
-#     mystore = MO2_store.objects.get(MO2_mailAdress = mail)
-#     if request.method == 'POST':
-#         initial_data = {
-#             "MO2_storeName":request.POST.get('MO2_storeName'),
-#             "MO2_storeInfo":request.POST.get('MO2_storeInfo'),
-#             "MO2_phoneNumber":request.POST.get('MO2_phoneNumber'),
-#             "MO2_address":request.POST.get('MO2_address'),
-#             "MO2_images1":request.POST.get('MO2_images1'),
-#             "MO2_images2":request.POST.get('MO2_images2'),
-#             "MO2_images3":request.POST.get('MO2_images3'),
-#         }
-#         form = StoreUpdateForm(request.POST or initial_data,instance=mystore)
-#         params = {
-#             'form':form,
-#             'message' : '',
-#         }
-#         return render(request,"StoreInfoEdit.html",params)
-#     else :
-#         initial_data = {
-#             "MO2_storeName":mystore.MO2_storeName,
-#             "MO2_storeInfo":mystore.MO2_storeInfo,
-#             "MO2_phoneNumber":mystore.MO2_phoneNumber,
-#             "MO2_address":mystore.MO2_address,
-#             "MO2_images1":mystore.MO2_images1,
-#             "MO2_images2":mystore.MO2_images2,
-#             "MO2_images3":mystore.MO2_images3,
-#         }
-#         form = StoreUpdateForm(request.POST or initial_data,instance=mystore)
-#         params = {
-#             'form':form,
-#             'message' : '',
-#         }
-#         return render(request,"StoreInfoEdit.html",params)
-# # 店舗用情報編集画面
-# @login_required_store
-# def storeInfoConfirmationView(request,mail):
-#     mystore = MO2_store.objects.get(MO2_mailAdress = mail)
-#     if request.method == 'POST':
-#         initial_data = {
-#             "MO2_storeName":request.POST.get('MO2_storeName'),
-#             "MO2_storeInfo":request.POST.get('MO2_storeInfo'),
-#             "MO2_phoneNumber":request.POST.get('MO2_phoneNumber'),
-#             "MO2_address":request.POST.get('MO2_address'),
-#             "MO2_images1":request.POST.get('MO2_images1'),
-#             "MO2_images2":request.POST.get('MO2_images2'),
-#             "MO2_images3":request.POST.get('MO2_images3'),
-#         }
-#         if request.POST.get('next', '') == 'confirm':
-#             form = StoreUpdateForm(initial_data,instance=mystore)
-#             params = {"message":'',"form":form}
-#             return render(request,"StoreInfoConfirmation.html",params)
-#         if request.POST.get('next', '') == 'back':
-#             form = StoreUpdateForm(initial_data,instance=mystore)
-#             params = {"message":'',"form":form}
-#             return render(request,"StoreInfoEdit.html",params)
-#         if request.POST.get('next', '') == 'next':
-#             form = StoreUpdateForm(initial_data,instance=mystore)
-#             if form.is_valid():
-#                 mystore = MO2_store.objects.get(MO2_mailAdress = mail)
-#                 mystore.MO2_storeName = request.POST.get('MO2_storeName')
-#                 mystore.MO2_storeInfo = request.POST.get('MO2_storeInfo')
-#                 mystore.MO2_phoneNumber = request.POST.get('MO2_phoneNumber')
-#                 mystore.MO2_address = request.POST.get('MO2_address')
-#                 mystore.MO2_images1 = request.POST.get('MO2_images1')
-#                 mystore.MO2_images2 = request.POST.get('MO2_images2')
-#                 mystore.MO2_images3 = request.POST.get('MO2_images3')
-#                 mystore.save()
-#                 return redirect("store:storeinfocomp")
 
 @login_required_store
 def storeInfoEditView(request,mail):
@@ -482,39 +413,6 @@ def subtag(request,mail):
         dspot.MO5_tagNumber.remove(i)
     store.save()
     return store_tag(request)
-# def member_manage(request, id):
-#     classinfo = T7_Class.objects.get(id=id)  # クラスの情報をとる
-#     classmem = T8_ClassMember.objects.filter(
-#         classMember_class_id=id)  # クラスのメンバー
-#     classmem_id = T8_ClassMember.objects.filter(
-#         classMember_class_id=id).values_list('classMember_student_id', flat=True)
-#     all_students = T6_S_Students.objects.filter(
-#         s_students_subject_id=classinfo.class_subject_id).exclude(s_students_student_id_id__in=classmem_id)  # 科目の選択メンバー
-#     param = {'classmem': classmem,
-#              'noclassmem': all_students,
-#              'id': id,
-#              }
-#     return render(request, 'membermanage.html', param)
-
-
-# def addmember(request, id):
-#     users_id = request.POST.getlist('add')
-#     users = CustomUser.objects.filter(id__in=users_id)
-#     class_info = T7_Class.objects.get(id=id)
-#     for i in users:
-#         new = T8_ClassMember.objects.create(
-#             classMember_student_id=i,
-#             classMember_class_id=class_info,
-#         )
-#         new.save()
-#     return redirect('accounts:membermanage', id)
-
-
-# def removemember(request, id):
-#     user_id = request.POST.getlist('removemem')
-#     T8_ClassMember.objects.filter(
-#         classMember_class_id=id, classMember_student_id_id__in=user_id).delete()
-#     return redirect('accounts:membermanage', id)
 
 # 翻訳APIをインポート
 from googletrans import Translator
@@ -523,8 +421,15 @@ translator = Translator()
 
 @login_required_store
 def kari(request,mail):
-    i = MO2_store.objects.get(MO2_mailAdress=mail)
-    # t=translator.translate(str(i.MO2_storeName),dest='en',src='ja').text
-    t=translator.translate("仮店舗",dest='en',src='ja').text
-    print(t)
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM store_mo12_storeeng;")
+    cursor.execute("TRUNCATE TABLE store_mo12_storeeng RESTART IDENTITY;")
+    d_spot = list(MO3_Default_spot.objects.values_list("MO2_storeNumber",flat=True))
+    print(d_spot)
+    store = MO2_store.objects.filter(MO2_storeNumber__in=d_spot)
+    lngs = ["en","de","it","fr","es","pl","zh-CN"]
+    for i in store:
+        for lng in lngs:
+            t=translator.translate(str(i.MO2_storeName),dest=lng, src="auto").text
+            MO12_storeEng.objects.create(MO2_storeNumber=i,MO12_storeNameLng=lng,MO12_storeNameEng=t)
     return render(request,"karioki.html")

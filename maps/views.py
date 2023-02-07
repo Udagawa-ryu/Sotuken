@@ -32,38 +32,19 @@ def Map(request):
     o_spotform = OspotCreateForm()
     searchform = SpotSearchForm()
     tag_list = MO5_Tag.objects.all()
-    d_spot = MO3_Default_spot.objects.select_related('MO2_storeNumber')
+    d_spot = MO3_Default_spot.objects.select_related('MO2_storeNumber').order_by('MO2_storeNumber')
     o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = request.user.MO1_userNumber)
-    d_spot_len = len(d_spot)
     d_list = []
     o_list = []
-    d = ""
-    eng_d_spot = MO12_storeEng.objects.filter(MO12_storeNameLng="en").values_list("MO12_storeNameEng")
-    
-    print("d_spot.len="+str(len(d_spot)))
-    # test=["Tokyo Information Creator Kogakuin College","Ohara Business Civil Servant College Ikebukuro Campus","Ohara Bookkeeping Civil Servant Medical Welfare Nursing College Tachikawa Campus","store_sample","store_owner_sample1","store_owner_sample2","store_owner_sample3","Mother Farm","Kasai Rinkai Park","Nikko Toshogu Shrine","Ashikaga Flower Park","Roppongi Hills","Hitachi Seaside Park","New Enoshima Aquarium","Tokyo Dome City","Tobu Zoological Park","Choeizan Ikegami Honmonji","Tokyo Summer Land","Mobility Resort Motegi","Railway Museum","Yoyogi Park","Lalaport Tachikawa Tachihi","Onshi Ueno Zoo","Tokyo DisneySea","Yomiuri Land","Showa Kinen Park","Sanrio Puroland","Tokyo Disneyland"]
-    # print("test.len=",str(len(test)))
-    # for i in d_spot:
-    #     d+=str(i.MO2_storeNumber.MO2_storeName)+"*******"
-    # for i in eng_d_spot:
-    #     d+=i[0].replace('\'', "`")+"*"
-    # print(d)
-    # print()
-    # t=translator.translate(d, dest=user.MO1_language, src='ja').text
-    # t=translator.translate(d, dest="", src='en').text
-    # print(t)
-    # print()
-    # s=t.split("*")
-    # print("s.len="+str(len(s)))
-    # print(s)
-    # for i in range(d_spot_len):
-    #     d_spot[i].MO2_storeNumber.MO2_storeName = s[i]
-    #     # print(s[i])
+    eng_d_spot = MO12_storeEng.objects.filter(MO12_storeNameLng=user.MO1_language).values_list("MO2_storeNumber","MO12_storeNameEng").order_by("MO2_storeNumber")
+    dic_eng = dict(list(eng_d_spot))
     for i in d_spot:
+        print(i.MO2_storeNumber.MO2_storeName)
         image = image_url(i)
-        # print(i.MO2_storeNumber.MO2_storeName)
-        # name = translator.translate(i.MO2_storeNumber.MO2_storeName, dest=user.MO1_language, src='ja').text
-        name = i.MO2_storeNumber.MO2_storeName
+        if user.MO1_language == "ja":
+            name = i.MO2_storeNumber.MO2_storeName
+        else:
+            name = dic_eng[i.MO2_storeNumber.MO2_storeNumber]
         # print(name)
         d_list.append([i.MO2_storeNumber.MO2_address,name.replace('\'', '`'),i.MO3_DspotNumber,image])
     # print("2")
