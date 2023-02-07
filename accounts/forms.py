@@ -9,15 +9,26 @@ from allauth.account.forms import (
 #クラス名はsettings.pyで書いた名前
 class CustomSignupForm(UserCreationForm):
     COUNTRIES = {
-        #どこかから国の一覧データを持ってきたい
         ("USA","USA"),
-        ("日本","JAPAN"),
+        ("JAPAN","日本"),
+        ("Germany","Deutschland"),
+        ("Italy","Italia"),
+        ("France","France"),
+        ("Spain","España"),
+        ("Portuguese","Português"),
+        ("China","中国"),
+    }
+    LANGAGES = {
+        ("en","English"),
+        ("ja","日本語"),
+        ("de","Deutsch"),
+        ("it","Italiano"),
+        ("fr","Français"),
+        ("es","Español"),
+        ("pl","Português"),
+        ("zh-CN","中国人"),
     }
     MO1_homeCountry = forms.ChoiceField(label="HomeCountry",choices=COUNTRIES)
-    LANGAGES = {
-        ("English","en"),
-        ("日本語","ja"),
-    }
     MO1_language = forms.ChoiceField(label="Language",choices=LANGAGES)
     MO1_openRange = forms.ChoiceField(label="OpenRange",choices={(0,"Open"),(1,"Hidden")})
     MO1_userID = forms.CharField(label="UserID",min_length=7,max_length=15)
@@ -52,13 +63,24 @@ class CustomLoginForm(LoginForm):
 
 class UserEditForm(forms.ModelForm):
     COUNTRIES = {
-        #どこかから国の一覧データを持ってきたい
         ("USA","USA"),
         ("JAPAN","日本"),
+        ("Germany","Deutschland"),
+        ("Italy","Italia"),
+        ("France","France"),
+        ("Spain","España"),
+        ("Portuguese","Português"),
+        ("China","中国"),
     }
     LANGAGES = {
         ("en","English"),
         ("ja","日本語"),
+        ("de","Deutsch"),
+        ("it","Italiano"),
+        ("fr","Français"),
+        ("es","Español"),
+        ("pl","Português"),
+        ("zh-CN","中国人"),
     }
     MO1_homeCountry = forms.ChoiceField(label="HomeCountry",choices=COUNTRIES)
     MO1_language = forms.ChoiceField(label="Language",choices=LANGAGES)

@@ -39,8 +39,8 @@ def Map(request):
     eng_d_spot = MO12_storeEng.objects.filter(MO12_storeNameLng=user.MO1_language).values_list("MO2_storeNumber","MO12_storeNameEng").order_by("MO2_storeNumber")
     dic_eng = dict(list(eng_d_spot))
     for i in d_spot:
-        print(i.MO2_storeNumber.MO2_storeName)
         image = image_url(i)
+        print(image)
         if user.MO1_language == "ja":
             name = i.MO2_storeNumber.MO2_storeName
         else:
