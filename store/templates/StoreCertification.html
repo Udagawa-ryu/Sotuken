@@ -25,29 +25,29 @@
             <th class="th-center" colspan="4">未認証店舗</th>
           </tr>
           <tr>
-            <th colspan="1">
-              店舗名
+            <th colspan="1" style="width:20%;">
+                店舗名
             </th>
-            <th colspan="1">
+            <th colspan="1" style="width:40%;">
               店舗情報
             </th>
-            <th colspan="1">
+            <th colspan="1" style="width:30%;">
               住所
             </th>
-            <th colspan="1">
+            <th colspan="1" style="width:10%;">
               認証
             </th>
           </tr>
           {% for all in noauth %}
           <tr>
             <td class="col-3" style="font-size: larger;">
-              <p>{{ all.MO2_storeName }}</p>
+              {{ all.MO2_storeName }}
             </td>
-            <td class="col-3" style="font-size: larger;max-width:100px;">
-              <p>{{ all.MO2_storeInfo }}</p>
+            <td class="col-3" style="display:block;font-size: larger;overflow:auto;max-height:100px;">
+              {{ all.MO2_storeInfo }}
             </td>
             <td class="col-3" style="font-size: larger;">
-              <p>{{ all.MO2_address }}</p>
+              {{ all.MO2_address }}
             </td>
             <td>
               <input type="checkbox" name="add" value="{{ all.MO2_storeNumber }}"

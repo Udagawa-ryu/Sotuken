@@ -269,12 +269,14 @@
                         <div class="box-child">
                             <table>
                                 <tr>
-                                    <td class="width:10%;">
+                                    <th>
                                         <input type="checkbox" name="tags" value={{i.MO5_tagNumber}}
                                             style="transform: scale(2);margin: 0 12px;">
-                                    </td>
-                                    <td>
-                                        {{ i.MO5_tagName }}
+                                    </th>
+                                    <td >
+                                        <div style="margin:0 3px 0 3px;">
+                                            {{ i.MO5_tagName }}
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
@@ -285,7 +287,8 @@
                 <div style="margin-top:10px;">
                     <table class="confirmation">
                         <input type="hidden" name="MO1_userID" value={{user.MO1_userNumber}}>
-                        <input type="hidden" name="page_user" value={{user.MO1_userNumber}} <tr>
+                        <input type="hidden" name="page_user" value={{user.MO1_userNumber}}>
+                        <tr>
                         <th class="th-center">{{s_form.words.label}}</th>
                         <td class="td-space"><input type="text" name="keyword" class="hoge"></td>
                         <td class="td-button"><button class="btn btn-primary btn-outline btn-lg" type="submit" name="next"
