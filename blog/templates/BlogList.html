@@ -30,8 +30,9 @@
                 {% for blog in blogs %}
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="fh5co-blog animate-box">
-                        <a href="blogDetail/{{blog.MO7_blogNumber}}"><img class="img-responsive"
-                                src="{% static 'images/place-1.jpg' %}" alt=""></a>
+                        <a href="blogDetail/{{blog.MO7_blogNumber}}">
+                            <img class="img-responsive" src='/media/{{ blog.MO7_blogImage1}}' alt="">
+                        </a>
                         <div class="blog-text">
                             <div class="prod-title">
                                 <!-- ブログタイトル -->

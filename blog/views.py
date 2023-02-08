@@ -77,6 +77,7 @@ def BlogRegister(request):
             'message' : '',
         }
         if request.POST.get('next', '') == 'confirm':
+            print(form)
             if form.is_valid():
                 form.save()
                 return redirect("blog:blogCompletion")
@@ -236,7 +237,7 @@ def BlogEdit(request, pk):
             "MO7_openRange":request.POST.get("MO7_openRange"),
         }
         if request.POST.get('next', '') == 'update':
-            form = BlogRegisterForm(initial_data,instance=blog)
+            form = BlogRegisterForm(request.POST,request.FILES,instance=blog)
             form.fields['MO6_visitRecordNumber'].queryset = my_record
             form.fields['MO7_openRange'].choices = CHOICE
             print(form)
