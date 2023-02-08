@@ -225,15 +225,15 @@ def SpotSearch(request):
         tags_id = request.POST.getlist('tags')
         keword = request.POST.get('keyword')
         tag_counter = len(tags_id)
-        if tag_counter==0:
-            sql = """ select count(*), "MO2_storeNumber" from maps_mo3_default_spot inner join store_mo2_store on ( store_mo2_store."MO2_storeNumber" = "maps_mo3_default_spot"."MO2_storeNumber_id" ) """
+        user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
+        user_lang = user.MO1_language
+        sql = """ select count(*), "MO2_storeNumber" from maps_mo3_default_spot inner join store_mo2_store on ( store_mo2_store."MO2_storeNumber" = "maps_mo3_default_spot"."MO2_storeNumber_id" ) """
+        if tag_counter!=0:
+            sql += """ inner join "maps_mo3_default_spot_MO5_tagNumber" on ( "maps_mo3_default_spot"."MO3_DspotNumber" = "maps_mo3_default_spot_MO5_tagNumber"."mo3_default_spot_id" ) """
+        if keword != "":
+            sql += """ inner join store_mo12_storeeng on ("store_mo2_store"."MO2_storeNumber" = "store_mo12_storeeng"."MO2_storeNumber_id") where \"MO12_storeNameEng\" LIKE '%{}%' and "MO12_storeNameLng" = '{}' """;
         else:
-            sql = """ select count(*), "MO2_storeNumber" from maps_mo3_default_spot inner join store_mo2_store on ( store_mo2_store."MO2_storeNumber" = "maps_mo3_default_spot"."MO2_storeNumber_id" ) inner join "maps_mo3_default_spot_MO5_tagNumber" on 
-            ( "maps_mo3_default_spot"."MO3_DspotNumber" = "maps_mo3_default_spot_MO5_tagNumber"."mo3_default_spot_id" )"""
-        if keword == "":
             sql += """ where 1=1 """
-        else:
-            sql += " where \"MO2_storeName\" LIKE '%{}%' "
         if tag_counter != 0:
             sql += """ and (1=0 """
             for i in tags_id:
@@ -241,7 +241,7 @@ def SpotSearch(request):
             sql += """)"""
         sql += """ group by "MO2_storeNumber";"""
         cursor = connection.cursor()
-        cursor.execute(sql.format(keword))
+        cursor.execute(sql.format(keword, user_lang))
         res = cursor.fetchall()
         sql = """select * from maps_mo3_default_spot where 1=0 """
         for i in range(len(res)):
@@ -251,7 +251,6 @@ def SpotSearch(request):
                 sql += """ or "MO2_storeNumber_id" = """+str(res[i][1])
         sql += """ ; """
         serch = MO3_Default_spot.objects.raw(sql)
-        user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
         if request.POST.get("MO1_userID")==request.POST.get("page_user"):
             o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = user)
             page_user = user
