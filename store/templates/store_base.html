@@ -89,7 +89,8 @@
                         <!-- 訪日観光客のアカウントの時 -->
                         <!-- <h1 id="fh5co-logo"><a href="{% url 'main:Mypage' %}"><i class="icon-airplane"></i>SAMURAI WALK</a></h1> -->
                         <!-- 店舗アカウントの時 -->
-                        <h1 id="fh5co-logo"><a href="{% url 'store:StoreMypage' %}"><i class="icon-airplane"></i>SAMURAI WALK</a></h1>
+                        <h1 id="fh5co-logo"><a href="{% url 'store:StoreMypage' %}"><i class="icon-airplane"></i>SAMURAI
+                                WALK</a></h1>
                         <!-- START #fh5co-menu-wrap -->
                         <!-- ログインしていない時、店舗アカウントの時は表示しないようにする -->
                         <!-- <nav id="fh5co-menu-wrap" role="navigation">
@@ -133,6 +134,7 @@
                                 <li><a href="{% url 'accounts:OpenRangeRegister' %}">PublicScope</a></li>
                                 <li><a href="{% url 'accounts:UserSearch' %}">Search</a></li> -->
                                 <!-- {% if request.user.is_authenticated } -->
+                                <li><a href="{% url 'main:countact' %}">Contact</a></li>
                                 <li><a href="{% url 'store:storeLogout' %}">LogOut</a></li>
                                 <!-- {% else }
                                 <li><a href="{% url 'store:StoreLogin' }">Login</a></li>
@@ -143,7 +145,7 @@
                 </div>
             </header>
 
-<!-- ここに各ページのhtml,cssが入る -->
+            <!-- ここに各ページのhtml,cssが入る -->
             {% block contents %}{% endblock %}
 
             <footer>
