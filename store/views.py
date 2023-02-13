@@ -269,6 +269,7 @@ def storeQRView(request,mail):
 
 def store_visit_QRCreate(num):
     qr_str = "http://localhost:8000/visitrecord/"+str(num)
+    # qr_str = "https://samuraiwalk.sytes.net/visitrecord/"+str(num)
     img = qrcode.make(qr_str)
     buffer = BytesIO()
     img.save(buffer, format="PNG")
@@ -276,6 +277,7 @@ def store_visit_QRCreate(num):
     return qr
 def store_point_QRCreate(num):
     qr_str = "http://localhost:8000/PointInput/"+str(num)
+    # qr_str = "https://samuraiwalk.sytes.net/PointInput/"+str(num)
     img = qrcode.make(qr_str)
     buffer = BytesIO()
     img.save(buffer, format="PNG")
