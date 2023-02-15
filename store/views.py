@@ -263,7 +263,6 @@ class storeinfocompletionView(generic.TemplateView):
 
 @login_required_store
 def storeQRView(request,mail):
-    date = request
     qr = store_visit_QRCreate(mail)
     qr2 = store_point_QRCreate(mail)
     return render(request,"StoreQR.html",{"qr":qr,"qr2":qr2})
