@@ -16,6 +16,7 @@
     <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
     <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
     <link rel="stylesheet" href="{% static 'css/mystyle.css' %}" />
+    <link rel="icon" href="{% static '/icon/favicon.ico' %}">
     <meta name="author" content="FREEHTML5.CO" />
     {% block css %}{% endblock %}
     {% block script %}{% endblock %}
@@ -87,7 +88,8 @@
                     <div class="nav-header">
                         <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
                         <!-- 訪日観光客のアカウントの時 -->
-                        <h1 id="fh5co-logo"><a href="{% url 'main:Mypage' %}"><i class="icon-airplane"></i>SAMURAI WALK</a></h1>
+                        <h1 id="fh5co-logo"><a href="{% url 'main:Mypage' %}"><i class="icon-airplane"></i>SAMURAI
+                                WALK</a></h1>
                         <!-- 店舗アカウントの時 -->
                         <!-- <h1 id="fh5co-logo"><a href="{% url 'store:StoreMypage' }"><i class="icon-airplane"></i>SAMURAI WALK</a></h1> -->
                         <!-- START #fh5co-menu-wrap -->
@@ -149,7 +151,7 @@
                 </div>
             </header>
 
-<!-- ここに各ページのhtml,cssが入る -->
+            <!-- ここに各ページのhtml,cssが入る -->
             {% block contents %}{% endblock %}
 
             <footer>
