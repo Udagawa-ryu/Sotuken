@@ -23,13 +23,13 @@ LOGGING = {
             'level': 'INFO',
         },
     },
-    'handler': {
+    'handlers': {
         'file': {
             'level': 'INFO',
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/django.log'),
             'formatter': 'prod',
-            'when': 'D'
+            'when': 'D',
             'interval': 1,
             'backupCount':7,
         },
@@ -45,6 +45,7 @@ LOGGING = {
     }
 }
 #-------------------
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/home/app_admin/log'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
