@@ -575,6 +575,7 @@
     padding: 1px;
     text-align: left;
     border-radius: 12px;
+    width: fit-content;
 }
 
 .leaflet-popup-content {

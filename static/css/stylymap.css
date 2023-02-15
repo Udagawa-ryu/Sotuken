@@ -13,7 +13,7 @@
     .box-parent {
         margin: auto;
         width:90%;
-        height: 80px;
+        height: 160px;
         border: 1px solid;
         display:flex;
         flex-wrap:wrap;/* これを指定する */
