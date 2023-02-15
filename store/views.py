@@ -19,6 +19,7 @@ from maps.models import MO5_Tag
 from django.db import connection
 import os
 from samuraiwalk.settings import MEDIA_URL,MEDIA_ROOT
+import datetime
 
 # Create your views here.
 
@@ -268,7 +269,9 @@ def storeQRView(request,mail):
     return render(request,"StoreQR.html",{"qr":qr,"qr2":qr2})
 
 def store_visit_QRCreate(num):
-    qr_str = "http://localhost:8000/visitrecord/"+str(num)
+    dt_now = datetime.datetime.now()
+    date = dt_now.strftime('%Y-%m-%d')
+    qr_str = "http://localhost:8000/visitrecord/"+str(num)+"/"+date
     # qr_str = "https://samuraiwalk.sytes.net/visitrecord/"+str(num)
     img = qrcode.make(qr_str)
     buffer = BytesIO()
@@ -276,7 +279,9 @@ def store_visit_QRCreate(num):
     qr = base64.b64encode(buffer.getvalue()).decode().replace("'", "")
     return qr
 def store_point_QRCreate(num):
-    qr_str = "http://localhost:8000/PointInput/"+str(num)
+    dt_now = datetime.datetime.now()
+    date = dt_now.strftime('%Y-%m-%d')
+    qr_str = "http://localhost:8000/PointInput/"+str(num)+"/"+date
     # qr_str = "https://samuraiwalk.sytes.net/PointInput/"+str(num)
     img = qrcode.make(qr_str)
     buffer = BytesIO()

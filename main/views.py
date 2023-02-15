@@ -10,6 +10,8 @@ from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
+import datetime
+
 # Create your views here.
 
 # マイページ画面
@@ -131,20 +133,24 @@ def FavoriteUserListView(request):
 
 
 @login_required
-def visitrecordcreate(request,mail):
+def visitrecordcreate(request,mail,date):
     user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
     store = MO2_store.objects.get(MO2_mailAdress=mail)
     d_spot = MO3_Default_spot.objects.get(MO2_storeNumber = store)
-    record = MO6_Visit_record.objects.create(MO1_userNumber=user,MO3_DspotNumber=d_spot)
-    user.MO1_point += 10
-    user.save()
-    point = MO11_Pointrecord.objects.create(MO1_userNumber=user,MO2_storeNumber=store,MO11_pointSize=10)
-    params = {
-        "store":store,
-        "record":record,
-        "point":point,
-    }
-    return render(request,"recordcomp.html",params)
+    d = datetime.datetime.strptime(date, '%Y-%m-%d')
+    if MO6_Visit_record.objects.filter(MO1_userNumber=user,MO3_DspotNumber=d_spot,MO6_createdDate__date=d).exists():
+        return redirect('main:Mypage')
+    else:
+        record = MO6_Visit_record.objects.create(MO1_userNumber=user,MO3_DspotNumber=d_spot)
+        user.MO1_point += 10
+        user.save()
+        point = MO11_Pointrecord.objects.create(MO1_userNumber=user,MO2_storeNumber=store,MO11_pointSize=10)
+        params = {
+            "store":store,
+            "record":record,
+            "point":point,
+        }
+        return render(request,"recordcomp.html",params)
 
 def Countact(request):
     params = {"message":""}
