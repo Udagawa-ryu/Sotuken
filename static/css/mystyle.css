@@ -210,6 +210,7 @@ body.is-touch .tiles article .content {
     .tiles {
         margin: -1.25em 0 0 -1.25em;
     }
+
     .tiles article {
         width: calc(33.33333% - 1.25em);
         margin: 1.25em 0 0 1.25em;
@@ -220,6 +221,7 @@ body.is-touch .tiles article .content {
     .tiles {
         margin: -2.5em 0 0 -2.5em;
     }
+
     .tiles article {
         width: calc(50% - 2.5em);
         margin: 2.5em 0 0 2.5em;
@@ -230,10 +232,12 @@ body.is-touch .tiles article .content {
     .tiles {
         margin: -1.25em 0 0 -1.25em;
     }
+
     .tiles article {
         width: calc(50% - 1.25em);
         margin: 1.25em 0 0 1.25em;
     }
+
     .tiles article:hover>.image {
         -moz-transform: scale(1.0);
         -webkit-transform: scale(1.0);
@@ -246,6 +250,7 @@ body.is-touch .tiles article .content {
     .tiles {
         margin: 0;
     }
+
     .tiles article {
         width: 100%;
         margin: 1.25em 0 0 0;
@@ -285,10 +290,14 @@ body.is-touch .tiles article .content {
     transform: translate(-50%, -50%);
     margin: 0;
     padding: 0;
-    color: white;/*文字は白に*/
-    font-weight: bold;/*太字に*/
-    font-size: 2em;/*サイズ2倍*/
-    font-family: Quicksand, sans-serif;/*Google Font*/
+    color: white;
+    /*文字は白に*/
+    font-weight: bold;
+    /*太字に*/
+    font-size: 2em;
+    /*サイズ2倍*/
+    font-family: Quicksand, sans-serif;
+    /*Google Font*/
 }
 
 @media screen and (max-width: 736px) {
@@ -299,7 +308,7 @@ body.is-touch .tiles article .content {
 
 /* Mypage Wrapper */
 
-#wrapper > * > .inner {
+#wrapper>*>.inner {
     width: 100%;
     max-width: 68em;
     margin: 3% auto;
@@ -307,7 +316,7 @@ body.is-touch .tiles article .content {
 }
 
 @media screen and (max-width: 736px) {
-    #wrapper > * > .inner {
+    #wrapper>*>.inner {
         padding: 0 1.25em;
     }
 }
@@ -386,10 +395,12 @@ table.confirmation {
     width: 80%;
     word-break: break-all;
 }
+
 @media screen and (max-width:480px) {
+
     /*　画面サイズが480pxからはここを読み込む　*/
     table.confirmation {
-        width:100%;
+        width: 100%;
     }
 }
 
@@ -398,7 +409,7 @@ th {
     padding: 10px;
 }
 
-th.th-center{
+th.th-center {
     background: #F78536;
     color: #fff;
     width: 30%;
@@ -412,7 +423,7 @@ td.td-space {
     word-break: break-word;
     padding-left: 10px;
     padding-right: 10px;
-    color:#333333;
+    color: #333333;
 }
 
 /* テキスト 中央 */
@@ -421,14 +432,17 @@ td.td-space {
     margin-left: auto;
     text-align: center;
 }
+
 .point-display {
     width: 40%;
     margin-right: auto;
     margin-left: auto;
 }
+
 .point-disp-table {
     width: 80%;
 }
+
 .btnin {
     display: inline-block;
     width: 100px;
@@ -443,11 +457,12 @@ td.td-space {
     align-items: flex-start;
     margin-bottom: 10px;
 }
+
 @media screen and (max-width:480px) {
 
     /*　画面サイズが480pxからはここを読み込む　*/
     .side-by-side {
-        margin-top:10px;
+        margin-top: 10px;
         display: inline;
     }
 }
@@ -460,11 +475,12 @@ td.td-space {
     word-break: break-all;
     word-wrap: break-all;
 }
+
 @media screen and (max-width:480px) {
 
     /*　画面サイズが480pxからはここを読み込む　*/
     .spot-table {
-        width:100%;
+        width: 100%;
         word-break: break-all;
         word-wrap: break-all;
     }
@@ -475,6 +491,7 @@ td.td-space {
     width: 35%;
     margin-left: 5%;
 }
+
 @media screen and (max-width:480px) {
 
     /*　画面サイズが480pxからはここを読み込む　*/
@@ -515,18 +532,19 @@ td.td-space {
 /* ユーザーリストテーブル */
 .user_list {
     width: 60%;
-    margin-right:auto;
-    margin-left:auto;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 /* 店舗パスワード登録(PC) */
 @media screen and (max-width: 1280px) {
     .storepass-registr {
-        width:50%;
-        margin-right:auto;
-        margin-left:auto;
+        width: 50%;
+        margin-right: auto;
+        margin-left: auto;
     }
 }
+
 /* 店舗パスワード登録(スマホ) */
 @media screen and (max-width: 480px) {
     .storepass-registr {
@@ -536,10 +554,11 @@ td.td-space {
 
 /* スペース */
 .space {
-    margin-top:40px;
+    margin-top: 40px;
 }
+
 .space2 {
-    margin-top:60px;
+    margin-top: 60px;
 }
 
 /* サインアップフォーム */
@@ -547,12 +566,14 @@ td.td-space {
     margin-right: auto;
     margin-left: auto;
 }
+
 /* サインアップフォーム(PC) */
 @media screen and (max-width: 1280px) {
     .signup-form {
-        width:40%;
+        width: 40%;
     }
 }
+
 /* サインアップフォーム(スマホ) */
 @media screen and (max-width: 480px) {
     .signup-form {
@@ -565,6 +586,7 @@ td.td-space {
     width: 640px;
     height: 480px;
 }
+
 /* サインアップフォーム(スマホ) */
 @media screen and (max-width: 480px) {
     .camera-size {
@@ -578,11 +600,13 @@ td.td-space {
 .disp-flex {
     display: flex;
 }
+
 @media screen and (max-width: 480px) {
     .disp-flex {
         display: block;
     }
 }
+
 /* タブテーブルスクロール */
 .tab-scroll {
     overflow: auto;
@@ -590,27 +614,31 @@ td.td-space {
     width: 48%;
     height: 400px;
 }
+
 @media screen and (max-width: 480px) {
     .tab-scroll {
         width: 100%;
     }
 }
+
 /* タグテーブル */
 .tag-table {
     width: 100%;
 }
+
 th.tag-th {
     background: #F78536;
-    text-align:center;
-    color:#fff;
+    text-align: center;
+    color: #fff;
     height: 50px;
     vertical-align: middle;
-    padding:0%;
+    padding: 0%;
     position: sticky;
     top: 0;
     left: 0;
     z-index: 10;
 }
+
 td.tag-check {
     width: 10%;
 }
@@ -618,6 +646,7 @@ td.tag-check {
 .tab-margin {
     margin-right: 4%;
 }
+
 @media screen and (max-width: 480px) {
     .tab-margin {
         margin-bottom: 25px;
@@ -628,5 +657,36 @@ td.tag-check {
 @media screen and (max-width: 480px) {
     .tag-table {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 959px) {
+    .signup-form {
+        width: 80%;
+    }
+}
+
+/* qrコード表示画面 */
+.qr-table {
+    width: 50%;
+}
+
+@media screen and (max-width: 959px) {
+    .qr-table {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .qr-table {
+        width: 100%;
+    }
+}
+
+/* qrコードサイズ */
+@media screen and (max-width: 480px) {
+    .qr-size {
+        width: 300px;
+        height: 300px;
     }
 }
