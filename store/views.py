@@ -18,7 +18,7 @@ from io import BytesIO
 from maps.models import MO5_Tag
 from django.db import connection
 import os
-from samuraiwalk.settings_common import MEDIA_URL,MEDIA_ROOT
+from samuraiwalk.settings import MEDIA_URL,MEDIA_ROOT
 
 # Create your views here.
 
