@@ -60,11 +60,12 @@
                 <table class="spot-table">
                     <tr>
                         <td class="Spot_Name">{{ spot.MO2_storeNumber.MO2_storeName }}</td>
+                        {% comment %} <td class="Spot_Name">{{ trans_name.MO12_storeNameEng }}</td> {% endcomment %}
                     </tr>
                     <tr>
                         <td>Spot Info<br>
                             {% comment %} {{ spot.MO2_storeNumber.MO2_storeInfo }} {% endcomment %}
-                            {{ trans }}
+                            {{ trans_info }}
                         </td>
                     </tr>
                 </table>
