@@ -150,11 +150,13 @@ def DspotInfo(request,spot_num):
         count = 0
     else:
         count = myrecords.count()
+    trans = translator.translate(str(spot.MO2_storeNumber.MO2_storeInfo),dest="en",str="auto").text
     params = {
         "spot":spot,
         "count":count,
         "myrecords":myrecords,
         "blogs":blogs,
+        "trans":trans,
         "img_link":img_link,
         "img_id":img_id,
         "img_count":img_count
