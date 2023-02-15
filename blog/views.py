@@ -11,6 +11,12 @@ from samuraiwalk.settings_common import MEDIA_ROOT
 import os
 # Create your views here.
 
+# 翻訳APIをインポート
+from googletrans import Translator
+
+# Translatorクラスのインスタンスを生成
+translator = Translator()
+
 # ブログ一覧画面
 class BlogListView(LoginRequiredMixin, generic.ListView):
     model = MO7_Blog
@@ -185,6 +191,9 @@ class BlogDetailView(LoginRequiredMixin, generic.DetailView):
         else:
             fav = 0
         context['fav'] = fav
+        context['trans_name'] = translator.translate(str(blog.MO7_blogName),dest="en",str="auto").text
+        context['trans_contents'] = translator.translate(str(blog.MO7_blogText),dest="en",str="auto").text
+        # context['trans_recode'] = translator.translate(str(blog.MO6_visitRecordNumber),dest="en",str="auto").text
         return context
 
 # ブログ編集画面

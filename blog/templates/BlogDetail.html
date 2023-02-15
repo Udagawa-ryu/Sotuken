@@ -23,12 +23,14 @@
             <table class="confirmation">
                 <tr>
                     <th class="th-center">Title</th>
-                    <td class="td-space">{{blog.0.MO7_blogName}}</td>
+                    {% comment %} <td class="td-space">{{blog.0.MO7_blogName}}</td> {% endcomment %}
+                    <td class="td-space">{{trans_name}}</td>
                 </tr>
                 <tr>
                     <th class="th-center">Contents</th>
                     <td class="td-space">
-                        {{blog.0.MO7_blogText}}
+                        {% comment %} {{blog.0.MO7_blogText}} {% endcomment %}
+                        {{trans_contents}}
                     </td>
                 </tr>
                 {% for i in img %}
@@ -43,6 +45,7 @@
                     <th class="th-center">VisitRecode</th>
                     <td class="td-space">
                         {{blog.0.MO6_visitRecordNumber}}
+                        {% comment %} {{trans_recode}} {% endcomment %}
                     </td>
                 </tr>
                 <tr>
