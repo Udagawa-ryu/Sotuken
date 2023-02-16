@@ -65,7 +65,8 @@ def addStore(request):
             i.save()
             result, created =MO3_Default_spot.objects.get_or_create(MO2_storeNumber=i)
             if created:
-                url = "http://localhost:8000/store/storePassRegister/"+str(i.MO2_mailAdress)
+                # url = "http://localhost:8000/store/storePassRegister/"+str(i.MO2_mailAdress)
+                url = "https://samuraiwalk.sytes.net/store/storePassRegister/"+str(i.MO2_mailAdress)
                 subject = "認証が完了しました。以下のURLよりパスワードを設定してください。"
                 message = url
                 from_email = "admin@mail.com"  # 送信者
@@ -151,7 +152,8 @@ def storeChangePasswordresister(request):
                 params['message'] = "店舗登録が解除されています。"
                 return render(request,'StorePassChange.html',params)
             else:
-                url = "http://localhost:8000/store/storePassform/"+str(store.MO2_mailAdress)
+                # url = "http://localhost:8000/store/storePassform/"+str(store.MO2_mailAdress)
+                url = "https://samuraiwalk.sytes.net/store/storePassform/"+str(store.MO2_mailAdress)
                 subject = "以下より新しいパスワードを設定してください。"
                 message = url
                 from_email = "admin@mail.com"  # 送信者
