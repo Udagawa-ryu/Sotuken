@@ -284,7 +284,7 @@ def store_point_QRCreate(num):
     dt_now = datetime.datetime.now()
     date = dt_now.strftime('%Y-%m-%d')
     # qr_str = "http://localhost:8000/PointInput/"+str(num)+"/"+date
-    qr_str = "https://samuraiwalk.sytes.net/PointInput/"+str(num)+"/"+date
+    qr_str = "https://samuraiwalk.sytes.net/PointInput/"+str(num)
     img = qrcode.make(qr_str)
     buffer = BytesIO()
     img.save(buffer, format="PNG")
