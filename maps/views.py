@@ -180,9 +180,15 @@ def OtherMap(request,num):
     o_spot = MO4_Original_spot.objects.filter(MO1_userNumber = num)
     d_list = []
     o_list = []
+    eng_d_spot = MO12_storeEng.objects.filter(MO12_storeNameLng=mydata.MO1_language).values_list("MO2_storeNumber","MO12_storeNameEng").order_by("MO2_storeNumber")
+    dic_eng = dict(list(eng_d_spot))
     for i in d_spot:
         image = image_url(i)
-        d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber,image])
+        if mydata.MO1_language == "ja":
+            name = i.MO2_storeNumber.MO2_storeName
+        else:
+            name = dic_eng[i.MO2_storeNumber.MO2_storeNumber]
+        d_list.append([i.MO2_storeNumber.MO2_address,name,i.MO3_DspotNumber,image])
     for i in o_spot:
         url = "/static/images/noimage.jpg"
         address = [i.MO4_OspotLat,i.MO4_OspotLng]
@@ -237,7 +243,7 @@ def SpotSearch(request):
         if tag_counter!=0:
             sql += """ inner join "maps_mo3_default_spot_MO5_tagNumber" on ( "maps_mo3_default_spot"."MO3_DspotNumber" = "maps_mo3_default_spot_MO5_tagNumber"."mo3_default_spot_id" ) """
         if keword != "":
-            sql += """ inner join store_mo12_storeeng on ("store_mo2_store"."MO2_storeNumber" = "store_mo12_storeeng"."MO2_storeNumber_id") where \"MO12_storeNameEng\" LIKE '%{}%' and "MO12_storeNameLng" = '{}' """;
+            sql += """ inner join store_mo12_storeeng on ("store_mo2_store"."MO2_storeNumber" = "store_mo12_storeeng"."MO2_storeNumber_id") where \"MO12_storeNameEng\" LIKE '%{}%' """;
         else:
             sql += """ where 1=1 """
         if tag_counter != 0:
@@ -247,7 +253,7 @@ def SpotSearch(request):
             sql += """)"""
         sql += """ group by "MO2_storeNumber";"""
         cursor = connection.cursor()
-        cursor.execute(sql.format(keword, user_lang))
+        cursor.execute(sql.format(keword))
         res = cursor.fetchall()
         sql = """select * from maps_mo3_default_spot where 1=0 """
         for i in range(len(res)):
@@ -266,11 +272,17 @@ def SpotSearch(request):
         o_spotform = OspotCreateForm()
         searchform = SpotSearchForm()
         tag_list = MO5_Tag.objects.all()
+        eng_d_spot = MO12_storeEng.objects.filter(MO12_storeNameLng=user_lang).values_list("MO2_storeNumber","MO12_storeNameEng").order_by("MO2_storeNumber")
+        dic_eng = dict(list(eng_d_spot))
         d_list = []
         o_list = []
         for i in serch:
             image = image_url(i)
-            d_list.append([i.MO2_storeNumber.MO2_address,i.MO2_storeNumber.MO2_storeName,i.MO3_DspotNumber,image])
+            if user.MO1_language == "ja":
+                name = i.MO2_storeNumber.MO2_storeName
+            else:
+                name = dic_eng[i.MO2_storeNumber.MO2_storeNumber]
+            d_list.append([i.MO2_storeNumber.MO2_address,name,i.MO3_DspotNumber,image])
         for i in o_spot:
             url = "/static/images/noimage.jpg"
             address = [i.MO4_OspotLat,i.MO4_OspotLng]
