@@ -414,7 +414,7 @@ def store_tag(request,mail):
         "tags":alltags,
         "now":dspot,
     }
-    return render(request,"Storetag.html",params)
+    return render(request,"StoreTag.html",params)
 
 @login_required_store
 def addtag(request,mail):
