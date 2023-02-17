@@ -690,3 +690,7 @@ td.tag-check {
         height: 300px;
     }
 }
+
+.blog-title {
+    word-break: break-word;
+}
