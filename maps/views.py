@@ -153,7 +153,6 @@ def DspotInfo(request,spot_num):
     trans_info = translator.translate(str(spot.MO2_storeNumber.MO2_storeInfo),dest="en",str="auto").text
     trans_name = MO12_storeEng.objects.get(MO12_storeNameLng="en",MO2_storeNumber=spot.MO2_storeNumber)
     tag = spot.MO5_tagNumber.all()
-    print("これ",tag)
     params = {
         "spot":spot,
         "count":count,
@@ -164,7 +163,7 @@ def DspotInfo(request,spot_num):
         "img_link":img_link,
         "img_id":img_id,
         "img_count":img_count,
-        "tag":tag
+        "tag":tag,
     }
     return render(request,"DspotInfo.html",params)
 

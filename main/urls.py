@@ -11,6 +11,7 @@ urlpatterns = [
     path('PointInput/<str:mail>/',views.PointInputView, name="PointInput"),
     path('StoreQRread/',views.StoreQRreadView, name="StoreQRread"),
     path('VisitQRread/',views.VisitQRreadView, name="VisitQRread"),
+    path('VisitQRErrer/',views.VisitQRErrerView, name="VisitQRErrer"),
     path('favoriteBlogList/', views.FavoriteBlogListView, name="favoriteBlogList"),
     path('favoriteUserList/', views.FavoriteUserListView, name="favoriteUserList"),
     path('visitrecord/<str:mail>/<str:date>/',views.visitrecordcreate,name="visitrecord"),
