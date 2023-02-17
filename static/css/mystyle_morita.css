@@ -1089,7 +1089,7 @@ table.ospot_record {
     }
 }
 
-footer {
+#footer {
     position: absolute;
     bottom: 0;
 }
