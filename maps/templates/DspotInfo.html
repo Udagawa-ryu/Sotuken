@@ -25,17 +25,15 @@
             <div class="container1">
                 <div class="carousel">
                     {% for i in img_id%}
-                        {% if i == "carousel-1" %}
-                        <input type="radio" id="{{i}}" name="carousel[]" checked>
-                        {% else %}
-                        <input type="radio" id="{{i}}" name="carousel[]">
-                        {% endif %}
+                    {% if i == "carousel-1" %}
+                    <input type="radio" id="{{i}}" name="carousel[]" checked>
+                    {% else %}
+                    <input type="radio" id="{{i}}" name="carousel[]">
+                    {% endif %}
                     {% endfor %}
                     <ul class="carousel__items">
                         {% for a in img_link %}
-                        <li class="carousel__item" id="paddingnone"><img
-                                src="{{a}}"
-                                alt=""></li>
+                        <li class="carousel__item" id="paddingnone"><img src="{{a}}" alt=""></li>
                         {% endfor %}
                     </ul>
                     <div class="carousel__prev">
@@ -59,13 +57,30 @@
             <div class="side-by-side">
                 <table class="spot-table">
                     <tr>
-                        <td class="Spot_Name">{{ spot.MO2_storeNumber.MO2_storeName }}</td>
-                        {% comment %} <td class="Spot_Name">{{ trans_name.MO12_storeNameEng }}</td> {% endcomment %}
+                        <th>JP_name</th>
                     </tr>
                     <tr>
-                        <td>Spot Info<br>
+                        <td class="Spot_Name">{{ spot.MO2_storeNumber.MO2_storeName }}</td>
+                    <tr>
+                        <th>name</th>
+                    </tr>
+                    <td class="Spot_Name">{{ trans_name.MO12_storeNameEng }}</td>
+                    </tr>
+                    <tr>
+                        <th>Info</th>
+                    </tr>
+                    <tr>
+                        <td>
                             {% comment %} {{ spot.MO2_storeNumber.MO2_storeInfo }} {% endcomment %}
                             {{ trans_info }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ spot.MO2_storeNumber.MO2_address }}
                         </td>
                     </tr>
                 </table>
@@ -82,6 +97,16 @@
                             </select>
                         </td>
                     </tr>
+                    <tr>
+                        <th>Tag</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% for i in tag %}
+                            #{{ i.MO5_tagName }}
+                            {% endfor %}
+                        </td>
+                    </tr>
                 </table>
             </div>
             <table>
@@ -89,11 +114,12 @@
                     <th class="f_blog">Featured Blogs</th>
                 </tr>
                 {% for i in blogs %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'blog:blogDetail' i.MO7_blogNumber %}">“ {{ i.MO7_blogName }} ” - {{ i.MO1_userID.username }}</a><br>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        <a href="{% url 'blog:blogDetail' i.MO7_blogNumber %}">“ {{ i.MO7_blogName }} ” - {{
+                            i.MO1_userID.username }}</a><br>
+                    </td>
+                </tr>
                 {% endfor %}
             </table>
         </div>
