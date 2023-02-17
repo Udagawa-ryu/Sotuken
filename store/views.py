@@ -128,7 +128,7 @@ def storeLogin(request):
                 if check_password(ps,user.MO2_password):
                     request.session['storeLogin'] = user.MO2_mailAdress
                     request.session.set_expiry(settings.SESSION_COOKIE_AGE)
-                    return render(request,'storeMypage.html',{'mystore':user})
+                    return render(request,'StoreMypage.html',{'mystore':user})
                 else:
                     params['form'] = StoreLoginForm()
                     params['message'] = "パスワードが違います"
