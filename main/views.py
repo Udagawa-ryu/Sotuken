@@ -139,7 +139,7 @@ def visitrecordcreate(request,mail,date):
     d_spot = MO3_Default_spot.objects.get(MO2_storeNumber = store)
     d = datetime.datetime.strptime(date, '%Y-%m-%d')
     if MO6_Visit_record.objects.filter(MO1_userNumber=user,MO3_DspotNumber=d_spot,MO6_createdDate__date=d).exists():
-        return redirect('main:Mypage')
+        return redirect('main:VisitQRErrer')
     else:
         record = MO6_Visit_record.objects.create(MO1_userNumber=user,MO3_DspotNumber=d_spot)
         user.MO1_point += 10
@@ -162,3 +162,6 @@ def Countact(request):
         send_mail(subject, message, from_email, recipient_list)
         params["message"] = "Your inquiry has been received"
     return render(request,"ContactUs.html",params)
+
+def VisitQRErrerView(request):
+    return render(request,'VisitQRErrer.html')
