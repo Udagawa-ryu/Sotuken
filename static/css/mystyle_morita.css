@@ -1088,3 +1088,8 @@ table.ospot_record {
         margin-left: 21%;
     }
 }
+
+footer {
+    position: absolute;
+    bottom: 0;
+}
