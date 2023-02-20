@@ -28,6 +28,9 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG',default=False)
 
+# GOOGLE_APIKEY
+GOOGLE_APIKEY = env('GOOGLE_API')
+
 ALLOWED_HOSTS = []
 
 
@@ -77,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'samuraiwalk.context_processors.constant_text',
             ],
         },
     },
