@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
     <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API}}&callback=initMap"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRh_82v_as8gc1SMbHnvHPSK2w1plRQdk&callback=initMap"></script>
 
 
     <link rel="stylesheet" href="{% static 'css/easy-button.css' %}">
@@ -234,6 +234,26 @@
     </div>
 
     <div class="container"  id="scroll">
+    {% comment %} タグの検索条件を表示 {% endcomment %}
+    <div>
+        <p>検索中のタグ：
+        {% if sea_tags %}
+        {% for i in sea_tags %}
+        #{{i.MO5_tagName}}&nbsp;
+        {% endfor %}
+        {% else %}
+        検索中のタグはありません。
+        {% endif %}
+        </p>
+        
+        <p>検索中のキーワード：
+        {% if keyword %}
+        #{{keyword}}
+        {% else %}
+        検索中のキーワードはありません。
+        {% endif %}
+        </p>
+    </div>
         <div class="animate-box">
             <!-- ブログタイトル入力 -->
             <!-- ブログ内容入力 -->

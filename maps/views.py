@@ -236,6 +236,8 @@ def SpotSearch(request):
     if request.method == 'POST':
         tags_id = request.POST.getlist('tags')
         keword = request.POST.get('keyword')
+        print("tags=",tags_id)
+        print("keword=",keword)
         tag_counter = len(tags_id)
         user = CustomUser.objects.get(MO1_userNumber=request.user.MO1_userNumber)
         user_lang = user.MO1_language
@@ -272,6 +274,7 @@ def SpotSearch(request):
         o_spotform = OspotCreateForm()
         searchform = SpotSearchForm()
         tag_list = MO5_Tag.objects.all()
+        sea_tags = MO5_Tag.objects.filter(MO5_tagNumber__in = tags_id)
         eng_d_spot = MO12_storeEng.objects.filter(MO12_storeNameLng=user_lang).values_list("MO2_storeNumber","MO12_storeNameEng").order_by("MO2_storeNumber")
         dic_eng = dict(list(eng_d_spot))
         d_list = []
@@ -293,6 +296,8 @@ def SpotSearch(request):
             'o_form':o_spotform,
             's_form':searchform,
             'tag_list':tag_list,
+            'sea_tags':sea_tags,
+            'keyword':keword,
             'user':user,
             'page_user':page_user,
         }
