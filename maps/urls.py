@@ -10,6 +10,6 @@ urlpatterns = [
     path('DspotInfo/<int:spot_num>/', views.DspotInfo, name="defalutspotinfo"),
     path('OspotInfo/<int:spot_num>/', views.OspotInfo, name="originalspotinfo"),
     path('usersmap/<int:num>',views.OtherMap,name="OtherMap"),
-    path('SpotSaerch/',views.SpotSearch,name="SpotSearch"),
+    path('SpotSearch/',views.SpotSearch,name="SpotSearch"),
     path('OpotCreate/',views.OspotCreate,name="OspotCreate"),
 ]
