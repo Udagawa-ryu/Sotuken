@@ -19,6 +19,7 @@ from maps.models import MO5_Tag
 from django.db import connection
 import os
 from samuraiwalk.settings import MEDIA_URL,MEDIA_ROOT
+from samuraiwalk.settings_common import SETTING_ROOT as now_root
 import datetime
 
 # Create your views here.
@@ -59,14 +60,13 @@ def addStore(request):
     if storeNums != []:
         for num in storeNums:
             i = MO2_store.objects.get(MO2_storeNumber=num)
-            # str_encoded = cryptocode.encrypt(str(i.MO2_storeNumber),"samurai")
-            # url = "http://localhost:8000/store/storePassRegister/"+str_encoded+"/"
             i.is_auth = True
             i.save()
             result, created =MO3_Default_spot.objects.get_or_create(MO2_storeNumber=i)
             if created:
                 # url = "http://localhost:8000/store/storePassRegister/"+str(i.MO2_mailAdress)
-                url = "https://samuraiwalk.sytes.net/store/storePassRegister/"+str(i.MO2_mailAdress)
+                # url = "https://samuraiwalk.sytes.net/store/storePassRegister/"+str(i.MO2_mailAdress)
+                url = str(now_root)+"/store/storePassRegister/"+str(i.MO2_mailAdress)
                 subject = "認証が完了しました。以下のURLよりパスワードを設定してください。"
                 message = url
                 from_email = "admin@mail.com"  # 送信者
@@ -153,7 +153,8 @@ def storeChangePasswordresister(request):
                 return render(request,'StorePassChange.html',params)
             else:
                 # url = "http://localhost:8000/store/storePassform/"+str(store.MO2_mailAdress)
-                url = "https://samuraiwalk.sytes.net/store/storePassform/"+str(store.MO2_mailAdress)
+                # url = "https://samuraiwalk.sytes.net/store/storePassform/"+str(store.MO2_mailAdress)
+                url = str(now_root)+"/store/storePassform/"+str(store.MO2_mailAdress)
                 subject = "以下より新しいパスワードを設定してください。"
                 message = url
                 from_email = "admin@mail.com"  # 送信者
@@ -274,7 +275,8 @@ def store_visit_QRCreate(num):
     dt_now = datetime.datetime.now()
     date = dt_now.strftime('%Y-%m-%d')
     # qr_str = "http://localhost:8000/visitrecord/"+str(num)+"/"+date
-    qr_str = "https://samuraiwalk.sytes.net/visitrecord/"+str(num)+"/"+date
+    # qr_str = "https://samuraiwalk.sytes.net/visitrecord/"+str(num)+"/"+date
+    qr_str = str(now_root)+"/visitrecord/"+str(num)+"/"+date
     img = qrcode.make(qr_str)
     buffer = BytesIO()
     img.save(buffer, format="PNG")
@@ -284,7 +286,8 @@ def store_point_QRCreate(num):
     dt_now = datetime.datetime.now()
     date = dt_now.strftime('%Y-%m-%d')
     # qr_str = "http://localhost:8000/PointInput/"+str(num)+"/"+date
-    qr_str = "https://samuraiwalk.sytes.net/PointInput/"+str(num)
+    # qr_str = "https://samuraiwalk.sytes.net/PointInput/"+str(num)
+    qr_str = str(now_root)+"/PointInput/"+str(num)
     img = qrcode.make(qr_str)
     buffer = BytesIO()
     img.save(buffer, format="PNG")
