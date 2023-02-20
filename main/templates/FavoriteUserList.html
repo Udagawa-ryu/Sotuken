@@ -6,7 +6,7 @@
 
 {% block css %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/mystyle_morita.css' %}" />
 <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
 {% endblock %}
 
@@ -20,8 +20,9 @@
     <div class="container">
         <!-- 左寄せ -->
         <div class="animate-box">
-            <div style="text-align:right;">
-                <button class="favorite" style="width:150px;" type="submit" onclick="location.href='{% url 'main:favoriteBlogList' %}'">Favorite<br>
+            <div style="text-align:right; margin-bottom: 20px;">
+                <button class="btnin" style="width:150px;" type="submit"
+                    onclick="location.href='{% url 'main:favoriteBlogList' %}'">Favorite<br>
                     Blog</button>
             </div>
         </div>
@@ -35,7 +36,8 @@
                     <form method="post" action="{% url 'accounts:OtherMypage' %}">
                         {% csrf_token %}
                         <input type="hidden" name="user" value="{{ obj.MO9_followedUserNumber.MO1_userNumber}}">
-                        <td style="text-align:right;"><button class="btnin" type="submit" style="width:150px;">UserPage</button></td>
+                        <td style="text-align:right;"><button class="btnin" type="submit"
+                                style="width:150px;">UserPage</button></td>
                     </form>
                 </tr>
                 {% empty %}

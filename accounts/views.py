@@ -41,7 +41,7 @@ def UserInfoEdit(request):
         ("fr","Français"),
         ("es","Español"),
         ("pl","Português"),
-        ("zh-CN","中国人"),
+        ("zh-CN","汉语"),
     }
     if request.method == 'POST':
         initial_data = {
@@ -96,7 +96,7 @@ def UserInfoConfirmation(request):
             ("fr","Français"),
             ("es","Español"),
             ("pl","Português"),
-            ("zh-CN","中国人"),
+            ("zh-CN","汉语"),
         }
         initial_data = {
             "username":request.POST.get("username"),

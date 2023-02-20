@@ -26,7 +26,7 @@ class CustomSignupForm(UserCreationForm):
         ("fr","Français"),
         ("es","Español"),
         ("pl","Português"),
-        ("zh-CN","中国人"),
+        ("zh-CN","汉语"),
     }
     MO1_homeCountry = forms.ChoiceField(label="HomeCountry",choices=COUNTRIES)
     MO1_language = forms.ChoiceField(label="Language",choices=LANGAGES)
@@ -80,7 +80,7 @@ class UserEditForm(forms.ModelForm):
         ("fr","Français"),
         ("es","Español"),
         ("pl","Português"),
-        ("zh-CN","中国人"),
+        ("zh-CN","汉语"),
     }
     MO1_homeCountry = forms.ChoiceField(label="HomeCountry",choices=COUNTRIES)
     MO1_language = forms.ChoiceField(label="Language",choices=LANGAGES)
