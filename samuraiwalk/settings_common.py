@@ -201,4 +201,4 @@ SESSION_COOKIE_AGE = 3600
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': os.path.join(BASE_DIR, 'static/backups')}
 
-SETTING_ROOT = "https://samuraiwalk.sytes.net/"
+SETTING_ROOT = "https://samuraiwalk.sytes.net"
