@@ -22,9 +22,6 @@
 
 
     <script>
-        function initMap(){
-            console.log("MAP start");
-        }
 
         // マーカーリスト配列の初期化
         // データ型:　[{pos: [float 緯度][float 経度], name; String 名前},・・・]
@@ -32,7 +29,33 @@
         var original_spot_markerList = [];
         // 日本の全体が入るboundを保存
         var japan_bound = [[47,120], [20,155]];
-        
+
+        {% comment %} function current_location_oscreat(){
+            alert("oscreate");
+            if (clickMarker) {
+                alert("1");
+                map.removeLayer(clickMarker);
+            }
+            alert("2");
+            navigator.geolocation.getCurrentPosition((position)=> {
+                var req = new XMLHttpRequest();
+                req.onreadystatechange = function() {
+                    if(req.readyState == 4 && req.status == 200) {
+                        var json = req.responseText;
+                        var results = JSON.parse(json);
+                        alert("3");
+                        //緯度
+                        let lat = position.coords.latitude;
+                        //経度
+                        let lng = position.coords.longitude;
+                        var popStr = '<input type="hidden" name="lat" form="test-oscreate" value='+lat+'>'+'<input type="hidden" name="lng" form="test-oscreate" value='+lng+'>'+'<a href="#scroll"><button class="btn btn-primary btn-outline btn-lg">create</button></a>';
+                        alert("4");
+                        clickMarker = L.marker([lat,lng]).on('click', onMarkerClick).addTo(map).bindPopup(popStr).openPopup();
+                        alert("5");
+                    }
+                };
+            });
+        } {% endcomment %}
         // マップ作成、表示関数
         function init() {
             // htmlの要素mapcontainerを指定し、mapを作成
@@ -236,21 +259,18 @@
     <div class="container"  id="scroll">
     {% comment %} タグの検索条件を表示 {% endcomment %}
     <div>
-        <p>検索中のタグ：
+        <p>
         {% if sea_tags %}
+        検索中のタグ：
         {% for i in sea_tags %}
         #{{i.MO5_tagName}}&nbsp;
         {% endfor %}
-        {% else %}
-        検索中のタグはありません。
         {% endif %}
         </p>
         
-        <p>検索中のキーワード：
         {% if keyword %}
-        #{{keyword}}
-        {% else %}
-        検索中のキーワードはありません。
+        <p>検索中のキーワード：
+        {{keyword}}
         {% endif %}
         </p>
     </div>
