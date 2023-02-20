@@ -22,8 +22,9 @@
 
 
     <script>
-        console.log("map start");
-
+        function initMap(){
+            console.log("MAP start");
+        }
         // マーカーリスト配列の初期化
         // データ型:　[{pos: [float 緯度][float 経度], name; String 名前},・・・]
         var default_spot_markerList = [];
@@ -33,7 +34,6 @@
 
         // マップ作成、表示関数
         function init() {
-            console.log("init start");
             // htmlの要素mapcontainerを指定し、mapを作成
             // 空のmapを作成し、要素を後から追加
             var center = [36.0,140];
@@ -103,7 +103,6 @@
         function make_markerList(){
             const d_list = JSON.parse('{{ d_list|safe }}');
             const o_list = JSON.parse('{{ o_list|safe }}');
-            console.log("make_markerList start");
             // データベースからスポットの情報を取得
             // [Stirng 住所, String 名前]
             var default_spot_data_array = d_list
