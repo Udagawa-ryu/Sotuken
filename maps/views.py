@@ -245,7 +245,10 @@ def SpotSearch(request):
         if tag_counter!=0:
             sql += """ inner join "maps_mo3_default_spot_MO5_tagNumber" on ( "maps_mo3_default_spot"."MO3_DspotNumber" = "maps_mo3_default_spot_MO5_tagNumber"."mo3_default_spot_id" ) """
         if keword != "":
-            sql += """ inner join store_mo12_storeeng on ("store_mo2_store"."MO2_storeNumber" = "store_mo12_storeeng"."MO2_storeNumber_id") where \"MO12_storeNameEng\" LIKE '%{}%' """;
+            if user_lang == "ja":
+                sql += """ where "store_mo2_store"."MO2_storeName" LIKE '%{}%' """
+            else:
+                sql += """ inner join store_mo12_storeeng on ("store_mo2_store"."MO2_storeNumber" = "store_mo12_storeeng"."MO2_storeNumber_id") where \"MO12_storeNameEng\" LIKE '%{}%' """;
         else:
             sql += """ where 1=1 """
         if tag_counter != 0:
