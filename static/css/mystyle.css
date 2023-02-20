@@ -683,6 +683,11 @@ td.tag-check {
     }
 }
 
+.qr-size {
+    width: 410px;
+    height: 410px;
+}
+
 /* qrコードサイズ */
 @media screen and (max-width: 480px) {
     .qr-size {
