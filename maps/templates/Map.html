@@ -259,20 +259,20 @@
     <div class="container"  id="scroll">
     {% comment %} タグの検索条件を表示 {% endcomment %}
     <div>
-        <p>
         {% if sea_tags %}
-        検索中のタグ：
+        <p>
+        Searching Tags：
         {% for i in sea_tags %}
         #{{i.MO5_tagName}}&nbsp;
         {% endfor %}
-        {% endif %}
         </p>
-        
+        {% endif %}
+
         {% if keyword %}
-        <p>検索中のキーワード：
+        <p>Searching Keywords：
         {{keyword}}
-        {% endif %}
         </p>
+        {% endif %}
     </div>
         <div class="animate-box">
             <!-- ブログタイトル入力 -->
