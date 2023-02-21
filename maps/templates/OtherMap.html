@@ -1,173 +1,173 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Map{% endblock %}
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 {% block script %}
-    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" /> -->
-    <link rel="stylesheet" href="{% static 'css/leaflet.css' %}" />
-    <script src="{% static 'js/leaflet.js' %}"></script>
-    <script src="{% static 'js/leaflet.sprite.js' %}"></script>
-    <script src="https://cdn.geolonia.com/community-geocoder.js"></script>
-    <script src="{% static 'js/leaflet-search.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/leaflet-search.css' %}">
-    <link rel="stylesheet" href="{% static 'css/stylymap.css' %}" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API}}&callback=initMap"></script>
+<!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" /> -->
+<link rel="stylesheet" href="{% static 'css/leaflet.css' %}" />
+<script src="{% static 'js/leaflet.js' %}"></script>
+<script src="{% static 'js/leaflet.sprite.js' %}"></script>
+<script src="https://cdn.geolonia.com/community-geocoder.js"></script>
+<script src="{% static 'js/leaflet-search.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/leaflet-search.css' %}">
+<link rel="stylesheet" href="{% static 'css/stylymap.css' %}" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API}}&callback=initMap"></script>
 
 
-    <link rel="stylesheet" href="{% static 'css/easy-button.css' %}">
-    <script src="{% static 'js/easy-button.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/easy-button.css' %}">
+<script src="{% static 'js/easy-button.js' %}"></script>
 
 
-    <script>
-        function initMap(){
-            console.log("MAP start");
+<script>
+    function initMap() {
+        console.log("MAP start");
+    }
+    // マーカーリスト配列の初期化
+    // データ型:　[{pos: [float 緯度][float 経度], name; String 名前},・・・]
+    var default_spot_markerList = [];
+    var original_spot_markerList = [];
+    // 日本の全体が入るboundを保存
+    var japan_bound = [[47, 120], [20, 155]];
+
+    // マップ作成、表示関数
+    function init() {
+        // htmlの要素mapcontainerを指定し、mapを作成
+        // 空のmapを作成し、要素を後から追加
+        var center = [36.0, 140];
+        var startZoom = '10';
+        var map = L.map('mapcontainer', { maxBounds: japan_bound, maxZoom: 20, minZoom: 5, }).setView(center, startZoom);
+
+        // maptile選択・mapに追加
+        L.gridLayer.googleMutant({
+            type: "roadmap",
+        }).addTo(map);
+
+        // スポット検索コンソール設定
+        // スポット検索用レイヤーを作成し、マップに追加
+        var searchLayer = new L.LayerGroup();
+        map.addLayer(searchLayer);
+
+        // スポット検索用コンソール自体の設定を行い、マップに追加
+        var controlSearch = new L.Control.Search({
+            position: 'topright',
+            layer: searchLayer,
+            initial: false,
+            zoom: 15,
+            marker: false
+        });
+        map.addControl(controlSearch);
+
+        // 地名検索コンソールを設定し、マップに追加
+        // 入力は多言語対応、検索結果出力はブラウザの設定言語
+        L.Control.geocoder({
+            geocoder: L.Control.Geocoder.nominatim()
+        }).addTo(map);
+
+        // 地図初期設定
+        // [左上緯度,左上経度], [右下緯度,右下経度]
+        var bound = L.latLngBounds([37.0, 139.4], [35.5, 140.1]);
+
+        // マーカーを地図に追加
+        for (var num in default_spot_markerList) {
+            // マーカーを変数に格納
+            var mk = default_spot_markerList[num];
+            // マーカーに関連付けるポップアップ設定
+            var popup = L.popup().setContent("<a href='/maps/DspotInfo/" + mk.spot_num + "/'>" + mk.name + "</a><br><img class='gazo' src='" + mk.url + "' >");
+            // マーカーアイコン設定
+            L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
+            // 上記設定でマーカーを地図、検索用レイヤーに追加
+            searchLayer.addLayer(L.marker(mk.pos, {
+                title: mk.name,
+                icon: L.spriteIcon('green')
+            }).bindPopup(popup).addTo(map));
+            //マーカー全体が入るボックスを広げる
         }
-        // マーカーリスト配列の初期化
-        // データ型:　[{pos: [float 緯度][float 経度], name; String 名前},・・・]
-        var default_spot_markerList = [];
-        var original_spot_markerList = [];
-        // 日本の全体が入るboundを保存
-        var japan_bound = [[47,120], [20,155]];
-
-        // マップ作成、表示関数
-        function init() {
-            // htmlの要素mapcontainerを指定し、mapを作成
-            // 空のmapを作成し、要素を後から追加
-            var center = [36.0,140];
-            var startZoom =  '10';
-            var map = L.map('mapcontainer',{maxBounds: japan_bound, maxZoom: 20, minZoom: 5,}).setView(center, startZoom);
-
-            // maptile選択・mapに追加
-            L.gridLayer.googleMutant({
-                type: "roadmap",
-            }).addTo(map);
-
-            // スポット検索コンソール設定
-            // スポット検索用レイヤーを作成し、マップに追加
-            var searchLayer = new L.LayerGroup();
-            map.addLayer(searchLayer);
-
-            // スポット検索用コンソール自体の設定を行い、マップに追加
-            var controlSearch = new L.Control.Search({
-                position:'topright',
-                layer: searchLayer,
-                initial: false,
-                zoom: 15,
-                marker: false
-            });
-            map.addControl( controlSearch );
-
-            // 地名検索コンソールを設定し、マップに追加
-            // 入力は多言語対応、検索結果出力はブラウザの設定言語
-            L.Control.geocoder({ 
-                geocoder: L.Control.Geocoder.nominatim()
-            }).addTo(map);
-
-            // 地図初期設定
-            // [左上緯度,左上経度], [右下緯度,右下経度]
-            var bound = L.latLngBounds([37.0,139.4], [35.5,140.1]);
-
-            // マーカーを地図に追加
-            for (var num in default_spot_markerList) {
-                // マーカーを変数に格納
-                var mk = default_spot_markerList[num];
-                // マーカーに関連付けるポップアップ設定
-                var popup = L.popup().setContent("<a href='/maps/DspotInfo/"+mk.spot_num+"/'>"+mk.name+"</a><br><img class='gazo' src='"+mk.url+"' >");
-                // マーカーアイコン設定
-                L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
-                // 上記設定でマーカーを地図、検索用レイヤーに追加
-                searchLayer.addLayer(L.marker(mk.pos, { 
-                    title: mk.name, 
-                    icon: L.spriteIcon('green') 
-                }).bindPopup(popup).addTo(map));
-                //マーカー全体が入るボックスを広げる
-            }
-            for (var num in original_spot_markerList) {
-                var mk = original_spot_markerList[num];
-                var popup = L.popup().setContent("<a href='/maps/OspotInfo/"+mk.spot_num+"/'>"+mk.name+"</a><br><img class='gazo' src='{% static 'images/noimage.jpg' %}' >");
-                L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
-                searchLayer.addLayer(L.marker(mk.pos, { 
-                title: mk.name, 
-                icon: L.spriteIcon('red') 
-                }).bindPopup(popup).addTo(map));
-                //マーカー全体が入るボックスを広げる
-            }
-            //マーカー全体が入るように地図範囲を設定する
-            map.fitBounds(bound);
+        for (var num in original_spot_markerList) {
+            var mk = original_spot_markerList[num];
+            var popup = L.popup().setContent("<a href='/maps/OspotInfo/" + mk.spot_num + "/'>" + mk.name + "</a>");
+            L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.3.1/dist/images/';
+            searchLayer.addLayer(L.marker(mk.pos, {
+                title: mk.name,
+                icon: L.spriteIcon('red')
+            }).bindPopup(popup).addTo(map));
+            //マーカー全体が入るボックスを広げる
         }
+        //マーカー全体が入るように地図範囲を設定する
+        map.fitBounds(bound);
+    }
 
-        // マーカーリスト作成関数 make_markerList
-        function make_markerList(){
-            const d_list = JSON.parse('{{ d_list|safe }}');
-            const o_list = JSON.parse('{{ o_list|safe }}');
-            // データベースからスポットの情報を取得
-            // [Stirng 住所, String 名前]
-            var default_spot_data_array = d_list
-            var original_spot_data_array = o_list
-            // 各データ数を変数に格納
-            const default_spot_counter = default_spot_data_array.length;
-            const original_spot_counter = original_spot_data_array.length;
+    // マーカーリスト作成関数 make_markerList
+    function make_markerList() {
+        const d_list = JSON.parse('{{ d_list|safe }}');
+        const o_list = JSON.parse('{{ o_list|safe }}');
+        // データベースからスポットの情報を取得
+        // [Stirng 住所, String 名前]
+        var default_spot_data_array = d_list
+        var original_spot_data_array = o_list
+        // 各データ数を変数に格納
+        const default_spot_counter = default_spot_data_array.length;
+        const original_spot_counter = original_spot_data_array.length;
 
-            // marker_add関数で作成したPromiseを格納する配列 promises
-            // 後にPromise.allで使用
-            var promises = [];
-            // marker_add関数を呼び出し、各スポットの住所を座標に変換し、マーカーリストに追加
-            // 重い処理のため非同期で実行し、Promiseをpromisesに追加
-            for (var i = 0; i < default_spot_counter; i++){
-                promises.push(marker_add(default_spot_data_array[i][0], default_spot_data_array[i][1],"default",default_spot_data_array[i][2],default_spot_data_array[i][3]));
-            }
-            for (var i = 0; i < original_spot_counter; i++){
-                promises.push(marker_add(original_spot_data_array[i][0], original_spot_data_array[i][1],"original",original_spot_data_array[i][2],original_spot_data_array[i][3]));
-            }
-            // 全てのPromiseがresolveしたら、init関数を実行
-            Promise.all(promises).then(() => {
-                init();
-            });
+        // marker_add関数で作成したPromiseを格納する配列 promises
+        // 後にPromise.allで使用
+        var promises = [];
+        // marker_add関数を呼び出し、各スポットの住所を座標に変換し、マーカーリストに追加
+        // 重い処理のため非同期で実行し、Promiseをpromisesに追加
+        for (var i = 0; i < default_spot_counter; i++) {
+            promises.push(marker_add(default_spot_data_array[i][0], default_spot_data_array[i][1], "default", default_spot_data_array[i][2], default_spot_data_array[i][3]));
         }
+        for (var i = 0; i < original_spot_counter; i++) {
+            promises.push(marker_add(original_spot_data_array[i][0], original_spot_data_array[i][1], "original", original_spot_data_array[i][2], original_spot_data_array[i][3]));
+        }
+        // 全てのPromiseがresolveしたら、init関数を実行
+        Promise.all(promises).then(() => {
+            init();
+        });
+    }
 
-        // 住所→座標（緯度経度）変換関数 marker_add
-        // 引数 String address : 住所
-        //      String name : 名前
-        // 　　 String default_or_original : スポットの種類
-        // 戻り値　Promise 変換を実行し、マーカーリストに追加するPromise
-        function marker_add(address, name, default_or_original,spot_num,url){
-            return new Promise((resolve) => {
-                // 変換関数 getLatLng
-                // 関数内の処理終了後、Promiseをresolve()
-                if (default_or_original == "default"){
-                    getLatLng(address, (result) => {
-                        // 追加するマーカーリストのテンプレート
-                        // {pos: [float lat,float lng], String name}
-                        var markerList_tmp = {};
-                        // マーカーリストのテンプレートに座標、名前を設定
-                        markerList_tmp.pos = [result.lat,result.lng];
-                        markerList_tmp.name = name;
-                        markerList_tmp.spot_num = spot_num;
-                        markerList_tmp.url = url;
-                        // default・originalを判断し、それぞれのマーカーリストに作成したテンプレートを追加
-                        if (default_or_original == "default"){
-                            default_spot_markerList.push(markerList_tmp);
-                        } else if (default_or_original == "original"){
-                            original_spot_markerList.push(markerList_tmp);
-                        } else {
-                            console.log("default_or_original 未登録");
-                        }
-                        resolve();
-                    });
-                } else {
+    // 住所→座標（緯度経度）変換関数 marker_add
+    // 引数 String address : 住所
+    //      String name : 名前
+    // 　　 String default_or_original : スポットの種類
+    // 戻り値　Promise 変換を実行し、マーカーリストに追加するPromise
+    function marker_add(address, name, default_or_original, spot_num, url) {
+        return new Promise((resolve) => {
+            // 変換関数 getLatLng
+            // 関数内の処理終了後、Promiseをresolve()
+            if (default_or_original == "default") {
+                getLatLng(address, (result) => {
+                    // 追加するマーカーリストのテンプレート
+                    // {pos: [float lat,float lng], String name}
                     var markerList_tmp = {};
-                    markerList_tmp.pos = address;
+                    // マーカーリストのテンプレートに座標、名前を設定
+                    markerList_tmp.pos = [result.lat, result.lng];
                     markerList_tmp.name = name;
                     markerList_tmp.spot_num = spot_num;
-                    original_spot_markerList.push(markerList_tmp);
+                    markerList_tmp.url = url;
+                    // default・originalを判断し、それぞれのマーカーリストに作成したテンプレートを追加
+                    if (default_or_original == "default") {
+                        default_spot_markerList.push(markerList_tmp);
+                    } else if (default_or_original == "original") {
+                        original_spot_markerList.push(markerList_tmp);
+                    } else {
+                        console.log("default_or_original 未登録");
+                    }
                     resolve();
-                }
-            });
-        }
-    </script>
+                });
+            } else {
+                var markerList_tmp = {};
+                markerList_tmp.pos = address;
+                markerList_tmp.name = name;
+                markerList_tmp.spot_num = spot_num;
+                original_spot_markerList.push(markerList_tmp);
+                resolve();
+            }
+        });
+    }
+</script>
 {% endblock %}
 
 {% block onload %}onload="make_markerList()"{% endblock %}
@@ -183,7 +183,7 @@
     <div id="mapfloar">
         <div id="mapcontainer" class="mapcon"></div>
     </div>
-    <div class="container"  id="scroll">
+    <div class="container" id="scroll">
         <div class="animate-box">
             <!-- ブログタイトル入力 -->
             <!-- ブログ内容入力 -->
@@ -216,8 +216,8 @@
                     <tr>
                         <th class="th-center">{{s_form.words.label}}</th>
                         <td class="td-space"><input type="text" name="keyword" class="hoge"></td>
-                        <td class="td-button"><button class="btn btn-primary btn-outline btn-lg" type="submit" name="next"
-                                value="confirm">SEARCH</button></td>
+                        <td class="td-button"><button class="btn btn-primary btn-outline btn-lg" type="submit"
+                                name="next" value="confirm">SEARCH</button></td>
                     </tr>
                 </table>
             </form>
